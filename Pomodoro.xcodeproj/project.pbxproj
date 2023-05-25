@@ -11,6 +11,7 @@
 		CAF098F82A1FB1F600606A83 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF098F72A1FB1F600606A83 /* ContentView.swift */; };
 		CAF098FA2A1FB21500606A83 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CAF098F92A1FB21500606A83 /* Assets.xcassets */; };
 		CAF098FD2A1FB21500606A83 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CAF098FC2A1FB21500606A83 /* Preview Assets.xcassets */; };
+		CAF099072A1FBB8900606A83 /* RiveRuntime in Frameworks */ = {isa = PBXBuildFile; productRef = CAF099062A1FBB8900606A83 /* RiveRuntime */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CAF099072A1FBB8900606A83 /* RiveRuntime in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,6 +87,9 @@
 			dependencies = (
 			);
 			name = Pomodoro;
+			packageProductDependencies = (
+				CAF099062A1FBB8900606A83 /* RiveRuntime */,
+			);
 			productName = Pomodoro;
 			productReference = CAF098F22A1FB1F600606A83 /* Pomodoro.app */;
 			productType = "com.apple.product-type.application";
@@ -113,6 +118,9 @@
 				Base,
 			);
 			mainGroup = CAF098E92A1FB1F600606A83;
+			packageReferences = (
+				CAF099052A1FBB8900606A83 /* XCRemoteSwiftPackageReference "rive-ios" */,
+			);
 			productRefGroup = CAF098F32A1FB1F600606A83 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -336,6 +344,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CAF099052A1FBB8900606A83 /* XCRemoteSwiftPackageReference "rive-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/rive-app/rive-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CAF099062A1FBB8900606A83 /* RiveRuntime */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CAF099052A1FBB8900606A83 /* XCRemoteSwiftPackageReference "rive-ios" */;
+			productName = RiveRuntime;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = CAF098EA2A1FB1F600606A83 /* Project object */;
 }
