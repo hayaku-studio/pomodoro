@@ -29,6 +29,6 @@ struct PomodoroApp: App {
             Button("Quit") {
                 NSApplication.shared.terminate(nil)
             }.keyboardShortcut("q")
-        }
+        }.menuBarExtraStyle(.window)
     }
 }
