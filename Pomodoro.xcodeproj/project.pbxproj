@@ -12,6 +12,8 @@
 		CAF098FA2A1FB21500606A83 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CAF098F92A1FB21500606A83 /* Assets.xcassets */; };
 		CAF098FD2A1FB21500606A83 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CAF098FC2A1FB21500606A83 /* Preview Assets.xcassets */; };
 		CAF099072A1FBB8900606A83 /* RiveRuntime in Frameworks */ = {isa = PBXBuildFile; productRef = CAF099062A1FBB8900606A83 /* RiveRuntime */; };
+		CAF0990D2A222A2E00606A83 /* AnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF0990C2A222A2E00606A83 /* AnimationView.swift */; };
+		CAF0990E2A222BFB00606A83 /* pomodoro_timer.riv in Resources */ = {isa = PBXBuildFile; fileRef = CAF099092A22280600606A83 /* pomodoro_timer.riv */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +23,8 @@
 		CAF098F92A1FB21500606A83 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CAF098FC2A1FB21500606A83 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		CAF098FE2A1FB21500606A83 /* Pomodoro.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Pomodoro.entitlements; sourceTree = "<group>"; };
+		CAF099092A22280600606A83 /* pomodoro_timer.riv */ = {isa = PBXFileReference; lastKnownFileType = file; path = pomodoro_timer.riv; sourceTree = "<group>"; };
+		CAF0990C2A222A2E00606A83 /* AnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,7 +60,9 @@
 			children = (
 				CAF098F52A1FB1F600606A83 /* PomodoroApp.swift */,
 				CAF098F72A1FB1F600606A83 /* ContentView.swift */,
+				CAF0990C2A222A2E00606A83 /* AnimationView.swift */,
 				CAF098F92A1FB21500606A83 /* Assets.xcassets */,
+				CAF099082A2227ED00606A83 /* RiveAssets */,
 				CAF098FE2A1FB21500606A83 /* Pomodoro.entitlements */,
 				CAF098FB2A1FB21500606A83 /* Preview Content */,
 			);
@@ -69,6 +75,14 @@
 				CAF098FC2A1FB21500606A83 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		CAF099082A2227ED00606A83 /* RiveAssets */ = {
+			isa = PBXGroup;
+			children = (
+				CAF099092A22280600606A83 /* pomodoro_timer.riv */,
+			);
+			path = RiveAssets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -135,6 +149,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CAF0990E2A222BFB00606A83 /* pomodoro_timer.riv in Resources */,
 				CAF098FD2A1FB21500606A83 /* Preview Assets.xcassets in Resources */,
 				CAF098FA2A1FB21500606A83 /* Assets.xcassets in Resources */,
 			);
@@ -147,6 +162,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CAF0990D2A222A2E00606A83 /* AnimationView.swift in Sources */,
 				CAF098F82A1FB1F600606A83 /* ContentView.swift in Sources */,
 				CAF098F62A1FB1F600606A83 /* PomodoroApp.swift in Sources */,
 			);

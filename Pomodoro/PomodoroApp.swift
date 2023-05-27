@@ -25,6 +25,7 @@ struct PomodoroApp: App {
                 currentNumber = "3"
             }
             .keyboardShortcut("3")
+            AnimationView()
             Divider()
             Button("Quit") {
                 NSApplication.shared.terminate(nil)
