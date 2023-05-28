@@ -10,7 +10,11 @@ import RiveRuntime
 
 struct AnimationView: View {
     var body: some View {
-        RiveViewModel(fileName: "pomodoro_timer").view()
+        VStack {
+            Text("Hello")
+            RiveViewModel(fileName: "pomodoro_timer").view().scaledToFit().frame(width: 200, height: 200)
+            Text("There")
+        }
     }
 }
 
