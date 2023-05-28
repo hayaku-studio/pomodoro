@@ -11,9 +11,12 @@ import SwiftUI
 struct PomodoroApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
         
+    // dummy component so that the App doesn't complain.
+    // TODO: Search if there's a way to remove this
     var body: some Scene {
         WindowGroup {
-            AnimationView()
+            Group {
+            }
         }
     }
 }
