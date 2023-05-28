@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CAD1E6682A237A4E00C0C4C8 /* SwiftUIFontIcon in Frameworks */ = {isa = PBXBuildFile; productRef = CAD1E6672A237A4E00C0C4C8 /* SwiftUIFontIcon */; };
 		CAF098F62A1FB1F600606A83 /* PomodoroApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF098F52A1FB1F600606A83 /* PomodoroApp.swift */; };
 		CAF098FA2A1FB21500606A83 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CAF098F92A1FB21500606A83 /* Assets.xcassets */; };
 		CAF098FD2A1FB21500606A83 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CAF098FC2A1FB21500606A83 /* Preview Assets.xcassets */; };
@@ -30,6 +31,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CAD1E6682A237A4E00C0C4C8 /* SwiftUIFontIcon in Frameworks */,
 				CAF099072A1FBB8900606A83 /* RiveRuntime in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -100,6 +102,7 @@
 			name = Pomodoro;
 			packageProductDependencies = (
 				CAF099062A1FBB8900606A83 /* RiveRuntime */,
+				CAD1E6672A237A4E00C0C4C8 /* SwiftUIFontIcon */,
 			);
 			productName = Pomodoro;
 			productReference = CAF098F22A1FB1F600606A83 /* Pomodoro.app */;
@@ -131,6 +134,7 @@
 			mainGroup = CAF098E92A1FB1F600606A83;
 			packageReferences = (
 				CAF099052A1FBB8900606A83 /* XCRemoteSwiftPackageReference "rive-ios" */,
+				CAD1E6662A237A4E00C0C4C8 /* XCRemoteSwiftPackageReference "SwiftUIFontIcon" */,
 			);
 			productRefGroup = CAF098F32A1FB1F600606A83 /* Products */;
 			projectDirPath = "";
@@ -358,6 +362,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		CAD1E6662A237A4E00C0C4C8 /* XCRemoteSwiftPackageReference "SwiftUIFontIcon" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/huybuidac/SwiftUIFontIcon";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		CAF099052A1FBB8900606A83 /* XCRemoteSwiftPackageReference "rive-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/rive-app/rive-ios";
@@ -369,6 +381,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		CAD1E6672A237A4E00C0C4C8 /* SwiftUIFontIcon */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CAD1E6662A237A4E00C0C4C8 /* XCRemoteSwiftPackageReference "SwiftUIFontIcon" */;
+			productName = SwiftUIFontIcon;
+		};
 		CAF099062A1FBB8900606A83 /* RiveRuntime */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = CAF099052A1FBB8900606A83 /* XCRemoteSwiftPackageReference "rive-ios" */;
