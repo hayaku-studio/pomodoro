@@ -15,8 +15,7 @@ struct PomodoroApp: App {
     // TODO: Search if there's a way to remove this
     var body: some Scene {
         WindowGroup {
-            Group {
-            }
+            Group {}
         }
     }
 }
@@ -33,6 +32,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
             statusButton.action = #selector(togglePopover)
         }
         
+        popover.contentSize = NSSize(width: 300, height: 300)
         popover.behavior = .transient
         popover.contentViewController = NSHostingController(rootView: AnimationView())
     }
