@@ -42,6 +42,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
                 self.popover.performClose(nil)
             } else {
                 popover.show(relativeTo: button.bounds, of: button, preferredEdge: NSRectEdge.minY)
+                popover.contentViewController?.view.window?.makeKey()
             }
         }
     }
