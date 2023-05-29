@@ -29,13 +29,13 @@ struct AnimationView: View {
     func startTimer() {
         pomodoro.play()
         pomodoro.triggerInput("start")
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) {_ in
+        timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) {_ in
             incrementTime()
         }
     }
     
     func incrementTime() {
-        time += 1
+        time += 6
         pomodoro.setInput("time", value: time)
     }
 }
