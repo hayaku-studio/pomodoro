@@ -23,6 +23,7 @@ struct AnimationView: View {
             .frame(height: 0)
             pomodoro.view().scaledToFit().frame(width: 200, height: 200)
             FontIcon.button(.materialIcon(code: .play_circle_filled), action: startTimer)
+            FontIcon.button(.materialIcon(code: .pause_circle_filled), action: pauseTimer)
         }
     }
     
@@ -32,6 +33,10 @@ struct AnimationView: View {
         timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) {_ in
             incrementTime()
         }
+    }
+    
+    func pauseTimer() {
+        timer?.invalidate()
     }
     
     func incrementTime() {
