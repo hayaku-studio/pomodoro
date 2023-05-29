@@ -11,6 +11,8 @@ import RiveRuntime
 
 struct AnimationView: View {
     let pomodoro = RiveViewModel(fileName: "pomodoro_timer", stateMachineName: "State Machine")
+    @State var timer: Timer?
+    @State var time = 0.0
     
     var body: some View {
         VStack {
@@ -25,7 +27,16 @@ struct AnimationView: View {
     }
     
     func startTimer() {
-        print("Hello")
+        pomodoro.play()
+        pomodoro.triggerInput("start")
+        timer = Timer.scheduledTimer(withTimeInterval: 0.02, repeats: true) {_ in
+            incrementTime()
+        }
+    }
+    
+    func incrementTime() {
+        time += 10
+        pomodoro.setInput("time", value: time)
     }
 }
 
