@@ -30,7 +30,7 @@ struct AnimationView: View {
     func startTimer() {
         pomodoro.play()
         pomodoro.triggerInput("start")
-        timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) {_ in
+        timer = Timer.scheduledTimer(withTimeInterval: 6, repeats: true) {_ in
             incrementTime()
         }
     }
@@ -40,8 +40,11 @@ struct AnimationView: View {
     }
     
     func incrementTime() {
-        time += 6
-        pomodoro.setInput("time", value: time)
+        time += 0.1
+        pomodoro.setInput("timeMinutes", value: time)
+        if time == 100 {
+            
+        }
     }
 }
 
