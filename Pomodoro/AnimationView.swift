@@ -13,6 +13,7 @@ struct AnimationView: View {
     let pomodoro = RiveViewModel(fileName: "pomodoro_timer", stateMachineName: "State Machine")
     @State var timer: Timer?
     @State var time = 0.0
+    @State var previousTranslation = 0.0
     
     var body: some View {
         VStack {
@@ -29,8 +30,17 @@ struct AnimationView: View {
                     .contentShape(Circle())
                     .frame(width: 150)
                 //.onTapGesture() // TODO: On too many taps give a drag hint - https://www.instagram.com/p/CewsSvBrTBa/
-                    .gesture(DragGesture().onChanged {value in
-                        print(value)
+                    .gesture(DragGesture().onChanged {gesture in
+                        let newTranslation = gesture.translation.width/20
+                        let incrementalTranslation = newTranslation - previousTranslation
+                        previousTranslation = newTranslation
+                        time -= incrementalTranslation
+                        if time > 100 {
+                            time = 100
+                        } else if time < 0 {
+                            time = 0
+                        }
+                        pomodoro.setInput("timeMinutes", value: time)
                     })
             }
             FontIcon.button(.materialIcon(code: .play_circle_filled), action: startTimer)
