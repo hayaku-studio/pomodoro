@@ -30,18 +30,25 @@ struct AnimationView: View {
                     .contentShape(Circle())
                     .frame(width: 150)
                 //.onTapGesture() // TODO: On too many taps give a drag hint - https://www.instagram.com/p/CewsSvBrTBa/
-                    .gesture(DragGesture().onChanged {gesture in
-                        let newTranslation = gesture.translation.width/20
-                        let incrementalTranslation = newTranslation - previousTranslation
-                        previousTranslation = newTranslation
-                        time -= incrementalTranslation
-                        if time > 100 {
-                            time = 100
-                        } else if time < 0 {
-                            time = 0
+                    .gesture(DragGesture()
+                        .onChanged {gesture in
+                            let newTranslation = gesture.translation.width/20
+                            let incrementalTranslation = newTranslation - previousTranslation
+                            previousTranslation = newTranslation
+                            time -= incrementalTranslation
+                            if time > 100 {
+                                time = 100
+                            } else if time < 0 {
+                                time = 0
+                            }
+                            pomodoro.setInput("timeMinutes", value: time)
                         }
-                        pomodoro.setInput("timeMinutes", value: time)
-                    })
+                        .onEnded {gesture in
+                            if time > 0 {
+                                startTimer()
+                            }
+                        }
+                    )
             }
             FontIcon.button(.materialIcon(code: .play_circle_filled), action: startTimer)
             FontIcon.button(.materialIcon(code: .pause_circle_filled), action: pauseTimer)
@@ -49,10 +56,8 @@ struct AnimationView: View {
     }
     
     func startTimer() {
-        pomodoro.play()
-        pomodoro.triggerInput("start")
         timer = Timer.scheduledTimer(withTimeInterval: 6, repeats: true) {_ in
-            incrementTime()
+            decrementTime()
         }
     }
     
@@ -60,10 +65,10 @@ struct AnimationView: View {
         timer?.invalidate()
     }
     
-    func incrementTime() {
-        time += 0.1
+    func decrementTime() {
+        time -= 0.1
         pomodoro.setInput("timeMinutes", value: time)
-        if time == 100 {
+        if time == 0 {
             
         }
     }
