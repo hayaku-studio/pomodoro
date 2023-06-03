@@ -21,7 +21,18 @@ struct AnimationView: View {
             }
             .opacity(0)
             .frame(height: 0)
-            pomodoro.view().scaledToFit().frame(width: 200, height: 200)
+            ZStack {
+                pomodoro.view().scaledToFit().frame(width: 200, height: 200)
+                Circle()
+                //.stroke(.black.opacity(0.1)) // uncomment to see hitbox
+                    .opacity(0.0)
+                    .contentShape(Circle())
+                    .frame(width: 150)
+                //.onTapGesture() // TODO: On too many taps give a drag hint - https://www.instagram.com/p/CewsSvBrTBa/
+                    .gesture(DragGesture().onChanged {value in
+                        print(value)
+                    })
+            }
             FontIcon.button(.materialIcon(code: .play_circle_filled), action: startTimer)
             FontIcon.button(.materialIcon(code: .pause_circle_filled), action: pauseTimer)
         }
