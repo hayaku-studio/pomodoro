@@ -57,6 +57,7 @@ struct AnimationView: View {
     }
     
     func startTimer() {
+        timer?.invalidate()
         timer = Timer.scheduledTimer(withTimeInterval: 6, repeats: true) {_ in
             decrementTime()
         }
