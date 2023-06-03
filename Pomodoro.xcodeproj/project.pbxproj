@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CA6B06A02A2B605F00F62E56 /* pomodoro_timer.riv in Resources */ = {isa = PBXBuildFile; fileRef = CA6B069F2A2B605F00F62E56 /* pomodoro_timer.riv */; };
 		CAD1E6682A237A4E00C0C4C8 /* SwiftUIFontIcon in Frameworks */ = {isa = PBXBuildFile; productRef = CAD1E6672A237A4E00C0C4C8 /* SwiftUIFontIcon */; };
-		CAD1E6702A2A0EFB00C0C4C8 /* pomodoro_timer.riv in Resources */ = {isa = PBXBuildFile; fileRef = CAD1E66F2A2A0EFB00C0C4C8 /* pomodoro_timer.riv */; };
 		CAF098F62A1FB1F600606A83 /* PomodoroApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF098F52A1FB1F600606A83 /* PomodoroApp.swift */; };
 		CAF098FA2A1FB21500606A83 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CAF098F92A1FB21500606A83 /* Assets.xcassets */; };
 		CAF098FD2A1FB21500606A83 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CAF098FC2A1FB21500606A83 /* Preview Assets.xcassets */; };
@@ -17,7 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		CAD1E66F2A2A0EFB00C0C4C8 /* pomodoro_timer.riv */ = {isa = PBXFileReference; lastKnownFileType = file; path = pomodoro_timer.riv; sourceTree = "<group>"; };
+		CA6B069F2A2B605F00F62E56 /* pomodoro_timer.riv */ = {isa = PBXFileReference; lastKnownFileType = file; name = pomodoro_timer.riv; path = ../../../../../Downloads/pomodoro_timer.riv; sourceTree = "<group>"; };
 		CAF098F22A1FB1F600606A83 /* Pomodoro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pomodoro.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAF098F52A1FB1F600606A83 /* PomodoroApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroApp.swift; sourceTree = "<group>"; };
 		CAF098F92A1FB21500606A83 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -79,7 +79,7 @@
 		CAF099082A2227ED00606A83 /* RiveAssets */ = {
 			isa = PBXGroup;
 			children = (
-				CAD1E66F2A2A0EFB00C0C4C8 /* pomodoro_timer.riv */,
+				CA6B069F2A2B605F00F62E56 /* pomodoro_timer.riv */,
 			);
 			path = RiveAssets;
 			sourceTree = "<group>";
@@ -151,7 +151,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CAF098FD2A1FB21500606A83 /* Preview Assets.xcassets in Resources */,
-				CAD1E6702A2A0EFB00C0C4C8 /* pomodoro_timer.riv in Resources */,
+				CA6B06A02A2B605F00F62E56 /* pomodoro_timer.riv in Resources */,
 				CAF098FA2A1FB21500606A83 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
