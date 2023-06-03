@@ -44,6 +44,7 @@ struct AnimationView: View {
                             pomodoro.setInput("timeMinutes", value: time)
                         }
                         .onEnded {gesture in
+                            previousTranslation = 0
                             if time > 0 {
                                 startTimer()
                             }
