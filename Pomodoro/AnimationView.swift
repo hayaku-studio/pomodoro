@@ -11,6 +11,7 @@ import RiveRuntime
 
 struct AnimationView: View {
     let pomodoro = RiveViewModel(fileName: "pomodoro_timer", stateMachineName: "State Machine")
+    @State var isPlaying = false
     @State var timer: Timer?
     @State var time = 0.0
     @State var previousTranslation = 0.0
@@ -51,12 +52,22 @@ struct AnimationView: View {
                         }
                     )
             }
-            FontIcon.button(.materialIcon(code: .play_circle_filled), action: startTimer)
-            FontIcon.button(.materialIcon(code: .pause_circle_filled), action: pauseTimer)
+            FontIcon.button(.materialIcon(code: isPlaying ? .pause_circle_filled : .play_circle_filled), action: toggleTimer, fontsize: 30)
+                .foregroundColor(Color("Pomodoro Primary"))
+                .frame(width: 40, height: 40.0)
+        }
+    }
+    
+    func toggleTimer() {
+        if isPlaying {
+            pauseTimer()
+        } else if time > 0 {
+            startTimer()
         }
     }
     
     func startTimer() {
+        isPlaying = true
         timer?.invalidate()
         timer = Timer.scheduledTimer(withTimeInterval: 6, repeats: true) {_ in
             decrementTime()
@@ -64,14 +75,16 @@ struct AnimationView: View {
     }
     
     func pauseTimer() {
+        isPlaying = false
         timer?.invalidate()
     }
     
     func decrementTime() {
         time -= 0.1
         pomodoro.setInput("timeMinutes", value: time)
-        if time == 0 {
-            
+        if time <= 0 {
+            time = 0
+            pauseTimer()
         }
     }
 }
