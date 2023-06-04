@@ -12,7 +12,7 @@ struct PomodoroIconView: View {
         HStack {
             Image("Tomato Icon Play")
             Text("25")
-                .foregroundColor(Color.white)
+                .foregroundColor(Color("Dark Mode Contrast"))
         }
     }
 }
