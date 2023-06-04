@@ -26,10 +26,10 @@ struct AnimationView: View {
             ZStack {
                 pomodoro.view().scaledToFit().frame(width: 200, height: 200)
                 Circle()
-                //.stroke(.black.opacity(0.1)) // uncomment to see hitbox
+                //.stroke(.green) // uncomment to see hitbox
                     .opacity(0.0)
                     .contentShape(Circle())
-                    .frame(width: 150)
+                    .frame(width: 160)
                 //.onTapGesture() // TODO: On too many taps give a drag hint - https://www.instagram.com/p/CewsSvBrTBa/
                     .gesture(DragGesture()
                         .onChanged {gesture in
