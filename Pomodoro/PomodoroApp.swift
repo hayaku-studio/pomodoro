@@ -25,10 +25,15 @@ class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
     private let popover = NSPopover()
     
     @MainActor func applicationDidFinishLaunching(_ notification: Notification) {
+        let pomodoroIcon = PomodoroIconView()
+        let iconView = NSHostingView(rootView: pomodoroIcon)
+        iconView.frame = NSRect(x: 0, y: 0, width: 40, height: 22)
+        
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
         
         if let statusButton = statusItem.button {
-            statusButton.image = NSImage(systemSymbolName: "chart.line.uptrend.xyaxis.circle", accessibilityDescription: "Chart Line")
+            statusButton.addSubview(iconView)
+            statusButton.frame = iconView.frame
             statusButton.action = #selector(togglePopover)
         }
         
