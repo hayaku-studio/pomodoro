@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct PopupView: View {
-    @EnvironmentObject private var modelData: ModelData
-    
     var body: some View {
         AnimationView()
     }
@@ -17,6 +15,6 @@ struct PopupView: View {
 
 struct PopupView_Previews: PreviewProvider {
     static var previews: some View {
-        PopupView().environmentObject(ModelData())
+        PopupView()
     }
 }
