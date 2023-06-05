@@ -30,6 +30,7 @@ struct AnimationView: View {
                 //.onTapGesture() // TODO: On too many taps give a drag hint - https://www.instagram.com/p/CewsSvBrTBa/
                     .gesture(DragGesture()
                         .onChanged {gesture in
+                            pauseTimer() // TODO: find a better way to do this (instead of calling pauseTimer hundreds of times)
                             let newTranslation = Int(gesture.translation.width)*3
                             let incrementalTranslation = newTranslation - modelData.pomoTimer.previousTranslation
                             modelData.pomoTimer.previousTranslation = newTranslation
