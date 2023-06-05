@@ -21,11 +21,12 @@ struct PomodoroApp: App {
 }
 
 class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
+    @StateObject private var modelData = ModelData()
     private var statusItem: NSStatusItem!
     private let popover = NSPopover()
     
     @MainActor func applicationDidFinishLaunching(_ notification: Notification) {
-        let pomodoroIcon = PomodoroIconView()
+        let pomodoroIcon = PomodoroIconView().environmentObject(modelData)
         let iconView = NSHostingView(rootView: pomodoroIcon)
         iconView.frame = NSRect(x: 0, y: 0, width: 40, height: 22)
         
@@ -39,7 +40,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
         
         popover.contentSize = NSSize(width: 300, height: 300)
         popover.behavior = .transient
-        popover.contentViewController = NSHostingController(rootView: AnimationView())
+        popover.contentViewController = NSHostingController(rootView: PopupView().environmentObject(modelData))
     }
     
     @objc func togglePopover() {

@@ -10,11 +10,8 @@ import SwiftUIFontIcon
 import RiveRuntime
 
 struct AnimationView: View {
+    @State var pomoTimer: PomoTimer
     let pomodoro = RiveViewModel(fileName: "pomodoro_timer", stateMachineName: "State Machine")
-    @State var isPlaying = false
-    @State var timer: Timer?
-    @State var time = 0.0
-    @State var previousTranslation = 0.0
     
     var body: some View {
         VStack {
@@ -34,56 +31,56 @@ struct AnimationView: View {
                     .gesture(DragGesture()
                         .onChanged {gesture in
                             let newTranslation = gesture.translation.width/20
-                            let incrementalTranslation = newTranslation - previousTranslation
-                            previousTranslation = newTranslation
-                            time -= incrementalTranslation
-                            if time > 100 {
-                                time = 100
-                            } else if time < 0 {
-                                time = 0
+                            let incrementalTranslation = newTranslation - pomoTimer.previousTranslation
+                            pomoTimer.previousTranslation = newTranslation
+                            pomoTimer.time -= incrementalTranslation
+                            if pomoTimer.time > 100 {
+                                pomoTimer.time = 100
+                            } else if pomoTimer.time < 0 {
+                                pomoTimer.time = 0
                             }
-                            pomodoro.setInput("timeMinutes", value: time)
+                            pomodoro.setInput("timeMinutes", value: pomoTimer.time)
                         }
                         .onEnded {gesture in
-                            previousTranslation = 0
-                            if time > 0 {
+                            pomoTimer.previousTranslation = 0
+                            if pomoTimer.time > 0 {
                                 startTimer()
                             }
                         }
                     )
             }
-            FontIcon.button(.materialIcon(code: isPlaying ? .pause_circle_filled : .play_circle_filled), action: toggleTimer, fontsize: 30)
+            FontIcon.button(.materialIcon(code: pomoTimer.isPlaying ? .pause_circle_filled : .play_circle_filled), action: toggleTimer, fontsize: 30)
                 .foregroundColor(Color("Pomodoro Primary"))
                 .frame(width: 40, height: 40.0)
         }
     }
     
     func toggleTimer() {
-        if isPlaying {
+        if pomoTimer.isPlaying {
             pauseTimer()
-        } else if time > 0 {
+        } else if pomoTimer.time > 0 {
             startTimer()
         }
     }
     
     func startTimer() {
-        isPlaying = true
-        timer?.invalidate()
-        timer = Timer.scheduledTimer(withTimeInterval: 6, repeats: true) {_ in
+        pomoTimer.isPlaying = true
+        pomoTimer.timer?.invalidate()
+        pomoTimer.timer = Timer.scheduledTimer(withTimeInterval: 6, repeats: true) {_ in
             decrementTime()
         }
     }
     
     func pauseTimer() {
-        isPlaying = false
-        timer?.invalidate()
+        pomoTimer.isPlaying = false
+        pomoTimer.timer?.invalidate()
     }
     
     func decrementTime() {
-        time -= 0.1
-        pomodoro.setInput("timeMinutes", value: time)
-        if time <= 0 {
-            time = 0
+        pomoTimer.time -= 0.1
+        pomodoro.setInput("timeMinutes", value: pomoTimer.time)
+        if pomoTimer.time <= 0 {
+            pomoTimer.time = 0
             pauseTimer()
         }
     }
@@ -91,6 +88,6 @@ struct AnimationView: View {
 
 struct AnimationView_Previews: PreviewProvider {
     static var previews: some View {
-        AnimationView()
+        AnimationView(pomoTimer: PomoTimer())
     }
 }
