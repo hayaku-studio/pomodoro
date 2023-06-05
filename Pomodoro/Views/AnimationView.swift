@@ -39,7 +39,8 @@ struct AnimationView: View {
                             } else if modelData.pomoTimer.timeSeconds < 0 {
                                 modelData.pomoTimer.timeSeconds = 0
                             }
-                            pomodoro.setInput("timeMinutes", value: Float(modelData.pomoTimer.timeSeconds/60))
+                            print(Float(modelData.pomoTimer.timeSeconds)/60)
+                            pomodoro.setInput("timeMinutes", value: Float(modelData.pomoTimer.timeSeconds)/60)
                         }
                         .onEnded {gesture in
                             modelData.pomoTimer.previousTranslation = 0
@@ -78,7 +79,7 @@ struct AnimationView: View {
     
     func decrementTime() {
         modelData.pomoTimer.timeSeconds -= 1
-        pomodoro.setInput("timeMinutes", value: Float(modelData.pomoTimer.timeSeconds/60))
+                        pomodoro.setInput("timeMinutes", value: Float(modelData.pomoTimer.timeSeconds)/60)
         if modelData.pomoTimer.timeSeconds <= 0 {
             modelData.pomoTimer.timeSeconds = 0
             pauseTimer()
