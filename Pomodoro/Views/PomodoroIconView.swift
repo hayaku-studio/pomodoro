@@ -16,6 +16,8 @@ struct PomodoroIconView: View {
             Text("\(String(format: "%02d", Int(modelData.pomoTimer.timeSeconds/60)))" +
                  ":" +
                  "\(String(format: "%02d", Int(modelData.pomoTimer.timeSeconds % 60)))")
+            .font(.footnote)
+            .offset(y: 2)
             .foregroundColor(Color("Dark Mode Contrast"))
         }
     }
