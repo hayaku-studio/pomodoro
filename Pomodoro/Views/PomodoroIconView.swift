@@ -13,7 +13,7 @@ struct PomodoroIconView: View {
     var body: some View {
         HStack {
             ZStack {
-                Image("Tomato Icon Semi Wide")
+                Image("Tomato Icon")
                 Text("\(String(format: "%02d", Int(modelData.pomoTimer.timeSeconds/60)))")
                     .font(.footnote)
                     .fontWeight(.semibold)
@@ -22,7 +22,7 @@ struct PomodoroIconView: View {
             }.offset(x: 6)
             Text(":").offset(x: -2)
              ZStack {
-                    Image("Tomato Icon Semi Wide")
+                    Image("Tomato Icon")
                     Text("\(String(format: "%02d", Int(modelData.pomoTimer.timeSeconds%60)))")
                 .font(.footnote)
                 .fontWeight(.semibold)

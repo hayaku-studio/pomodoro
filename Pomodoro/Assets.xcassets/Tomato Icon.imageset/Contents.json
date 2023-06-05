@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "Tomato Icon.svg",
+      "filename" : "Tomato Icon Semi Wide 1.svg",
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -12,7 +12,7 @@
           "value" : "light"
         }
       ],
-      "filename" : "Tomato Icon 1.svg",
+      "filename" : "Tomato Icon Semi Wide.svg",
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -23,7 +23,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "Tomato Icon Dark Mode.svg",
+      "filename" : "Tomato Icon Semi Wide Dark Mode.svg",
       "idiom" : "universal",
       "scale" : "1x"
     },
