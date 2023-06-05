@@ -40,7 +40,6 @@ struct AnimationView: View {
                             } else if modelData.pomoTimer.timeSeconds < 0 {
                                 modelData.pomoTimer.timeSeconds = 0
                             }
-                            print(Float(modelData.pomoTimer.timeSeconds)/60)
                             pomodoro.setInput("timeMinutes", value: Float(modelData.pomoTimer.timeSeconds)/60)
                         }
                         .onEnded {gesture in
