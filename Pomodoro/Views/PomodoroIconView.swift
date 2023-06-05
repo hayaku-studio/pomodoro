@@ -13,13 +13,13 @@ struct PomodoroIconView: View {
     var body: some View {
         HStack {
 //            Image("Tomato Icon Play")
-            Text(String(floor(modelData.time)))
+            Text(String(floor(modelData.pomoTimer.time)))
                 .foregroundColor(Color("Dark Mode Contrast"))
         }
     }
     
     func callThing() {
-        print(String(floor(modelData.time)))
+        print(String(floor(modelData.pomoTimer.time)))
     }
 }
 

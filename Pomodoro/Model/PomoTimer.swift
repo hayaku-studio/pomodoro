@@ -10,6 +10,6 @@ import Foundation
 struct PomoTimer {
     var isPlaying = false
     var timer: Timer?
-//    var time = 0.0
+    var time = 0.0
     var previousTranslation = 0.0
 }

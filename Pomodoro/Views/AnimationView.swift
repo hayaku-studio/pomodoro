@@ -11,7 +11,6 @@ import RiveRuntime
 
 struct AnimationView: View {
     @EnvironmentObject private var modelData: ModelData
-    @State var pomoTimer: PomoTimer
     let pomodoro = RiveViewModel(fileName: "pomodoro_timer", stateMachineName: "State Machine")
     
     var body: some View {
@@ -32,56 +31,56 @@ struct AnimationView: View {
                     .gesture(DragGesture()
                         .onChanged {gesture in
                             let newTranslation = gesture.translation.width/20
-                            let incrementalTranslation = newTranslation - pomoTimer.previousTranslation
-                            pomoTimer.previousTranslation = newTranslation
-                            modelData.time -= incrementalTranslation
-                            if modelData.time > 100 {
-                                modelData.time = 100
-                            } else if modelData.time < 0 {
-                                modelData.time = 0
+                            let incrementalTranslation = newTranslation - modelData.pomoTimer.previousTranslation
+                            modelData.pomoTimer.previousTranslation = newTranslation
+                            modelData.pomoTimer.time -= incrementalTranslation
+                            if modelData.pomoTimer.time > 100 {
+                                modelData.pomoTimer.time = 100
+                            } else if modelData.pomoTimer.time < 0 {
+                                modelData.pomoTimer.time = 0
                             }
-                            pomodoro.setInput("timeMinutes", value: modelData.time)
+                            pomodoro.setInput("timeMinutes", value: modelData.pomoTimer.time)
                         }
                         .onEnded {gesture in
-                            pomoTimer.previousTranslation = 0
-                            if modelData.time > 0 {
+                            modelData.pomoTimer.previousTranslation = 0
+                            if modelData.pomoTimer.time > 0 {
                                 startTimer()
                             }
                         }
                     )
             }
-            FontIcon.button(.materialIcon(code: pomoTimer.isPlaying ? .pause_circle_filled : .play_circle_filled), action: toggleTimer, fontsize: 30)
+            FontIcon.button(.materialIcon(code: modelData.pomoTimer.isPlaying ? .pause_circle_filled : .play_circle_filled), action: toggleTimer, fontsize: 30)
                 .foregroundColor(Color("Pomodoro Primary"))
                 .frame(width: 40, height: 40.0)
         }
     }
     
     func toggleTimer() {
-        if pomoTimer.isPlaying {
+        if modelData.pomoTimer.isPlaying {
             pauseTimer()
-        } else if modelData.time > 0 {
+        } else if modelData.pomoTimer.time > 0 {
             startTimer()
         }
     }
     
     func startTimer() {
-        pomoTimer.isPlaying = true
-        pomoTimer.timer?.invalidate()
-        pomoTimer.timer = Timer.scheduledTimer(withTimeInterval: 6, repeats: true) {_ in
+        modelData.pomoTimer.isPlaying = true
+        modelData.pomoTimer.timer?.invalidate()
+        modelData.pomoTimer.timer = Timer.scheduledTimer(withTimeInterval: 6, repeats: true) {_ in
             decrementTime()
         }
     }
     
     func pauseTimer() {
-        pomoTimer.isPlaying = false
-        pomoTimer.timer?.invalidate()
+        modelData.pomoTimer.isPlaying = false
+        modelData.pomoTimer.timer?.invalidate()
     }
     
     func decrementTime() {
-        modelData.time -= 0.1
-        pomodoro.setInput("timeMinutes", value: modelData.time)
-        if modelData.time <= 0 {
-            modelData.time = 0
+        modelData.pomoTimer.time -= 0.1
+        pomodoro.setInput("timeMinutes", value: modelData.pomoTimer.time)
+        if modelData.pomoTimer.time <= 0 {
+            modelData.pomoTimer.time = 0
             pauseTimer()
         }
     }
@@ -89,6 +88,6 @@ struct AnimationView: View {
 
 struct AnimationView_Previews: PreviewProvider {
     static var previews: some View {
-        AnimationView(pomoTimer: PomoTimer()).environmentObject(ModelData())
+        AnimationView().environmentObject(ModelData())
     }
 }

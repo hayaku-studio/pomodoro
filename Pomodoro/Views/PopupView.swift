@@ -11,7 +11,7 @@ struct PopupView: View {
     @EnvironmentObject private var modelData: ModelData
     
     var body: some View {
-        AnimationView(pomoTimer: modelData.pomoTimer)
+        AnimationView()
     }
 }
 
