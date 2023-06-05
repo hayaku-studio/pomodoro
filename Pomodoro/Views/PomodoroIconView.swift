@@ -11,10 +11,12 @@ struct PomodoroIconView: View {
     @EnvironmentObject private var modelData: ModelData
 
     var body: some View {
-        HStack {
-//            Image("Tomato Icon Play")
-            Text(String(floor(modelData.pomoTimer.time)))
-                .foregroundColor(Color("Dark Mode Contrast"))
+        ZStack {
+            Image("Tomato Icon Wide")
+            Text("\(String(format: "%02d", Int(modelData.pomoTimer.time)))" +
+                 ":" +
+                 "\(String(format: "%02d", Int(modelData.pomoTimer.time)))")
+            .foregroundColor(Color("Dark Mode Contrast"))
         }
     }
     
