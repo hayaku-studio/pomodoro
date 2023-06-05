@@ -30,20 +30,20 @@ struct AnimationView: View {
                 //.onTapGesture() // TODO: On too many taps give a drag hint - https://www.instagram.com/p/CewsSvBrTBa/
                     .gesture(DragGesture()
                         .onChanged {gesture in
-                            let newTranslation = gesture.translation.width/20
+                            let newTranslation = Int(gesture.translation.width)*3
                             let incrementalTranslation = newTranslation - modelData.pomoTimer.previousTranslation
                             modelData.pomoTimer.previousTranslation = newTranslation
-                            modelData.pomoTimer.time -= incrementalTranslation
-                            if modelData.pomoTimer.time > 100 {
-                                modelData.pomoTimer.time = 100
-                            } else if modelData.pomoTimer.time < 0 {
-                                modelData.pomoTimer.time = 0
+                            modelData.pomoTimer.timeSeconds -= incrementalTranslation
+                            if modelData.pomoTimer.timeSeconds > 6000 {
+                                modelData.pomoTimer.timeSeconds = 6000
+                            } else if modelData.pomoTimer.timeSeconds < 0 {
+                                modelData.pomoTimer.timeSeconds = 0
                             }
-                            pomodoro.setInput("timeMinutes", value: modelData.pomoTimer.time)
+                            pomodoro.setInput("timeMinutes", value: Float(modelData.pomoTimer.timeSeconds/60))
                         }
                         .onEnded {gesture in
                             modelData.pomoTimer.previousTranslation = 0
-                            if modelData.pomoTimer.time > 0 {
+                            if modelData.pomoTimer.timeSeconds > 0 {
                                 startTimer()
                             }
                         }
@@ -58,7 +58,7 @@ struct AnimationView: View {
     func toggleTimer() {
         if modelData.pomoTimer.isPlaying {
             pauseTimer()
-        } else if modelData.pomoTimer.time > 0 {
+        } else if modelData.pomoTimer.timeSeconds > 0 {
             startTimer()
         }
     }
@@ -66,7 +66,7 @@ struct AnimationView: View {
     func startTimer() {
         modelData.pomoTimer.isPlaying = true
         modelData.pomoTimer.timer?.invalidate()
-        modelData.pomoTimer.timer = Timer.scheduledTimer(withTimeInterval: 6, repeats: true) {_ in
+        modelData.pomoTimer.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) {_ in
             decrementTime()
         }
     }
@@ -77,10 +77,10 @@ struct AnimationView: View {
     }
     
     func decrementTime() {
-        modelData.pomoTimer.time -= 0.1
-        pomodoro.setInput("timeMinutes", value: modelData.pomoTimer.time)
-        if modelData.pomoTimer.time <= 0 {
-            modelData.pomoTimer.time = 0
+        modelData.pomoTimer.timeSeconds -= 1
+        pomodoro.setInput("timeMinutes", value: Float(modelData.pomoTimer.timeSeconds/60))
+        if modelData.pomoTimer.timeSeconds <= 0 {
+            modelData.pomoTimer.timeSeconds = 0
             pauseTimer()
         }
     }

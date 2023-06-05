@@ -13,16 +13,14 @@ struct PomodoroIconView: View {
     var body: some View {
         ZStack {
             Image("Tomato Icon Wide")
-            Text("\(String(format: "%02d", Int(modelData.pomoTimer.time)))" +
+            Text("\(String(format: "%02d", Int(modelData.pomoTimer.timeSeconds/60)))" +
                  ":" +
-                 "\(String(format: "%02d", Int(modelData.pomoTimer.time)))")
+                 "\(String(format: "%02d", Int(modelData.pomoTimer.timeSeconds % 60)))")
             .foregroundColor(Color("Dark Mode Contrast"))
         }
     }
     
-    func callThing() {
-        print(String(floor(modelData.pomoTimer.time)))
-    }
+    
 }
 
 struct PomodoroIconView_Previews: PreviewProvider {
