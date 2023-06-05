@@ -8,8 +8,8 @@
 import Foundation
 
 struct PomoTimer {
+    // TODO: I think timeSeconds is the only variable that needs to be here. Everything else can stay in Animation View
     var isPlaying = false
     var timer: Timer?
-    var timeSeconds = 0
     var previousTranslation = 0
 }

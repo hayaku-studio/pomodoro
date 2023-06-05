@@ -8,5 +8,5 @@
 import Foundation
 
 final class ModelData: ObservableObject {
-    @Published var pomoTimer = PomoTimer()
+    @Published var timeSeconds = 0
 }
