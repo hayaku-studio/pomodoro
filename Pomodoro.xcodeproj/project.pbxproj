@@ -41,6 +41,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CAA95F2B2A2DD0E500057B26 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		CAA95F2C2A2DD0F200057B26 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CAF0990C2A222A2E00606A83 /* AnimationView.swift */,
+				CA6B06A12A2C6E4000F62E56 /* PomodoroIconView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		CAF098E92A1FB1F600606A83 = {
 			isa = PBXGroup;
 			children = (
@@ -61,8 +77,8 @@
 			isa = PBXGroup;
 			children = (
 				CAF098F52A1FB1F600606A83 /* PomodoroApp.swift */,
-				CAF0990C2A222A2E00606A83 /* AnimationView.swift */,
-				CA6B06A12A2C6E4000F62E56 /* PomodoroIconView.swift */,
+				CAA95F2C2A2DD0F200057B26 /* Views */,
+				CAA95F2B2A2DD0E500057B26 /* Model */,
 				CAF098F92A1FB21500606A83 /* Assets.xcassets */,
 				CAF099082A2227ED00606A83 /* RiveAssets */,
 				CAF098FE2A1FB21500606A83 /* Pomodoro.entitlements */,
