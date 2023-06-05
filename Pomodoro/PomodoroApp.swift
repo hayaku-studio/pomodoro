@@ -21,7 +21,7 @@ struct PomodoroApp: App {
 }
 
 class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
-    @StateObject private var modelData = ModelData()
+    private var modelData = ModelData()
     private var statusItem: NSStatusItem!
     private let popover = NSPopover()
     

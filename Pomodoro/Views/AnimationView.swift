@@ -10,6 +10,7 @@ import SwiftUIFontIcon
 import RiveRuntime
 
 struct AnimationView: View {
+    @EnvironmentObject private var modelData: ModelData
     @State var pomoTimer: PomoTimer
     let pomodoro = RiveViewModel(fileName: "pomodoro_timer", stateMachineName: "State Machine")
     
@@ -33,17 +34,17 @@ struct AnimationView: View {
                             let newTranslation = gesture.translation.width/20
                             let incrementalTranslation = newTranslation - pomoTimer.previousTranslation
                             pomoTimer.previousTranslation = newTranslation
-                            pomoTimer.time -= incrementalTranslation
-                            if pomoTimer.time > 100 {
-                                pomoTimer.time = 100
-                            } else if pomoTimer.time < 0 {
-                                pomoTimer.time = 0
+                            modelData.time -= incrementalTranslation
+                            if modelData.time > 100 {
+                                modelData.time = 100
+                            } else if modelData.time < 0 {
+                                modelData.time = 0
                             }
-                            pomodoro.setInput("timeMinutes", value: pomoTimer.time)
+                            pomodoro.setInput("timeMinutes", value: modelData.time)
                         }
                         .onEnded {gesture in
                             pomoTimer.previousTranslation = 0
-                            if pomoTimer.time > 0 {
+                            if modelData.time > 0 {
                                 startTimer()
                             }
                         }
@@ -58,7 +59,7 @@ struct AnimationView: View {
     func toggleTimer() {
         if pomoTimer.isPlaying {
             pauseTimer()
-        } else if pomoTimer.time > 0 {
+        } else if modelData.time > 0 {
             startTimer()
         }
     }
@@ -77,10 +78,10 @@ struct AnimationView: View {
     }
     
     func decrementTime() {
-        pomoTimer.time -= 0.1
-        pomodoro.setInput("timeMinutes", value: pomoTimer.time)
-        if pomoTimer.time <= 0 {
-            pomoTimer.time = 0
+        modelData.time -= 0.1
+        pomodoro.setInput("timeMinutes", value: modelData.time)
+        if modelData.time <= 0 {
+            modelData.time = 0
             pauseTimer()
         }
     }
@@ -88,6 +89,6 @@ struct AnimationView: View {
 
 struct AnimationView_Previews: PreviewProvider {
     static var previews: some View {
-        AnimationView(pomoTimer: PomoTimer())
+        AnimationView(pomoTimer: PomoTimer()).environmentObject(ModelData())
     }
 }

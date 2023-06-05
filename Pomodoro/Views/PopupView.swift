@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PopupView: View {
-    @EnvironmentObject var modelData: ModelData
+    @EnvironmentObject private var modelData: ModelData
     
     var body: some View {
         AnimationView(pomoTimer: modelData.pomoTimer)

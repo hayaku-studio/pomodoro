@@ -8,17 +8,23 @@
 import SwiftUI
 
 struct PomodoroIconView: View {
+    @EnvironmentObject private var modelData: ModelData
+
     var body: some View {
         HStack {
-            Image("Tomato Icon Play")
-            Text("25")
+//            Image("Tomato Icon Play")
+            Text(String(floor(modelData.time)))
                 .foregroundColor(Color("Dark Mode Contrast"))
         }
+    }
+    
+    func callThing() {
+        print(String(floor(modelData.time)))
     }
 }
 
 struct PomodoroIconView_Previews: PreviewProvider {
     static var previews: some View {
-        PomodoroIconView()
+        PomodoroIconView().environmentObject(ModelData())
     }
 }
