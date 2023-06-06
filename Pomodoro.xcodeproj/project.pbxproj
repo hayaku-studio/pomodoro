@@ -8,10 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		CA6B06A22A2C6E4000F62E56 /* PomodoroIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6B06A12A2C6E4000F62E56 /* PomodoroIconView.swift */; };
-		CAA95F2A2A2D410100057B26 /* pomodoro_timer.riv in Resources */ = {isa = PBXBuildFile; fileRef = CAA95F292A2D410100057B26 /* pomodoro_timer.riv */; };
 		CAA95F2E2A2DD13D00057B26 /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA95F2D2A2DD13D00057B26 /* ModelData.swift */; };
 		CAA95F322A2DE7DC00057B26 /* PopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA95F312A2DE7DC00057B26 /* PopupView.swift */; };
 		CAD1E6682A237A4E00C0C4C8 /* SwiftUIFontIcon in Frameworks */ = {isa = PBXBuildFile; productRef = CAD1E6672A237A4E00C0C4C8 /* SwiftUIFontIcon */; };
+		CAE3D51D2A2F4BC900AD88F1 /* Sound.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE3D51C2A2F4BC900AD88F1 /* Sound.swift */; };
+		CAE3D5212A2F673500AD88F1 /* Reception Bell.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CAE3D51E2A2F4F6D00AD88F1 /* Reception Bell.mp3 */; };
+		CAE3D5282A2F684700AD88F1 /* pomodoro_timer.riv in Resources */ = {isa = PBXBuildFile; fileRef = CAE3D5272A2F684700AD88F1 /* pomodoro_timer.riv */; };
 		CAF098F62A1FB1F600606A83 /* PomodoroApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF098F52A1FB1F600606A83 /* PomodoroApp.swift */; };
 		CAF098FA2A1FB21500606A83 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CAF098F92A1FB21500606A83 /* Assets.xcassets */; };
 		CAF098FD2A1FB21500606A83 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CAF098FC2A1FB21500606A83 /* Preview Assets.xcassets */; };
@@ -21,9 +23,11 @@
 
 /* Begin PBXFileReference section */
 		CA6B06A12A2C6E4000F62E56 /* PomodoroIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroIconView.swift; sourceTree = "<group>"; };
-		CAA95F292A2D410100057B26 /* pomodoro_timer.riv */ = {isa = PBXFileReference; lastKnownFileType = file; name = pomodoro_timer.riv; path = ../../../../../Downloads/pomodoro_timer.riv; sourceTree = "<group>"; };
 		CAA95F2D2A2DD13D00057B26 /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
 		CAA95F312A2DE7DC00057B26 /* PopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupView.swift; sourceTree = "<group>"; };
+		CAE3D51C2A2F4BC900AD88F1 /* Sound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sound.swift; sourceTree = "<group>"; };
+		CAE3D51E2A2F4F6D00AD88F1 /* Reception Bell.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Reception Bell.mp3"; sourceTree = "<group>"; };
+		CAE3D5272A2F684700AD88F1 /* pomodoro_timer.riv */ = {isa = PBXFileReference; lastKnownFileType = file; path = pomodoro_timer.riv; sourceTree = "<group>"; };
 		CAF098F22A1FB1F600606A83 /* Pomodoro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pomodoro.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAF098F52A1FB1F600606A83 /* PomodoroApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroApp.swift; sourceTree = "<group>"; };
 		CAF098F92A1FB21500606A83 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -63,6 +67,22 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		CAE3D51B2A2F4BA200AD88F1 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				CAE3D51C2A2F4BC900AD88F1 /* Sound.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		CAE3D5202A2F670600AD88F1 /* SoundAssets */ = {
+			isa = PBXGroup;
+			children = (
+				CAE3D51E2A2F4F6D00AD88F1 /* Reception Bell.mp3 */,
+			);
+			path = SoundAssets;
+			sourceTree = "<group>";
+		};
 		CAF098E92A1FB1F600606A83 = {
 			isa = PBXGroup;
 			children = (
@@ -85,8 +105,10 @@
 				CAF098F52A1FB1F600606A83 /* PomodoroApp.swift */,
 				CAA95F2C2A2DD0F200057B26 /* Views */,
 				CAA95F2B2A2DD0E500057B26 /* Model */,
+				CAE3D51B2A2F4BA200AD88F1 /* Utils */,
 				CAF098F92A1FB21500606A83 /* Assets.xcassets */,
 				CAF099082A2227ED00606A83 /* RiveAssets */,
+				CAE3D5202A2F670600AD88F1 /* SoundAssets */,
 				CAF098FE2A1FB21500606A83 /* Pomodoro.entitlements */,
 				CAF098FB2A1FB21500606A83 /* Preview Content */,
 			);
@@ -104,7 +126,7 @@
 		CAF099082A2227ED00606A83 /* RiveAssets */ = {
 			isa = PBXGroup;
 			children = (
-				CAA95F292A2D410100057B26 /* pomodoro_timer.riv */,
+				CAE3D5272A2F684700AD88F1 /* pomodoro_timer.riv */,
 			);
 			path = RiveAssets;
 			sourceTree = "<group>";
@@ -175,8 +197,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CAE3D5282A2F684700AD88F1 /* pomodoro_timer.riv in Resources */,
+				CAE3D5212A2F673500AD88F1 /* Reception Bell.mp3 in Resources */,
 				CAF098FD2A1FB21500606A83 /* Preview Assets.xcassets in Resources */,
-				CAA95F2A2A2D410100057B26 /* pomodoro_timer.riv in Resources */,
 				CAF098FA2A1FB21500606A83 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -189,6 +212,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CAF0990D2A222A2E00606A83 /* AnimationView.swift in Sources */,
+				CAE3D51D2A2F4BC900AD88F1 /* Sound.swift in Sources */,
 				CAA95F2E2A2DD13D00057B26 /* ModelData.swift in Sources */,
 				CA6B06A22A2C6E4000F62E56 /* PomodoroIconView.swift in Sources */,
 				CAA95F322A2DE7DC00057B26 /* PopupView.swift in Sources */,

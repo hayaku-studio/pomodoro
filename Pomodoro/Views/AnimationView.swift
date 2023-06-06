@@ -86,9 +86,14 @@ struct AnimationView: View {
         modelData.timeSeconds -= 1
                         pomodoro.setInput("timeMinutes", value: Float(modelData.timeSeconds)/60)
         if modelData.timeSeconds <= 0 {
-            modelData.timeSeconds = 0
-            pauseTimer()
+            timerFinished()
         }
+    }
+    
+    func timerFinished() {
+        playSound()
+        modelData.timeSeconds = 0
+        pauseTimer()
     }
 }
 
