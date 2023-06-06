@@ -12,8 +12,8 @@
 		CAA95F322A2DE7DC00057B26 /* PopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA95F312A2DE7DC00057B26 /* PopupView.swift */; };
 		CAD1E6682A237A4E00C0C4C8 /* SwiftUIFontIcon in Frameworks */ = {isa = PBXBuildFile; productRef = CAD1E6672A237A4E00C0C4C8 /* SwiftUIFontIcon */; };
 		CAE3D51D2A2F4BC900AD88F1 /* Sound.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE3D51C2A2F4BC900AD88F1 /* Sound.swift */; };
-		CAE3D5212A2F673500AD88F1 /* Reception Bell.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CAE3D51E2A2F4F6D00AD88F1 /* Reception Bell.mp3 */; };
 		CAE3D5282A2F684700AD88F1 /* pomodoro_timer.riv in Resources */ = {isa = PBXBuildFile; fileRef = CAE3D5272A2F684700AD88F1 /* pomodoro_timer.riv */; };
+		CAE3D52C2A2F6AF900AD88F1 /* Reception Bell.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CAE3D52B2A2F6AF900AD88F1 /* Reception Bell.mp3 */; };
 		CAF098F62A1FB1F600606A83 /* PomodoroApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF098F52A1FB1F600606A83 /* PomodoroApp.swift */; };
 		CAF098FA2A1FB21500606A83 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CAF098F92A1FB21500606A83 /* Assets.xcassets */; };
 		CAF098FD2A1FB21500606A83 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CAF098FC2A1FB21500606A83 /* Preview Assets.xcassets */; };
@@ -26,8 +26,8 @@
 		CAA95F2D2A2DD13D00057B26 /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
 		CAA95F312A2DE7DC00057B26 /* PopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupView.swift; sourceTree = "<group>"; };
 		CAE3D51C2A2F4BC900AD88F1 /* Sound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sound.swift; sourceTree = "<group>"; };
-		CAE3D51E2A2F4F6D00AD88F1 /* Reception Bell.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Reception Bell.mp3"; sourceTree = "<group>"; };
 		CAE3D5272A2F684700AD88F1 /* pomodoro_timer.riv */ = {isa = PBXFileReference; lastKnownFileType = file; path = pomodoro_timer.riv; sourceTree = "<group>"; };
+		CAE3D52B2A2F6AF900AD88F1 /* Reception Bell.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Reception Bell.mp3"; sourceTree = "<group>"; };
 		CAF098F22A1FB1F600606A83 /* Pomodoro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pomodoro.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAF098F52A1FB1F600606A83 /* PomodoroApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroApp.swift; sourceTree = "<group>"; };
 		CAF098F92A1FB21500606A83 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -78,7 +78,7 @@
 		CAE3D5202A2F670600AD88F1 /* SoundAssets */ = {
 			isa = PBXGroup;
 			children = (
-				CAE3D51E2A2F4F6D00AD88F1 /* Reception Bell.mp3 */,
+				CAE3D52B2A2F6AF900AD88F1 /* Reception Bell.mp3 */,
 			);
 			path = SoundAssets;
 			sourceTree = "<group>";
@@ -197,8 +197,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CAE3D52C2A2F6AF900AD88F1 /* Reception Bell.mp3 in Resources */,
 				CAE3D5282A2F684700AD88F1 /* pomodoro_timer.riv in Resources */,
-				CAE3D5212A2F673500AD88F1 /* Reception Bell.mp3 in Resources */,
 				CAF098FD2A1FB21500606A83 /* Preview Assets.xcassets in Resources */,
 				CAF098FA2A1FB21500606A83 /* Assets.xcassets in Resources */,
 			);
