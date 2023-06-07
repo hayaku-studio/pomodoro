@@ -14,6 +14,11 @@ struct PopupView: View {
     var body: some View {
             VStack {
                 HStack {
+                    Button(action: {}) {
+                        Text("")
+                    }
+                    .opacity(0)
+                    .frame(height: 0)
                     Spacer()
                     FontIcon.button(.materialIcon(code: .settings), action: openSettings)
                         .foregroundColor(Color("Pomodoro Primary"))

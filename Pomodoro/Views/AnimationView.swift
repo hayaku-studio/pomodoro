@@ -20,11 +20,6 @@ struct AnimationView: View {
     
     var body: some View {
         VStack {
-            Button(action: {}) {
-                Text("")
-            }
-            .opacity(0)
-            .frame(height: 0)
             ZStack {
                 pomodoro.view().scaledToFit().frame(width: 200, height: 200)
                 Circle()
