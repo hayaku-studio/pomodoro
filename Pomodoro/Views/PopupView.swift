@@ -6,10 +6,26 @@
 //
 
 import SwiftUI
+import SwiftUIFontIcon
 
 struct PopupView: View {
+    @State private var showSettings = false
+
     var body: some View {
-        AnimationView()
+            VStack {
+                HStack {
+                    Spacer()
+                    FontIcon.button(.materialIcon(code: .settings), action: openSettings)
+                        .foregroundColor(Color("Pomodoro Primary"))
+                        .frame(width: 40, height: 40)
+                }
+                AnimationView()
+            }
+        
+    }
+    
+    func openSettings() {
+        showSettings = true
     }
 }
 
