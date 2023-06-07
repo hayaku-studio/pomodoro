@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CA01D54F2A309BBD001B9DBC /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA01D54E2A309BBD001B9DBC /* SettingsView.swift */; };
 		CA6B06A22A2C6E4000F62E56 /* PomodoroIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6B06A12A2C6E4000F62E56 /* PomodoroIconView.swift */; };
 		CAA95F2E2A2DD13D00057B26 /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA95F2D2A2DD13D00057B26 /* ModelData.swift */; };
 		CAA95F322A2DE7DC00057B26 /* PopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA95F312A2DE7DC00057B26 /* PopupView.swift */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CA01D54E2A309BBD001B9DBC /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		CA6B06A12A2C6E4000F62E56 /* PomodoroIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroIconView.swift; sourceTree = "<group>"; };
 		CAA95F2D2A2DD13D00057B26 /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
 		CAA95F312A2DE7DC00057B26 /* PopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupView.swift; sourceTree = "<group>"; };
@@ -63,6 +65,7 @@
 				CAF0990C2A222A2E00606A83 /* AnimationView.swift */,
 				CA6B06A12A2C6E4000F62E56 /* PomodoroIconView.swift */,
 				CAA95F312A2DE7DC00057B26 /* PopupView.swift */,
+				CA01D54E2A309BBD001B9DBC /* SettingsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -211,6 +214,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA01D54F2A309BBD001B9DBC /* SettingsView.swift in Sources */,
 				CAF0990D2A222A2E00606A83 /* AnimationView.swift in Sources */,
 				CAE3D51D2A2F4BC900AD88F1 /* Sound.swift in Sources */,
 				CAA95F2E2A2DD13D00057B26 /* ModelData.swift in Sources */,

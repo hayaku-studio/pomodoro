@@ -24,7 +24,12 @@ struct PopupView: View {
                         .foregroundColor(Color("Pomodoro Primary"))
                         .frame(width: 40, height: 40)
                 }
-                AnimationView()
+                ZStack {
+                    AnimationView()
+                    if showSettings {
+                        SettingsView()
+                    }
+                }
             }
         
     }
