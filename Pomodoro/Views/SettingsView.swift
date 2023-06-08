@@ -22,24 +22,22 @@ struct SettingsView: View {
                 }
                 .toggleStyle(SwitchToggleStyle())
                 if soundToggle {
-                    VStack {
-                        Divider()
-                        HStack {
-                            Text("Volume")
-                            Spacer()
-                            Button("Test", action: playSound)
-                        }
-                        HStack {
-                            Label("Low Volume", systemImage: "volume.1")
-                                .labelStyle(.iconOnly)
-                            Slider(
-                                value: $volume,
-                                in: 0...1,
-                                step: 0.05
-                            )
-                            Label("High Volume", systemImage: "volume.3.fill")
-                                .labelStyle(.iconOnly)
-                        }
+                    Divider()
+                    HStack {
+                        Text("Volume")
+                        Spacer()
+                        Button("Test", action: playSound)
+                    }
+                    HStack {
+                        Label("Low Volume", systemImage: "volume.1")
+                            .labelStyle(.iconOnly)
+                        Slider(
+                            value: $volume,
+                            in: 0...1,
+                            step: 0.05
+                        )
+                        Label("High Volume", systemImage: "volume.3.fill")
+                            .labelStyle(.iconOnly)
                     }
                 }
             }
