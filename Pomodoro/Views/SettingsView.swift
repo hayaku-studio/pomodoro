@@ -23,6 +23,7 @@ struct SettingsView: View {
                 .toggleStyle(SwitchToggleStyle())
                 if soundToggle {
                     VStack {
+                        Divider()
                         HStack {
                             Text("Volume")
                             Spacer()
