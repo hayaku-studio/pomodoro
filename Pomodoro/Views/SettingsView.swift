@@ -42,9 +42,6 @@ struct SettingsView: View {
         .mask(RoundedRectangle(cornerRadius: 20, style: .continuous))
         .shadow(radius: 5, x: 0, y: 3)
         .shadow(radius: 30, x: 0, y: 30)
-        .overlay(RoundedRectangle(cornerRadius: 20, style: .continuous)
-            .stroke(.linearGradient(colors: [.white.opacity(0.8), .white.opacity(0.1)], startPoint: .topLeading, endPoint: .bottomTrailing))
-        )
         .padding()
     }
 }
