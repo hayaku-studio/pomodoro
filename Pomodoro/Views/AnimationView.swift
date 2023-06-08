@@ -16,7 +16,7 @@ struct AnimationView: View {
     @State var timer: Timer?
     @State var previousTranslation = 0
     
-    let pomodoro = RiveViewModel(fileName: "pomodoro_timer", stateMachineName: "State Machine")
+    @State private var pomodoro = RiveViewModel(fileName: "pomodoro_timer", stateMachineName: "State Machine") // TODO: in all documentation, `let` is used instead of `@State var`. However after opening the Settings modal, the animation breaks. This somehow fixes it
     
     var body: some View {
         VStack {
