@@ -12,9 +12,9 @@ import RiveRuntime
 struct AnimationView: View {
     @EnvironmentObject private var modelData: ModelData
     
-    @State var isPlaying = false
-    @State var timer: Timer?
-    @State var previousTranslation = 0
+    @State private var isPlaying = false
+    @State private var timer: Timer?
+    @State private var previousTranslation = 0
     
     @State private var pomodoro = RiveViewModel(fileName: "pomodoro_timer", stateMachineName: "State Machine") // TODO: in all documentation, `let` is used instead of `@State var`. However after opening the Settings modal, the animation breaks. This somehow fixes it
     
