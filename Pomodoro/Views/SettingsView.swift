@@ -15,34 +15,39 @@ struct SettingsView: View {
         VStack(alignment: .leading) {
             Text("Settings")
                 .font(.largeTitle)
-            Toggle(isOn: $soundToggle) {
-                Text("Ping on Timer Completion")
-                    .frame(maxWidth: .infinity, alignment: .leading)
-            }
-            .toggleStyle(SwitchToggleStyle())
-            if soundToggle {
-                VStack {
-                    HStack {
-                        Text("Volume")
-                        Spacer()
-                        Button("Test", action: playSound)
-                    }
-                    HStack {
-                        Label("Low Volume", systemImage: "volume.1")
-                            .labelStyle(.iconOnly)
-                        Slider(
-                            value: $volume,
-                            in: 0...1,
-                            step: 0.05
-                        )
-                        Label("High Volume", systemImage: "volume.3.fill")
-                            .labelStyle(.iconOnly)
+            VStack {
+                Toggle(isOn: $soundToggle) {
+                    Text("Ping on Timer Completion")
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+                .toggleStyle(SwitchToggleStyle())
+                if soundToggle {
+                    VStack {
+                        HStack {
+                            Text("Volume")
+                            Spacer()
+                            Button("Test", action: playSound)
+                        }
+                        HStack {
+                            Label("Low Volume", systemImage: "volume.1")
+                                .labelStyle(.iconOnly)
+                            Slider(
+                                value: $volume,
+                                in: 0...1,
+                                step: 0.05
+                            )
+                            Label("High Volume", systemImage: "volume.3.fill")
+                                .labelStyle(.iconOnly)
+                        }
                     }
                 }
             }
+            .padding(8)
+            .background(Color("Settings Card Background"))
+            .mask(RoundedRectangle(cornerRadius: 8, style: .continuous))
         }
         .padding(30)
-        .background(.white)
+        .background(Color("Settings Background"))
         .mask(RoundedRectangle(cornerRadius: 20, style: .continuous))
         .shadow(radius: 5, x: 0, y: 3)
         .shadow(radius: 30, x: 0, y: 30)
