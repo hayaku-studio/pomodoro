@@ -9,4 +9,5 @@ import Foundation
 
 final class ModelData: ObservableObject {
     @Published var timeSeconds = 0
+    @Published var pingVolume: Float = 0.5
 }

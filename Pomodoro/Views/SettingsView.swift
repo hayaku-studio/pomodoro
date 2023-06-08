@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @State private var volume: Double = 0
+    @EnvironmentObject private var modelData: ModelData
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -25,7 +25,7 @@ struct SettingsView: View {
                     Label("Low Volume", systemImage: "speaker.fill")
                         .labelStyle(.iconOnly)
                     Slider(
-                        value: $volume,
+                        value: $modelData.pingVolume,
                         in: 0...1
                     )
                     Label("High Volume", systemImage: "speaker.3.fill")

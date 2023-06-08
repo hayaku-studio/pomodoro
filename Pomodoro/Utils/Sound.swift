@@ -9,11 +9,11 @@ import AVFoundation
 
 var player: AVAudioPlayer?
 
-func playSound() {
+func playSound(volume: Float) {
     guard let url = Bundle.main.url(forResource: "Reception Bell", withExtension: "mp3") else { return }
     do {
         player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.mp3.rawValue)
-        player?.volume = 0.1 // relative to system audio
+        player?.volume = volume // relative to system audio
         guard let player = player else { return }
         player.play()
     } catch let error {

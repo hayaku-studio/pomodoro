@@ -86,7 +86,7 @@ struct AnimationView: View {
     }
     
     func timerFinished() {
-        playSound()
+        playSound(volume: modelData.pingVolume)
         modelData.timeSeconds = 0
         pauseTimer()
     }
