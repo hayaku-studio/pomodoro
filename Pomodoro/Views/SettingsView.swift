@@ -8,14 +8,38 @@
 import SwiftUI
 
 struct SettingsView: View {
+    @State private var soundToggle = true
     @State private var volume: Double = 0
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 24) {
+        VStack(alignment: .leading) {
             Text("Settings")
                 .font(.largeTitle)
-            Text("Ping Volume")
-            Slider(value: $volume, in: 0...100)
+            Toggle(isOn: $soundToggle) {
+                Text("Ping on Timer Completion")
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
+            .toggleStyle(SwitchToggleStyle())
+            if soundToggle {
+                VStack {
+                    HStack {
+                        Text("Volume")
+                        Spacer()
+                        Button("Test", action: playSound)
+                    }
+                    HStack {
+                        Label("Low Volume", systemImage: "volume.1")
+                            .labelStyle(.iconOnly)
+                        Slider(
+                            value: $volume,
+                            in: 0...1,
+                            step: 0.05
+                        )
+                        Label("High Volume", systemImage: "volume.3.fill")
+                            .labelStyle(.iconOnly)
+                    }
+                }
+            }
         }
         .padding(30)
         .background(.white)
