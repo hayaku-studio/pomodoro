@@ -45,7 +45,7 @@ struct SettingsView: View {
             .background(Color("Settings Card Background"))
             .mask(RoundedRectangle(cornerRadius: 8, style: .continuous))
         }
-        .padding(30)
+        .padding(16)
         .background(Color("Settings Background"))
         .mask(RoundedRectangle(cornerRadius: 20, style: .continuous))
         .shadow(radius: 5, x: 0, y: 3)
