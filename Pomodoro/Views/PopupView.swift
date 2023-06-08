@@ -10,8 +10,9 @@ import SwiftUIFontIcon
 
 struct PopupView: View {
     @State private var showSettings = false
-
+    
     var body: some View {
+        ZStack {
             VStack {
                 HStack {
                     Button(action: {}) {
@@ -24,18 +25,25 @@ struct PopupView: View {
                         .foregroundColor(Color("Pomodoro Primary"))
                         .frame(width: 40, height: 40)
                 }
-                ZStack {
-                    AnimationView()
-                    if showSettings {
-                        SettingsView()
-                    }
-                }
+                AnimationView()
             }
-        
+            if showSettings {
+                Rectangle()
+                    .fill(.black.opacity(0.15))
+                    .onTapGesture {
+                        closeSettings()
+                    }
+                SettingsView()
+            }
+        }
     }
     
     func openSettings() {
         showSettings = true
+    }
+    
+    func closeSettings() {
+        showSettings = false
     }
 }
 
