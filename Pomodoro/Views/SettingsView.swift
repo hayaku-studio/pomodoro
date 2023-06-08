@@ -8,42 +8,34 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @State private var soundToggle = true
     @State private var volume: Double = 0
     
     var body: some View {
         VStack(alignment: .leading) {
             Text("Settings")
                 .font(.largeTitle)
-            VStack {
-                Toggle(isOn: $soundToggle) {
-                    Text("Ping on Timer Completion")
-                        .frame(maxWidth: .infinity, alignment: .leading)
+            
+            VStack(alignment: .leading, spacing: 4) {
+                Text("PING VOLUME")
+                    .font(.caption)
+                    .foregroundColor(Color("Settings Heading Text"))
+                    .padding(.leading, 8)
+                    
+                HStack {
+                    Label("Low Volume", systemImage: "speaker.fill")
+                        .labelStyle(.iconOnly)
+                    Slider(
+                        value: $volume,
+                        in: 0...1
+                    )
+                    Label("High Volume", systemImage: "speaker.3.fill")
+                        .labelStyle(.iconOnly)
                 }
-                .toggleStyle(SwitchToggleStyle())
-                if soundToggle {
-                    Divider()
-                    HStack {
-                        Text("Volume")
-                        Spacer()
-                        Button("Test", action: playSound)
-                    }
-                    HStack {
-                        Label("Low Volume", systemImage: "volume.1")
-                            .labelStyle(.iconOnly)
-                        Slider(
-                            value: $volume,
-                            in: 0...1,
-                            step: 0.05
-                        )
-                        Label("High Volume", systemImage: "volume.3.fill")
-                            .labelStyle(.iconOnly)
-                    }
-                }
+                .foregroundColor(Color("Settings Icon"))
+                .padding(8)
+                .background(Color("Settings Card Background"))
+                .mask(RoundedRectangle(cornerRadius: 8, style: .continuous))
             }
-            .padding(8)
-            .background(Color("Settings Card Background"))
-            .mask(RoundedRectangle(cornerRadius: 8, style: .continuous))
         }
         .padding(16)
         .background(Color("Settings Background"))
