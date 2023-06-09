@@ -15,6 +15,33 @@ struct SettingsView: View {
             Text("Settings")
                 .font(.largeTitle)
             PingVolumeView()
+            
+            VStack(alignment: .leading, spacing: 4) {
+                Text("TIMER")
+                    .font(.caption)
+                    .foregroundColor(Color("Settings Heading Text"))
+                    .padding(.leading, 8)
+                
+                Picker("Snap to Nearest:", selection: $modelData.timerSnap) {
+                    ForEach(TimerSnap.allCases) {timerSnap in
+                        Text(timerSnap.id).tag(timerSnap)
+                    }
+                }
+                .onChange(of: modelData.timerSnap) {tag in
+                    UserDefaults.standard.set(tag.id, forKey: "timerSnap") // TODO: reduce possibility of bugs by having "timerSnap" be some global var (maybe something like Keys.TimerSnap)
+                }
+                .foregroundColor(Color("Settings Icon"))
+                .padding(8)
+                .background(Color("Settings Card Background"))
+                .mask(RoundedRectangle(cornerRadius: 8, style: .continuous))
+            }
+        }
+        .padding(16)
+        .background(Color("Settings Background"))
+        .mask(RoundedRectangle(cornerRadius: 20, style: .continuous))
+        .shadow(radius: 5, x: 0, y: 3)
+        .shadow(radius: 30, x: 0, y: 30)
+        .padding()
     }
 }
 

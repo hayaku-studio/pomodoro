@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CA01D54F2A309BBD001B9DBC /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA01D54E2A309BBD001B9DBC /* SettingsView.swift */; };
+		CA6789E82A33762A002CB46A /* TimerSnap.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6789E72A33762A002CB46A /* TimerSnap.swift */; };
 		CA6B06A22A2C6E4000F62E56 /* PomodoroIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6B06A12A2C6E4000F62E56 /* PomodoroIconView.swift */; };
 		CAA95F2E2A2DD13D00057B26 /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA95F2D2A2DD13D00057B26 /* ModelData.swift */; };
 		CAA95F322A2DE7DC00057B26 /* PopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA95F312A2DE7DC00057B26 /* PopupView.swift */; };
@@ -24,6 +25,7 @@
 
 /* Begin PBXFileReference section */
 		CA01D54E2A309BBD001B9DBC /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		CA6789E72A33762A002CB46A /* TimerSnap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerSnap.swift; sourceTree = "<group>"; };
 		CA6B06A12A2C6E4000F62E56 /* PomodoroIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroIconView.swift; sourceTree = "<group>"; };
 		CAA95F2D2A2DD13D00057B26 /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
 		CAA95F312A2DE7DC00057B26 /* PopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupView.swift; sourceTree = "<group>"; };
@@ -51,6 +53,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CA6789E62A337617002CB46A /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				CA6789E72A33762A002CB46A /* TimerSnap.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
 		CAA95F2B2A2DD0E500057B26 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -108,6 +118,7 @@
 				CAF098F52A1FB1F600606A83 /* PomodoroApp.swift */,
 				CAA95F2C2A2DD0F200057B26 /* Views */,
 				CAA95F2B2A2DD0E500057B26 /* Model */,
+				CA6789E62A337617002CB46A /* Enums */,
 				CAE3D51B2A2F4BA200AD88F1 /* Utils */,
 				CAF098F92A1FB21500606A83 /* Assets.xcassets */,
 				CAF099082A2227ED00606A83 /* RiveAssets */,
@@ -219,6 +230,7 @@
 				CAE3D51D2A2F4BC900AD88F1 /* Sound.swift in Sources */,
 				CAA95F2E2A2DD13D00057B26 /* ModelData.swift in Sources */,
 				CA6B06A22A2C6E4000F62E56 /* PomodoroIconView.swift in Sources */,
+				CA6789E82A33762A002CB46A /* TimerSnap.swift in Sources */,
 				CAA95F322A2DE7DC00057B26 /* PopupView.swift in Sources */,
 				CAF098F62A1FB1F600606A83 /* PomodoroApp.swift in Sources */,
 			);
