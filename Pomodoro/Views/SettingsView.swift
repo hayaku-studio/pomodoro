@@ -27,7 +27,11 @@ struct SettingsView: View {
                     Slider(
                         value: $modelData.pingVolume,
                         in: 0...1
-                    )
+                    ) { editing in
+                        if (editing == false) {
+                            UserDefaults.standard.set(modelData.pingVolume, forKey: "pingVolume") // TODO: reduce possibility of bugs by having "pingVolume" be some global var (maybe something like Keys.PingVolume)
+                        }
+                    }
                     Label("High Volume", systemImage: "speaker.3.fill")
                         .labelStyle(.iconOnly)
                 }
