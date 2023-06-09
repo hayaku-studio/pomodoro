@@ -6,9 +6,9 @@
 //
 
 enum TimerSnap: String, CaseIterable, Identifiable {
-    case seconds3 = "3 Seconds"
+    case second = "1 Second"
+    case seconds5 = "5 Seconds"
     case seconds10 = "10 Seconds"
-    case seconds15 = "15 Seconds"
     case seconds30 = "30 Seconds"
     case minute = "Minute"
     
@@ -16,12 +16,12 @@ enum TimerSnap: String, CaseIterable, Identifiable {
     
     var numberValue: Int {
         switch self {
-        case .seconds3:
-            return 3
+        case .second:
+            return 1
+        case .seconds5:
+            return 5
         case .seconds10:
             return 10
-        case .seconds15:
-            return 15
         case .seconds30:
             return 30
         case .minute:

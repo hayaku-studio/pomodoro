@@ -23,7 +23,6 @@ final class ModelData: ObservableObject {
         }
         
         let timerSnapKey = "timerSnap"
-        timerSnap = TimerSnap(rawValue: defaults.string(forKey: timerSnapKey) ?? "")  ?? TimerSnap.seconds3
-        print(timerSnap)
+        timerSnap = TimerSnap(rawValue: defaults.string(forKey: timerSnapKey) ?? "")  ?? TimerSnap.seconds10
     }
 }
