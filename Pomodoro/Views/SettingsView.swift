@@ -30,6 +30,7 @@ struct SettingsView: View {
                     ) { editing in
                         if (editing == false) {
                             UserDefaults.standard.set(modelData.pingVolume, forKey: "pingVolume") // TODO: reduce possibility of bugs by having "pingVolume" be some global var (maybe something like Keys.PingVolume)
+                            playSound(volume: modelData.pingVolume)
                         }
                     }
                     Label("High Volume", systemImage: "speaker.3.fill")
