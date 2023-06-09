@@ -13,4 +13,19 @@ enum TimerSnap: String, CaseIterable, Identifiable {
     case minute = "Minute"
     
     var id: String { rawValue }
+    
+    var numberValue: Int {
+        switch self {
+        case .seconds3:
+            return 3
+        case .seconds10:
+            return 10
+        case .seconds15:
+            return 15
+        case .seconds30:
+            return 30
+        case .minute:
+            return 60
+        }
+    }
 }
