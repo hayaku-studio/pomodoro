@@ -28,6 +28,7 @@ struct PopupView: View {
                 AnimationView()
             }
             if showSettings {
+                // TODO: extract CustomModalView
                 Rectangle()
                     .fill(.black.opacity(0.15))
                     .onTapGesture {
@@ -35,7 +36,13 @@ struct PopupView: View {
                     }
                 SettingsView()
                     .transition(.move(edge: .top)
-                    .combined(with: .opacity))
+                        .combined(with: .opacity))
+                    .overlay(alignment: .top) {
+                        FontIcon.button(.materialIcon(code: .cancel), action: closeSettings)
+                            .foregroundColor(Color("Pomodoro Primary"))
+                            .frame(width: 40, height: 40)
+                            .frame(maxWidth: .infinity, alignment: .trailing) // TODO: less hacky alignment
+                    }
                     .zIndex(1)
             }
         }
