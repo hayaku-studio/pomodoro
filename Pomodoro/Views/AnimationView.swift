@@ -35,7 +35,14 @@ struct AnimationView: View {
                             let newTranslation = Int(Float(gesture.translation.width)*5.0/Float(timerSnapValue))*timerSnapValue
                             let incrementalTranslation = newTranslation - previousTranslation
                             previousTranslation = newTranslation
-                            modelData.timeSeconds -= incrementalTranslation
+                            let amountOfSecondsFromSnap = modelData.timeSeconds % modelData.timerSnap.numberValue
+                            if amountOfSecondsFromSnap == 0 {
+                                modelData.timeSeconds -= incrementalTranslation
+                            } else if gesture.translation.width > 0 {
+                                modelData.timeSeconds -= amountOfSecondsFromSnap
+                            } else {
+                                modelData.timeSeconds += modelData.timerSnap.numberValue - amountOfSecondsFromSnap
+                            }
                             if modelData.timeSeconds > 6000 {
                                 modelData.timeSeconds = 6000
                             } else if modelData.timeSeconds < 0 {
