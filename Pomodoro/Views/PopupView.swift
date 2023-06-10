@@ -34,16 +34,23 @@ struct PopupView: View {
                         closeSettings()
                     }
                 SettingsView()
+                    .transition(.move(edge: .top)
+                    .combined(with: .opacity))
+                    .zIndex(1)
             }
         }
     }
     
     func openSettings() {
-        showSettings = true
+        withAnimation(.spring()) {
+            showSettings = true
+        }
     }
     
     func closeSettings() {
-        showSettings = false
+        withAnimation(.spring()) {
+            showSettings = false
+        }
     }
 }
 
