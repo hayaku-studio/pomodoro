@@ -32,7 +32,7 @@ struct AnimationView: View {
                     .gesture(DragGesture()
                         .onChanged {gesture in
                             pauseTimer() // TODO: find a better way to do this (instead of calling pauseTimer hundreds of times)
-                            let timerSnapValue = modelData.timerSnap.numberValue
+                            let timerSnapValue = isOptionKeyPressed() ? 60 : modelData.timerSnap.numberValue
                             let newTranslation = Int(Float(gesture.translation.width)*5.0/Float(timerSnapValue))*timerSnapValue
                             let incrementalTranslation = newTranslation - previousTranslation
                             previousTranslation = newTranslation
@@ -106,6 +106,10 @@ struct AnimationView: View {
         playSound(volume: modelData.pingVolume)
         modelData.timeSeconds = 0
         pauseTimer()
+    }
+    
+    func isOptionKeyPressed() -> Bool {
+        return NSEvent.modifierFlags.contains(.option)
     }
 }
 
