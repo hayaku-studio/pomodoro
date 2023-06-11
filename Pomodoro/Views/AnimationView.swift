@@ -15,6 +15,7 @@ struct AnimationView: View {
     @State private var isPlaying = false
     @State private var timer: Timer?
     @State private var previousTranslation = 0
+    @State private var isTimerGreaterThanZero = false
     
     @State private var pomodoro = RiveViewModel(fileName: "pomodoro_timer", stateMachineName: "State Machine") // TODO: in all documentation, `let` is used instead of `@State var`. However after opening the Settings modal, the animation breaks. This somehow fixes it
     
@@ -49,6 +50,14 @@ struct AnimationView: View {
                                 modelData.timeSeconds = 0
                             }
                             pomodoro.setInput("timeMinutes", value: Float(modelData.timeSeconds)/60)
+                            if (modelData.timeSeconds > 0) {
+                                isTimerGreaterThanZero = true
+                            } else {
+                                if isTimerGreaterThanZero {
+                                    playSound(volume: modelData.pingVolume)
+                                }
+                                isTimerGreaterThanZero = false
+                            }
                         }
                         .onEnded {gesture in
                             previousTranslation = 0
