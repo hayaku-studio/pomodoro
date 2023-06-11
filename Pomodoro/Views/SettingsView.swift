@@ -35,7 +35,7 @@ struct SettingsView: View {
                 .background(Color("Settings Card Background"))
                 .mask(RoundedRectangle(cornerRadius: 8, style: .continuous))
                 
-                Text("You can hold the Option ⌥ Key while dragging to snap to the nearest minute")
+                Text("Hold the Option ⌥ Key while dragging to snap to the nearest minute.")
                     .font(.caption)
                     .foregroundColor(Color("Settings Heading Text"))
                     .padding(.leading, 8)
