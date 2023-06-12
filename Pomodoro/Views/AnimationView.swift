@@ -20,6 +20,7 @@ struct AnimationView: View {
     
     @State private var pomodoro = RiveViewModel(fileName: "pomodoro_timer", stateMachineName: "State Machine") // TODO: in all documentation, `let` is used instead of `@State var`. However after opening the Settings modal, the animation breaks. This somehow fixes it
     
+    @State var tooltipHideTimer: Timer?
     @State var isTooltipVisible = false
     var tooltipConfig = DefaultTooltipConfig()
     
@@ -42,6 +43,7 @@ struct AnimationView: View {
                     .gesture(DragGesture()
                         .onChanged {gesture in
                             pauseTimer() // TODO: find a better way to do this (instead of calling pauseTimer hundreds of times)
+                            isTooltipVisible = false
                             let timerSnapValue = isOptionKeyPressed() ? 60 : modelData.timerSnap.numberValue
                             let newTranslation = Int(Float(gesture.translation.width)*5.0/Float(timerSnapValue))*timerSnapValue
                             let incrementalTranslation = newTranslation - previousTranslation
@@ -82,7 +84,7 @@ struct AnimationView: View {
                 .background(Circle().fill(Color(isTimerGreaterThanZero ? "Pomodoro Primary" : "Disabled Button")))
                 .frame(width: 36, height: 36)
                 .offset(y: -8)
-                .tooltip(isTooltipVisible && !isTimerGreaterThanZero, side: .top, config: tooltipConfig) {
+                .tooltip(isTooltipVisible, side: .top, config: tooltipConfig) {
                     Text("Drag the timer left ← to start.")
                 }
         }
@@ -125,7 +127,8 @@ struct AnimationView: View {
     
     func openTooltip() {
         isTooltipVisible = true
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+        tooltipHideTimer?.invalidate()
+        tooltipHideTimer = Timer.scheduledTimer(withTimeInterval: 3, repeats: true) {_ in
             isTooltipVisible = false
         }
     }
