@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftUIFontIcon
+import SwiftUITooltip
 import RiveRuntime
 
 struct AnimationView: View {
@@ -18,6 +19,15 @@ struct AnimationView: View {
     @State private var isTimerGreaterThanZero = false
     
     @State private var pomodoro = RiveViewModel(fileName: "pomodoro_timer", stateMachineName: "State Machine") // TODO: in all documentation, `let` is used instead of `@State var`. However after opening the Settings modal, the animation breaks. This somehow fixes it
+    
+    @State var isTooltipVisible = false
+    var tooltipConfig = DefaultTooltipConfig()
+    
+    init() {
+        let backgroundcolor = Color("Settings Card Background")
+        tooltipConfig.borderColor = backgroundcolor
+        tooltipConfig.backgroundColor = backgroundcolor
+    }
     
     var body: some View {
         VStack {
@@ -67,11 +77,14 @@ struct AnimationView: View {
                         }
                     )
             }
-            FontIcon.button(.materialIcon(code: isPlaying ? .pause : .play_arrow), action: toggleTimer, padding: 4, fontsize: 24)
+            FontIcon.button(.materialIcon(code: isPlaying ? .pause : .play_arrow), action: isTimerGreaterThanZero ? toggleTimer : openTooltip, padding: 4, fontsize: 24)
                 .foregroundColor(Color("Dark Mode Button Contrast"))
                 .background(Circle().fill(Color(isTimerGreaterThanZero ? "Pomodoro Primary" : "Disabled Button")))
                 .frame(width: 36, height: 36)
                 .offset(y: -8)
+                .tooltip(isTooltipVisible && !isTimerGreaterThanZero, side: .top, config: tooltipConfig) {
+                    Text("Drag the timer left ← to start.")
+                }
         }
     }
     
@@ -108,6 +121,13 @@ struct AnimationView: View {
         playSound(volume: modelData.pingVolume)
         modelData.timeSeconds = 0
         pauseTimer()
+    }
+    
+    func openTooltip() {
+        isTooltipVisible = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            isTooltipVisible = false
+        }
     }
     
     func isOptionKeyPressed() -> Bool {
