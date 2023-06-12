@@ -21,7 +21,7 @@ struct PopupView: View {
                     .opacity(0)
                     .frame(height: 0)
                     Spacer()
-                    FontIcon.button(.materialIcon(code: .settings), action: openSettings)
+                    FontIcon.button(.materialIcon(code: .settings), action: openSettings, fontsize: 24)
                         .foregroundColor(Color("Pomodoro Primary"))
                         .frame(width: 40, height: 40)
                 }
@@ -38,8 +38,9 @@ struct PopupView: View {
                     .transition(.move(edge: .top)
                         .combined(with: .opacity))
                     .overlay(alignment: .top) {
-                        FontIcon.button(.materialIcon(code: .cancel), action: closeSettings)
-                            .foregroundColor(Color("Pomodoro Primary"))
+                        FontIcon.button(.materialIcon(code: .close), action: closeSettings)
+                            .foregroundColor(Color("Dark Mode Button Contrast"))
+                            .background(Circle().fill(Color("Pomodoro Primary")))
                             .frame(width: 40, height: 40)
                             .frame(maxWidth: .infinity, alignment: .trailing) // TODO: less hacky alignment
                     }

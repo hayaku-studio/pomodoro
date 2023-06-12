@@ -67,9 +67,10 @@ struct AnimationView: View {
                         }
                     )
             }
-            FontIcon.button(.materialIcon(code: isPlaying ? .pause_circle_filled : .play_circle_filled), action: toggleTimer, fontsize: 30)
-                .foregroundColor(Color("Pomodoro Primary"))
-                .frame(width: 40, height: 40.0)
+            FontIcon.button(.materialIcon(code: isPlaying ? .pause : .play_arrow), action: toggleTimer, padding: 4, fontsize: 24)
+                .foregroundColor(Color("Dark Mode Button Contrast"))
+                .background(Circle().fill(Color("Pomodoro Primary")))                .frame(width: 36, height: 36)
+                .offset(y: -8)
         }
     }
     
