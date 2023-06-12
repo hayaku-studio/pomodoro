@@ -10,6 +10,7 @@
 		CA01D54F2A309BBD001B9DBC /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA01D54E2A309BBD001B9DBC /* SettingsView.swift */; };
 		CA6789E82A33762A002CB46A /* TimerSnap.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6789E72A33762A002CB46A /* TimerSnap.swift */; };
 		CA6B06A22A2C6E4000F62E56 /* PomodoroIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6B06A12A2C6E4000F62E56 /* PomodoroIconView.swift */; };
+		CA72DA422A372B7C00998051 /* SwiftUITooltip in Frameworks */ = {isa = PBXBuildFile; productRef = CA72DA412A372B7C00998051 /* SwiftUITooltip */; };
 		CAA95F2E2A2DD13D00057B26 /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA95F2D2A2DD13D00057B26 /* ModelData.swift */; };
 		CAA95F322A2DE7DC00057B26 /* PopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA95F312A2DE7DC00057B26 /* PopupView.swift */; };
 		CAD1E6682A237A4E00C0C4C8 /* SwiftUIFontIcon in Frameworks */ = {isa = PBXBuildFile; productRef = CAD1E6672A237A4E00C0C4C8 /* SwiftUIFontIcon */; };
@@ -46,6 +47,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CAD1E6682A237A4E00C0C4C8 /* SwiftUIFontIcon in Frameworks */,
+				CA72DA422A372B7C00998051 /* SwiftUITooltip in Frameworks */,
 				CAF099072A1FBB8900606A83 /* RiveRuntime in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -164,6 +166,7 @@
 			packageProductDependencies = (
 				CAF099062A1FBB8900606A83 /* RiveRuntime */,
 				CAD1E6672A237A4E00C0C4C8 /* SwiftUIFontIcon */,
+				CA72DA412A372B7C00998051 /* SwiftUITooltip */,
 			);
 			productName = Pomodoro;
 			productReference = CAF098F22A1FB1F600606A83 /* Pomodoro.app */;
@@ -196,6 +199,7 @@
 			packageReferences = (
 				CAF099052A1FBB8900606A83 /* XCRemoteSwiftPackageReference "rive-ios" */,
 				CAD1E6662A237A4E00C0C4C8 /* XCRemoteSwiftPackageReference "SwiftUIFontIcon" */,
+				CA72DA402A372B7C00998051 /* XCRemoteSwiftPackageReference "SwiftUI-Tooltip" */,
 			);
 			productRefGroup = CAF098F32A1FB1F600606A83 /* Products */;
 			projectDirPath = "";
@@ -430,6 +434,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		CA72DA402A372B7C00998051 /* XCRemoteSwiftPackageReference "SwiftUI-Tooltip" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/quassum/SwiftUI-Tooltip.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		CAD1E6662A237A4E00C0C4C8 /* XCRemoteSwiftPackageReference "SwiftUIFontIcon" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/huybuidac/SwiftUIFontIcon";
@@ -449,6 +461,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		CA72DA412A372B7C00998051 /* SwiftUITooltip */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CA72DA402A372B7C00998051 /* XCRemoteSwiftPackageReference "SwiftUI-Tooltip" */;
+			productName = SwiftUITooltip;
+		};
 		CAD1E6672A237A4E00C0C4C8 /* SwiftUIFontIcon */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = CAD1E6662A237A4E00C0C4C8 /* XCRemoteSwiftPackageReference "SwiftUIFontIcon" */;
