@@ -69,7 +69,8 @@ struct AnimationView: View {
             }
             FontIcon.button(.materialIcon(code: isPlaying ? .pause : .play_arrow), action: toggleTimer, padding: 4, fontsize: 24)
                 .foregroundColor(Color("Dark Mode Button Contrast"))
-                .background(Circle().fill(Color("Pomodoro Primary")))                .frame(width: 36, height: 36)
+                .background(Circle().fill(Color(isTimerGreaterThanZero ? "Pomodoro Primary" : "Disabled Button")))
+                .frame(width: 36, height: 36)
                 .offset(y: -8)
         }
     }
@@ -97,7 +98,7 @@ struct AnimationView: View {
     
     func decrementTime() {
         modelData.timeSeconds -= 1
-                        pomodoro.setInput("timeMinutes", value: Float(modelData.timeSeconds)/60)
+        pomodoro.setInput("timeMinutes", value: Float(modelData.timeSeconds)/60)
         if modelData.timeSeconds <= 0 {
             timerFinished()
         }
