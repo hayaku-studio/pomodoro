@@ -128,7 +128,7 @@ struct AnimationView: View {
     func openTooltip() {
         isTooltipVisible = true
         tooltipHideTimer?.invalidate()
-        tooltipHideTimer = Timer.scheduledTimer(withTimeInterval: 3, repeats: true) {_ in
+        tooltipHideTimer = Timer.scheduledTimer(withTimeInterval: 2, repeats: true) {_ in
             isTooltipVisible = false
         }
     }
