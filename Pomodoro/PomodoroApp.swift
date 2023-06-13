@@ -38,7 +38,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
             statusButton.action = #selector(togglePopover)
         }
         
-        popover.contentSize = NSSize(width: 300, height: 200)
+        popover.contentSize = NSSize(width: 290, height: 200)
         popover.behavior = .transient
         popover.contentViewController = NSHostingController(rootView: PopupView().environmentObject(modelData))
     }
