@@ -12,12 +12,21 @@ struct CustomModal: ViewModifier {
     var actionOnDismiss: () -> Void
     
     func body(content: Content) -> some View {
+        
         Rectangle()
             .fill(.black.opacity(0.15))
             .onTapGesture {
                 actionOnDismiss()
             }
-        content
+        Group {
+            content
+                .padding(16)
+                .background(Color("Settings Background"))
+                .mask(RoundedRectangle(cornerRadius: 20, style: .continuous))
+                .shadow(radius: 5, x: 0, y: 3)
+                .shadow(radius: 30, x: 0, y: 30)
+                .padding()
+        }
             .transition(.move(edge: .top)
                 .combined(with: .opacity))
             .overlay(alignment: .top) {

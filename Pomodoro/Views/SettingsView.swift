@@ -41,12 +41,6 @@ struct SettingsView: View {
                     .padding(.leading, 8)
             }
         }
-        .padding(16)
-        .background(Color("Settings Background"))
-        .mask(RoundedRectangle(cornerRadius: 20, style: .continuous))
-        .shadow(radius: 5, x: 0, y: 3)
-        .shadow(radius: 30, x: 0, y: 30)
-        .padding()
     }
 }
 
