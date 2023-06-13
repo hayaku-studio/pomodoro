@@ -19,7 +19,9 @@ struct PopupView: View {
                         Text("")
                     }
                     .opacity(0)
-                    .frame(height: 0)
+                    .frame(width: 0, height: 0)
+                    FontIcon.button(.materialIcon(code: .equalizer), action: openSettings, fontsize: 24)
+                        .foregroundColor(Color("Pomodoro Primary"))
                     Spacer()
                     FontIcon.button(.materialIcon(code: .settings), action: openSettings, fontsize: 24)
                         .foregroundColor(Color("Pomodoro Primary"))
