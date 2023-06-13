@@ -21,7 +21,7 @@ struct CustomModal: ViewModifier {
         Group {
             content
                 .padding(16)
-                .background(Color("Settings Background"))
+                .background(Color("Modal Content Background"))
                 .mask(RoundedRectangle(cornerRadius: 20, style: .continuous))
                 .shadow(radius: 5, x: 0, y: 3)
                 .shadow(radius: 30, x: 0, y: 30)
