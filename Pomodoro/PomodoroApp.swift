@@ -28,7 +28,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
     @MainActor func applicationDidFinishLaunching(_ notification: Notification) {
         let pomodoroIcon = PomodoroIconView().environmentObject(modelData)
         let iconView = NSHostingView(rootView: pomodoroIcon)
-        iconView.frame = NSRect(x: 0, y: 0, width: 40, height: 22)
+        iconView.frame = NSRect(x: 0, y: 0, width: 44, height: 20)
         
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
         
