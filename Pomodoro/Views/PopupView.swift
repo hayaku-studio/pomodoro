@@ -30,23 +30,8 @@ struct PopupView: View {
                 AnimationView()
             }
             if showSettings {
-                // TODO: extract CustomModalView
-                Rectangle()
-                    .fill(.black.opacity(0.15))
-                    .onTapGesture {
-                        closeSettings()
-                    }
                 SettingsView()
-                    .transition(.move(edge: .top)
-                        .combined(with: .opacity))
-                    .overlay(alignment: .top) {
-                        FontIcon.button(.materialIcon(code: .close), action: closeSettings)
-                            .foregroundColor(Color("Dark Mode Button Contrast"))
-                            .background(Circle().fill(Color("Pomodoro Primary")))
-                            .frame(width: 40, height: 40)
-                            .frame(maxWidth: .infinity, alignment: .trailing) // TODO: less hacky alignment
-                    }
-                    .zIndex(1)
+                    .customModal(actionOnDismiss: closeSettings)
             }
         }
     }
