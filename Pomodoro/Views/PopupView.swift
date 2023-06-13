@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftUIFontIcon
 
 struct PopupView: View {
+    @State private var showCalendar = false
     @State private var showSettings = false
     
     var body: some View {
@@ -20,7 +21,7 @@ struct PopupView: View {
                     }
                     .opacity(0)
                     .frame(width: 0, height: 0)
-                    FontIcon.button(.materialIcon(code: .equalizer), action: openSettings, fontsize: 24)
+                    FontIcon.button(.materialIcon(code: .equalizer), action: openCalendar, fontsize: 24)
                         .foregroundColor(Color("Pomodoro Primary"))
                     Spacer()
                     FontIcon.button(.materialIcon(code: .settings), action: openSettings, fontsize: 24)
@@ -29,10 +30,26 @@ struct PopupView: View {
                 }
                 AnimationView()
             }
+            if showCalendar {
+                CalendarView()
+                    .customModal(actionOnDismiss: closeCalendar)
+            }
             if showSettings {
                 SettingsView()
                     .customModal(actionOnDismiss: closeSettings)
             }
+        }
+    }
+    
+    func openCalendar() {
+        withAnimation(.spring()) {
+            showCalendar = true
+        }
+    }
+    
+    func closeCalendar() {
+        withAnimation(.spring()) {
+            showCalendar = false
         }
     }
     
