@@ -14,9 +14,20 @@ struct CalendarView: View {
         SortDescriptor(\.workTimeMinutes, order: .reverse)
     ]) var days: FetchedResults<Day>
     
+    let dateFormatter: DateFormatter
+    
+    init() {
+        dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .long
+        dateFormatter.timeStyle = .short
+    }
+    
     var body: some View {
         VStack {
             ForEach(days.reversed(), id: \.self) {day in
+                if day.date != nil {
+                    Text(day.date!, formatter: dateFormatter)
+                }
                 Text("\(day.workTimeMinutes)")
             }
         }
