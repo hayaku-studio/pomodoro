@@ -10,7 +10,7 @@ import SwiftUI
 @main
 struct PomodoroApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
-        
+    
     // dummy component so that the App doesn't complain.
     // TODO: Search if there's a way to remove this
     var body: some Scene {
@@ -24,9 +24,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
     private var modelData = ModelData()
     private var statusItem: NSStatusItem!
     private let popover = NSPopover()
+    private let persistenceController = PersistenceController.shared
     
     @MainActor func applicationDidFinishLaunching(_ notification: Notification) {
-        let pomodoroIcon = PomodoroIconView().environmentObject(modelData)
+        let pomodoroIcon = PomodoroIconView().environmentObject(modelData).environment(\.managedObjectContext, persistenceController.container.viewContext)
         let iconView = NSHostingView(rootView: pomodoroIcon)
         iconView.frame = NSRect(x: 0, y: 0, width: 44, height: 20)
         
@@ -40,7 +41,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
         
         popover.contentSize = NSSize(width: 290, height: 200)
         popover.behavior = .transient
-        popover.contentViewController = NSHostingController(rootView: PopupView().environmentObject(modelData))
+        popover.contentViewController = NSHostingController(rootView: PopupView().environmentObject(modelData).environment(\.managedObjectContext, persistenceController.container.viewContext))
     }
     
     @objc func togglePopover() {

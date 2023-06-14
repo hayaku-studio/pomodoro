@@ -15,6 +15,8 @@
 		CA72DA482A3894C300998051 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA72DA472A3894C300998051 /* CalendarView.swift */; };
 		CAA95F2E2A2DD13D00057B26 /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA95F2D2A2DD13D00057B26 /* ModelData.swift */; };
 		CAA95F322A2DE7DC00057B26 /* PopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA95F312A2DE7DC00057B26 /* PopupView.swift */; };
+		CAA996482A39D3920096A7F8 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CAA996462A39D3920096A7F8 /* DataModel.xcdatamodeld */; };
+		CAA9964A2A39D44D0096A7F8 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA996492A39D44D0096A7F8 /* PersistenceController.swift */; };
 		CAD1E6682A237A4E00C0C4C8 /* SwiftUIFontIcon in Frameworks */ = {isa = PBXBuildFile; productRef = CAD1E6672A237A4E00C0C4C8 /* SwiftUIFontIcon */; };
 		CAE3D51D2A2F4BC900AD88F1 /* Sound.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE3D51C2A2F4BC900AD88F1 /* Sound.swift */; };
 		CAE3D5282A2F684700AD88F1 /* pomodoro_timer.riv in Resources */ = {isa = PBXBuildFile; fileRef = CAE3D5272A2F684700AD88F1 /* pomodoro_timer.riv */; };
@@ -34,6 +36,8 @@
 		CA72DA472A3894C300998051 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		CAA95F2D2A2DD13D00057B26 /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
 		CAA95F312A2DE7DC00057B26 /* PopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupView.swift; sourceTree = "<group>"; };
+		CAA996472A39D3920096A7F8 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
+		CAA996492A39D44D0096A7F8 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 		CAE3D51C2A2F4BC900AD88F1 /* Sound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sound.swift; sourceTree = "<group>"; };
 		CAE3D5272A2F684700AD88F1 /* pomodoro_timer.riv */ = {isa = PBXFileReference; lastKnownFileType = file; path = pomodoro_timer.riv; sourceTree = "<group>"; };
 		CAE3D52B2A2F6AF900AD88F1 /* Reception Bell.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Reception Bell.mp3"; sourceTree = "<group>"; };
@@ -124,6 +128,8 @@
 			isa = PBXGroup;
 			children = (
 				CAF098F52A1FB1F600606A83 /* PomodoroApp.swift */,
+				CAA996462A39D3920096A7F8 /* DataModel.xcdatamodeld */,
+				CAA996492A39D44D0096A7F8 /* PersistenceController.swift */,
 				CAA95F2C2A2DD0F200057B26 /* Views */,
 				CAA95F2B2A2DD0E500057B26 /* Model */,
 				CA6789E62A337617002CB46A /* Enums */,
@@ -235,8 +241,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CAA996482A39D3920096A7F8 /* DataModel.xcdatamodeld in Sources */,
 				CA72DA482A3894C300998051 /* CalendarView.swift in Sources */,
 				CA01D54F2A309BBD001B9DBC /* SettingsView.swift in Sources */,
+				CAA9964A2A39D44D0096A7F8 /* PersistenceController.swift in Sources */,
 				CAF0990D2A222A2E00606A83 /* AnimationView.swift in Sources */,
 				CAE3D51D2A2F4BC900AD88F1 /* Sound.swift in Sources */,
 				CAA95F2E2A2DD13D00057B26 /* ModelData.swift in Sources */,
@@ -485,6 +493,19 @@
 			productName = RiveRuntime;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		CAA996462A39D3920096A7F8 /* DataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				CAA996472A39D3920096A7F8 /* DataModel.xcdatamodel */,
+			);
+			currentVersion = CAA996472A39D3920096A7F8 /* DataModel.xcdatamodel */;
+			path = DataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = CAF098EA2A1FB1F600606A83 /* Project object */;
 }
