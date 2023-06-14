@@ -9,6 +9,8 @@ import SwiftUI
 import SwiftUIFontIcon
 
 struct PopupView: View {
+    @Environment(\.managedObjectContext) var managedObjectContext
+    
     @State private var showCalendar = false
     @State private var showSettings = false
     
@@ -23,6 +25,12 @@ struct PopupView: View {
                     .frame(width: 0, height: 0)
                     FontIcon.button(.materialIcon(code: .equalizer), action: openCalendar, fontsize: 24)
                         .foregroundColor(Color("Pomodoro Primary"))
+                    Button("Insert today") {
+                        let day = Day(context: managedObjectContext)
+                        day.date = Date.now
+                        day.workTimeMinutes = 120
+                        PersistenceController.shared.save()
+                    }
                     Spacer()
                     FontIcon.button(.materialIcon(code: .settings), action: openSettings, fontsize: 24)
                         .foregroundColor(Color("Pomodoro Primary"))

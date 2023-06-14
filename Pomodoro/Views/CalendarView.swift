@@ -8,8 +8,18 @@
 import SwiftUI
 
 struct CalendarView: View {
+    @Environment(\.managedObjectContext) var managedObjectContext
+    @FetchRequest(sortDescriptors: [
+        SortDescriptor(\.date),
+        SortDescriptor(\.workTimeMinutes, order: .reverse)
+    ]) var days: FetchedResults<Day>
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            ForEach(days.reversed(), id: \.self) {day in
+                Text("\(day.workTimeMinutes)")
+            }
+        }
     }
 }
 

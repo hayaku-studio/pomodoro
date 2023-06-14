@@ -15,6 +15,7 @@ struct PersistenceController {
     // Storage for Core Data
     let container: NSPersistentContainer
 
+    // TODO: doesn't seem to work
     // A test configuration for SwiftUI previews
     static var preview: PersistenceController = {
         let controller = PersistenceController(inMemory: true)
