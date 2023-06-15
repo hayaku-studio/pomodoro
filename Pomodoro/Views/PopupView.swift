@@ -26,7 +26,7 @@ struct PopupView: View {
                     FontIcon.button(.materialIcon(code: .equalizer), action: openCalendar, fontsize: 24)
                         .foregroundColor(Color("Pomodoro Primary"))
                     Button("Insert today") {
-                        saveCalendarEntry(context: managedObjectContext, date: Calendar.current.startOfDay(for: Date.now), workTimeMinutes: 120)
+                        saveCalendarEntry(context: managedObjectContext, date: Calendar.current.startOfDay(for: Date.now), workTimeMinutes: 90)
                     }
                     Spacer()
                     FontIcon.button(.materialIcon(code: .settings), action: openSettings, fontsize: 24)
@@ -50,8 +50,12 @@ struct PopupView: View {
     func saveCalendarEntry(context: NSManagedObjectContext, date: Date, workTimeMinutes: Int64) {
         let entry: CalendarEntry?
         
-        @FetchRequest(sortDescriptors: [SortDescriptor(\.date)], predicate: NSPredicate(format: "date == %@", date as NSDate)) var calendarEntries: FetchedResults<CalendarEntry>
-//        fetchCalendarEvent.limit = 1 // TODO: implement limit. Although there should only ever be 1 event anyway
+        let fetchRequest = CalendarEntry.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "date == %@", date as NSDate)
+        fetchRequest.fetchLimit = 1
+        
+        // TODO: catch error
+        let calendarEntries = try! context.fetch(fetchRequest)
         
         if calendarEntries.count == 0 {
            // insert
