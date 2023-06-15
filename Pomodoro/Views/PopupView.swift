@@ -46,29 +46,6 @@ struct PopupView: View {
         }
     }
     
-    // TODO: extract calendar helper methods from Views
-    func saveCalendarEntry(context: NSManagedObjectContext, date: Date, workTimeMinutes: Int64) {
-        let entry: CalendarEntry?
-        
-        let fetchRequest = CalendarEntry.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "date == %@", date as NSDate)
-        fetchRequest.fetchLimit = 1
-        
-        // TODO: catch error
-        let calendarEntries = try! context.fetch(fetchRequest)
-        
-        if calendarEntries.count == 0 {
-           // insert
-           entry = CalendarEntry(context: context)
-        } else {
-           // update
-           entry = calendarEntries.first
-        }
-        entry?.date = date
-        entry?.workTimeMinutes = workTimeMinutes
-        PersistenceController.shared.save()
-    }
-    
     func openCalendar() {
         withAnimation(.spring()) {
             showCalendar = true

@@ -13,6 +13,7 @@
 		CA72DA422A372B7C00998051 /* SwiftUITooltip in Frameworks */ = {isa = PBXBuildFile; productRef = CA72DA412A372B7C00998051 /* SwiftUITooltip */; };
 		CA72DA462A38819D00998051 /* CustomModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA72DA452A38819D00998051 /* CustomModal.swift */; };
 		CA72DA482A3894C300998051 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA72DA472A3894C300998051 /* CalendarView.swift */; };
+		CAA7FCDF2A3B24EB00E5E51C /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA7FCDE2A3B24EB00E5E51C /* Calendar.swift */; };
 		CAA95F2E2A2DD13D00057B26 /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA95F2D2A2DD13D00057B26 /* ModelData.swift */; };
 		CAA95F322A2DE7DC00057B26 /* PopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA95F312A2DE7DC00057B26 /* PopupView.swift */; };
 		CAA996482A39D3920096A7F8 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CAA996462A39D3920096A7F8 /* DataModel.xcdatamodeld */; };
@@ -34,6 +35,7 @@
 		CA6B06A12A2C6E4000F62E56 /* PomodoroIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroIconView.swift; sourceTree = "<group>"; };
 		CA72DA452A38819D00998051 /* CustomModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomModal.swift; sourceTree = "<group>"; };
 		CA72DA472A3894C300998051 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		CAA7FCDE2A3B24EB00E5E51C /* Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
 		CAA95F2D2A2DD13D00057B26 /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
 		CAA95F312A2DE7DC00057B26 /* PopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupView.swift; sourceTree = "<group>"; };
 		CAA996472A39D3920096A7F8 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				CAE3D51C2A2F4BC900AD88F1 /* Sound.swift */,
+				CAA7FCDE2A3B24EB00E5E51C /* Calendar.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -250,6 +253,7 @@
 				CAA95F2E2A2DD13D00057B26 /* ModelData.swift in Sources */,
 				CA6B06A22A2C6E4000F62E56 /* PomodoroIconView.swift in Sources */,
 				CA72DA462A38819D00998051 /* CustomModal.swift in Sources */,
+				CAA7FCDF2A3B24EB00E5E51C /* Calendar.swift in Sources */,
 				CA6789E82A33762A002CB46A /* TimerSnap.swift in Sources */,
 				CAA95F322A2DE7DC00057B26 /* PopupView.swift in Sources */,
 				CAF098F62A1FB1F600606A83 /* PomodoroApp.swift in Sources */,
