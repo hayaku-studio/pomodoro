@@ -26,7 +26,7 @@ struct PopupView: View {
                     FontIcon.button(.materialIcon(code: .equalizer), action: openCalendar, fontsize: 24)
                         .foregroundColor(Color("Pomodoro Primary"))
                     Button("Insert today") {
-                        saveCalendarEntry(context: managedObjectContext, date: Calendar.current.startOfDay(for: Date.now), workTimeMinutes: 90)
+                        incrementTodaysWorkTimeMinutes(context: managedObjectContext)
                     }
                     Spacer()
                     FontIcon.button(.materialIcon(code: .settings), action: openSettings, fontsize: 24)
