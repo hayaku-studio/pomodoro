@@ -26,10 +26,7 @@ struct PopupView: View {
                     FontIcon.button(.materialIcon(code: .equalizer), action: openCalendar, fontsize: 24)
                         .foregroundColor(Color("Pomodoro Primary"))
                     Button("Insert today") {
-                        let entry = CalendarEntry(context: managedObjectContext)
-                        entry.date = Calendar.current.startOfDay(for: Date.now)
-                        entry.workTimeMinutes = 120
-                        PersistenceController.shared.save()
+                        saveCalendarEntry(context: managedObjectContext, date: Calendar.current.startOfDay(for: Date.now), workTimeMinutes: 120)
                     }
                     Spacer()
                     FontIcon.button(.materialIcon(code: .settings), action: openSettings, fontsize: 24)
@@ -47,6 +44,25 @@ struct PopupView: View {
                     .customModal(actionOnDismiss: closeSettings)
             }
         }
+    }
+    
+    // TODO: extract calendar helper methods from Views
+    func saveCalendarEntry(context: NSManagedObjectContext, date: Date, workTimeMinutes: Int64) {
+        let entry: CalendarEntry?
+        
+        @FetchRequest(sortDescriptors: [SortDescriptor(\.date)], predicate: NSPredicate(format: "date == %@", date as NSDate)) var calendarEntries: FetchedResults<CalendarEntry>
+//        fetchCalendarEvent.limit = 1 // TODO: implement limit. Although there should only ever be 1 event anyway
+        
+        if calendarEntries.count == 0 {
+           // insert
+           entry = CalendarEntry(context: context)
+        } else {
+           // update
+           entry = calendarEntries.first
+        }
+        entry?.date = date
+        entry?.workTimeMinutes = workTimeMinutes
+        PersistenceController.shared.save()
     }
     
     func openCalendar() {
