@@ -12,7 +12,7 @@ struct CalendarView: View {
     @FetchRequest(sortDescriptors: [
         SortDescriptor(\.date),
         SortDescriptor(\.workTimeMinutes, order: .reverse)
-    ]) var days: FetchedResults<Day>
+    ]) var calendarEntries: FetchedResults<CalendarEntry>
     
     let dateFormatter: DateFormatter
     
@@ -24,11 +24,11 @@ struct CalendarView: View {
     
     var body: some View {
         VStack {
-            ForEach(days.reversed(), id: \.self) {day in
-                if day.date != nil {
-                    Text(day.date!, formatter: dateFormatter)
+            ForEach(calendarEntries.reversed(), id: \.self) {entry in
+                if entry.date != nil {
+                    Text(entry.date!, formatter: dateFormatter)
                 }
-                Text("\(day.workTimeMinutes)")
+                Text("\(entry.workTimeMinutes)")
             }
         }
     }

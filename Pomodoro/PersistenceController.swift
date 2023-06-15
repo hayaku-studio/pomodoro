@@ -20,11 +20,11 @@ struct PersistenceController {
     static var preview: PersistenceController = {
         let controller = PersistenceController(inMemory: true)
 
-        // Create 10 example days.
+        // Create 10 example calendar entries.
         for _ in 0..<10 {
-            let day = Day(context: controller.container.viewContext)
-            day.date = Date.now
-            day.workTimeMinutes = 120
+            let entry = CalendarEntry(context: controller.container.viewContext)
+            entry.date = Date.now
+            entry.workTimeMinutes = 120
         }
 
         return controller
