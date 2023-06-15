@@ -12,9 +12,11 @@ import RiveRuntime
 
 struct AnimationView: View {
     @EnvironmentObject private var modelData: ModelData
+    @Environment(\.managedObjectContext) var managedObjectContext
     
     @State private var isPlaying = false
-    @State private var timer: Timer?
+    @State private var animationTimer: Timer?
+    @State private var workTimeTimer: Timer?
     @State private var previousTranslation = 0
     @State private var isTimerGreaterThanZero = false
     
@@ -42,7 +44,7 @@ struct AnimationView: View {
                 //.onTapGesture() // TODO: On too many taps give a drag hint - https://www.instagram.com/p/CewsSvBrTBa/
                     .gesture(DragGesture()
                         .onChanged {gesture in
-                            pauseTimer() // TODO: find a better way to do this (instead of calling pauseTimer hundreds of times)
+                            pauseTimers() // TODO: find a better way to do this (instead of calling pauseTimers hundreds of times)
                             isTooltipVisible = false
                             let timerSnapValue = isOptionKeyPressed() ? 60 : modelData.timerSnap.numberValue
                             let newTranslation = Int(Float(gesture.translation.width)*5.0/Float(timerSnapValue))*timerSnapValue
@@ -74,12 +76,12 @@ struct AnimationView: View {
                         .onEnded {gesture in
                             previousTranslation = 0
                             if modelData.timeSeconds > 0 {
-                                startTimer()
+                                startTimers()
                             }
                         }
                     )
             }
-            FontIcon.button(.materialIcon(code: isPlaying ? .pause : .play_arrow), action: isTimerGreaterThanZero ? toggleTimer : openTooltip, padding: 4, fontsize: 24)
+            FontIcon.button(.materialIcon(code: isPlaying ? .pause : .play_arrow), action: isTimerGreaterThanZero ? toggleTimers : openTooltip, padding: 4, fontsize: 24)
                 .foregroundColor(Color("Dark Mode Button Contrast"))
                 .background(Circle().fill(Color(isTimerGreaterThanZero ? "Pomodoro Primary" : "Disabled Button")))
                 .frame(width: 36, height: 36)
@@ -90,25 +92,30 @@ struct AnimationView: View {
         }
     }
     
-    func toggleTimer() {
+    func toggleTimers() {
         if isPlaying {
-            pauseTimer()
+            pauseTimers()
         } else if modelData.timeSeconds > 0 {
-            startTimer()
+            startTimers()
         }
     }
     
-    func startTimer() {
+    func startTimers() {
         isPlaying = true
-        timer?.invalidate()
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) {_ in
+        animationTimer?.invalidate()
+        animationTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) {_ in
             decrementTime()
         }
+        workTimeTimer?.invalidate()
+        workTimeTimer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true) {_ in
+            incrementTodaysWorkTimeMinutes(context: managedObjectContext)
+        }
     }
     
-    func pauseTimer() {
+    func pauseTimers() {
         isPlaying = false
-        timer?.invalidate()
+        animationTimer?.invalidate()
+        workTimeTimer?.invalidate()
     }
     
     func decrementTime() {
@@ -122,7 +129,7 @@ struct AnimationView: View {
     func timerFinished() {
         playSound(volume: modelData.pingVolume)
         modelData.timeSeconds = 0
-        pauseTimer()
+        pauseTimers()
     }
     
     func openTooltip() {
