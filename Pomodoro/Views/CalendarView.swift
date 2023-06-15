@@ -8,12 +8,13 @@
 import SwiftUI
 
 struct CalendarView: View {
+    @EnvironmentObject private var modelData: ModelData
     @Environment(\.managedObjectContext) var managedObjectContext
     @FetchRequest(sortDescriptors: [
         SortDescriptor(\.date),
         SortDescriptor(\.workTimeMinutes, order: .reverse)
     ]) var calendarEntries: FetchedResults<CalendarEntry>
-    
+        
     let dateFormatter: DateFormatter
     
     init() {
@@ -24,6 +25,14 @@ struct CalendarView: View {
     
     var body: some View {
         VStack {
+            HStack {
+                Picker("", selection: $modelData.calendarFormat) {
+                    ForEach(CalendarFormat.allCases) { format in
+                        Text(format.id).tag(format)
+                    }
+                }
+                .pickerStyle(.segmented)
+            }
             ForEach(calendarEntries.reversed(), id: \.self) {entry in
                 if entry.date != nil {
                     Text(entry.date!, formatter: dateFormatter)
