@@ -27,7 +27,7 @@ struct PopupView: View {
                         .foregroundColor(Color("Pomodoro Primary"))
                     Button("Insert today") {
                         let day = Day(context: managedObjectContext)
-                        day.date = Date.now
+                        day.date = Calendar.current.startOfDay(for: Date.now)
                         day.workTimeMinutes = 120
                         PersistenceController.shared.save()
                     }
