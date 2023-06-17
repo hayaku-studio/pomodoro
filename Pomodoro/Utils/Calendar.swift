@@ -29,8 +29,7 @@ func incrementTodaysWorkTimeMinutes(context: NSManagedObjectContext) {
 //}
 
 func getCurrentWeek(context: NSManagedObjectContext) -> [CalendarEntry] {
-    var today = Date.now
-
+    let today = Date.now
     let startOfWeekMonday = getMonday(myDate: today)
     let endOfWeekSunday = getSunday(myDate: today)
     
