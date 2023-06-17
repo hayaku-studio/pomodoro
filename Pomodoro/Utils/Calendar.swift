@@ -34,21 +34,13 @@ func getCurrentWeek(context: NSManagedObjectContext) -> [CalendarEntry] {
     let startOfWeekMonday = getMonday(myDate: today)
     let endOfWeekSunday = getSunday(myDate: today)
     
-    // TODO: I don't think these dates are timezone independant
-//    let df = DateFormatter()
-//    df.dateFormat = "yyyy-MM-dd HH:mm"
-//    print(df.string(from: startOfWeekMonday))
-//    print(endOfWeekSunday)
-    
     let fetchRequest = CalendarEntry.fetchRequest()
-    fetchRequest.predicate = NSPredicate(format: "((date > %@) AND (date <= %@)) || (date = nil)", startOfWeekMonday as NSDate, endOfWeekSunday as NSDate)
+    fetchRequest.predicate = NSPredicate(format: "((date >= %@) AND (date <= %@)) || (date = nil)", startOfWeekMonday as NSDate, endOfWeekSunday as NSDate)
 
     fetchRequest.fetchLimit = 7
     
     // TODO: catch error
     let calendarEntries = try! context.fetch(fetchRequest)
-    
-    print(calendarEntries)
     
     return calendarEntries
 }
