@@ -10,17 +10,15 @@ import SwiftUI
 struct CalendarView: View {
     @EnvironmentObject private var modelData: ModelData
     @Environment(\.managedObjectContext) var managedObjectContext
-    @FetchRequest(sortDescriptors: [
-        SortDescriptor(\.date),
-        SortDescriptor(\.workTimeMinutes, order: .reverse)
-    ]) var calendarEntries: FetchedResults<CalendarEntry>
-        
+    
     let dateFormatter: DateFormatter
     
     init() {
         dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .long
         dateFormatter.timeStyle = .short
+        
+        //        calendarEntries =
     }
     
     var body: some View {
@@ -33,11 +31,11 @@ struct CalendarView: View {
                 }
                 .pickerStyle(.segmented)
             }
-            ForEach(calendarEntries.reversed(), id: \.self) {entry in
-                if entry.date != nil {
-                    Text(entry.date!, formatter: dateFormatter)
-                }
-                Text("\(entry.workTimeMinutes)")
+            ForEach(getCurrentWeek(context: managedObjectContext), id: \.self) {entry in
+//                                    if entry?.date != nil {
+//                                        Text(entry.date!, formatter: dateFormatter)
+//                                    }
+                Text(String(entry?.workTimeMinutes ?? 0))
             }
         }
     }

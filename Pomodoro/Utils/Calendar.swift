@@ -28,6 +28,31 @@ func incrementTodaysWorkTimeMinutes(context: NSManagedObjectContext) {
 //    PersistenceController.shared.save()
 //}
 
+func getCurrentWeek(context: NSManagedObjectContext) -> [CalendarEntry?] {
+    var today = Date()
+
+    let startOfWeekMonday = getMonday(myDate: Date.now)
+    let endOfWeekSunday = getSunday(myDate: Date.now)
+    
+    // TODO: I don't think these dates are timezone independant
+//    let df = DateFormatter()
+//    df.dateFormat = "yyyy-MM-dd HH:mm"
+//    print(df.string(from: startOfWeekMonday))
+//    print(endOfWeekSunday)
+    
+    let fetchRequest = CalendarEntry.fetchRequest()
+    fetchRequest.predicate = NSPredicate(format: "((date > %@) AND (date <= %@)) || (date = nil)", startOfWeekMonday as NSDate, endOfWeekSunday as NSDate)
+
+    fetchRequest.fetchLimit = 7
+    
+    // TODO: catch error
+    let calendarEntries = try! context.fetch(fetchRequest)
+    
+    print(calendarEntries)
+    
+    return calendarEntries
+}
+
 func getCalendarEntry(context: NSManagedObjectContext, date: Date) -> CalendarEntry? {
     let fetchRequest = CalendarEntry.fetchRequest()
     fetchRequest.predicate = NSPredicate(format: "date == %@", date as NSDate)
@@ -37,4 +62,18 @@ func getCalendarEntry(context: NSManagedObjectContext, date: Date) -> CalendarEn
     let calendarEntries = try! context.fetch(fetchRequest)
     
     return calendarEntries.first
+}
+
+private func getMonday(myDate: Date) -> Date {
+    let calendar = Calendar.current
+    var components = calendar.dateComponents([.weekOfYear, .yearForWeekOfYear], from: myDate)
+    components.weekday = 2 // Monday
+    return calendar.date(from: components)!
+}
+
+private func getSunday(myDate: Date) -> Date {
+    let calendar = Calendar.current
+    var components = calendar.dateComponents([.weekOfYear, .yearForWeekOfYear], from: myDate)
+    components.weekday = 1 // Sunday
+    return calendar.date(from: components)!
 }
