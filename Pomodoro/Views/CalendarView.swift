@@ -32,9 +32,9 @@ struct CalendarView: View {
                 .pickerStyle(.segmented)
             }
             ForEach(getCurrentWeek(context: managedObjectContext), id: \.self) {entry in
-//                                    if entry?.date != nil {
-//                                        Text(entry.date!, formatter: dateFormatter)
-//                                    }
+                if let date = entry?.date {
+                    Text(date, formatter: dateFormatter)
+                }
                 Text(String(entry?.workTimeMinutes ?? 0))
             }
         }
