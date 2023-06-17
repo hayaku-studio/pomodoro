@@ -28,11 +28,11 @@ func incrementTodaysWorkTimeMinutes(context: NSManagedObjectContext) {
 //    PersistenceController.shared.save()
 //}
 
-func getCurrentWeek(context: NSManagedObjectContext) -> [CalendarEntry?] {
-    var today = Date()
+func getCurrentWeek(context: NSManagedObjectContext) -> [CalendarEntry] {
+    var today = Date.now
 
-    let startOfWeekMonday = getMonday(myDate: Date.now)
-    let endOfWeekSunday = getSunday(myDate: Date.now)
+    let startOfWeekMonday = getMonday(myDate: today)
+    let endOfWeekSunday = getSunday(myDate: today)
     
     // TODO: I don't think these dates are timezone independant
 //    let df = DateFormatter()

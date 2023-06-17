@@ -17,8 +17,6 @@ struct CalendarView: View {
         dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .long
         dateFormatter.timeStyle = .short
-        
-        //        calendarEntries =
     }
     
     var body: some View {
@@ -32,10 +30,10 @@ struct CalendarView: View {
                 .pickerStyle(.segmented)
             }
             ForEach(getCurrentWeek(context: managedObjectContext), id: \.self) {entry in
-                if let date = entry?.date {
+                if let date = entry.date {
                     Text(date, formatter: dateFormatter)
                 }
-                Text(String(entry?.workTimeMinutes ?? 0))
+                Text(String(entry.workTimeMinutes))
             }
         }
     }
