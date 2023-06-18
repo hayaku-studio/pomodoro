@@ -24,12 +24,14 @@ struct CalendarView: View {
                 }
                 .pickerStyle(.segmented)
             }
-            ForEach(getCurrentWeek(context: managedObjectContext), id: \.self) {entry in
-                if let date = entry.date {
-                    Text(date, formatter: dateFormatter)
-                }
-                Text(String(entry.workTimeMinutes))
-            }
+            // TODO: remove commented code
+            //            ForEach(getCurrentWeek(context: managedObjectContext), id: \.self) {entry in
+            //                if let date = entry.date {
+            //                    Text(date, formatter: dateFormatter)
+            //                }
+            //                Text(String(entry.workTimeMinutes))
+            //            }
+            CalendarGraph(calendarEntries: getCurrentWeek(context: managedObjectContext))
         }
     }
 }

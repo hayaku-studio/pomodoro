@@ -13,6 +13,7 @@
 		CA72DA422A372B7C00998051 /* SwiftUITooltip in Frameworks */ = {isa = PBXBuildFile; productRef = CA72DA412A372B7C00998051 /* SwiftUITooltip */; };
 		CA72DA462A38819D00998051 /* CustomModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA72DA452A38819D00998051 /* CustomModal.swift */; };
 		CA72DA482A3894C300998051 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA72DA472A3894C300998051 /* CalendarView.swift */; };
+		CA951B2B2A3DF0CA0041E5FB /* CalendarCapsule.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA951B2A2A3DF0CA0041E5FB /* CalendarCapsule.swift */; };
 		CAA7FCDF2A3B24EB00E5E51C /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA7FCDE2A3B24EB00E5E51C /* Calendar.swift */; };
 		CAA7FCE12A3B96ED00E5E51C /* CalendarFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA7FCE02A3B96ED00E5E51C /* CalendarFormat.swift */; };
 		CAA95F2E2A2DD13D00057B26 /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA95F2D2A2DD13D00057B26 /* ModelData.swift */; };
@@ -28,6 +29,7 @@
 		CAF098FD2A1FB21500606A83 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CAF098FC2A1FB21500606A83 /* Preview Assets.xcassets */; };
 		CAF099072A1FBB8900606A83 /* RiveRuntime in Frameworks */ = {isa = PBXBuildFile; productRef = CAF099062A1FBB8900606A83 /* RiveRuntime */; };
 		CAF0990D2A222A2E00606A83 /* AnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF0990C2A222A2E00606A83 /* AnimationView.swift */; };
+		CAFC9E052A3F14BE003CAB98 /* CalendarGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFC9E042A3F14BE003CAB98 /* CalendarGraph.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,7 @@
 		CA6B06A12A2C6E4000F62E56 /* PomodoroIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroIconView.swift; sourceTree = "<group>"; };
 		CA72DA452A38819D00998051 /* CustomModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomModal.swift; sourceTree = "<group>"; };
 		CA72DA472A3894C300998051 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		CA951B2A2A3DF0CA0041E5FB /* CalendarCapsule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCapsule.swift; sourceTree = "<group>"; };
 		CAA7FCDE2A3B24EB00E5E51C /* Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
 		CAA7FCE02A3B96ED00E5E51C /* CalendarFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarFormat.swift; sourceTree = "<group>"; };
 		CAA95F2D2A2DD13D00057B26 /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
@@ -51,6 +54,7 @@
 		CAF098FC2A1FB21500606A83 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		CAF098FE2A1FB21500606A83 /* Pomodoro.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Pomodoro.entitlements; sourceTree = "<group>"; };
 		CAF0990C2A222A2E00606A83 /* AnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationView.swift; sourceTree = "<group>"; };
+		CAFC9E042A3F14BE003CAB98 /* CalendarGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarGraph.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +80,16 @@
 			path = Enums;
 			sourceTree = "<group>";
 		};
+		CA951B272A3DF0630041E5FB /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				CA72DA472A3894C300998051 /* CalendarView.swift */,
+				CAFC9E042A3F14BE003CAB98 /* CalendarGraph.swift */,
+				CA951B2A2A3DF0CA0041E5FB /* CalendarCapsule.swift */,
+			);
+			path = Calendar;
+			sourceTree = "<group>";
+		};
 		CAA95F2B2A2DD0E500057B26 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -88,11 +102,11 @@
 			isa = PBXGroup;
 			children = (
 				CAF0990C2A222A2E00606A83 /* AnimationView.swift */,
-				CA72DA472A3894C300998051 /* CalendarView.swift */,
 				CA6B06A12A2C6E4000F62E56 /* PomodoroIconView.swift */,
 				CAA95F312A2DE7DC00057B26 /* PopupView.swift */,
 				CA01D54E2A309BBD001B9DBC /* SettingsView.swift */,
 				CA72DA452A38819D00998051 /* CustomModal.swift */,
+				CA951B272A3DF0630041E5FB /* Calendar */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -257,9 +271,11 @@
 				CAA95F2E2A2DD13D00057B26 /* ModelData.swift in Sources */,
 				CA6B06A22A2C6E4000F62E56 /* PomodoroIconView.swift in Sources */,
 				CA72DA462A38819D00998051 /* CustomModal.swift in Sources */,
+				CAFC9E052A3F14BE003CAB98 /* CalendarGraph.swift in Sources */,
 				CAA7FCDF2A3B24EB00E5E51C /* Calendar.swift in Sources */,
 				CA6789E82A33762A002CB46A /* TimerSnap.swift in Sources */,
 				CAA95F322A2DE7DC00057B26 /* PopupView.swift in Sources */,
+				CA951B2B2A3DF0CA0041E5FB /* CalendarCapsule.swift in Sources */,
 				CAF098F62A1FB1F600606A83 /* PomodoroApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
