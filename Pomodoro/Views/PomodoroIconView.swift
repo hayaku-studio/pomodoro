@@ -12,7 +12,7 @@ struct PomodoroIconView: View {
 
     var body: some View {
         let minutes = Int(modelData.timeSeconds/60)
-        HStack {
+        return HStack {
             ZStack {
                 Image("Tomato Icon")
                 Text("\(String(format: "%02d", minutes))")
@@ -32,8 +32,6 @@ struct PomodoroIconView: View {
              }.offset(x: -6)
         }
     }
-    
-    
 }
 
 struct PomodoroIconView_Previews: PreviewProvider {

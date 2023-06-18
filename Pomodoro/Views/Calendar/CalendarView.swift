@@ -11,16 +11,11 @@ struct CalendarView: View {
     @EnvironmentObject private var modelData: ModelData
     @Environment(\.managedObjectContext) var managedObjectContext
     
-    let dateFormatter: DateFormatter
-    
-    init() {
-        dateFormatter = DateFormatter()
+    var body: some View {
+        let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .long
         dateFormatter.timeStyle = .short
-    }
-    
-    var body: some View {
-        VStack {
+        return VStack {
             HStack {
                 Picker("", selection: $modelData.calendarFormat) {
                     ForEach(CalendarFormat.allCases) { format in
