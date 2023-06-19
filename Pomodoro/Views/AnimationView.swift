@@ -33,7 +33,7 @@ struct AnimationView: View {
     }
     
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             ZStack {
                 pomodoro.view().scaledToFit().frame(width: 200, height: 200)
                 Circle()
@@ -82,6 +82,7 @@ struct AnimationView: View {
                         }
                     )
             }
+            .offset(y: -12)
             FontIcon.button(.materialIcon(code: isPlaying ? .pause : .play_arrow), action: isTimerGreaterThanZero ? toggleTimers : openTooltip, padding: 4, fontsize: 24)
                 .foregroundColor(Color("Dark Mode Button Contrast"))
                 .background(Circle().fill(Color(isTimerGreaterThanZero ? "Pomodoro Primary" : "Disabled Button")))
