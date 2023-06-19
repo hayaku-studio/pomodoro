@@ -68,6 +68,7 @@ struct AnimationView: View {
                                 isTimerGreaterThanZero = true
                             } else {
                                 if isTimerGreaterThanZero {
+                                    pomodoro.triggerInput("finishPing")
                                     playSound(volume: modelData.pingVolume)
                                 }
                                 isTimerGreaterThanZero = false
@@ -127,6 +128,7 @@ struct AnimationView: View {
     }
     
     func timerFinished() {
+        pomodoro.triggerInput("finishPing")
         playSound(volume: modelData.pingVolume)
         modelData.timeSeconds = 0
         pauseTimers()
