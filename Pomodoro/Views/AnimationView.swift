@@ -131,6 +131,7 @@ struct AnimationView: View {
         pomodoro.triggerInput("finishPing")
         playSound(volume: modelData.pingVolume)
         modelData.timeSeconds = 0
+        isTimerGreaterThanZero = false
         pauseTimers()
     }
     
