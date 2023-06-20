@@ -31,9 +31,6 @@ func getCalendarEntriesForCurrentWeek(context: NSManagedObjectContext) -> [Calen
     let startOfWeekMonday = getMonday(myDate: today)
     let endOfWeekSunday = getSunday(myDate: today)
     
-    print(startOfWeekMonday)
-    print(endOfWeekSunday)
-    
     let fetchRequest = CalendarEntry.fetchRequest()
     fetchRequest.predicate = NSPredicate(format: "((date >= %@) AND (date <= %@)) || (date = nil)", startOfWeekMonday as NSDate, endOfWeekSunday as NSDate)
     fetchRequest.fetchLimit = 7
