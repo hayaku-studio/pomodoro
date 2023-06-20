@@ -25,13 +25,13 @@ struct CalendarView: View {
                 .pickerStyle(.segmented)
             }
             // TODO: remove commented code
-            //            ForEach(getCurrentWeek(context: managedObjectContext), id: \.self) {entry in
+            //            ForEach(getCalendarEntriesForCurrentWeek(context: managedObjectContext), id: \.self) {entry in
             //                if let date = entry.date {
             //                    Text(date, formatter: dateFormatter)
             //                }
             //                Text(String(entry.workTimeMinutes))
             //            }
-            CalendarGraph(calendarEntries: getCurrentWeek(context: managedObjectContext))
+            CalendarGraph(calendarEntries: getCalendarEntriesForCurrentWeek(context: managedObjectContext))
         }
     }
 }

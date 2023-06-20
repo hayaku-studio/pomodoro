@@ -21,7 +21,7 @@ struct CalendarGraph: View {
     
     var upperBoundMinutes: Int {
         let largestWorkTimeMinutes: Int64 = calendarEntries.map {$0.workTimeMinutes}.max() ?? 1
-        return Int(largestWorkTimeMinutes / 60) * 60
+        return 60 * Int(ceil(Double(largestWorkTimeMinutes) / 60.0))
     }
     
     var body: some View {

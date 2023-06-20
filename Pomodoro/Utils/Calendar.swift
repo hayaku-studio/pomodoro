@@ -21,27 +21,38 @@ func incrementTodaysWorkTimeMinutes(context: NSManagedObjectContext) {
     PersistenceController.shared.save()
 }
 
-//func saveCalendarEntry(context: NSManagedObjectContext, date: Date, workTimeMinutes: Int64) {
-//    let entry = getCalendarEntry(context: context, date: date) ?? CalendarEntry(context: context)
-//    entry.date = date
-//    entry.workTimeMinutes = workTimeMinutes
-//    PersistenceController.shared.save()
+// TODO: implement
+//func getDateToTimeWorkedMapForRange(from: Date, to: Date) -> KeyValuePairs<Date, Int> {
+//
 //}
 
-func getCurrentWeek(context: NSManagedObjectContext) -> [CalendarEntry] {
+func getCalendarEntriesForCurrentWeek(context: NSManagedObjectContext) -> [CalendarEntry] {
     let today = Date.now
     let startOfWeekMonday = getMonday(myDate: today)
     let endOfWeekSunday = getSunday(myDate: today)
     
+    print(startOfWeekMonday)
+    print(endOfWeekSunday)
+    
     let fetchRequest = CalendarEntry.fetchRequest()
     fetchRequest.predicate = NSPredicate(format: "((date >= %@) AND (date <= %@)) || (date = nil)", startOfWeekMonday as NSDate, endOfWeekSunday as NSDate)
-
     fetchRequest.fetchLimit = 7
     
     // TODO: catch error
     let calendarEntries = try! context.fetch(fetchRequest)
+    let currentWeek = getCurrentWeek()
     
-    return calendarEntries
+    return currentWeek.map { date in
+        if let entry = calendarEntries.first(where: { $0.date == date }) {
+            return entry
+        } else {
+            // TODO: are entries being created, and does this affect performance? I think since I'm not saving, they aren't. And performance affect should be neglible.
+            let emptyEntry = CalendarEntry(context: context)
+            emptyEntry.date = date
+            emptyEntry.workTimeMinutes = 0
+            return emptyEntry
+        }
+    }
 }
 
 func getCalendarEntry(context: NSManagedObjectContext, date: Date) -> CalendarEntry? {
@@ -67,4 +78,19 @@ private func getSunday(myDate: Date) -> Date {
     var components = calendar.dateComponents([.weekOfYear, .yearForWeekOfYear], from: myDate)
     components.weekday = 1 // Sunday
     return calendar.date(from: components)!
+}
+
+private func getCurrentWeek() -> [Date] {
+    var calendar = Calendar.autoupdatingCurrent
+    calendar.firstWeekday = 2 // Start on Monday (or 1 for Sunday)
+    let today = calendar.startOfDay(for: Date())
+    var week = [Date]()
+    if let weekInterval = calendar.dateInterval(of: .weekOfYear, for: today) {
+        for i in 0...6 {
+            if let day = calendar.date(byAdding: .day, value: i, to: weekInterval.start) {
+                week += [day]
+            }
+        }
+    }
+    return week
 }
