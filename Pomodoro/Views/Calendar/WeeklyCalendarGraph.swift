@@ -33,9 +33,14 @@ struct WeeklyCalendarGraph: View {
                     .foregroundColor(Color("Pomodoro Primary"))
                 Spacer()
                 VStack {
-                    Text(verbatim: getWeekRange(calendarEntries: calendarEntries))
-                    let totalMinutesForRange = getTotalWorkMinutes(calendarEntries: calendarEntries)
-                    Text("\(totalMinutesForRange.getCompletedHoursFromMinutes) hours \(totalMinutesForRange.getRemainderMinutesFromMinutes) minutes")
+                    if let unwrappedIndex = highlightedCapsuleIndex {
+                        let totalMinutesForIndex = Int(calendarEntries[unwrappedIndex].workTimeMinutes)
+                        Text("\(totalMinutesForIndex.getCompletedHoursFromMinutes) hours \(totalMinutesForIndex.getRemainderMinutesFromMinutes) minutes")
+                    } else {
+                        Text(verbatim: getWeekRange(calendarEntries: calendarEntries))
+                        let totalMinutesForRange = getTotalWorkMinutes(calendarEntries: calendarEntries)
+                        Text("\(totalMinutesForRange.getCompletedHoursFromMinutes) hours \(totalMinutesForRange.getRemainderMinutesFromMinutes) minutes")
+                    }
                 }
                 Spacer()
                 FontIcon.button(.materialIcon(code: .chevron_right), action: nextWeek, padding: 4, fontsize: 24)
