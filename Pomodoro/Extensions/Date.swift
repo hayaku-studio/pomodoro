@@ -16,6 +16,12 @@ extension Date {
         return calendar.component(component, from: self)
     }
     
+    var xdayOfWeek: String {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "EEE"
+        return String(dateFormatter.string(from: self).capitalized.first!)
+        }
+    
     var xmonth: String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMM"
