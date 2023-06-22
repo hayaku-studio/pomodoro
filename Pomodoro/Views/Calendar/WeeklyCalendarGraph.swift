@@ -43,24 +43,24 @@ struct WeeklyCalendarGraph: View {
             }
             GeometryReader { proxy in
                 VStack {
-                    Spacer()
                     HStack(alignment: .bottom, spacing: proxy.size.width / 120) {
                         ForEach(Array(calendarEntries.enumerated()), id: \.offset) { index, observation in
                             VStack {
+                                Spacer()
                                 CalendarCapsule(
                                     index: index,
                                     color: Color("Pomodoro Primary").opacity(index == highlightedCapsuleIndex ? 1 : 0.4), // TODO: set colors that look good for Dark Mode
                                     height: Double(observation.workTimeMinutes) / Double(upperBoundMinutes) * proxy.size.height
                                 )
                                 .animation(.ripple(index: index))
-                                .onHover { isHovering in
-                                    if isHovering {
-                                        highlightedCapsuleIndex = index
-                                    } else {
-                                        highlightedCapsuleIndex = nil
-                                    }
-                                }
                                 Text("**\(observation.date!.xdayOfWeek)**")
+                            }
+                            .onHover { isHovering in
+                                if isHovering {
+                                    highlightedCapsuleIndex = index
+                                } else {
+                                    highlightedCapsuleIndex = nil
+                                }
                             }
                         }
                     }
