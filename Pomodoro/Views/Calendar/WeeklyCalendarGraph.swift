@@ -95,6 +95,7 @@ struct WeeklyCalendarGraph: View {
 }
 
 extension Int {
+    // TODO: simplify expression
     var getCompletedHoursStringFromMinutes: String {
         let completedHours = Int(self / 60)
         if completedHours == 1 {
