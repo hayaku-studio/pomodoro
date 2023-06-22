@@ -50,8 +50,7 @@ struct WeeklyCalendarGraph: View {
             }
             GeometryReader { proxy in
                 VStack {
-                    // TODO: put spacing into VStacks, so that when moving the cursor across, the values jump around less
-                    HStack(alignment: .bottom, spacing: proxy.size.width / 120) {
+                    HStack(spacing: 0) {
                         ForEach(Array(calendarEntries.enumerated()), id: \.offset) { index, observation in
                             VStack {
                                 Spacer()
@@ -63,6 +62,7 @@ struct WeeklyCalendarGraph: View {
                                 .animation(.ripple(index: index))
                                 Text("**\(observation.date!.xdayOfWeek)**")
                             }
+                            .padding([.leading, .trailing], proxy.size.width / 120)
                             .onHover { isHovering in
                                 if isHovering {
                                     highlightedCapsuleIndex = index
