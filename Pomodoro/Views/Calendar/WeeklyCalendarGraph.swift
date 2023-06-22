@@ -34,6 +34,8 @@ struct WeeklyCalendarGraph: View {
                 Spacer()
                 VStack {
                     if let unwrappedIndex = highlightedCapsuleIndex {
+                        let date = calendarEntries[unwrappedIndex].date!
+                        Text(verbatim: "\(date.xget(.day)) \(date.xmonth) \(date.xget(.year))")
                         let totalMinutesForIndex = Int(calendarEntries[unwrappedIndex].workTimeMinutes)
                         Text("\(totalMinutesForIndex.getCompletedHoursStringFromMinutes) \(totalMinutesForIndex.getRemainderMinutesStringFromMinutes)")
                     } else {
@@ -48,6 +50,7 @@ struct WeeklyCalendarGraph: View {
             }
             GeometryReader { proxy in
                 VStack {
+                    // TODO: put spacing into VStacks, so that when moving the cursor across, the values jump around less
                     HStack(alignment: .bottom, spacing: proxy.size.width / 120) {
                         ForEach(Array(calendarEntries.enumerated()), id: \.offset) { index, observation in
                             VStack {
