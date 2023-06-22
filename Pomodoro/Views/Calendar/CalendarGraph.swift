@@ -39,14 +39,17 @@ struct CalendarGraph: View {
                     .foregroundColor(Color("Disabled Button"))
             }
             GeometryReader { proxy in
-                HStack(alignment: .bottom, spacing: proxy.size.width / 120) {
-                    ForEach(Array(calendarEntries.enumerated()), id: \.offset) { index, observation in
-                        CalendarCapsule(
-                            index: index,
-                            color: Color("Pomodoro Primary"),
-                            height: Double(observation.workTimeMinutes) / Double(upperBoundMinutes) * proxy.size.height
-                        )
-                        .animation(.ripple(index: index))
+                VStack {
+                    Spacer()
+                    HStack(alignment: .bottom, spacing: proxy.size.width / 120) {
+                        ForEach(Array(calendarEntries.enumerated()), id: \.offset) { index, observation in
+                            CalendarCapsule(
+                                index: index,
+                                color: Color("Pomodoro Primary"),
+                                height: Double(observation.workTimeMinutes) / Double(upperBoundMinutes) * proxy.size.height
+                            )
+                            .animation(.ripple(index: index))
+                        }
                     }
                 }
             }
