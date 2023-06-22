@@ -31,7 +31,10 @@ struct CalendarGraph: View {
                     .foregroundColor(Color("Pomodoro Primary"))
                 Spacer()
                 VStack {
-                    Text("12th - 18th June 2023")
+                    let firstDate = calendarEntries.first!.date!
+                    let lastDate = calendarEntries.last!.date!
+                    // TODO: when going over the month
+                    Text(verbatim: "\(firstDate.xget(.day)) - \(lastDate.xget(.day)) \(lastDate.xmonth) \(lastDate.xget(.year))")
                     Text("2 hours 15 minutes")
                 }
                 Spacer()

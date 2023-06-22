@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CA01D54F2A309BBD001B9DBC /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA01D54E2A309BBD001B9DBC /* SettingsView.swift */; };
+		CA48135E2A44485C00AA7A1C /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA48135D2A44485C00AA7A1C /* Date.swift */; };
 		CA6789E82A33762A002CB46A /* TimerSnap.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6789E72A33762A002CB46A /* TimerSnap.swift */; };
 		CA6B06A22A2C6E4000F62E56 /* PomodoroIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6B06A12A2C6E4000F62E56 /* PomodoroIconView.swift */; };
 		CA72DA422A372B7C00998051 /* SwiftUITooltip in Frameworks */ = {isa = PBXBuildFile; productRef = CA72DA412A372B7C00998051 /* SwiftUITooltip */; };
@@ -34,6 +35,7 @@
 
 /* Begin PBXFileReference section */
 		CA01D54E2A309BBD001B9DBC /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		CA48135D2A44485C00AA7A1C /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		CA6789E72A33762A002CB46A /* TimerSnap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerSnap.swift; sourceTree = "<group>"; };
 		CA6B06A12A2C6E4000F62E56 /* PomodoroIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroIconView.swift; sourceTree = "<group>"; };
 		CA72DA452A38819D00998051 /* CustomModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomModal.swift; sourceTree = "<group>"; };
@@ -71,6 +73,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CA48135C2A44482C00AA7A1C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				CA48135D2A44485C00AA7A1C /* Date.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		CA6789E62A337617002CB46A /* Enums */ = {
 			isa = PBXGroup;
 			children = (
@@ -154,6 +164,7 @@
 				CAA95F2B2A2DD0E500057B26 /* Model */,
 				CA6789E62A337617002CB46A /* Enums */,
 				CAE3D51B2A2F4BA200AD88F1 /* Utils */,
+				CA48135C2A44482C00AA7A1C /* Extensions */,
 				CAF098F92A1FB21500606A83 /* Assets.xcassets */,
 				CAF099082A2227ED00606A83 /* RiveAssets */,
 				CAE3D5202A2F670600AD88F1 /* SoundAssets */,
@@ -267,6 +278,7 @@
 				CA01D54F2A309BBD001B9DBC /* SettingsView.swift in Sources */,
 				CAA9964A2A39D44D0096A7F8 /* PersistenceController.swift in Sources */,
 				CAF0990D2A222A2E00606A83 /* AnimationView.swift in Sources */,
+				CA48135E2A44485C00AA7A1C /* Date.swift in Sources */,
 				CAE3D51D2A2F4BC900AD88F1 /* Sound.swift in Sources */,
 				CAA95F2E2A2DD13D00057B26 /* ModelData.swift in Sources */,
 				CA6B06A22A2C6E4000F62E56 /* PomodoroIconView.swift in Sources */,
