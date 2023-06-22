@@ -35,11 +35,11 @@ struct WeeklyCalendarGraph: View {
                 VStack {
                     if let unwrappedIndex = highlightedCapsuleIndex {
                         let totalMinutesForIndex = Int(calendarEntries[unwrappedIndex].workTimeMinutes)
-                        Text("\(totalMinutesForIndex.getCompletedHoursFromMinutes) hours \(totalMinutesForIndex.getRemainderMinutesFromMinutes) minutes")
+                        Text("\(totalMinutesForIndex.getCompletedHoursStringFromMinutes) \(totalMinutesForIndex.getRemainderMinutesStringFromMinutes)")
                     } else {
                         Text(verbatim: getWeekRange(calendarEntries: calendarEntries))
                         let totalMinutesForRange = getTotalWorkMinutes(calendarEntries: calendarEntries)
-                        Text("\(totalMinutesForRange.getCompletedHoursFromMinutes) hours \(totalMinutesForRange.getRemainderMinutesFromMinutes) minutes")
+                        Text("\(totalMinutesForRange.getCompletedHoursStringFromMinutes) \(totalMinutesForRange.getRemainderMinutesStringFromMinutes)")
                     }
                 }
                 Spacer()
@@ -95,12 +95,22 @@ struct WeeklyCalendarGraph: View {
 }
 
 extension Int {
-    var getCompletedHoursFromMinutes: Int {
-        Int(self / 60)
+    var getCompletedHoursStringFromMinutes: String {
+        let completedHours = Int(self / 60)
+        if completedHours == 1 {
+            return "1 hour"
+        } else {
+            return "\(completedHours) hours"
+        }
     }
     
-    var getRemainderMinutesFromMinutes: Int {
-        self % 60
+    var getRemainderMinutesStringFromMinutes: String {
+        let completedMinutes = Int(self % 60)
+        if completedMinutes == 1 {
+            return "1 minute"
+        } else {
+            return "\(completedMinutes) minutes"
+        }
     }
 }
 
