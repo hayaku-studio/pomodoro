@@ -16,7 +16,7 @@ extension Animation {
     }
 }
 
-struct CalendarGraph: View {
+struct WeeklyCalendarGraph: View {
     var calendarEntries: [CalendarEntry]
     
     var upperBoundMinutes: Int {

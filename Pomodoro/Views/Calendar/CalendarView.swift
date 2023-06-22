@@ -31,7 +31,7 @@ struct CalendarView: View {
             //                }
             //                Text(String(entry.workTimeMinutes))
             //            }
-            CalendarGraph(calendarEntries: getCalendarEntriesForCurrentWeek(context: managedObjectContext))
+            WeeklyCalendarGraph(calendarEntries: getCalendarEntriesForCurrentWeek(context: managedObjectContext))
         }
     }
 }
