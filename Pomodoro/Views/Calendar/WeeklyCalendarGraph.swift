@@ -19,6 +19,8 @@ extension Animation {
 struct WeeklyCalendarGraph: View {
     var calendarEntries: [CalendarEntry]
     
+    @State private var highlightedCapsuleIndex: Int?
+    
     var upperBoundMinutes: Int {
         let largestWorkTimeMinutes: Int64 = calendarEntries.map {$0.workTimeMinutes}.max() ?? 1
         return 60 * Int(ceil(Double(largestWorkTimeMinutes) / 60.0))
@@ -47,10 +49,17 @@ struct WeeklyCalendarGraph: View {
                             VStack {
                                 CalendarCapsule(
                                     index: index,
-                                    color: Color("Pomodoro Primary"),
+                                    color: Color("Pomodoro Primary").opacity(index == highlightedCapsuleIndex ? 1 : 0.4), // TODO: set colors that look good for Dark Mode
                                     height: Double(observation.workTimeMinutes) / Double(upperBoundMinutes) * proxy.size.height
                                 )
                                 .animation(.ripple(index: index))
+                                .onHover { isHovering in
+                                    if isHovering {
+                                        highlightedCapsuleIndex = index
+                                    } else {
+                                        highlightedCapsuleIndex = nil
+                                    }
+                                }
                                 Text("**\(observation.date!.xdayOfWeek)**")
                             }
                         }
