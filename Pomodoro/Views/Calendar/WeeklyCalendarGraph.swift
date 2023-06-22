@@ -56,7 +56,7 @@ struct WeeklyCalendarGraph: View {
                                 Spacer()
                                 CalendarCapsule(
                                     index: index,
-                                    color: Color("Pomodoro Primary").opacity(index == highlightedCapsuleIndex ? 1 : 0.4), // TODO: set colors that look good for Dark Mode
+                                    color: Color(index == highlightedCapsuleIndex ? "Pomodoro Primary" : "Disabled Button"),
                                     height: Double(observation.workTimeMinutes) / Double(upperBoundMinutes) * proxy.size.height
                                 )
                                 .animation(.ripple(index: index))
