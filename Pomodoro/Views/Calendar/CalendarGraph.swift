@@ -31,11 +31,9 @@ struct CalendarGraph: View {
                     .foregroundColor(Color("Pomodoro Primary"))
                 Spacer()
                 VStack {
-                    let firstDate = calendarEntries.first!.date!
-                    let lastDate = calendarEntries.last!.date!
-                    // TODO: when going over the month
-                    Text(verbatim: "\(firstDate.xget(.day)) - \(lastDate.xget(.day)) \(lastDate.xmonth) \(lastDate.xget(.year))")
-                    Text("2 hours 15 minutes")
+                    Text(verbatim: getWeekRange(calendarEntries: calendarEntries))
+                    let totalMinutesForRange = getTotalWorkMinutes(calendarEntries: calendarEntries)
+                    Text("\(totalMinutesForRange.getCompletedHoursFromMinutes) hours \(totalMinutesForRange.getRemainderMinutesFromMinutes) minutes")
                 }
                 Spacer()
                 FontIcon.button(.materialIcon(code: .chevron_right), action: nextWeek, padding: 4, fontsize: 24)
@@ -65,6 +63,27 @@ struct CalendarGraph: View {
     
     func nextWeek() {
         print("Next")
+    }
+    
+    func getWeekRange(calendarEntries: [CalendarEntry]) -> String {
+        let firstDate = calendarEntries.first!.date!
+        let lastDate = calendarEntries.last!.date!
+        // TODO: when going over the month/year, maybe expand on first date
+        return "\(firstDate.xget(.day)) - \(lastDate.xget(.day)) \(lastDate.xmonth) \(lastDate.xget(.year))"
+    }
+    
+    func getTotalWorkMinutes(calendarEntries: [CalendarEntry]) -> Int {
+        return calendarEntries.map({Int($0.workTimeMinutes)}).reduce(0, +)
+    }
+}
+
+extension Int {
+    var getCompletedHoursFromMinutes: Int {
+        Int(self / 60)
+    }
+    
+    var getRemainderMinutesFromMinutes: Int {
+        self % 60
     }
 }
 
