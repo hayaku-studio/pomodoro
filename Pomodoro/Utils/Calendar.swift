@@ -31,7 +31,7 @@ func getCalendarEntriesForWeek(context: NSManagedObjectContext, date: Date) -> [
     
     // TODO: catch error
     let calendarEntries = try! context.fetch(fetchRequest)
-    let currentWeek = getCurrentWeek()
+    let currentWeek = getWeek(date: date)
     
     return currentWeek.map { date in
         if let entry = calendarEntries.first(where: { $0.date == date }) {
@@ -71,10 +71,10 @@ private func getSunday(myDate: Date) -> Date {
     return calendar.date(from: components)!
 }
 
-private func getCurrentWeek() -> [Date] {
+private func getWeek(date: Date) -> [Date] {
     var calendar = Calendar.autoupdatingCurrent
     calendar.firstWeekday = 2 // Start on Monday (or 1 for Sunday)
-    let today = calendar.startOfDay(for: Date())
+    let today = calendar.startOfDay(for: date)
     var week = [Date]()
     if let weekInterval = calendar.dateInterval(of: .weekOfYear, for: today) {
         for i in 0...6 {
