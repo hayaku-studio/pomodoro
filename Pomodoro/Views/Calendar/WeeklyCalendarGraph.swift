@@ -54,7 +54,7 @@ struct WeeklyCalendarGraph: View {
                 }
                 Spacer()
                 FontIcon.button(.materialIcon(code: .chevron_right), action: nextWeek, padding: 4, fontsize: 24)
-                    .foregroundColor(Color("Disabled Button"))
+                    .foregroundColor(Color(modelData.calendarPastWeeks > 0 ? "Pomodoro Primary" : "Disabled Button"))
             }
             GeometryReader { proxy in
                 VStack {
@@ -91,8 +91,10 @@ struct WeeklyCalendarGraph: View {
     }
     
     func nextWeek() {
-        modelData.calendarPastWeeks -= 1
-        updateCalendarEntries()
+        if modelData.calendarPastWeeks > 0 {
+            modelData.calendarPastWeeks -= 1
+            updateCalendarEntries()
+        }
     }
     
     func updateCalendarEntries() {
