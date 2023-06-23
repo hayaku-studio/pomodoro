@@ -17,9 +17,17 @@ extension Animation {
 }
 
 struct WeeklyCalendarGraph: View {
-    var calendarEntries: [CalendarEntry]
+    @EnvironmentObject private var modelData: ModelData
     
+    @State private var calendarEntries: [CalendarEntry]
     @State private var highlightedCapsuleIndex: Int?
+    
+    private let context: NSManagedObjectContext
+    
+    init(context: NSManagedObjectContext) {
+        self.context = context
+        calendarEntries = getCalendarEntriesForWeek(context: context, date: Date.now)
+    }
     
     var upperBoundMinutes: Int {
         let largestWorkTimeMinutes: Int64 = calendarEntries.map {$0.workTimeMinutes}.max() ?? 1
