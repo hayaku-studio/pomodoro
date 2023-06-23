@@ -40,8 +40,10 @@ struct PersistenceController {
         }
 
         container.loadPersistentStores { description, error in
+            self.container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+            
             if let error = error {
-                fatalError("Error: \(error.localizedDescription)")
+                fatalError("Unresolved Init Error: \(error.localizedDescription)")
             }
         }
     }
@@ -53,7 +55,7 @@ struct PersistenceController {
             do {
                 try context.save()
             } catch {
-                // Show some error here
+                print("Unresolved Save Error: \(error)")
             }
         }
     }
