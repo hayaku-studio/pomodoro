@@ -21,6 +21,14 @@ func incrementTodaysWorkTimeMinutes(context: NSManagedObjectContext) {
     PersistenceController.shared.save()
 }
 
+func getEarliestCalendarEntryDate(context: NSManagedObjectContext) -> Date {
+    let fetchRequest = CalendarEntry.fetchRequest()
+    fetchRequest.predicate = NSPredicate(format: "date == min(date)")
+    fetchRequest.fetchLimit = 1
+    // TODO: catch error
+    return try! context.fetch(fetchRequest)[0].date ?? Date.now
+}
+
 func getCalendarEntriesForWeek(context: NSManagedObjectContext, date: Date) -> [CalendarEntry] {
     let startOfWeekMonday = getMonday(myDate: date)
     let endOfWeekSunday = getSunday(myDate: date)

@@ -23,10 +23,12 @@ struct WeeklyCalendarGraph: View {
     @State private var highlightedCapsuleIndex: Int?
     
     private let context: NSManagedObjectContext
+    private let earliestCalendarEntryDate: Date
     
     init(context: NSManagedObjectContext) {
         self.context = context
-        calendarEntries = getCalendarEntriesForWeek(context: context, date: Date.now)
+        earliestCalendarEntryDate = getEarliestCalendarEntryDate(context: context)
+        _calendarEntries = State(initialValue: getCalendarEntriesForWeek(context: context, date: Date.now))
     }
     
     var upperBoundMinutes: Int {
