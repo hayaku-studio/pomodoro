@@ -21,15 +21,9 @@ func incrementTodaysWorkTimeMinutes(context: NSManagedObjectContext) {
     PersistenceController.shared.save()
 }
 
-// TODO: implement
-//func getDateToTimeWorkedMapForRange(from: Date, to: Date) -> KeyValuePairs<Date, Int> {
-//
-//}
-
-func getCalendarEntriesForCurrentWeek(context: NSManagedObjectContext) -> [CalendarEntry] {
-    let today = Date.now
-    let startOfWeekMonday = getMonday(myDate: today)
-    let endOfWeekSunday = getSunday(myDate: today)
+func getCalendarEntriesForWeek(context: NSManagedObjectContext, date: Date) -> [CalendarEntry] {
+    let startOfWeekMonday = getMonday(myDate: date)
+    let endOfWeekSunday = getSunday(myDate: date)
     
     let fetchRequest = CalendarEntry.fetchRequest()
     fetchRequest.predicate = NSPredicate(format: "((date >= %@) AND (date <= %@)) || (date = nil)", startOfWeekMonday as NSDate, endOfWeekSunday as NSDate)
