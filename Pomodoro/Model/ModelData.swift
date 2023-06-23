@@ -12,6 +12,7 @@ final class ModelData: ObservableObject {
     @Published var pingVolume: Float
     @Published var timerSnap: TimerSnap
     @Published var calendarFormat = CalendarFormat.week
+    @Published var calendarPastWeeks = 0
     
     init() {
         let defaults = UserDefaults.standard

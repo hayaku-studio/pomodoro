@@ -86,11 +86,19 @@ struct WeeklyCalendarGraph: View {
     }
     
     func previousWeek() {
-        print("Previous")
+        modelData.calendarPastWeeks += 1
+        updateCalendarEntries()
     }
     
     func nextWeek() {
-        print("Next")
+        modelData.calendarPastWeeks -= 1
+        updateCalendarEntries()
+    }
+    
+    func updateCalendarEntries() {
+        if let date = Calendar.current.date(byAdding: .day, value: -(7*modelData.calendarPastWeeks), to: Date.now) {
+            calendarEntries = getCalendarEntriesForWeek(context: context, date: date)
+        }
     }
     
     func getWeekRange(calendarEntries: [CalendarEntry]) -> String {
