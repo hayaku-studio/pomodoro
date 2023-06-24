@@ -93,10 +93,10 @@ struct WeeklyCalendarGraph: View {
     }
     
     func previousWeek() {
-//            if isEarliestCalendarEntryOlderThanFirstCalendarEntry()  {
-                modelData.calendarPastWeeks += 1
-                updateCalendarEntries()
-//            }
+        if isEarliestCalendarEntryOlderThanFirstCalendarEntry()  {
+            modelData.calendarPastWeeks += 1
+            updateCalendarEntries()
+        }
     }
     
     func nextWeek() {
