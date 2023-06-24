@@ -31,7 +31,11 @@ struct WeeklyCalendarGraph: View {
     
     var upperBoundMinutes: Int {
         let largestWorkTimeMinutes: Int64 = calendarEntries.map {$0.workTimeMinutes}.max() ?? 1
-        return 60 * Int(ceil(Double(largestWorkTimeMinutes) / 60.0))
+        if largestWorkTimeMinutes == 0 {
+            return 60
+        } else {
+            return 60 * Int(ceil(Double(largestWorkTimeMinutes) / 60.0))
+        }
     }
     
     var body: some View {
@@ -89,10 +93,10 @@ struct WeeklyCalendarGraph: View {
     }
     
     func previousWeek() {
-            if isEarliestCalendarEntryOlderThanFirstCalendarEntry()  {
+//            if isEarliestCalendarEntryOlderThanFirstCalendarEntry()  {
                 modelData.calendarPastWeeks += 1
                 updateCalendarEntries()
-            }
+//            }
     }
     
     func nextWeek() {
