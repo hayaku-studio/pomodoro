@@ -9,6 +9,9 @@ import SwiftUI
 import SwiftUIFontIcon
 
 struct PopupView: View {
+    @EnvironmentObject private var modelData: ModelData
+    @Environment(\.managedObjectContext) private var managedObjectContext
+    
     @State private var showCalendar = false
     @State private var showSettings = false
     
@@ -38,6 +41,8 @@ struct PopupView: View {
                 SettingsView()
                     .customModal(actionOnDismiss: closeSettings)
             }
+        }.onAppear() {
+            modelData.earliestCalendarEntryDate = getEarliestCalendarEntryDate(context: managedObjectContext)
         }
     }
     

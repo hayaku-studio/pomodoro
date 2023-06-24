@@ -23,11 +23,9 @@ struct WeeklyCalendarGraph: View {
     @State private var highlightedCapsuleIndex: Int?
     
     private let context: NSManagedObjectContext
-    private let earliestCalendarEntryDate: Date
     
     init(context: NSManagedObjectContext) {
         self.context = context
-        earliestCalendarEntryDate = getEarliestCalendarEntryDate(context: context)
         _calendarEntries = State(initialValue: getCalendarEntriesForWeek(context: context, date: Date.now))
     }
     
@@ -44,10 +42,11 @@ struct WeeklyCalendarGraph: View {
                 Spacer()
                 VStack {
                     if let unwrappedIndex = highlightedCapsuleIndex {
-                        let date = calendarEntries[unwrappedIndex].date!
-                        Text(verbatim: "\(date.xget(.day)) \(date.xmonth) \(date.xget(.year))")
-                        let totalMinutesForIndex = Int(calendarEntries[unwrappedIndex].workTimeMinutes)
-                        Text("\(totalMinutesForIndex.getCompletedHoursStringFromMinutes) \(totalMinutesForIndex.getRemainderMinutesStringFromMinutes)")
+                        if let date = calendarEntries[unwrappedIndex].date {
+                            Text(verbatim: "\(date.xget(.day)) \(date.xmonth) \(date.xget(.year))")
+                            let totalMinutesForIndex = Int(calendarEntries[unwrappedIndex].workTimeMinutes)
+                            Text("\(totalMinutesForIndex.getCompletedHoursStringFromMinutes) \(totalMinutesForIndex.getRemainderMinutesStringFromMinutes)")
+                        }
                     } else {
                         Text(verbatim: getWeekRange(calendarEntries: calendarEntries))
                         let totalMinutesForRange = getTotalWorkMinutes(calendarEntries: calendarEntries)
@@ -70,7 +69,9 @@ struct WeeklyCalendarGraph: View {
                                     height: Double(observation.workTimeMinutes) / Double(upperBoundMinutes) * proxy.size.height
                                 )
                                 .animation(.ripple(index: index))
-                                Text("**\(observation.date!.xdayOfWeek)**")
+                                if let date = observation.date {
+                                    Text("**\(date.xdayOfWeek)**")
+                                }
                             }
                             .padding([.leading, .trailing], proxy.size.width / 120)
                             .onHover { isHovering in
@@ -106,10 +107,13 @@ struct WeeklyCalendarGraph: View {
     }
     
     func getWeekRange(calendarEntries: [CalendarEntry]) -> String {
-        let firstDate = calendarEntries.first!.date!
-        let lastDate = calendarEntries.last!.date!
-        // TODO: when going over the month/year, maybe expand on first date
-        return "\(firstDate.xget(.day)) - \(lastDate.xget(.day)) \(lastDate.xmonth) \(lastDate.xget(.year))"
+        if let firstDate = calendarEntries.first?.date {
+            if let lastDate = calendarEntries.last?.date {
+                // TODO: when going over the month/year, maybe expand on first date
+                return "\(firstDate.xget(.day)) - \(lastDate.xget(.day)) \(lastDate.xmonth) \(lastDate.xget(.year))"
+            }
+        }
+        return ""
     }
     
     func getTotalWorkMinutes(calendarEntries: [CalendarEntry]) -> Int {
