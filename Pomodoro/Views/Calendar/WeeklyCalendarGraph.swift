@@ -39,7 +39,7 @@ struct WeeklyCalendarGraph: View {
     }
     
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             HStack {
                 FontIcon.button(.materialIcon(code: .chevron_left), action: previousWeek, padding: 4, fontsize: 24)
                     .foregroundColor(Color(isEarliestCalendarEntryOlderThanFirstCalendarEntry() ? "Pomodoro Primary" : "Disabled Button"))
@@ -65,12 +65,12 @@ struct WeeklyCalendarGraph: View {
                 VStack {
                     HStack(spacing: 0) {
                         ForEach(Array(calendarEntries.enumerated()), id: \.offset) { index, observation in
-                            VStack {
+                            VStack(spacing: 4) {
                                 Spacer()
                                 CalendarCapsule(
                                     index: index,
                                     color: Color(index == highlightedCapsuleIndex ? "Pomodoro Primary" : "Disabled Button"),
-                                    height: Double(observation.workTimeMinutes) / Double(upperBoundMinutes) * proxy.size.height
+                                    height: Double(observation.workTimeMinutes) / Double(upperBoundMinutes) * (proxy.size.height-32)
                                 )
                                 .animation(.ripple(index: index))
                                 if let date = observation.date {
