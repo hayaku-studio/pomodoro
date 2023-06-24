@@ -38,7 +38,7 @@ struct WeeklyCalendarGraph: View {
         VStack {
             HStack {
                 FontIcon.button(.materialIcon(code: .chevron_left), action: previousWeek, padding: 4, fontsize: 24)
-                    .foregroundColor(Color("Pomodoro Primary"))
+                    .foregroundColor(Color(isEarliestCalendarEntryOlderThanFirstCalendarEntry() ? "Pomodoro Primary" : "Disabled Button"))
                 Spacer()
                 VStack {
                     if let unwrappedIndex = highlightedCapsuleIndex {
@@ -89,8 +89,10 @@ struct WeeklyCalendarGraph: View {
     }
     
     func previousWeek() {
-        modelData.calendarPastWeeks += 1
-        updateCalendarEntries()
+            if isEarliestCalendarEntryOlderThanFirstCalendarEntry()  {
+                modelData.calendarPastWeeks += 1
+                updateCalendarEntries()
+            }
     }
     
     func nextWeek() {
@@ -98,6 +100,17 @@ struct WeeklyCalendarGraph: View {
             modelData.calendarPastWeeks -= 1
             updateCalendarEntries()
         }
+    }
+    
+    func isEarliestCalendarEntryOlderThanFirstCalendarEntry() -> Bool {
+        if let earliestDateInCurrentCalendarEntries = calendarEntries[0].date {
+            if let earliestCalendarEntryDate = modelData.earliestCalendarEntryDate {
+                if earliestCalendarEntryDate < earliestDateInCurrentCalendarEntries  {
+                    return true
+                }
+            }
+        }
+        return false
     }
     
     func updateCalendarEntries() {
