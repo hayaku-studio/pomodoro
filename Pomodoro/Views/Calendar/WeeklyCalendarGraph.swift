@@ -19,14 +19,16 @@ extension Animation {
 struct WeeklyCalendarGraph: View {
     @EnvironmentObject private var modelData: ModelData
     
+    @State private var calendarPastWeeks: Int
     @State private var calendarEntries: [CalendarEntry]
     @State private var highlightedCapsuleIndex: Int?
     
     private let context: NSManagedObjectContext
     
-    init(context: NSManagedObjectContext) {
+    init(context: NSManagedObjectContext, calendarPastWeeks: Int) {
         self.context = context
-        _calendarEntries = State(initialValue: getCalendarEntriesForWeek(context: context, date: Date.now))
+        self.calendarPastWeeks = calendarPastWeeks
+        _calendarEntries = State(initialValue: getCalendarEntriesForWeek(context: context, date: Calendar.current.date(byAdding: .day, value: -(7*calendarPastWeeks), to: Date.now) ?? Date.now))
     }
     
     var upperBoundMinutes: Int {
@@ -59,7 +61,7 @@ struct WeeklyCalendarGraph: View {
                 }
                 Spacer()
                 FontIcon.button(.materialIcon(code: .chevron_right), action: nextWeek, padding: 4, fontsize: 24)
-                    .foregroundColor(Color(modelData.calendarPastWeeks > 0 ? "Pomodoro Primary" : "Disabled Button"))
+                    .foregroundColor(Color(calendarPastWeeks > 0 ? "Pomodoro Primary" : "Disabled Button"))
             }
             GeometryReader { proxy in
                 VStack {
@@ -89,19 +91,21 @@ struct WeeklyCalendarGraph: View {
                     }
                 }
             }
+        }.onAppear() {
+            print("Hello \(calendarPastWeeks)")
         }
     }
     
     func previousWeek() {
         if isEarliestCalendarEntryOlderThanFirstCalendarEntry()  {
-            modelData.calendarPastWeeks += 1
+            calendarPastWeeks += 1
             updateCalendarEntries()
         }
     }
     
     func nextWeek() {
-        if modelData.calendarPastWeeks > 0 {
-            modelData.calendarPastWeeks -= 1
+        if calendarPastWeeks > 0 {
+            calendarPastWeeks -= 1
             updateCalendarEntries()
         }
     }
@@ -118,7 +122,7 @@ struct WeeklyCalendarGraph: View {
     }
     
     func updateCalendarEntries() {
-        if let date = Calendar.current.date(byAdding: .day, value: -(7*modelData.calendarPastWeeks), to: Date.now) {
+        if let date = Calendar.current.date(byAdding: .day, value: -(7*calendarPastWeeks), to: Date.now) {
             calendarEntries = getCalendarEntriesForWeek(context: context, date: date)
         }
     }
