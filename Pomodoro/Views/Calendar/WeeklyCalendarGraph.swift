@@ -51,12 +51,12 @@ struct WeeklyCalendarGraph: View {
                         if let date = calendarEntries[unwrappedIndex].date {
                             Text(verbatim: "\(date.xget(.day)) \(date.xmonth) \(date.xget(.year))")
                             let totalMinutesForIndex = Int(calendarEntries[unwrappedIndex].workTimeMinutes)
-                            Text("\(totalMinutesForIndex.getCompletedHoursStringFromMinutes) \(totalMinutesForIndex.getRemainderMinutesStringFromMinutes)")
+                            Text("\(totalMinutesForIndex.xgetCompletedHoursStringFromMinutes) \(totalMinutesForIndex.xgetRemainderMinutesStringFromMinutes)")
                         }
                     } else {
                         Text(verbatim: getWeekRange(calendarEntries: calendarEntries))
                         let totalMinutesForRange = getTotalWorkMinutes(calendarEntries: calendarEntries)
-                        Text("\(totalMinutesForRange.getCompletedHoursStringFromMinutes) \(totalMinutesForRange.getRemainderMinutesStringFromMinutes)")
+                        Text("\(totalMinutesForRange.xgetCompletedHoursStringFromMinutes) \(totalMinutesForRange.xgetRemainderMinutesStringFromMinutes)")
                     }
                 }
                 Spacer()
@@ -139,27 +139,6 @@ struct WeeklyCalendarGraph: View {
     
     func getTotalWorkMinutes(calendarEntries: [CalendarEntry]) -> Int {
         return calendarEntries.map({Int($0.workTimeMinutes)}).reduce(0, +)
-    }
-}
-
-extension Int {
-    // TODO: simplify expression
-    var getCompletedHoursStringFromMinutes: String {
-        let completedHours = Int(self / 60)
-        if completedHours == 1 {
-            return "1 hour"
-        } else {
-            return "\(completedHours) hours"
-        }
-    }
-    
-    var getRemainderMinutesStringFromMinutes: String {
-        let completedMinutes = Int(self % 60)
-        if completedMinutes == 1 {
-            return "1 minute"
-        } else {
-            return "\(completedMinutes) minutes"
-        }
     }
 }
 
