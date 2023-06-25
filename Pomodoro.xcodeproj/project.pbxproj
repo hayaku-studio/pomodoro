@@ -130,8 +130,8 @@
 		CAE3D51B2A2F4BA200AD88F1 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				CAE3D51C2A2F4BC900AD88F1 /* Sound.swift */,
 				CAA7FCDE2A3B24EB00E5E51C /* Calendar.swift */,
+				CAE3D51C2A2F4BC900AD88F1 /* Sound.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
