@@ -104,13 +104,13 @@ struct AnimationView: View {
     
     func startTimers() {
         isPlaying = true
-        animationTimer?.invalidate()
-        animationTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) {_ in
-            decrementTime()
-        }
         workTimeTimer?.invalidate()
         workTimeTimer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true) {_ in
             incrementTodaysWorkTimeMinutes(context: managedObjectContext)
+        }
+        animationTimer?.invalidate()
+        animationTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) {_ in
+            decrementTime()
         }
     }
     
