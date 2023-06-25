@@ -32,16 +32,19 @@ func getEarliestCalendarEntryDate(context: NSManagedObjectContext) -> Date {
 func getCalendarEntriesForWeek(context: NSManagedObjectContext, date: Date) -> [CalendarEntry] {
     let startOfWeekMonday = getMonday(myDate: date)
     let endOfWeekSunday = getSunday(myDate: date)
-    
+    return getCalendarEntriesBetweenTwoDates(context: context, beginDate: startOfWeekMonday, endDate: endOfWeekSunday)
+}
+
+func getCalendarEntriesBetweenTwoDates(context: NSManagedObjectContext, beginDate: Date, endDate: Date) -> [CalendarEntry] {
     let fetchRequest = CalendarEntry.fetchRequest()
-    fetchRequest.predicate = NSPredicate(format: "(date >= %@) AND (date <= %@)", startOfWeekMonday as NSDate, endOfWeekSunday as NSDate)
+    fetchRequest.predicate = NSPredicate(format: "(date >= %@) AND (date <= %@)", beginDate as NSDate, endDate as NSDate)
     fetchRequest.fetchLimit = 7
     
     // TODO: catch error
     let calendarEntries = try! context.fetch(fetchRequest)
-    let currentWeek = getWeek(date: date)
+    let allDates = getDatesBetween(beginDate: beginDate, endDate: endDate)
     
-    return currentWeek.map { date in
+    return allDates.map { date in
         if let entry = calendarEntries.first(where: { $0.date == date }) {
             return entry
         } else {
@@ -65,6 +68,27 @@ func getCalendarEntry(context: NSManagedObjectContext, date: Date) -> CalendarEn
     return calendarEntries.first
 }
 
+private func getDatesBetween(beginDate: Date, endDate: Date) -> [Date] {
+    let calendar = Calendar.current
+    var week = [Date]()
+    if beginDate > endDate {
+        // TODO: handle
+        print("Error: beginDate is older than endDate")
+    } else {
+        if let daysBetween = calendar.dateComponents([.day], from: beginDate, to: endDate).day {
+            for i in 0...daysBetween {
+                if let day = calendar.date(byAdding: .day, value: i, to: beginDate) {
+                    week += [day]
+                }
+            }
+        } else {
+            // TODO: handle
+            print("Unexpected getDatesBetween Error")
+        }
+    }
+    return week
+}
+
 private func getMonday(myDate: Date) -> Date {
     let calendar = Calendar.current
     var components = calendar.dateComponents([.weekOfYear, .yearForWeekOfYear], from: myDate)
@@ -77,19 +101,4 @@ private func getSunday(myDate: Date) -> Date {
     var components = calendar.dateComponents([.weekOfYear, .yearForWeekOfYear], from: myDate)
     components.weekday = 1 // Sunday
     return calendar.date(from: components)!
-}
-
-private func getWeek(date: Date) -> [Date] {
-    var calendar = Calendar.autoupdatingCurrent
-    calendar.firstWeekday = 2 // Start on Monday (or 1 for Sunday)
-    let today = calendar.startOfDay(for: date)
-    var week = [Date]()
-    if let weekInterval = calendar.dateInterval(of: .weekOfYear, for: today) {
-        for i in 0...6 {
-            if let day = calendar.date(byAdding: .day, value: i, to: weekInterval.start) {
-                week += [day]
-            }
-        }
-    }
-    return week
 }
