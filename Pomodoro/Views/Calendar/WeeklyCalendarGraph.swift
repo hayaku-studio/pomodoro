@@ -54,7 +54,7 @@ struct WeeklyCalendarGraph: View {
                             Text("\(totalMinutesForIndex.xgetCompletedHoursStringFromMinutes) \(totalMinutesForIndex.xgetRemainderMinutesStringFromMinutes)")
                         }
                     } else {
-                        Text(verbatim: getWeekRange(calendarEntries: calendarEntries))
+                        Text(verbatim: getWeekRangeString(calendarEntries: calendarEntries))
                         let totalMinutesForRange = getTotalWorkMinutes(calendarEntries: calendarEntries)
                         Text("\(totalMinutesForRange.xgetCompletedHoursStringFromMinutes) \(totalMinutesForRange.xgetRemainderMinutesStringFromMinutes)")
                     }
@@ -125,7 +125,7 @@ struct WeeklyCalendarGraph: View {
         }
     }
     
-    func getWeekRange(calendarEntries: [CalendarEntry]) -> String {
+    func getWeekRangeString(calendarEntries: [CalendarEntry]) -> String {
         if let firstDate = calendarEntries.first?.date {
             if let lastDate = calendarEntries.last?.date {
                 // TODO: when going over the month/year, maybe expand on first date
