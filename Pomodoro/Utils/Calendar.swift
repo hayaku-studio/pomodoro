@@ -57,16 +57,6 @@ func getCalendarEntriesBetweenTwoDates(context: NSManagedObjectContext, beginDat
     }
 }
 
-func getCalendarEntry(context: NSManagedObjectContext, date: Date) -> CalendarEntry? {
-    let fetchRequest = CalendarEntry.fetchRequest()
-    fetchRequest.predicate = NSPredicate(format: "date == %@", date as NSDate)
-    fetchRequest.fetchLimit = 1
-    
-    // TODO: catch error
-    let calendarEntries = try! context.fetch(fetchRequest)
-    
-    return calendarEntries.first
-}
 
 private func getDatesBetween(beginDate: Date, endDate: Date) -> [Date] {
     let calendar = Calendar.current
@@ -87,6 +77,17 @@ private func getDatesBetween(beginDate: Date, endDate: Date) -> [Date] {
         }
     }
     return week
+}
+
+private func getCalendarEntry(context: NSManagedObjectContext, date: Date) -> CalendarEntry? {
+    let fetchRequest = CalendarEntry.fetchRequest()
+    fetchRequest.predicate = NSPredicate(format: "date == %@", date as NSDate)
+    fetchRequest.fetchLimit = 1
+    
+    // TODO: catch error
+    let calendarEntries = try! context.fetch(fetchRequest)
+    
+    return calendarEntries.first
 }
 
 private func getMonday(myDate: Date) -> Date {
