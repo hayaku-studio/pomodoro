@@ -91,8 +91,6 @@ struct WeeklyCalendarGraph: View {
                     }
                 }
             }
-        }.onAppear() {
-            print("Hello \(calendarPastWeeks)")
         }
     }
     
