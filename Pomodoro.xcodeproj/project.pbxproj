@@ -11,6 +11,7 @@
 		CA2B4C462A4977BC005ED3E7 /* Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2B4C452A4977BC005ED3E7 /* Animation.swift */; };
 		CA2B4C482A497C6A005ED3E7 /* CalendarCapsuleGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2B4C472A497C6A005ED3E7 /* CalendarCapsuleGraph.swift */; };
 		CA2B4C4A2A499CFD005ED3E7 /* CalendarNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2B4C492A499CFD005ED3E7 /* CalendarNavigationView.swift */; };
+		CA2B4C4D2A49B8F2005ED3E7 /* CalendarGraphEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2B4C4C2A49B8F2005ED3E7 /* CalendarGraphEntry.swift */; };
 		CA48135E2A44485C00AA7A1C /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA48135D2A44485C00AA7A1C /* Date.swift */; };
 		CA6789E82A33762A002CB46A /* TimerSnap.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6789E72A33762A002CB46A /* TimerSnap.swift */; };
 		CA6B06A22A2C6E4000F62E56 /* PomodoroIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6B06A12A2C6E4000F62E56 /* PomodoroIconView.swift */; };
@@ -43,6 +44,7 @@
 		CA2B4C452A4977BC005ED3E7 /* Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animation.swift; sourceTree = "<group>"; };
 		CA2B4C472A497C6A005ED3E7 /* CalendarCapsuleGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCapsuleGraph.swift; sourceTree = "<group>"; };
 		CA2B4C492A499CFD005ED3E7 /* CalendarNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarNavigationView.swift; sourceTree = "<group>"; };
+		CA2B4C4C2A49B8F2005ED3E7 /* CalendarGraphEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarGraphEntry.swift; sourceTree = "<group>"; };
 		CA48135D2A44485C00AA7A1C /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		CA6789E72A33762A002CB46A /* TimerSnap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerSnap.swift; sourceTree = "<group>"; };
 		CA6B06A12A2C6E4000F62E56 /* PomodoroIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroIconView.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				CAA95F2D2A2DD13D00057B26 /* ModelData.swift */,
+				CA2B4C4C2A49B8F2005ED3E7 /* CalendarGraphEntry.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -297,6 +300,7 @@
 				CA48135E2A44485C00AA7A1C /* Date.swift in Sources */,
 				CA2B4C4A2A499CFD005ED3E7 /* CalendarNavigationView.swift in Sources */,
 				CAE3D51D2A2F4BC900AD88F1 /* Sound.swift in Sources */,
+				CA2B4C4D2A49B8F2005ED3E7 /* CalendarGraphEntry.swift in Sources */,
 				CAA95F2E2A2DD13D00057B26 /* ModelData.swift in Sources */,
 				CA6B06A22A2C6E4000F62E56 /* PomodoroIconView.swift in Sources */,
 				CA72DA462A38819D00998051 /* CustomModal.swift in Sources */,

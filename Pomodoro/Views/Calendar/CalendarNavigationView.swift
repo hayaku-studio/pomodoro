@@ -12,7 +12,7 @@ struct CalendarNavigationView: View {
     @EnvironmentObject private var modelData: ModelData
     @Environment(\.managedObjectContext) var managedObjectContext
     
-    @Binding var calendarEntries: [CalendarEntry]
+    @Binding var calendarEntries: [CalendarGraphEntry]
     @Binding var calendarPast: Int
     @Binding var highlightedCapsuleIndex: Int?
     var calendarFormat: CalendarFormat
@@ -24,11 +24,10 @@ struct CalendarNavigationView: View {
             Spacer()
             VStack {
                 if let unwrappedIndex = highlightedCapsuleIndex {
-                    if let date = calendarEntries[unwrappedIndex].date {
-                        Text(verbatim: "\(date.xget(.day)) \(date.xmonth) \(date.xget(.year))")
-                        let totalMinutesForIndex = Int(calendarEntries[unwrappedIndex].workTimeMinutes)
-                        Text("\(totalMinutesForIndex.xgetCompletedHoursStringFromMinutes) \(totalMinutesForIndex.xgetRemainderMinutesStringFromMinutes)")
-                    }
+                    let date = calendarEntries[unwrappedIndex].date
+                    Text(verbatim: "\(date.xget(.day)) \(date.xmonth) \(date.xget(.year))")
+                    let totalMinutesForIndex = Int(calendarEntries[unwrappedIndex].workTimeMinutes)
+                    Text("\(totalMinutesForIndex.xgetCompletedHoursStringFromMinutes) \(totalMinutesForIndex.xgetRemainderMinutesStringFromMinutes)")
                 } else {
                     Text(verbatim: getWeekRangeString(calendarEntries: calendarEntries))
                     let totalMinutesForRange = getTotalWorkMinutes(calendarEntries: calendarEntries)
@@ -56,11 +55,10 @@ struct CalendarNavigationView: View {
     }
     
     func isEarliestCalendarEntryOlderThanFirstCalendarEntry() -> Bool {
-        if let earliestDateInCurrentCalendarEntries = calendarEntries[0].date {
-            if let earliestCalendarEntryDate = modelData.earliestCalendarEntryDate {
-                if earliestCalendarEntryDate < earliestDateInCurrentCalendarEntries  {
-                    return true
-                }
+        let earliestDateInCurrentCalendarEntries = calendarEntries[0].date
+        if let earliestCalendarEntryDate = modelData.earliestCalendarEntryDate {
+            if earliestCalendarEntryDate < earliestDateInCurrentCalendarEntries  {
+                return true
             }
         }
         return false
@@ -83,7 +81,7 @@ struct CalendarNavigationView: View {
         }
     }
     
-    func getWeekRangeString(calendarEntries: [CalendarEntry]) -> String {
+    func getWeekRangeString(calendarEntries: [CalendarGraphEntry]) -> String {
         if let firstDate = calendarEntries.first?.date {
             if let lastDate = calendarEntries.last?.date {
                 // TODO: when going over the month/year, maybe expand on first date
@@ -93,7 +91,7 @@ struct CalendarNavigationView: View {
         return ""
     }
     
-    func getTotalWorkMinutes(calendarEntries: [CalendarEntry]) -> Int {
+    func getTotalWorkMinutes(calendarEntries: [CalendarGraphEntry]) -> Int {
         return calendarEntries.map({Int($0.workTimeMinutes)}).reduce(0, +)
     }
 }

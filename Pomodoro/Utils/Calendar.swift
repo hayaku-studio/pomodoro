@@ -29,10 +29,20 @@ func getEarliestCalendarEntryDate(context: NSManagedObjectContext) -> Date {
     return try! context.fetch(fetchRequest)[0].date ?? Date.now
 }
 
-func getCalendarEntriesForWeek(context: NSManagedObjectContext, date: Date) -> [CalendarEntry] {
+func getCalendarEntriesForWeek(context: NSManagedObjectContext, date: Date) -> [CalendarGraphEntry] {
     let startOfWeekMonday = getMonday(myDate: date)
     let endOfWeekSunday = getSunday(myDate: date)
-    return getCalendarEntriesBetweenTwoDates(context: context, beginDate: startOfWeekMonday, endDate: endOfWeekSunday)
+    return getCalendarEntriesBetweenTwoDates(context: context, beginDate: startOfWeekMonday, endDate: endOfWeekSunday).map {
+        if let date = $0.date {
+            return CalendarGraphEntry(date: date, workTimeMinutes: Int($0.workTimeMinutes))
+            
+        }
+        else {
+            // TODO: handle
+            // TODO: why is workTimeMinutes not optional?
+            return CalendarGraphEntry(date: Date.now, workTimeMinutes: Int($0.workTimeMinutes))
+        }
+    }
 }
 
 func getCalendarEntriesBetweenTwoDates(context: NSManagedObjectContext, beginDate: Date, endDate: Date) -> [CalendarEntry] {

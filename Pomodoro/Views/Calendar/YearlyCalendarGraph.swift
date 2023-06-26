@@ -10,7 +10,7 @@ import SwiftUI
 struct YearlyCalendarGraph: View {
     @EnvironmentObject private var modelData: ModelData
     
-    @State private var calendarEntries: [CalendarEntry]
+    @State private var calendarEntries: [CalendarGraphEntry]
     @State private var calendarPastYears: Int
     @State private var highlightedCapsuleIndex: Int?
     

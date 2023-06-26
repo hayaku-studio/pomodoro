@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct CalendarCapsuleGraph: View {
-    var calendarEntries: [CalendarEntry]
+    var calendarEntries: [CalendarGraphEntry]
     @Binding var highlightedCapsuleIndex: Int?
     
     var upperBoundMinutes: Int {
-        let largestWorkTimeMinutes: Int64 = calendarEntries.map {$0.workTimeMinutes}.max() ?? 1
+        let largestWorkTimeMinutes = calendarEntries.map {$0.workTimeMinutes}.max() ?? 0
         if largestWorkTimeMinutes == 0 {
             return 60
         } else {
@@ -33,9 +33,7 @@ struct CalendarCapsuleGraph: View {
                                 height: Double(observation.workTimeMinutes) / Double(upperBoundMinutes) * (proxy.size.height-32)
                             )
                             .animation(.xripple(index: index))
-                            if let date = observation.date {
-                                Text("**\(date.xdayOfWeek)**")
-                            }
+                            Text("**\(observation.date.xdayOfWeek)**")
                         }
                         .padding([.leading, .trailing], proxy.size.width / 120)
                         .onHover { isHovering in
