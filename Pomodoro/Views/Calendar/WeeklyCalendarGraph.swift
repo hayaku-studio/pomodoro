@@ -23,15 +23,6 @@ struct WeeklyCalendarGraph: View {
         _calendarEntries = State(initialValue: getCalendarEntriesForWeek(context: context, date: Calendar.current.date(byAdding: .day, value: -(7*calendarPastWeeks), to: Date.now) ?? Date.now))
     }
     
-    var upperBoundMinutes: Int {
-        let largestWorkTimeMinutes: Int64 = calendarEntries.map {$0.workTimeMinutes}.max() ?? 1
-        if largestWorkTimeMinutes == 0 {
-            return 60
-        } else {
-            return 60 * Int(ceil(Double(largestWorkTimeMinutes) / 60.0))
-        }
-    }
-    
     var body: some View {
         VStack(spacing: 0) {
             HStack {
