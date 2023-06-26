@@ -8,14 +8,6 @@
 import SwiftUI
 import SwiftUIFontIcon
 
-extension Animation {
-    static func ripple(index: Int) -> Animation {
-        Animation.spring(dampingFraction: 0.5)
-            .speed(2)
-            .delay(0.03 * Double(index))
-    }
-}
-
 struct WeeklyCalendarGraph: View {
     @EnvironmentObject private var modelData: ModelData
     
@@ -74,7 +66,7 @@ struct WeeklyCalendarGraph: View {
                                     color: Color(index == highlightedCapsuleIndex ? "Pomodoro Primary" : "Disabled Button"),
                                     height: Double(observation.workTimeMinutes) / Double(upperBoundMinutes) * (proxy.size.height-32)
                                 )
-                                .animation(.ripple(index: index))
+                                .animation(.xripple(index: index))
                                 if let date = observation.date {
                                     Text("**\(date.xdayOfWeek)**")
                                 }

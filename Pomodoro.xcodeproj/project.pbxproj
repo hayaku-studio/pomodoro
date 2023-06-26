@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CA01D54F2A309BBD001B9DBC /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA01D54E2A309BBD001B9DBC /* SettingsView.swift */; };
+		CA2B4C462A4977BC005ED3E7 /* Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2B4C452A4977BC005ED3E7 /* Animation.swift */; };
 		CA48135E2A44485C00AA7A1C /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA48135D2A44485C00AA7A1C /* Date.swift */; };
 		CA6789E82A33762A002CB46A /* TimerSnap.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6789E72A33762A002CB46A /* TimerSnap.swift */; };
 		CA6B06A22A2C6E4000F62E56 /* PomodoroIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6B06A12A2C6E4000F62E56 /* PomodoroIconView.swift */; };
@@ -37,6 +38,7 @@
 
 /* Begin PBXFileReference section */
 		CA01D54E2A309BBD001B9DBC /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		CA2B4C452A4977BC005ED3E7 /* Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animation.swift; sourceTree = "<group>"; };
 		CA48135D2A44485C00AA7A1C /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		CA6789E72A33762A002CB46A /* TimerSnap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerSnap.swift; sourceTree = "<group>"; };
 		CA6B06A12A2C6E4000F62E56 /* PomodoroIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroIconView.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 		CA48135C2A44482C00AA7A1C /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				CA2B4C452A4977BC005ED3E7 /* Animation.swift */,
 				CA48135D2A44485C00AA7A1C /* Date.swift */,
 				CAD1A1982A48671700503402 /* Int.swift */,
 			);
@@ -296,6 +299,7 @@
 				CAA95F322A2DE7DC00057B26 /* PopupView.swift in Sources */,
 				CA951B2B2A3DF0CA0041E5FB /* CalendarCapsule.swift in Sources */,
 				CAD1A1972A48668200503402 /* YearlyCalendarView.swift in Sources */,
+				CA2B4C462A4977BC005ED3E7 /* Animation.swift in Sources */,
 				CAF098F62A1FB1F600606A83 /* PomodoroApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
