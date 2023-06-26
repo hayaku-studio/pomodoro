@@ -34,13 +34,12 @@ func getCalendarEntriesForWeek(context: NSManagedObjectContext, date: Date) -> [
     let endOfWeekSunday = getSunday(myDate: date)
     return getCalendarEntriesBetweenTwoDates(context: context, beginDate: startOfWeekMonday, endDate: endOfWeekSunday).map {
         if let date = $0.date {
-            return CalendarGraphEntry(date: date, workTimeMinutes: Int($0.workTimeMinutes))
-            
+            return CalendarGraphEntry(date: date, workTimeMinutes: Int($0.workTimeMinutes), label: date.xdayOfWeek)
         }
         else {
             // TODO: handle
             // TODO: why is workTimeMinutes not optional?
-            return CalendarGraphEntry(date: Date.now, workTimeMinutes: Int($0.workTimeMinutes))
+            return CalendarGraphEntry(date: Date.now, workTimeMinutes: Int($0.workTimeMinutes), label: date.xdayOfWeek)
         }
     }
 }

@@ -33,7 +33,7 @@ struct CalendarCapsuleGraph: View {
                                 height: Double(observation.workTimeMinutes) / Double(upperBoundMinutes) * (proxy.size.height-32)
                             )
                             .animation(.xripple(index: index))
-                            Text("**\(observation.date.xdayOfWeek)**")
+                            Text("**\(observation.label ?? "")**")
                         }
                         .padding([.leading, .trailing], proxy.size.width / 120)
                         .onHover { isHovering in
