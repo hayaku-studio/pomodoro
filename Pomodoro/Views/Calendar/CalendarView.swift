@@ -31,7 +31,14 @@ struct CalendarView: View {
             //                }
             //                Text(String(entry.workTimeMinutes))
             //            }
-            WeeklyCalendarGraph(context: managedObjectContext, calendarPastWeeks: 0)
+            switch modelData.calendarFormat {
+            case .week:
+                WeeklyCalendarGraph(context: managedObjectContext, calendarPastWeeks: 0)
+            case .month:
+                Text("Month")
+            case .year:
+                YearlyCalendarGraph(context: managedObjectContext, calendarPastYears: 0)
+            }
         }
     }
 }

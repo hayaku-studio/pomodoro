@@ -1,35 +1,26 @@
 //
-//  CalendarGraph.swift
+//  YearlyCalendarView.swift
 //  Pomodoro
 //
-//  Created by David Speers on 18/06/2023.
+//  Created by David Speers on 25/06/2023.
 //
 
 import SwiftUI
 import SwiftUIFontIcon
 
-struct WeeklyCalendarGraph: View {
+struct YearlyCalendarGraph: View {
     @EnvironmentObject private var modelData: ModelData
     
-    @State private var calendarPastWeeks: Int
+    @State private var calendarPastYears: Int
     @State private var calendarEntries: [CalendarEntry]
     @State private var highlightedCapsuleIndex: Int?
     
     private let context: NSManagedObjectContext
     
-    init(context: NSManagedObjectContext, calendarPastWeeks: Int) {
+    init(context: NSManagedObjectContext, calendarPastYears: Int) {
         self.context = context
-        self.calendarPastWeeks = calendarPastWeeks
-        _calendarEntries = State(initialValue: getCalendarEntriesForWeek(context: context, date: Calendar.current.date(byAdding: .day, value: -(7*calendarPastWeeks), to: Date.now) ?? Date.now))
-    }
-    
-    var upperBoundMinutes: Int {
-        let largestWorkTimeMinutes: Int64 = calendarEntries.map {$0.workTimeMinutes}.max() ?? 1
-        if largestWorkTimeMinutes == 0 {
-            return 60
-        } else {
-            return 60 * Int(ceil(Double(largestWorkTimeMinutes) / 60.0))
-        }
+        self.calendarPastYears = calendarPastYears
+        _calendarEntries = State(initialValue: getCalendarEntriesForWeek(context: context, date: Calendar.current.date(byAdding: .day, value: -(7*calendarPastYears), to: Date.now) ?? Date.now))
     }
     
     var body: some View {
@@ -53,7 +44,7 @@ struct WeeklyCalendarGraph: View {
                 }
                 Spacer()
                 FontIcon.button(.materialIcon(code: .chevron_right), action: nextWeek, padding: 4, fontsize: 24)
-                    .foregroundColor(Color(calendarPastWeeks > 0 ? "Pomodoro Primary" : "Disabled Button"))
+                    .foregroundColor(Color(calendarPastYears > 0 ? "Pomodoro Primary" : "Disabled Button"))
             }
             CalendarCapsuleGraph(calendarEntries: calendarEntries, highlightedCapsuleIndex: $highlightedCapsuleIndex)
         }
@@ -61,14 +52,14 @@ struct WeeklyCalendarGraph: View {
     
     func previousWeek() {
         if isEarliestCalendarEntryOlderThanFirstCalendarEntry()  {
-            calendarPastWeeks += 1
+            calendarPastYears += 1
             updateCalendarEntries()
         }
     }
     
     func nextWeek() {
-        if calendarPastWeeks > 0 {
-            calendarPastWeeks -= 1
+        if calendarPastYears > 0 {
+            calendarPastYears -= 1
             updateCalendarEntries()
         }
     }
@@ -85,7 +76,7 @@ struct WeeklyCalendarGraph: View {
     }
     
     func updateCalendarEntries() {
-        if let date = Calendar.current.date(byAdding: .day, value: -(7*calendarPastWeeks), to: Date.now) {
+        if let date = Calendar.current.date(byAdding: .day, value: -(7*calendarPastYears), to: Date.now) {
             calendarEntries = getCalendarEntriesForWeek(context: context, date: date)
         }
     }
@@ -104,18 +95,3 @@ struct WeeklyCalendarGraph: View {
         return calendarEntries.map({Int($0.workTimeMinutes)}).reduce(0, +)
     }
 }
-
-//struct CalendarGraph_Previews: PreviewProvider {
-//    static var hike = ModelData().hikes[0]
-//
-//    static var previews: some View {
-//        Group {
-//            CalendarGraph(hike: hike, path: \.elevation)
-//                .frame(height: 200)
-//            CalendarGraph(hike: hike, path: \.heartRate)
-//                .frame(height: 200)
-//            CalendarGraph(hike: hike, path: \.pace)
-//                .frame(height: 200)
-//        }
-//    }
-//}
