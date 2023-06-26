@@ -24,7 +24,7 @@ struct YearlyCalendarGraph: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            CalendarNavigationView(calendarEntries: $calendarEntries, calendarPastYears: $calendarPastYears, highlightedCapsuleIndex: $highlightedCapsuleIndex)
+            CalendarNavigationView(calendarEntries: $calendarEntries, calendarPast: $calendarPastYears, highlightedCapsuleIndex: $highlightedCapsuleIndex, calendarFormat: CalendarFormat.year)
             CalendarCapsuleGraph(calendarEntries: calendarEntries, highlightedCapsuleIndex: $highlightedCapsuleIndex)
         }
     }

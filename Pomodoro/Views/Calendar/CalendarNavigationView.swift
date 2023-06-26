@@ -13,12 +13,13 @@ struct CalendarNavigationView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     
     @Binding var calendarEntries: [CalendarEntry]
-    @Binding var calendarPastYears: Int
+    @Binding var calendarPast: Int
     @Binding var highlightedCapsuleIndex: Int?
+    var calendarFormat: CalendarFormat
     
     var body: some View {
         HStack {
-            FontIcon.button(.materialIcon(code: .chevron_left), action: previousWeek, padding: 4, fontsize: 24)
+            FontIcon.button(.materialIcon(code: .chevron_left), action: previous, padding: 4, fontsize: 24)
                 .foregroundColor(Color(isEarliestCalendarEntryOlderThanFirstCalendarEntry() ? "Pomodoro Primary" : "Disabled Button"))
             Spacer()
             VStack {
@@ -35,21 +36,21 @@ struct CalendarNavigationView: View {
                 }
             }
             Spacer()
-            FontIcon.button(.materialIcon(code: .chevron_right), action: nextWeek, padding: 4, fontsize: 24)
-                .foregroundColor(Color(calendarPastYears > 0 ? "Pomodoro Primary" : "Disabled Button"))
+            FontIcon.button(.materialIcon(code: .chevron_right), action: next, padding: 4, fontsize: 24)
+                .foregroundColor(Color(calendarPast > 0 ? "Pomodoro Primary" : "Disabled Button"))
         }
     }
     
-    func previousWeek() {
+    func previous() {
         if isEarliestCalendarEntryOlderThanFirstCalendarEntry()  {
-            calendarPastYears += 1
+            calendarPast += 1
             updateCalendarEntries()
         }
     }
     
-    func nextWeek() {
-        if calendarPastYears > 0 {
-            calendarPastYears -= 1
+    func next() {
+        if calendarPast > 0 {
+            calendarPast -= 1
             updateCalendarEntries()
         }
     }
@@ -66,8 +67,19 @@ struct CalendarNavigationView: View {
     }
     
     func updateCalendarEntries() {
-        if let date = Calendar.current.date(byAdding: .day, value: -(7*calendarPastYears), to: Date.now) {
-            calendarEntries = getCalendarEntriesForWeek(context: managedObjectContext, date: date)
+        switch calendarFormat {
+        case .week:
+            if let date = Calendar.current.date(byAdding: .day, value: -(7*calendarPast), to: Date.now) {
+                calendarEntries = getCalendarEntriesForWeek(context: managedObjectContext, date: date)
+            }
+        case .month:
+            break
+        case .year:
+            var dateComponent = DateComponents()
+            dateComponent.year = -calendarPast
+            if let date = Calendar.current.date(byAdding: dateComponent, to: Date.now) {
+                calendarEntries = getCalendarEntriesForWeek(context: managedObjectContext, date: date)
+            }
         }
     }
     

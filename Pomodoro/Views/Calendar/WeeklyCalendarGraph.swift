@@ -25,7 +25,7 @@ struct WeeklyCalendarGraph: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            CalendarNavigationView(calendarEntries: $calendarEntries, calendarPastYears: $calendarPastWeeks, highlightedCapsuleIndex: $highlightedCapsuleIndex)
+            CalendarNavigationView(calendarEntries: $calendarEntries, calendarPast: $calendarPastWeeks, highlightedCapsuleIndex: $highlightedCapsuleIndex, calendarFormat: CalendarFormat.week)
             CalendarCapsuleGraph(calendarEntries: calendarEntries, highlightedCapsuleIndex: $highlightedCapsuleIndex)
         }
     }
