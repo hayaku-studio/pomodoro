@@ -44,10 +44,27 @@ func getCalendarEntriesForWeek(context: NSManagedObjectContext, date: Date) -> [
     }
 }
 
+func getCalendarEntriesForYear(context: NSManagedObjectContext, date: Date) -> [CalendarGraphEntry] {
+    var monthEntries = [CalendarGraphEntry]()
+    let calendar = Calendar.current
+    let currentYear = calendar.component(.year, from: Date.now)
+    let firstDayOfYear = DateComponents(calendar: calendar, year: currentYear).date!
+    for month in 0..<12 {
+        let firstDayOfMonth = calendar.date(byAdding: .month, value: month, to: firstDayOfYear)!
+        let lastDayOfMonth = calendar.date(byAdding: DateComponents(month: month+1, day: -1), to: firstDayOfYear)!
+        let allDates = getCalendarEntriesBetweenTwoDates(
+            context: context,
+            beginDate: firstDayOfMonth,
+            endDate: lastDayOfMonth
+        )
+        monthEntries.append(CalendarGraphEntry(date: firstDayOfMonth, workTimeMinutes: allDates.map{Int($0.workTimeMinutes)}.reduce(0, +)))
+    }
+    return monthEntries
+}
+
 func getCalendarEntriesBetweenTwoDates(context: NSManagedObjectContext, beginDate: Date, endDate: Date) -> [CalendarEntry] {
     let fetchRequest = CalendarEntry.fetchRequest()
     fetchRequest.predicate = NSPredicate(format: "(date >= %@) AND (date <= %@)", beginDate as NSDate, endDate as NSDate)
-    fetchRequest.fetchLimit = 7
     
     // TODO: catch error
     let calendarEntries = try! context.fetch(fetchRequest)
