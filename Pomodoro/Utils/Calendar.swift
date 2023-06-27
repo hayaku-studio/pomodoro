@@ -57,7 +57,7 @@ func getCalendarEntriesForYear(context: NSManagedObjectContext, date: Date) -> [
             beginDate: firstDayOfMonth,
             endDate: lastDayOfMonth
         )
-        monthEntries.append(CalendarGraphEntry(date: firstDayOfMonth, workTimeMinutes: allDates.map{Int($0.workTimeMinutes)}.reduce(0, +)))
+        monthEntries.append(CalendarGraphEntry(date: firstDayOfMonth, workTimeMinutes: allDates.map{Int($0.workTimeMinutes)}.reduce(0, +), label: String(firstDayOfMonth.xmonth.prefix(1))))
     }
     return monthEntries
 }
