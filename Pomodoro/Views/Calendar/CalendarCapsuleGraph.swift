@@ -12,12 +12,7 @@ struct CalendarCapsuleGraph: View {
     @Binding var highlightedCapsuleIndex: Int?
     
     var upperBoundMinutes: Int {
-        let largestWorkTimeMinutes = calendarEntries.map {$0.workTimeMinutes}.max() ?? 0
-        if largestWorkTimeMinutes == 0 {
-            return 60
-        } else {
-            return 60 * Int(ceil(Double(largestWorkTimeMinutes) / 60.0))
-        }
+        return max(calendarEntries.map {$0.workTimeMinutes}.max() ?? 0, 1)
     }
     
     var body: some View {
