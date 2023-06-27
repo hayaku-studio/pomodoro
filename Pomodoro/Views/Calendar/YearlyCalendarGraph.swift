@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// TODO: I'm not following DRY with all these hard coded CalendarGraphs
 struct YearlyCalendarGraph: View {
     @EnvironmentObject private var modelData: ModelData
     

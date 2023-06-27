@@ -28,7 +28,9 @@ struct CalendarCapsuleGraph: View {
                                 height: Double(observation.workTimeMinutes) / Double(upperBoundMinutes) * (proxy.size.height-32)
                             )
                             .animation(.xripple(index: index))
+                            // TODO: this Text makes some CalendarCapsules wider
                             Text("**\(observation.label ?? "")**")
+                                .fixedSize(horizontal: true, vertical: true)
                         }
                         .padding([.leading, .trailing], proxy.size.width / 120)
                         .onHover { isHovering in

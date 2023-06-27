@@ -60,7 +60,11 @@ struct CalendarNavigationView: View {
                 calendarEntries = getCalendarEntriesForWeek(context: managedObjectContext, date: date)
             }
         case .month:
-            break
+            var dateComponent = DateComponents()
+            dateComponent.month = -calendarPast
+            if let date = Calendar.current.date(byAdding: dateComponent, to: Date.now) {
+                calendarEntries = getCalendarEntriesForMonth(context: managedObjectContext, date: date)
+            }
         case .year:
             var dateComponent = DateComponents()
             dateComponent.year = -calendarPast

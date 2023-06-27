@@ -35,7 +35,7 @@ struct CalendarView: View {
             case .week:
                 WeeklyCalendarGraph(context: managedObjectContext, calendarPastWeeks: 0)
             case .month:
-                Text("Month")
+                MonthlyCalendarGraph(context: managedObjectContext, calendarPastMonths: 0)
             case .year:
                 YearlyCalendarGraph(context: managedObjectContext, calendarPastYears: 0)
             }

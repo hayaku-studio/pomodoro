@@ -44,6 +44,20 @@ func getCalendarEntriesForWeek(context: NSManagedObjectContext, date: Date) -> [
     }
 }
 
+func getCalendarEntriesForMonth(context: NSManagedObjectContext, date: Date) -> [CalendarGraphEntry] {
+    let firstDayOfMonth = getMonthStart(date: date)
+    let lastDayOfMonth = getMonthEnd(date: date)
+    return getCalendarEntriesBetweenTwoDates(context: context, beginDate: firstDayOfMonth, endDate: lastDayOfMonth).enumerated().map {(index, value) in
+        if let date = value.date {
+            return CalendarGraphEntry(date: date, workTimeMinutes: Int(value.workTimeMinutes), label: index % 5 == 4 ? String(date.xget(.day)) : nil)
+        }
+        else {
+            // TODO: handle
+            return CalendarGraphEntry(date: Date.now, workTimeMinutes: Int(value.workTimeMinutes), label: String(date.xget(.day)))
+        }
+    }
+}
+
 func getCalendarEntriesForYear(context: NSManagedObjectContext, date: Date) -> [CalendarGraphEntry] {
     var monthEntries = [CalendarGraphEntry]()
     let calendar = Calendar.current
@@ -128,4 +142,17 @@ private func getSunday(myDate: Date) -> Date {
     var components = calendar.dateComponents([.weekOfYear, .yearForWeekOfYear], from: myDate)
     components.weekday = 1 // Sunday
     return calendar.date(from: components)!
+}
+
+private func getMonthStart(date: Date) -> Date {
+    let components = Calendar.current.dateComponents([.year, .month], from: date)
+    return Calendar.current.date(from: components)!
+}
+
+func getMonthEnd(date: Date) -> Date {
+    let components = Calendar.current.dateComponents([.year, .month], from: date) as NSDateComponents
+    components.month += 1
+    components.day = 1
+    components.day -= 1
+    return Calendar.current.date(from: components as DateComponents)!
 }

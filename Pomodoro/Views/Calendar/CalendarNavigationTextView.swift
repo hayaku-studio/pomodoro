@@ -29,7 +29,13 @@ struct CalendarNavigationTextView: View {
                 Text(verbatim: getWeekRangeString(calendarEntries: calendarEntries))
             }
         case .month:
-            Text("")
+            if let index = highlightedCapsuleIndex {
+                let date = calendarEntries[index].date
+                Text(verbatim: "\(date.xget(.day)) \(date.xmonth) \(date.xget(.year))")
+            } else {
+                let date = calendarEntries[0].date
+                Text(verbatim: "\(date.xmonth) \(date.xget(.year))")
+            }
         case .year:
             if let index = highlightedCapsuleIndex {
                 let date = calendarEntries[index].date
