@@ -19,7 +19,7 @@ struct YearlyCalendarGraph: View {
     init(context: NSManagedObjectContext, calendarPastYears: Int) {
         self.context = context
         self.calendarPastYears = calendarPastYears
-        _calendarEntries = State(initialValue: getCalendarEntriesForYear(context: context, date: Calendar.current.date(byAdding: .day, value: -(7*calendarPastYears), to: Date.now) ?? Date.now))
+        _calendarEntries = State(initialValue: getCalendarEntriesForYear(context: context, date: Calendar.current.date(byAdding: .year, value: -calendarPastYears, to: Date.now) ?? Date.now))
     }
     
     var body: some View {

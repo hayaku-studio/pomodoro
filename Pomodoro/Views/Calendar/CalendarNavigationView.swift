@@ -65,7 +65,7 @@ struct CalendarNavigationView: View {
             var dateComponent = DateComponents()
             dateComponent.year = -calendarPast
             if let date = Calendar.current.date(byAdding: dateComponent, to: Date.now) {
-                calendarEntries = getCalendarEntriesForWeek(context: managedObjectContext, date: date)
+                calendarEntries = getCalendarEntriesForYear(context: managedObjectContext, date: date)
             }
         }
     }

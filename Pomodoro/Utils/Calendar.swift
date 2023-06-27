@@ -47,7 +47,7 @@ func getCalendarEntriesForWeek(context: NSManagedObjectContext, date: Date) -> [
 func getCalendarEntriesForYear(context: NSManagedObjectContext, date: Date) -> [CalendarGraphEntry] {
     var monthEntries = [CalendarGraphEntry]()
     let calendar = Calendar.current
-    let currentYear = calendar.component(.year, from: Date.now)
+    let currentYear = calendar.component(.year, from: date)
     let firstDayOfYear = DateComponents(calendar: calendar, year: currentYear).date!
     for month in 0..<12 {
         let firstDayOfMonth = calendar.date(byAdding: .month, value: month, to: firstDayOfYear)!
