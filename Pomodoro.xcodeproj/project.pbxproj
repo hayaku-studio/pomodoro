@@ -18,6 +18,7 @@
 		CA72DA422A372B7C00998051 /* SwiftUITooltip in Frameworks */ = {isa = PBXBuildFile; productRef = CA72DA412A372B7C00998051 /* SwiftUITooltip */; };
 		CA72DA462A38819D00998051 /* CustomModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA72DA452A38819D00998051 /* CustomModal.swift */; };
 		CA72DA482A3894C300998051 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA72DA472A3894C300998051 /* CalendarView.swift */; };
+		CA771EFA2A4ADFEE009BF829 /* CalendarNavigationTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA771EF92A4ADFEE009BF829 /* CalendarNavigationTextView.swift */; };
 		CA951B2B2A3DF0CA0041E5FB /* CalendarCapsule.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA951B2A2A3DF0CA0041E5FB /* CalendarCapsule.swift */; };
 		CAA7FCDF2A3B24EB00E5E51C /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA7FCDE2A3B24EB00E5E51C /* Calendar.swift */; };
 		CAA7FCE12A3B96ED00E5E51C /* CalendarFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA7FCE02A3B96ED00E5E51C /* CalendarFormat.swift */; };
@@ -50,6 +51,7 @@
 		CA6B06A12A2C6E4000F62E56 /* PomodoroIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroIconView.swift; sourceTree = "<group>"; };
 		CA72DA452A38819D00998051 /* CustomModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomModal.swift; sourceTree = "<group>"; };
 		CA72DA472A3894C300998051 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		CA771EF92A4ADFEE009BF829 /* CalendarNavigationTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarNavigationTextView.swift; sourceTree = "<group>"; };
 		CA951B2A2A3DF0CA0041E5FB /* CalendarCapsule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCapsule.swift; sourceTree = "<group>"; };
 		CAA7FCDE2A3B24EB00E5E51C /* Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
 		CAA7FCE02A3B96ED00E5E51C /* CalendarFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarFormat.swift; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 			children = (
 				CA72DA472A3894C300998051 /* CalendarView.swift */,
 				CA2B4C492A499CFD005ED3E7 /* CalendarNavigationView.swift */,
+				CA771EF92A4ADFEE009BF829 /* CalendarNavigationTextView.swift */,
 				CAFC9E042A3F14BE003CAB98 /* WeeklyCalendarGraph.swift */,
 				CAD1A1962A48668200503402 /* YearlyCalendarGraph.swift */,
 				CA2B4C472A497C6A005ED3E7 /* CalendarCapsuleGraph.swift */,
@@ -308,6 +311,7 @@
 				CAFC9E052A3F14BE003CAB98 /* WeeklyCalendarGraph.swift in Sources */,
 				CAA7FCDF2A3B24EB00E5E51C /* Calendar.swift in Sources */,
 				CA6789E82A33762A002CB46A /* TimerSnap.swift in Sources */,
+				CA771EFA2A4ADFEE009BF829 /* CalendarNavigationTextView.swift in Sources */,
 				CAA95F322A2DE7DC00057B26 /* PopupView.swift in Sources */,
 				CA951B2B2A3DF0CA0041E5FB /* CalendarCapsule.swift in Sources */,
 				CAD1A1972A48668200503402 /* YearlyCalendarGraph.swift in Sources */,

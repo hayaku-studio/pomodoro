@@ -22,18 +22,7 @@ struct CalendarNavigationView: View {
             FontIcon.button(.materialIcon(code: .chevron_left), action: previous, padding: 4, fontsize: 24)
                 .foregroundColor(Color(isEarliestCalendarEntryOlderThanFirstCalendarEntry() ? "Pomodoro Primary" : "Disabled Button"))
             Spacer()
-            VStack {
-                if let unwrappedIndex = highlightedCapsuleIndex {
-                    let date = calendarEntries[unwrappedIndex].date
-                    Text(verbatim: "\(date.xget(.day)) \(date.xmonth) \(date.xget(.year))")
-                    let totalMinutesForIndex = Int(calendarEntries[unwrappedIndex].workTimeMinutes)
-                    Text("\(totalMinutesForIndex.xgetCompletedHoursStringFromMinutes) \(totalMinutesForIndex.xgetRemainderMinutesStringFromMinutes)")
-                } else {
-                    Text(verbatim: getWeekRangeString(calendarEntries: calendarEntries))
-                    let totalMinutesForRange = getTotalWorkMinutes(calendarEntries: calendarEntries)
-                    Text("\(totalMinutesForRange.xgetCompletedHoursStringFromMinutes) \(totalMinutesForRange.xgetRemainderMinutesStringFromMinutes)")
-                }
-            }
+            CalendarNavigationTextView(calendarEntries: calendarEntries, highlightedCapsuleIndex: highlightedCapsuleIndex, calendarFormat: calendarFormat)
             Spacer()
             FontIcon.button(.materialIcon(code: .chevron_right), action: next, padding: 4, fontsize: 24)
                 .foregroundColor(Color(calendarPast > 0 ? "Pomodoro Primary" : "Disabled Button"))
@@ -79,20 +68,6 @@ struct CalendarNavigationView: View {
                 calendarEntries = getCalendarEntriesForWeek(context: managedObjectContext, date: date)
             }
         }
-    }
-    
-    func getWeekRangeString(calendarEntries: [CalendarGraphEntry]) -> String {
-        if let firstDate = calendarEntries.first?.date {
-            if let lastDate = calendarEntries.last?.date {
-                // TODO: when going over the month/year, maybe expand on first date
-                return "\(firstDate.xget(.day)) - \(lastDate.xget(.day)) \(lastDate.xmonth) \(lastDate.xget(.year))"
-            }
-        }
-        return ""
-    }
-    
-    func getTotalWorkMinutes(calendarEntries: [CalendarGraphEntry]) -> Int {
-        return calendarEntries.map({Int($0.workTimeMinutes)}).reduce(0, +)
     }
 }
 
