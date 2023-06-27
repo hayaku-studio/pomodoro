@@ -14,16 +14,39 @@ struct CalendarNavigationTextView: View {
     
     var body: some View {
         VStack {
-            if let unwrappedIndex = highlightedCapsuleIndex {
-                let date = calendarEntries[unwrappedIndex].date
+            DateText()
+            WorkTimeText()
+        }
+    }
+    
+    @ViewBuilder func DateText() -> some View {
+        switch calendarFormat {
+        case .week:
+            if let index = highlightedCapsuleIndex {
+                let date = calendarEntries[index].date
                 Text(verbatim: "\(date.xget(.day)) \(date.xmonth) \(date.xget(.year))")
-                let totalMinutesForIndex = Int(calendarEntries[unwrappedIndex].workTimeMinutes)
-                Text("\(totalMinutesForIndex.xgetCompletedHoursStringFromMinutes) \(totalMinutesForIndex.xgetRemainderMinutesStringFromMinutes)")
             } else {
                 Text(verbatim: getWeekRangeString(calendarEntries: calendarEntries))
-                let totalMinutesForRange = getTotalWorkMinutes(calendarEntries: calendarEntries)
-                Text("\(totalMinutesForRange.xgetCompletedHoursStringFromMinutes) \(totalMinutesForRange.xgetRemainderMinutesStringFromMinutes)")
             }
+        case .month:
+            Text("")
+        case .year:
+            if let index = highlightedCapsuleIndex {
+                let date = calendarEntries[index].date
+                Text(verbatim: "\(date.xmonth) \(date.xget(.year))")
+            } else {
+                Text(verbatim: "\(calendarEntries[0].date.xget(.year))")
+            }
+        }
+    }
+    
+    @ViewBuilder func WorkTimeText() -> some View {
+        if let unwrappedIndex = highlightedCapsuleIndex {
+            let totalMinutesForIndex = Int(calendarEntries[unwrappedIndex].workTimeMinutes)
+            Text("\(totalMinutesForIndex.xgetCompletedHoursStringFromMinutes) \(totalMinutesForIndex.xgetRemainderMinutesStringFromMinutes)")
+        } else {
+            let totalMinutesForRange = getTotalWorkMinutes(calendarEntries: calendarEntries)
+            Text("\(totalMinutesForRange.xgetCompletedHoursStringFromMinutes) \(totalMinutesForRange.xgetRemainderMinutesStringFromMinutes)")
         }
     }
     
