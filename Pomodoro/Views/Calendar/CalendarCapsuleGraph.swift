@@ -22,14 +22,16 @@ struct CalendarCapsuleGraph: View {
             VStack {
                 HStack(spacing: 0) {
                     ForEach(Array(calendarEntries.enumerated()), id: \.offset) { index, observation in
+                        let isHovered = index == highlightedCapsuleIndex
+                        let height = Double(observation.workTimeMinutes) / Double(upperBoundMinutes) * (proxy.size.height-32)
                         VStack(spacing: 4) {
                             Spacer()
                             CalendarCapsule(
                                 index: index,
-                                color: Color(index == highlightedCapsuleIndex ? "Pomodoro Primary" : "Disabled Button"),
-                                height: Double(observation.workTimeMinutes) / Double(upperBoundMinutes) * (proxy.size.height-32)
+                                color: Color(isHovered ? "Pomodoro Primary" : "Disabled Button"),
+                                height: height
                             )
-                            .animation(.xripple(index: index))
+                            .animation(.xripple(index: index), value: height)
                             .offset(y: observation.label != nil ? 2 : 0)
                             ZStack {
                                 Text("**\(observation.label ?? "")**")
