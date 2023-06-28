@@ -33,6 +33,7 @@ struct CalendarCapsuleGraph: View {
                             )
                             .scaleEffect(isHovered ? 1.05 : 1, anchor: .bottom)
                             .animation(.xripple(index: index), value: height)
+                            // TODO: sometimes the animation goes past the x-axis (when changing fast). Also when going to zero, it's briefly a rectangle, not a capsule
                             .offset(y: observation.label != nil ? 2 : 0)
                             ZStack {
                                 Text("**\(observation.label ?? "")**")
