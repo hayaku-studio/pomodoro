@@ -17,11 +17,16 @@ struct CalendarCapsuleGraph: View {
         return max(calendarEntries.map {$0.workTimeMinutes}.max() ?? 0, 1)
     }
     
+    var nonEmptyCalendarEntries: [CalendarGraphEntry] {
+        return calendarEntries.filter { $0.workTimeMinutes > 0 }
+    }
+    
     var body: some View {
         GeometryReader { proxy in
             VStack {
                 HStack(spacing: 0) {
                     ForEach(Array(calendarEntries.enumerated()), id: \.offset) { index, observation in
+                        let nonEmptyIndex = nonEmptyCalendarEntries.firstIndex { $0.date == observation.date }
                         let isHovered = index == highlightedCapsuleIndex
                         let height = Double(observation.workTimeMinutes) / Double(upperBoundMinutes) * (proxy.size.height-32)
                         VStack(spacing: 4) {
@@ -32,9 +37,7 @@ struct CalendarCapsuleGraph: View {
                                 height: height
                             )
                             .scaleEffect(isHovered ? 1.05 : 1, anchor: .bottom)
-                            .animation(.xripple(index: index), value: height)
-                            // TODO: don't delay for CalendarEntries that are zero. Probably easiest by getting the index, filtering out workTimeMinutes == 0
-                            // TODO: sometimes the animation goes past the x-axis (when changing fast). Also when going to zero, it's briefly a rectangle, not a capsule
+                            .animation(nonEmptyIndex != nil ? .xripple(index: nonEmptyIndex!) : nil, value: height)
                             .offset(y: observation.label != nil ? 2 : 0)
                             ZStack {
                                 Text("**\(observation.label ?? "")**")
