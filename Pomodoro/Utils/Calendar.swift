@@ -47,9 +47,11 @@ func getCalendarEntriesForWeek(context: NSManagedObjectContext, date: Date) -> [
 func getCalendarEntriesForMonth(context: NSManagedObjectContext, date: Date) -> [CalendarGraphEntry] {
     let firstDayOfMonth = getMonthStart(date: date)
     let lastDayOfMonth = getMonthEnd(date: date)
-    return getCalendarEntriesBetweenTwoDates(context: context, beginDate: firstDayOfMonth, endDate: lastDayOfMonth).enumerated().map {(index, value) in
+    let allDates = getCalendarEntriesBetweenTwoDates(context: context, beginDate: firstDayOfMonth, endDate: lastDayOfMonth)
+    return allDates.enumerated().map {(index, value) in
         if let date = value.date {
-            return CalendarGraphEntry(date: date, workTimeMinutes: Int(value.workTimeMinutes), label: index % 5 == 4 ? String(date.xget(.day)) : nil)
+            let showLabel = (index == 0) || ((index % 5 == 4) && !(index == 29)) || (index == allDates.count-1)
+            return CalendarGraphEntry(date: date, workTimeMinutes: Int(value.workTimeMinutes), label: showLabel ? String(date.xget(.day)) : nil)
         }
         else {
             // TODO: handle
