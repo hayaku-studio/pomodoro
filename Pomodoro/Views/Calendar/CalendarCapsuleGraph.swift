@@ -31,9 +31,11 @@ struct CalendarCapsuleGraph: View {
                             )
                             .animation(.xripple(index: index))
                             .offset(y: observation.label != nil ? 2 : 0)
-                            // TODO: this Text makes some CalendarCapsules wider
-                            Text("**\(observation.label ?? "")**")
-                                .fixedSize(horizontal: true, vertical: true)
+                            ZStack {
+                                Text("**\(observation.label ?? "")**")
+                                    .fixedSize(horizontal: true, vertical: true)
+                            }
+                            .frame(maxWidth: 0)
                         }
                         .padding([.leading, .trailing], modelData.calendarFormat == CalendarFormat.month ? proxy.size.width / 240 : proxy.size.width / 120)
                         .onHover { isHovering in
