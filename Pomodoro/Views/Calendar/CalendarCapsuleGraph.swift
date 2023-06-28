@@ -30,6 +30,7 @@ struct CalendarCapsuleGraph: View {
                                 height: Double(observation.workTimeMinutes) / Double(upperBoundMinutes) * (proxy.size.height-32)
                             )
                             .animation(.xripple(index: index))
+                            .offset(y: observation.label != nil ? 2 : 0)
                             // TODO: this Text makes some CalendarCapsules wider
                             Text("**\(observation.label ?? "")**")
                                 .fixedSize(horizontal: true, vertical: true)
