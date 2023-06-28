@@ -31,6 +31,7 @@ struct CalendarCapsuleGraph: View {
                                 color: Color(isHovered ? "Pomodoro Primary" : "Disabled Button"),
                                 height: height
                             )
+                            .scaleEffect(isHovered ? 1.05 : 1, anchor: .bottom)
                             .animation(.xripple(index: index), value: height)
                             .offset(y: observation.label != nil ? 2 : 0)
                             ZStack {
