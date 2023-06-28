@@ -33,14 +33,9 @@ func getCalendarEntriesForWeek(context: NSManagedObjectContext, date: Date) -> [
     let startOfWeekMonday = getMonday(myDate: date)
     let endOfWeekSunday = getSunday(myDate: date)
     return getCalendarEntriesBetweenTwoDates(context: context, beginDate: startOfWeekMonday, endDate: endOfWeekSunday).map {
-        if let date = $0.date {
-            return CalendarGraphEntry(date: date, workTimeMinutes: Int($0.workTimeMinutes), label: date.xdayOfWeek)
-        }
-        else {
-            // TODO: handle
-            // TODO: why is workTimeMinutes not optional?
-            return CalendarGraphEntry(date: Date.now, workTimeMinutes: Int($0.workTimeMinutes), label: date.xdayOfWeek)
-        }
+        var calendarEntry = $0
+        calendarEntry.label = calendarEntry.date.xdayOfWeek
+        return calendarEntry
     }
 }
 
@@ -49,14 +44,10 @@ func getCalendarEntriesForMonth(context: NSManagedObjectContext, date: Date) -> 
     let lastDayOfMonth = getMonthEnd(date: date)
     let allDates = getCalendarEntriesBetweenTwoDates(context: context, beginDate: firstDayOfMonth, endDate: lastDayOfMonth)
     return allDates.enumerated().map {(index, value) in
-        if let date = value.date {
-            let showLabel = (index == 0) || ((index % 5 == 4) && !(index == 29)) || (index == allDates.count-1)
-            return CalendarGraphEntry(date: date, workTimeMinutes: Int(value.workTimeMinutes), label: showLabel ? String(date.xget(.day)) : nil)
-        }
-        else {
-            // TODO: handle
-            return CalendarGraphEntry(date: Date.now, workTimeMinutes: Int(value.workTimeMinutes), label: String(date.xget(.day)))
-        }
+        let showLabel = (index == 0) || ((index % 5 == 4) && !(index == 29)) || (index == allDates.count-1)
+        var calendarEntry = value
+        calendarEntry.label = showLabel ? String(date.xget(.day)) : nil
+        return calendarEntry
     }
 }
 
@@ -78,7 +69,7 @@ func getCalendarEntriesForYear(context: NSManagedObjectContext, date: Date) -> [
     return monthEntries
 }
 
-func getCalendarEntriesBetweenTwoDates(context: NSManagedObjectContext, beginDate: Date, endDate: Date) -> [CalendarEntry] {
+func getCalendarEntriesBetweenTwoDates(context: NSManagedObjectContext, beginDate: Date, endDate: Date) -> [CalendarGraphEntry] {
     let fetchRequest = CalendarEntry.fetchRequest()
     fetchRequest.predicate = NSPredicate(format: "(date >= %@) AND (date <= %@)", beginDate as NSDate, endDate as NSDate)
     
@@ -88,13 +79,9 @@ func getCalendarEntriesBetweenTwoDates(context: NSManagedObjectContext, beginDat
     
     return allDates.map { date in
         if let entry = calendarEntries.first(where: { $0.date == date }) {
-            return entry
+            return CalendarGraphEntry(date: entry.date!, workTimeMinutes: Int(entry.workTimeMinutes))
         } else {
-            // TODO: are entries being created, and does this affect performance? I think since I'm not saving, they aren't. And performance affect should be neglible.
-            let emptyEntry = CalendarEntry(context: context)
-            emptyEntry.date = date
-            emptyEntry.workTimeMinutes = 0
-            return emptyEntry
+            return CalendarGraphEntry(date: date, workTimeMinutes: 0)
         }
     }
 }
