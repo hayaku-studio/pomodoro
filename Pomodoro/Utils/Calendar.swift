@@ -46,7 +46,7 @@ func getCalendarEntriesForMonth(context: NSManagedObjectContext, date: Date) -> 
     return allDates.enumerated().map {(index, value) in
         let showLabel = (index == 0) || ((index % 5 == 4) && !(index == 29)) || (index == allDates.count-1)
         var calendarEntry = value
-        calendarEntry.label = showLabel ? String(date.xget(.day)) : nil
+        calendarEntry.label = showLabel ? String(index+1) : nil
         return calendarEntry
     }
 }
