@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct CalendarCapsuleGraph: View {
+    @EnvironmentObject private var modelData: ModelData
+
     var calendarEntries: [CalendarGraphEntry]
     @Binding var highlightedCapsuleIndex: Int?
     
@@ -32,7 +34,7 @@ struct CalendarCapsuleGraph: View {
                             Text("**\(observation.label ?? "")**")
                                 .fixedSize(horizontal: true, vertical: true)
                         }
-                        .padding([.leading, .trailing], proxy.size.width / 120)
+                        .padding([.leading, .trailing], modelData.calendarFormat == CalendarFormat.month ? proxy.size.width / 240 : proxy.size.width / 120)
                         .onHover { isHovering in
                             if isHovering {
                                 highlightedCapsuleIndex = index
