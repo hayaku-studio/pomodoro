@@ -85,7 +85,7 @@ struct AnimationView: View {
             .offset(y: -12)
             FontIcon.button(.materialIcon(code: isPlaying ? .pause : .play_arrow), action: isTimerGreaterThanZero ? toggleTimers : openTooltip, padding: 4, fontsize: 24)
                 .foregroundColor(Color("Dark Mode Button Contrast"))
-                .background(Circle().fill(Color(isTimerGreaterThanZero ? "Pomodoro Primary" : "Disabled Button")))
+                .background(Circle().fill(Color(isTimerGreaterThanZero ? "Pomodoro Primary" : "Pomodoro Disabled")))
                 .frame(width: 36, height: 36)
                 .offset(y: -8)
                 .tooltip(isTooltipVisible, side: .top, config: tooltipConfig) {

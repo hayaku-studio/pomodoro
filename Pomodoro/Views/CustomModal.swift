@@ -32,7 +32,7 @@ struct CustomModal: ViewModifier {
             .overlay(alignment: .top) {
                 FontIcon.button(.materialIcon(code: .close), action: actionOnDismiss)
                     .foregroundColor(Color("Dark Mode Button Contrast"))
-                    .background(Circle().fill(Color("Pomodoro Primary")))
+                    .background(Circle().fill(Color("Button Active")))
                     .frame(width: 40, height: 40)
                     .frame(maxWidth: .infinity, alignment: .trailing) // TODO: less hacky alignment
             }

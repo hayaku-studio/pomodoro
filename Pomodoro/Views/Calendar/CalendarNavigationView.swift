@@ -20,12 +20,12 @@ struct CalendarNavigationView: View {
     var body: some View {
         HStack {
             FontIcon.button(.materialIcon(code: .chevron_left), action: previous, padding: 4, fontsize: 24)
-                .foregroundColor(Color(isEarliestCalendarEntryOlderThanFirstCalendarEntry() ? "Pomodoro Primary" : "Disabled Button"))
+                .foregroundColor(Color(isEarliestCalendarEntryOlderThanFirstCalendarEntry() ? "Button Active" : "Button Disabled"))
             Spacer()
             CalendarNavigationTextView(calendarEntries: calendarEntries, highlightedCapsuleIndex: highlightedCapsuleIndex, calendarFormat: calendarFormat)
             Spacer()
             FontIcon.button(.materialIcon(code: .chevron_right), action: next, padding: 4, fontsize: 24)
-                .foregroundColor(Color(calendarPast > 0 ? "Pomodoro Primary" : "Disabled Button"))
+                .foregroundColor(Color(calendarPast > 0 ? "Button Active" : "Button Disabled"))
         }
     }
     

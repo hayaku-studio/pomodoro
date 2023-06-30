@@ -33,7 +33,7 @@ struct CalendarCapsuleGraph: View {
                             Spacer()
                             CalendarCapsule(
                                 index: index,
-                                color: Color(isHovered ? "Pomodoro Primary" : "Disabled Button"),
+                                color: Color(isHovered ? "Pomodoro Primary" : "Pomodoro Disabled"),
                                 height: height
                             )
                             .scaleEffect(isHovered ? 1.05 : 1, anchor: .bottom)
