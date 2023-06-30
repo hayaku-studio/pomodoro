@@ -24,13 +24,11 @@ struct PopupView: View {
                     }
                     .opacity(0)
                     .frame(width: 0, height: 0)
-                    FontIcon.button(.materialIcon(code: .equalizer), action: openCalendar, fontsize: 24)
-                        .foregroundColor(Color("Pomodoro Primary"))
+                    FabView(settingsAction: openSettings, statsAction: openCalendar)
                     Spacer()
-                    FontIcon.button(.materialIcon(code: .settings), action: openSettings, fontsize: 24)
-                        .foregroundColor(Color("Pomodoro Primary"))
-                        .frame(width: 40, height: 40)
                 }
+                .offset(x: -40, y: -8)
+                .zIndex(1)
                 AnimationView()
             }
             if showCalendar {

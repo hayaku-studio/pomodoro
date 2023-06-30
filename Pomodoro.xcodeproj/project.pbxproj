@@ -30,6 +30,10 @@
 		CAD1A1972A48668200503402 /* YearlyCalendarGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD1A1962A48668200503402 /* YearlyCalendarGraph.swift */; };
 		CAD1A1992A48671700503402 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD1A1982A48671700503402 /* Int.swift */; };
 		CAD1E6682A237A4E00C0C4C8 /* SwiftUIFontIcon in Frameworks */ = {isa = PBXBuildFile; productRef = CAD1E6672A237A4E00C0C4C8 /* SwiftUIFontIcon */; };
+		CAD7C4DF2A4DBF29009003C9 /* FloatingButton in Frameworks */ = {isa = PBXBuildFile; productRef = CAD7C4DE2A4DBF29009003C9 /* FloatingButton */; };
+		CAD7C4E12A4DBF87009003C9 /* FabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD7C4E02A4DBF87009003C9 /* FabView.swift */; };
+		CAD7C4E42A4E2E85009003C9 /* FabIconTextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD7C4E32A4E2E85009003C9 /* FabIconTextButton.swift */; };
+		CAD7C4E62A4E31A3009003C9 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD7C4E52A4E31A3009003C9 /* Color.swift */; };
 		CAE3D51D2A2F4BC900AD88F1 /* Sound.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE3D51C2A2F4BC900AD88F1 /* Sound.swift */; };
 		CAE3D5282A2F684700AD88F1 /* pomodoro_timer.riv in Resources */ = {isa = PBXBuildFile; fileRef = CAE3D5272A2F684700AD88F1 /* pomodoro_timer.riv */; };
 		CAE3D52C2A2F6AF900AD88F1 /* Reception Bell.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CAE3D52B2A2F6AF900AD88F1 /* Reception Bell.mp3 */; };
@@ -63,6 +67,9 @@
 		CAA996492A39D44D0096A7F8 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 		CAD1A1962A48668200503402 /* YearlyCalendarGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearlyCalendarGraph.swift; sourceTree = "<group>"; };
 		CAD1A1982A48671700503402 /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
+		CAD7C4E02A4DBF87009003C9 /* FabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FabView.swift; sourceTree = "<group>"; };
+		CAD7C4E32A4E2E85009003C9 /* FabIconTextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FabIconTextButton.swift; sourceTree = "<group>"; };
+		CAD7C4E52A4E31A3009003C9 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		CAE3D51C2A2F4BC900AD88F1 /* Sound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sound.swift; sourceTree = "<group>"; };
 		CAE3D5272A2F684700AD88F1 /* pomodoro_timer.riv */ = {isa = PBXFileReference; lastKnownFileType = file; path = pomodoro_timer.riv; sourceTree = "<group>"; };
 		CAE3D52B2A2F6AF900AD88F1 /* Reception Bell.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Reception Bell.mp3"; sourceTree = "<group>"; };
@@ -82,6 +89,7 @@
 			files = (
 				CAD1E6682A237A4E00C0C4C8 /* SwiftUIFontIcon in Frameworks */,
 				CA72DA422A372B7C00998051 /* SwiftUITooltip in Frameworks */,
+				CAD7C4DF2A4DBF29009003C9 /* FloatingButton in Frameworks */,
 				CAF099072A1FBB8900606A83 /* RiveRuntime in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -93,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				CA2B4C452A4977BC005ED3E7 /* Animation.swift */,
+				CAD7C4E52A4E31A3009003C9 /* Color.swift */,
 				CA48135D2A44485C00AA7A1C /* Date.swift */,
 				CAD1A1982A48671700503402 /* Int.swift */,
 			);
@@ -141,8 +150,18 @@
 				CA01D54E2A309BBD001B9DBC /* SettingsView.swift */,
 				CA72DA452A38819D00998051 /* CustomModal.swift */,
 				CA951B272A3DF0630041E5FB /* Calendar */,
+				CAD7C4E22A4E2DF4009003C9 /* Fab */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		CAD7C4E22A4E2DF4009003C9 /* Fab */ = {
+			isa = PBXGroup;
+			children = (
+				CAD7C4E02A4DBF87009003C9 /* FabView.swift */,
+				CAD7C4E32A4E2E85009003C9 /* FabIconTextButton.swift */,
+			);
+			path = Fab;
 			sourceTree = "<group>";
 		};
 		CAE3D51B2A2F4BA200AD88F1 /* Utils */ = {
@@ -234,6 +253,7 @@
 				CAF099062A1FBB8900606A83 /* RiveRuntime */,
 				CAD1E6672A237A4E00C0C4C8 /* SwiftUIFontIcon */,
 				CA72DA412A372B7C00998051 /* SwiftUITooltip */,
+				CAD7C4DE2A4DBF29009003C9 /* FloatingButton */,
 			);
 			productName = Pomodoro;
 			productReference = CAF098F22A1FB1F600606A83 /* Pomodoro.app */;
@@ -267,6 +287,7 @@
 				CAF099052A1FBB8900606A83 /* XCRemoteSwiftPackageReference "rive-ios" */,
 				CAD1E6662A237A4E00C0C4C8 /* XCRemoteSwiftPackageReference "SwiftUIFontIcon" */,
 				CA72DA402A372B7C00998051 /* XCRemoteSwiftPackageReference "SwiftUI-Tooltip" */,
+				CAD7C4DD2A4DBF29009003C9 /* XCRemoteSwiftPackageReference "FloatingButton" */,
 			);
 			productRefGroup = CAF098F32A1FB1F600606A83 /* Products */;
 			projectDirPath = "";
@@ -297,15 +318,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				CAA996482A39D3920096A7F8 /* DataModel.xcdatamodeld in Sources */,
+				CAD7C4E62A4E31A3009003C9 /* Color.swift in Sources */,
 				CA72DA482A3894C300998051 /* CalendarView.swift in Sources */,
 				CAD1A1992A48671700503402 /* Int.swift in Sources */,
 				CAA7FCE12A3B96ED00E5E51C /* CalendarFormat.swift in Sources */,
 				CA01D54F2A309BBD001B9DBC /* SettingsView.swift in Sources */,
 				CAA9964A2A39D44D0096A7F8 /* PersistenceController.swift in Sources */,
 				CAF0990D2A222A2E00606A83 /* AnimationView.swift in Sources */,
+				CAD7C4E42A4E2E85009003C9 /* FabIconTextButton.swift in Sources */,
 				CA48135E2A44485C00AA7A1C /* Date.swift in Sources */,
 				CA2B4C4A2A499CFD005ED3E7 /* CalendarNavigationView.swift in Sources */,
 				CAE3D51D2A2F4BC900AD88F1 /* Sound.swift in Sources */,
+				CAD7C4E12A4DBF87009003C9 /* FabView.swift in Sources */,
 				CA9984C92A4B1F2600B0D897 /* MonthlyCalendarGraph.swift in Sources */,
 				CA2B4C4D2A49B8F2005ED3E7 /* CalendarGraphEntry.swift in Sources */,
 				CAA95F2E2A2DD13D00057B26 /* ModelData.swift in Sources */,
@@ -534,6 +558,14 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		CAD7C4DD2A4DBF29009003C9 /* XCRemoteSwiftPackageReference "FloatingButton" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/exyte/FloatingButton";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		CAF099052A1FBB8900606A83 /* XCRemoteSwiftPackageReference "rive-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/rive-app/rive-ios";
@@ -554,6 +586,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CAD1E6662A237A4E00C0C4C8 /* XCRemoteSwiftPackageReference "SwiftUIFontIcon" */;
 			productName = SwiftUIFontIcon;
+		};
+		CAD7C4DE2A4DBF29009003C9 /* FloatingButton */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CAD7C4DD2A4DBF29009003C9 /* XCRemoteSwiftPackageReference "FloatingButton" */;
+			productName = FloatingButton;
 		};
 		CAF099062A1FBB8900606A83 /* RiveRuntime */ = {
 			isa = XCSwiftPackageProductDependency;
