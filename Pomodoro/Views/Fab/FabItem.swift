@@ -1,5 +1,5 @@
 //
-//  FabIconTextButton.swift
+//  FabItem.swift
 //  Pomodoro
 //
 //  Created by David Speers on 29/06/2023.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct FabIconTextButton: View {
+struct FabItem: View {
     var imageName: String
     var buttonText: String
     
@@ -46,9 +46,9 @@ struct FabIconTextButton: View {
 struct FabIconTextButton_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            FabIconTextButton(imageName: "timer", buttonText: "Timer")
-            FabIconTextButton(imageName: "gearshape", buttonText: "Settings")
-            FabIconTextButton(imageName: "chart.bar", buttonText: "Stats")
+            FabItem(imageName: "timer", buttonText: "Timer")
+            FabItem(imageName: "gearshape", buttonText: "Settings")
+            FabItem(imageName: "chart.bar", buttonText: "Stats")
         }
     }
 }

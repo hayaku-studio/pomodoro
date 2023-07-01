@@ -25,15 +25,15 @@ struct FabView: View {
         FloatingButton(
             mainButtonView: button,
             buttons: [
-                FabIconTextButton(imageName: "timer", buttonText: "Timer").onTapGesture {
+                FabItem(imageName: "timer", buttonText: "Timer").onTapGesture {
                     timerAction()
                     closeButtons()
                 },
-                FabIconTextButton(imageName: "gearshape", buttonText: "Settings").onTapGesture {
+                FabItem(imageName: "gearshape", buttonText: "Settings").onTapGesture {
                     settingsAction()
                     closeButtons()
                 },
-                FabIconTextButton(imageName: "chart.bar", buttonText: "Statistics").onTapGesture {
+                FabItem(imageName: "chart.bar", buttonText: "Statistics").onTapGesture {
                     statsAction()
                     closeButtons()
                 }
