@@ -11,8 +11,8 @@ import FloatingButton
 
 
 struct FabView: View {
-    @State var isOpen = false
     
+    @Binding var showFabMenu: Bool
     var settingsAction: () -> Void
     var statsAction: () -> Void
     
@@ -33,7 +33,7 @@ struct FabView: View {
                     closeButtons()
                 }
             ],
-            isOpen: $isOpen
+            isOpen: $showFabMenu
         )
         .straight()
         .direction(.bottom)
@@ -44,13 +44,13 @@ struct FabView: View {
     
     func closeButtons() {
         withAnimation {
-            isOpen = false
+            showFabMenu = false
         }
     }
 }
 
 struct FabView_Previews: PreviewProvider {
     static var previews: some View {
-        FabView(settingsAction: {}, statsAction: {})
+        FabView(showFabMenu: .constant(false), settingsAction: {}, statsAction: {})
     }
 }

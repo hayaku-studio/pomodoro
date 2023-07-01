@@ -12,6 +12,7 @@ struct PopupView: View {
     @EnvironmentObject private var modelData: ModelData
     @Environment(\.managedObjectContext) private var managedObjectContext
     
+    @State private var showFabMenu = false
     @State private var showCalendar = false
     @State private var showSettings = false
     
@@ -24,7 +25,7 @@ struct PopupView: View {
                     }
                     .opacity(0)
                     .frame(width: 0, height: 0)
-                    FabView(settingsAction: openSettings, statsAction: openCalendar)
+                    FabView(showFabMenu: $showFabMenu, settingsAction: openSettings, statsAction: openCalendar)
                     Spacer()
                 }
                 .offset(x: -40, y: -8)
@@ -38,6 +39,15 @@ struct PopupView: View {
             if showSettings {
                 SettingsView()
                     .customModal(actionOnDismiss: closeSettings)
+            }
+            if showFabMenu {
+                // TODO: zIndexing seems to be weird. Rectangle is under the  AnimationView (to be expected with current code, but is even the case when I reduce AnimationView's zIndex)
+                Rectangle()
+                    .opacity(0.00001) // TODO: better solution
+                    .onTapGesture {
+                        showFabMenu = false
+                    }
+                    .zIndex(-1)
             }
         }.onAppear() {
             modelData.earliestCalendarEntryDate = getEarliestCalendarEntryDate(context: managedObjectContext)
