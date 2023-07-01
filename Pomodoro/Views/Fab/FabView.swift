@@ -13,6 +13,7 @@ import FloatingButton
 struct FabView: View {
     
     @Binding var showFabMenu: Bool
+    var timerAction: () -> Void
     var settingsAction: () -> Void
     var statsAction: () -> Void
     
@@ -24,6 +25,10 @@ struct FabView: View {
         FloatingButton(
             mainButtonView: button,
             buttons: [
+                FabIconTextButton(imageName: "timer", buttonText: "Timer").onTapGesture {
+                    timerAction()
+                    closeButtons()
+                },
                 FabIconTextButton(imageName: "gearshape", buttonText: "Settings").onTapGesture {
                     settingsAction()
                     closeButtons()
@@ -51,6 +56,6 @@ struct FabView: View {
 
 struct FabView_Previews: PreviewProvider {
     static var previews: some View {
-        FabView(showFabMenu: .constant(false), settingsAction: {}, statsAction: {})
+        FabView(showFabMenu: .constant(false), timerAction: {}, settingsAction: {}, statsAction: {})
     }
 }

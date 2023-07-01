@@ -15,6 +15,7 @@ struct PopupView: View {
     @State private var showFabMenu = false
     @State private var showCalendar = false
     @State private var showSettings = false
+    @State private var showTimer = false
     
     var body: some View {
         ZStack {
@@ -25,7 +26,7 @@ struct PopupView: View {
                     }
                     .opacity(0)
                     .frame(width: 0, height: 0)
-                    FabView(showFabMenu: $showFabMenu, settingsAction: openSettings, statsAction: openCalendar)
+                    FabView(showFabMenu: $showFabMenu, timerAction: openTimer, settingsAction: openSettings, statsAction: openCalendar)
                     Spacer()
                 }
                 .offset(x: -40, y: -8)
@@ -75,6 +76,18 @@ struct PopupView: View {
     func closeSettings() {
         withAnimation(.spring()) {
             showSettings = false
+        }
+    }
+
+    func openTimer() {
+        withAnimation(.spring()) {
+            showTimer = true
+        }
+    }
+    
+    func closeTimer() {
+        withAnimation(.spring()) {
+            showTimer = false
         }
     }
 }

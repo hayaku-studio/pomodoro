@@ -42,8 +42,9 @@ struct FabIconTextButton: View {
 struct FabIconTextButton_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            FabIconTextButton(imageName: "gearshape.fill", buttonText: "Settings")
-            FabIconTextButton(imageName: "chart.bar.fill", buttonText: "Stats")
+            FabIconTextButton(imageName: "timer", buttonText: "Timer")
+            FabIconTextButton(imageName: "gearshape", buttonText: "Settings")
+            FabIconTextButton(imageName: "chart.bar", buttonText: "Stats")
         }
     }
 }
