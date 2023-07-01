@@ -11,6 +11,7 @@ struct FabIconTextButton: View {
     var imageName: String
     var buttonText: String
     
+    @State private var isHovered = false
     let imageWidth: CGFloat = 16
     
     var body: some View {
@@ -29,13 +30,16 @@ struct FabIconTextButton: View {
         }
         .padding(.horizontal, 8)
         .frame(width: 100, height: 30)
-        .background(Color("Modal Content Background"))
+        .background(Color(isHovered ? "FAB Background Hovered" : "FAB Background"))
         .cornerRadius(8)
         .shadow(color: .black.opacity(0.05), radius: 5, x: 0, y: 1)
         .overlay(
             RoundedRectangle(cornerRadius: 8)
                 .stroke(Color(hex: 0xF4F4F4), lineWidth: 1)
         )
+        .onHover { isHovered in
+            self.isHovered = isHovered
+        }
     }
 }
 
