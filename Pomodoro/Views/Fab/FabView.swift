@@ -17,11 +17,21 @@ struct FabView: View {
     var settingsAction: () -> Void
     var statsAction: () -> Void
     
+    @State private var isMainButtonHovered = false
+    
     var body: some View {
-        let button = FontIcon.text(.materialIcon(code: .menu), fontsize: 24).padding(4)
-            .foregroundColor(Color("Button Active"))
-            .frame(width: 28, height: 28)
-            .offset(y: 8)
+        let button = ZStack {
+            if isMainButtonHovered {
+                Circle().fill(Color("FAB Background Hovered")
+                    .opacity(isMainButtonHovered ? 1 : 0))
+            }
+            FontIcon.text(.materialIcon(code: showFabMenu ? .close : .menu), fontsize: 24)
+                .foregroundColor(Color("Button Active"))
+                .frame(width: 32, height: 32)
+        }
+            .onHover { isHovered in
+                isMainButtonHovered = isHovered
+            }
         FloatingButton(
             mainButtonView: button,
             buttons: [
@@ -45,6 +55,7 @@ struct FabView: View {
         .alignment(.left)
         .spacing(8)
         .initialOpacity(0)
+        .offset(y: 10)
     }
     
     func closeButtons() {
