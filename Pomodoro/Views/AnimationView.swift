@@ -8,7 +8,6 @@
 import SwiftUI
 import SwiftUIFontIcon
 import SwiftUITooltip
-import RiveRuntime
 
 struct AnimationView: View {
     @EnvironmentObject private var modelData: ModelData
@@ -19,8 +18,6 @@ struct AnimationView: View {
     @State private var workTimeTimer: Timer?
     @State private var previousTranslation = 0
     @State private var isTimerGreaterThanZero = false
-    
-    @State private var pomodoro = RiveViewModel(fileName: "pomodoro_timer", stateMachineName: "State Machine") // TODO: in all documentation, `let` is used instead of `@State var`. However after opening the Settings modal, the animation breaks. This somehow fixes it
     
     @State var tooltipHideTimer: Timer?
     @State var isTooltipVisible = false
@@ -35,7 +32,7 @@ struct AnimationView: View {
     var body: some View {
         VStack(spacing: 0) {
             ZStack {
-                pomodoro.view().scaledToFit().frame(width: 200, height: 200)
+                modelData.pomodoro.view().scaledToFit().frame(width: 200, height: 200)
                 Circle()
                 //.stroke(.green) // uncomment to see hitbox
                     .opacity(0.0)
@@ -63,12 +60,12 @@ struct AnimationView: View {
                             } else if modelData.timeSeconds < 0 {
                                 modelData.timeSeconds = 0
                             }
-                            pomodoro.setInput("timeMinutes", value: Float(modelData.timeSeconds)/60)
+                            modelData.pomodoro.setInput("timeMinutes", value: Float(modelData.timeSeconds)/60)
                             if (modelData.timeSeconds > 0) {
                                 isTimerGreaterThanZero = true
                             } else {
                                 if isTimerGreaterThanZero {
-                                    pomodoro.triggerInput("finishPing")
+                                    modelData.pomodoro.triggerInput("finishPing")
                                     playSound(volume: modelData.pingVolume)
                                 }
                                 isTimerGreaterThanZero = false
@@ -122,14 +119,14 @@ struct AnimationView: View {
     
     func decrementTime() {
         modelData.timeSeconds -= 1
-        pomodoro.setInput("timeMinutes", value: Float(modelData.timeSeconds)/60)
+        modelData.pomodoro.setInput("timeMinutes", value: Float(modelData.timeSeconds)/60)
         if modelData.timeSeconds <= 0 {
             timerFinished()
         }
     }
     
     func timerFinished() {
-        pomodoro.triggerInput("finishPing")
+        modelData.pomodoro.triggerInput("finishPing")
         playSound(volume: modelData.pingVolume)
         modelData.timeSeconds = 0
         isTimerGreaterThanZero = false
