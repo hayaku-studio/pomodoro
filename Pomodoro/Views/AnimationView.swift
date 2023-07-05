@@ -113,6 +113,7 @@ struct AnimationView: View {
     
     func pauseTimers() {
         isPlaying = false
+        modelData.pomodoro.pause()
         animationTimer?.invalidate()
         workTimeTimer?.invalidate()
     }
