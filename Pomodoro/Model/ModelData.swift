@@ -9,6 +9,13 @@ import Foundation
 import RiveRuntime
 
 final class ModelData: ObservableObject {
+    @Published var isPopoverShown = false {
+        willSet {
+            if !newValue {
+                pomodoro.pause()
+            }
+        }
+    }
     @Published var pomodoro = RiveViewModel(fileName: "pomodoro_timer", stateMachineName: "State Machine")
     @Published var timeSeconds = 0
     @Published var pingVolume: Float

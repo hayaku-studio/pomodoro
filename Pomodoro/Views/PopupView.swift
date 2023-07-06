@@ -31,7 +31,9 @@ struct PopupView: View {
                 }
                 .offset(x: -40, y: -8)
                 .zIndex(1)
-                AnimationView()
+                if modelData.isPopoverShown {
+                    AnimationView()
+                }
             }
             if showCalendar {
                 CalendarView()
