@@ -19,6 +19,7 @@ struct PomodoroApp: App {
 class AppDelegate: NSObject, NSApplicationDelegate {
     private var modelData = ModelData()
     private var statusItem: NSStatusItem!
+    private var menu: NSMenu!
     private let popover = NSPopover()
     private let persistenceController = PersistenceController.shared
     
@@ -27,12 +28,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let iconView = NSHostingView(rootView: pomodoroIcon)
         iconView.frame = NSRect(x: 0, y: 0, width: 44, height: 20)
         
+        menu = NSMenu()
+        menu.addItem(NSMenuItem(title: "Play", action: #selector(togglePopover), keyEquivalent: ""))
+        menu.addItem(.separator())
+        menu.addItem(NSMenuItem(title: "Quit", action: #selector(togglePopover), keyEquivalent: ""))
+
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
         
         if let statusButton = statusItem.button {
             statusButton.addSubview(iconView)
             statusButton.frame = iconView.frame
-            statusButton.action = #selector(togglePopover)
+            statusButton.sendAction(on: [.leftMouseUp, .rightMouseUp])
+            statusButton.action = #selector(statusMenuButtonTouched(_:))
         }
         
         popover.contentSize = NSSize(width: 290, height: 200)
@@ -53,6 +60,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 popover.contentViewController?.view.window?.makeKey()
                 NSApp.activate(ignoringOtherApps: true)
             }
+        }
+    }
+    
+    @objc private func statusMenuButtonTouched(_ sender: NSStatusBarButton) {
+        guard let event = NSApp.currentEvent else { return }
+        switch event.type {
+        case .rightMouseUp:
+            statusItem.menu = menu
+            statusItem.button?.performClick(nil)
+            statusItem.menu = nil
+        default:
+            togglePopover()
         }
     }
     
