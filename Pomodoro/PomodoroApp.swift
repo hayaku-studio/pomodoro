@@ -31,7 +31,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         menu = NSMenu()
         menu.addItem(NSMenuItem(title: "Play", action: #selector(togglePopover), keyEquivalent: ""))
         menu.addItem(.separator())
-        menu.addItem(NSMenuItem(title: "Quit", action: #selector(togglePopover), keyEquivalent: ""))
+        menu.addItem(NSMenuItem(title: "Quit", action: #selector(closeApp), keyEquivalent: ""))
 
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
         
@@ -75,8 +75,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
     
+    @objc func closeApp() {
+        NSApplication.shared.terminate(self)
+    }
+    
     func closePopover() {
         modelData.isPopoverShown = false
         popover.performClose(nil)
     }
+    
 }
