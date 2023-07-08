@@ -27,10 +27,11 @@ struct FabItem: View {
                 .setFabItemFrame()
                 .cornerRadius(8)
                 .shadow(color: .black.opacity(0.05), radius: 5, x: 0, y: 1)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 8)
-                        .stroke(Color(hex: 0xF4F4F4), lineWidth: 1)
-                )
+                // TODO: work on some nice overlay here
+//                .overlay(
+//                    RoundedRectangle(cornerRadius: 8)
+//                        .stroke(Color(hex: 0xF4F4F4), lineWidth: 1)
+//                )
                 .scaleEffect(isHovered ? 1.1 : 1)
             HStack {
                 Text(buttonText)
