@@ -29,8 +29,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         iconView.frame = NSRect(x: 0, y: 0, width: 44, height: 20)
         
         menu = NSMenu()
-        menu.addItem(NSMenuItem(title: "Play", action: #selector(togglePopover), keyEquivalent: ""))
-        menu.addItem(.separator())
+//        menu.addItem(NSMenuItem(title: "Play", action: #selector(togglePopover), keyEquivalent: ""))
+//        menu.addItem(.separator())
         menu.addItem(NSMenuItem(title: "Quit", action: #selector(closeApp), keyEquivalent: ""))
 
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
