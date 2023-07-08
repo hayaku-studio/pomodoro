@@ -16,7 +16,7 @@ func playSound(volume: Float) {
         guard let url = Bundle.main.url(forResource: "Reception Bell", withExtension: "mp3") else { return }
         do {
             player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.mp3.rawValue)
-            player?.volume = volume // relative to system audio
+            player?.volume = volume/5 // relative to system audio. Divide by 5 because file volume is too high
             guard let player = player else { return }
             player.play()
         } catch let error {
