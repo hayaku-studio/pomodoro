@@ -26,7 +26,12 @@ func getEarliestCalendarEntryDate(context: NSManagedObjectContext) -> Date {
     fetchRequest.predicate = NSPredicate(format: "date == min(date)")
     fetchRequest.fetchLimit = 1
     // TODO: catch error
-    return try! context.fetch(fetchRequest)[0].date ?? Date.now
+    let earliestCalendarEntries = try! context.fetch(fetchRequest)
+    if earliestCalendarEntries.isEmpty {
+        return Date.now
+    } else {
+        return earliestCalendarEntries[0].date ?? Date.now
+    }
 }
 
 func getCalendarEntriesForWeek(context: NSManagedObjectContext, date: Date) -> [CalendarGraphEntry] {
