@@ -35,6 +35,10 @@ struct PopupView: View {
                     AnimationView()
                 }
             }
+            if showTimer {
+                TimerSettingsView()
+                    .customModal(actionOnDismiss: closeTimer)
+            }
             if showCalendar {
                 CalendarView()
                     .customModal(actionOnDismiss: closeCalendar)

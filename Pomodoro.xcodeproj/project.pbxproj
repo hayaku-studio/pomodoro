@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CA01D54F2A309BBD001B9DBC /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA01D54E2A309BBD001B9DBC /* SettingsView.swift */; };
+		CA059C6A2A5C461200E2CDE6 /* TimerSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA059C692A5C461200E2CDE6 /* TimerSettingsView.swift */; };
 		CA2B4C462A4977BC005ED3E7 /* Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2B4C452A4977BC005ED3E7 /* Animation.swift */; };
 		CA2B4C482A497C6A005ED3E7 /* CalendarCapsuleGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2B4C472A497C6A005ED3E7 /* CalendarCapsuleGraph.swift */; };
 		CA2B4C4A2A499CFD005ED3E7 /* CalendarNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2B4C492A499CFD005ED3E7 /* CalendarNavigationView.swift */; };
@@ -47,6 +48,7 @@
 
 /* Begin PBXFileReference section */
 		CA01D54E2A309BBD001B9DBC /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		CA059C692A5C461200E2CDE6 /* TimerSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerSettingsView.swift; sourceTree = "<group>"; };
 		CA2B4C452A4977BC005ED3E7 /* Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animation.swift; sourceTree = "<group>"; };
 		CA2B4C472A497C6A005ED3E7 /* CalendarCapsuleGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCapsuleGraph.swift; sourceTree = "<group>"; };
 		CA2B4C492A499CFD005ED3E7 /* CalendarNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarNavigationView.swift; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 				CA6B06A12A2C6E4000F62E56 /* PomodoroIconView.swift */,
 				CAA95F312A2DE7DC00057B26 /* PopupView.swift */,
 				CA01D54E2A309BBD001B9DBC /* SettingsView.swift */,
+				CA059C692A5C461200E2CDE6 /* TimerSettingsView.swift */,
 				CA72DA452A38819D00998051 /* CustomModal.swift */,
 				CA951B272A3DF0630041E5FB /* Calendar */,
 				CAD7C4E22A4E2DF4009003C9 /* Fab */,
@@ -341,6 +344,7 @@
 				CA6789E82A33762A002CB46A /* TimerSnap.swift in Sources */,
 				CA771EFA2A4ADFEE009BF829 /* CalendarNavigationTextView.swift in Sources */,
 				CAA95F322A2DE7DC00057B26 /* PopupView.swift in Sources */,
+				CA059C6A2A5C461200E2CDE6 /* TimerSettingsView.swift in Sources */,
 				CA951B2B2A3DF0CA0041E5FB /* CalendarCapsule.swift in Sources */,
 				CAD1A1972A48668200503402 /* YearlyCalendarGraph.swift in Sources */,
 				CA2B4C462A4977BC005ED3E7 /* Animation.swift in Sources */,
