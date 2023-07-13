@@ -26,7 +26,7 @@ func getEarliestCalendarEntryDate(context: NSManagedObjectContext) -> Date {
     fetchRequest.predicate = NSPredicate(format: "date == min(date)")
     fetchRequest.fetchLimit = 1
     // TODO: catch error
-    let earliestCalendarEntries = try! context.fetch(fetchRequest)
+    let earliestCalendarEntries = (try? context.fetch(fetchRequest)) ?? []
     if earliestCalendarEntries.isEmpty {
         return Date.now
     } else {
@@ -79,7 +79,7 @@ func getCalendarEntriesBetweenTwoDates(context: NSManagedObjectContext, beginDat
     fetchRequest.predicate = NSPredicate(format: "(date >= %@) AND (date <= %@)", beginDate as NSDate, endDate as NSDate)
     
     // TODO: catch error
-    let calendarEntries = try! context.fetch(fetchRequest)
+    let calendarEntries: [CalendarEntry] = (try? context.fetch(fetchRequest)) ?? []
     let allDates = getDatesBetween(beginDate: beginDate, endDate: endDate)
     
     return allDates.map { date in
@@ -119,7 +119,7 @@ private func getCalendarEntry(context: NSManagedObjectContext, date: Date) -> Ca
     fetchRequest.fetchLimit = 1
     
     // TODO: catch error
-    let calendarEntries = try! context.fetch(fetchRequest)
+    let calendarEntries = (try? context.fetch(fetchRequest)) ?? []
     
     return calendarEntries.first
 }
