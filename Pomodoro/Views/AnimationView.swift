@@ -113,7 +113,8 @@ struct AnimationView: View {
     
     func pauseTimers() {
         isPlaying = false
-        modelData.pomodoro.pause()
+        // TODO: pause the animation (for performance reasons), without causing the "later ping" bug
+        //  modelData.pomodoro.pause()
         animationTimer?.invalidate()
         workTimeTimer?.invalidate()
     }
@@ -127,7 +128,11 @@ struct AnimationView: View {
     }
     
     func timerFinished() {
-        modelData.pomodoro.triggerInput("finishPing")
+        // if-statement needed because triggerInputs play when RiveModel plays again
+        // therefore, without this, the ping animation plays when you close the popover, wait for 00:00, wait a few seconds, and reopen the popover
+        if modelData.isPopoverShown {
+            modelData.pomodoro.triggerInput("finishPing")
+        }
         playSound(volume: modelData.pingVolume)
         modelData.timeSeconds = 0
         isTimerGreaterThanZero = false
