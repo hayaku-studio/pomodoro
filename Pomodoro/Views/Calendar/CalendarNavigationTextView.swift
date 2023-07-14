@@ -33,15 +33,18 @@ struct CalendarNavigationTextView: View {
                 let date = calendarEntries[index].date
                 Text(verbatim: "\(date.xget(.day)) \(date.xmonth) \(date.xget(.year))")
             } else {
-                let date = calendarEntries[0].date
-                Text(verbatim: "\(date.xmonth) \(date.xget(.year))")
+                if let date = calendarEntries.first?.date {
+                    Text(verbatim: "\(date.xmonth) \(date.xget(.year))")
+                }
             }
         case .year:
             if let index = highlightedCapsuleIndex {
                 let date = calendarEntries[index].date
                 Text(verbatim: "\(date.xmonth) \(date.xget(.year))")
             } else {
-                Text(verbatim: "\(calendarEntries[0].date.xget(.year))")
+                if let date = calendarEntries.first?.date {
+                    Text(verbatim: "\(date.xget(.year))")
+                }
             }
         }
     }

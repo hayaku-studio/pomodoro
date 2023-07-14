@@ -44,8 +44,7 @@ struct CalendarNavigationView: View {
     }
     
     func isEarliestCalendarEntryOlderThanFirstCalendarEntry() -> Bool {
-        let earliestDateInCurrentCalendarEntries = calendarEntries[0].date
-        if let earliestCalendarEntryDate = modelData.earliestCalendarEntryDate {
+        if let earliestDateInCurrentCalendarEntries = calendarEntries.first?.date, let earliestCalendarEntryDate = modelData.earliestCalendarEntryDate {
             if earliestCalendarEntryDate < earliestDateInCurrentCalendarEntries  {
                 return true
             }
