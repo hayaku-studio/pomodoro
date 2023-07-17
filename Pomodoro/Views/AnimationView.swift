@@ -32,7 +32,12 @@ struct AnimationView: View {
     var body: some View {
         VStack(spacing: 0) {
             ZStack {
-                modelData.pomodoro.view().scaledToFit().frame(width: 200, height: 200)
+                switch modelData.flowType {
+                case .focus:
+                    modelData.pomodoro.view().scaledToFit().frame(width: 200, height: 200)
+                case .rest:
+                    modelData.coffee.view().scaledToFit().frame(width: 200, height: 200)
+                }
                 Circle()
                 //.stroke(.green) // uncomment to see hitbox
                     .opacity(0.0)
@@ -60,12 +65,12 @@ struct AnimationView: View {
                             } else if modelData.timeSeconds < 0 {
                                 modelData.timeSeconds = 0
                             }
-                            modelData.pomodoro.setInput("timeMinutes", value: Float(modelData.timeSeconds)/60)
+                            setTimerTime(seconds: modelData.timeSeconds)
                             if (modelData.timeSeconds > 0) {
                                 isTimerGreaterThanZero = true
                             } else {
                                 if isTimerGreaterThanZero {
-                                    modelData.pomodoro.triggerInput("finishPing")
+                                    triggerTimerPing()
                                     playSound(volume: modelData.pingVolume)
                                 }
                                 isTimerGreaterThanZero = false
@@ -80,14 +85,30 @@ struct AnimationView: View {
                     )
             }
             .offset(y: -12)
-            FontIcon.button(.materialIcon(code: isPlaying ? .pause : .play_arrow), action: isTimerGreaterThanZero ? toggleTimers : openTooltip, padding: 4, fontsize: 24)
-                .foregroundColor(Color("Dark Mode Button Contrast"))
-                .background(Circle().fill(Color(isTimerGreaterThanZero ? "Pomodoro Primary" : "Pomodoro Disabled")))
-                .frame(width: 36, height: 36)
-                .offset(y: -8)
-                .tooltip(isTooltipVisible, side: .top, config: tooltipConfig) {
-                    Text("Drag the timer left ← to start.")
-                }
+            HStack {
+                FontIcon.button(.materialIcon(code: isPlaying ? .pause : .play_arrow), action: isTimerGreaterThanZero ? toggleTimers : openTooltip, padding: 4, fontsize: 24)
+                    .foregroundColor(Color("Dark Mode Button Contrast"))
+                    .background(Circle().fill(Color(isTimerGreaterThanZero ? "Pomodoro Primary" : "Pomodoro Disabled")))
+                    .frame(width: 36, height: 36)
+                    .offset(y: -8)
+                    .tooltip(isTooltipVisible, side: .top, config: tooltipConfig) {
+                        Text("Drag the timer left ← to start.")
+                    }
+                FontIcon.button(.materialIcon(code: .skip_next), action: toggleFlowType, padding: 4, fontsize: 24)
+                    .foregroundColor(Color("Dark Mode Button Contrast"))
+                    .background(Circle().fill(Color("Pomodoro Primary")))
+                    .frame(width: 36, height: 36)
+                    .offset(y: -8)
+            }
+        }
+    }
+    
+    func toggleFlowType() {
+        switch modelData.flowType {
+        case .focus:
+            modelData.flowType = FlowType.rest
+        case .rest:
+            modelData.flowType = FlowType.focus
         }
     }
     
@@ -121,7 +142,7 @@ struct AnimationView: View {
     
     func decrementTime() {
         modelData.timeSeconds -= 1
-        modelData.pomodoro.setInput("timeMinutes", value: Float(modelData.timeSeconds)/60)
+        setTimerTime(seconds: modelData.timeSeconds)
         if modelData.timeSeconds <= 0 {
             timerFinished()
         }
@@ -131,7 +152,7 @@ struct AnimationView: View {
         // if-statement needed because triggerInputs play when RiveModel plays again
         // therefore, without this, the ping animation plays when you close the popover, wait for 00:00, wait a few seconds, and reopen the popover
         if modelData.isPopoverShown {
-            modelData.pomodoro.triggerInput("finishPing")
+            triggerTimerPing()
         }
         playSound(volume: modelData.pingVolume)
         modelData.timeSeconds = 0
@@ -149,6 +170,24 @@ struct AnimationView: View {
     
     func isOptionKeyPressed() -> Bool {
         return NSEvent.modifierFlags.contains(.option)
+    }
+    
+    private func setTimerTime(seconds: Int) {
+        switch modelData.flowType {
+        case .focus:
+            modelData.pomodoro.setInput("timeMinutes", value: Float(seconds)/60)
+        case .rest:
+            modelData.coffee.setInput("timeMinutes", value: Float(seconds)/60)
+        }
+    }
+    
+    private func triggerTimerPing() {
+        switch modelData.flowType {
+        case .focus:
+            modelData.pomodoro.triggerInput("finishPing")
+        case .rest:
+            modelData.coffee.triggerInput("finishPing")
+        }
     }
 }
 

@@ -16,8 +16,10 @@ final class ModelData: ObservableObject {
             }
         }
     }
-    @Published var pomodoro = RiveViewModel(fileName: "pomodoro_timer", stateMachineName: "State Machine")
+    @Published var pomodoro = RiveViewModel(fileName: "pomodoro_timer", stateMachineName: "State Machine", artboardName: "Timer Artboard")
+    @Published var coffee = RiveViewModel(fileName: "pomodoro_timer", stateMachineName: "State Machine", artboardName: "Coffee Cup Artboard")
     @Published var timeSeconds = 0
+    @Published var flowType = FlowType.focus
     @Published var pingVolume: Float
     @Published var timerSnap: TimerSnap
     @Published var earliestCalendarEntryDate: Date?
