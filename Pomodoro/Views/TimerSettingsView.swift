@@ -20,6 +20,8 @@ struct TimerSettingsView: View {
     
     var body: some View {
         VStack {
+            Text("Set Timer Interval")
+                .font(.headline)
             Picker("", selection: $flowType) {
                 ForEach(FlowType.allCases) { format in
                     Text(format.id).tag(format)
@@ -37,7 +39,6 @@ struct TimerSettingsView: View {
                 }
                 setTimerTime(minutes: timeMinutes)
             }
-            Text("Set \(flowType.rawValue) Time")
             ZStack {
                 let frameSize = 150.0
                 switch flowType {
