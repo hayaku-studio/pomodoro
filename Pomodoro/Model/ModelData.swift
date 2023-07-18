@@ -13,6 +13,7 @@ final class ModelData: ObservableObject {
         willSet {
             if !newValue {
                 pomodoro.pause()
+                coffee.pause()
             }
         }
     }
