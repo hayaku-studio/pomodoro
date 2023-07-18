@@ -10,6 +10,8 @@ import Combine
 import RiveRuntime
 
 struct TimerSettingsView: View {
+    @EnvironmentObject private var modelData: ModelData
+    
     @State private var flowType = FlowType.focus
     @State private var pomodoro = RiveViewModel(fileName: "pomodoro_timer", stateMachineName: "State Machine", artboardName: "Timer Artboard")
     @State private var coffee = RiveViewModel(fileName: "pomodoro_timer", stateMachineName: "State Machine", artboardName: "Coffee Cup Artboard")
@@ -24,8 +26,16 @@ struct TimerSettingsView: View {
                 }
             }
             .pickerStyle(.segmented)
-            .onReceive([self.flowType].publisher.first()) { (value) in
-                print(value)
+            .onReceive([self.flowType].publisher.first()) { (value: FlowType) in
+                switch value {
+                case .focus:
+                    timeMinutes = modelData.focusTimeIntervalMinutes
+                case .rest:
+                    timeMinutes = modelData.restTimeIntervalMinutes
+                case .longRest:
+                    timeMinutes = modelData.longRestTimeIntervalMinutes
+                }
+                setTimerTime(minutes: timeMinutes)
             }
             Text("Set \(flowType.rawValue) Time")
             ZStack {
@@ -53,10 +63,24 @@ struct TimerSettingsView: View {
                             } else if timeMinutes < 1 {
                                 timeMinutes = 1
                             }
-                            setTimerTime(seconds: timeMinutes)
+                            setTimerTime(minutes: timeMinutes)
                         }
-                        .onEnded {gesture in
+                        .onEnded {_ in
                             previousTranslation = 0
+                            var timeIntervalMinutesKey = ""
+                            switch flowType {
+                            case .focus:
+                                modelData.focusTimeIntervalMinutes = timeMinutes
+                                timeIntervalMinutesKey = "focusTimeIntervalMinutes"
+                            case .rest:
+                                modelData.restTimeIntervalMinutes = timeMinutes
+                                timeIntervalMinutesKey = "restTimeIntervalMinutes"
+                            case .longRest:
+                                modelData.longRestTimeIntervalMinutes = timeMinutes
+                                timeIntervalMinutesKey = "longRestTimeIntervalMinutes"
+                            }
+                            UserDefaults.standard.set(timeMinutes, forKey: timeIntervalMinutesKey)
+                            // TODO: reduce possibility of bugs by having key be some global var
                         }
                     )
             }
@@ -67,12 +91,12 @@ struct TimerSettingsView: View {
         }
     }
     
-    private func setTimerTime(seconds: Int) {
+    private func setTimerTime(minutes: Int) {
         switch flowType {
         case .focus:
-            pomodoro.setInput("timeMinutes", value: Float(seconds))
+            pomodoro.setInput("timeMinutes", value: Float(minutes))
         default:
-            coffee.setInput("timeMinutes", value: Float(seconds))
+            coffee.setInput("timeMinutes", value: Float(minutes))
         }
     }
 }
