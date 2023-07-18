@@ -35,7 +35,7 @@ struct AnimationView: View {
                 switch modelData.flowType {
                 case .focus:
                     modelData.pomodoro.view().scaledToFit().frame(width: 200, height: 200)
-                case .rest:
+                default:
                     modelData.coffee.view().scaledToFit().frame(width: 200, height: 200)
                 }
                 Circle()
@@ -107,7 +107,7 @@ struct AnimationView: View {
         switch modelData.flowType {
         case .focus:
             modelData.flowType = FlowType.rest
-        case .rest:
+        default:
             modelData.flowType = FlowType.focus
         }
     }
@@ -176,7 +176,7 @@ struct AnimationView: View {
         switch modelData.flowType {
         case .focus:
             modelData.pomodoro.setInput("timeMinutes", value: Float(seconds)/60)
-        case .rest:
+        default:
             modelData.coffee.setInput("timeMinutes", value: Float(seconds)/60)
         }
     }
@@ -185,7 +185,7 @@ struct AnimationView: View {
         switch modelData.flowType {
         case .focus:
             modelData.pomodoro.triggerInput("finishPing")
-        case .rest:
+        default:
             modelData.coffee.triggerInput("finishPing")
         }
     }
