@@ -60,5 +60,8 @@ final class ModelData: ObservableObject {
         
         let timerSnapKey = "timerSnap"
         timerSnap = TimerSnap(rawValue: defaults.string(forKey: timerSnapKey) ?? "")  ?? TimerSnap.seconds10
+        
+        timeSeconds = focusTimeIntervalMinutes * 60
+        pomodoro.setInput("timeMinutes", value: Float(focusTimeIntervalMinutes))
     }
 }

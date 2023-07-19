@@ -17,7 +17,7 @@ struct AnimationView: View {
     @State private var animationTimer: Timer?
     @State private var workTimeTimer: Timer?
     @State private var previousTranslation = 0
-    @State private var isTimerGreaterThanZero = false
+    @State private var isTimerGreaterThanZero = true
     
     @State var tooltipHideTimer: Timer?
     @State var isTooltipVisible = false
@@ -94,7 +94,7 @@ struct AnimationView: View {
                     .tooltip(isTooltipVisible, side: .top, config: tooltipConfig) {
                         Text("Drag the timer left ← to start.")
                     }
-                FontIcon.button(.materialIcon(code: .skip_next), action: toggleFlowType, padding: 4, fontsize: 24)
+                FontIcon.button(.materialIcon(code: .skip_next), action: skipToNextFlowType, padding: 4, fontsize: 24)
                     .foregroundColor(Color("Dark Mode Button Contrast"))
                     .background(Circle().fill(Color("Pomodoro Primary")))
                     .frame(width: 36, height: 36)
@@ -103,12 +103,18 @@ struct AnimationView: View {
         }
     }
     
-    func toggleFlowType() {
+    func skipToNextFlowType() {
         switch modelData.flowType {
         case .focus:
             modelData.flowType = FlowType.rest
+            modelData.timeSeconds = modelData.restTimeIntervalMinutes*60
+            isTimerGreaterThanZero = true
+            modelData.coffee.setInput("timeMinutes", value: Float(modelData.timeSeconds))
         default:
             modelData.flowType = FlowType.focus
+            modelData.timeSeconds = modelData.focusTimeIntervalMinutes*60
+            isTimerGreaterThanZero = true
+            modelData.pomodoro.setInput("timeMinutes", value: Float(modelData.timeSeconds))
         }
     }
     
