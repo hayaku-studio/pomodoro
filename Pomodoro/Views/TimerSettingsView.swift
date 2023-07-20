@@ -29,7 +29,7 @@ struct TimerSettingsView: View {
                 }
             }
             .pickerStyle(.segmented)
-            .onReceive([self.flowType].publisher.first()) { (value: FlowType) in
+            .onChange(of: flowType) { (value: FlowType) in
                 switch value {
                 case .focus:
                     timeMinutes = modelData.focusTimeIntervalMinutes
@@ -101,6 +101,9 @@ struct TimerSettingsView: View {
                 .shadow(radius: 30, x: 0, y: 30)
                 Spacer()
             }
+        }.onAppear() {
+            timeMinutes = modelData.focusTimeIntervalMinutes
+            setAnimationTime(minutes: timeMinutes)
         }
     }
     
