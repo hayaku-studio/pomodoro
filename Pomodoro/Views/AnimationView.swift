@@ -32,11 +32,13 @@ struct AnimationView: View {
     var body: some View {
         VStack(spacing: 0) {
             ZStack {
-                switch modelData.flowType {
-                case .focus:
-                    modelData.pomodoro.view().scaledToFit().frame(width: 200, height: 200)
-                default:
-                    modelData.coffee.view().scaledToFit().frame(width: 200, height: 200)
+                if modelData.isPopoverShown {
+                    switch modelData.flowType {
+                    case .focus:
+                        modelData.pomodoro.view().scaledToFit().frame(width: 200, height: 200)
+                    default:
+                        modelData.coffee.view().scaledToFit().frame(width: 200, height: 200)
+                    }
                 }
                 Circle()
                 //.stroke(.green) // uncomment to see hitbox

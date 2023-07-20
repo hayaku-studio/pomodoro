@@ -31,9 +31,7 @@ struct PopupView: View {
                 }
                 .offset(x: -40, y: -8)
                 .zIndex(1)
-                if modelData.isPopoverShown {
-                    AnimationView()
-                }
+                AnimationView()
             }
             if showTimer {
                 TimerSettingsView()
