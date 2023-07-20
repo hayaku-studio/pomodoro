@@ -41,11 +41,13 @@ struct TimerSettingsView: View {
             }
             ZStack {
                 let frameSize = 150.0
-                switch flowType {
-                case .focus:
-                    pomodoro.view().scaledToFit().frame(width: frameSize, height: frameSize)
-                default:
-                    coffee.view().scaledToFit().frame(width: frameSize, height: frameSize)
+                if modelData.isPopoverShown {
+                    switch flowType {
+                    case .focus:
+                        pomodoro.view().scaledToFit().frame(width: frameSize, height: frameSize)
+                    default:
+                        coffee.view().scaledToFit().frame(width: frameSize, height: frameSize)
+                    }
                 }
                 // TODO: better solution
                 Rectangle()
