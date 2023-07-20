@@ -38,7 +38,7 @@ struct TimerSettingsView: View {
                 case .longRest:
                     timeMinutes = modelData.longRestTimeIntervalMinutes
                 }
-                setTimerTime(minutes: timeMinutes)
+                setAnimationTime(minutes: timeMinutes)
             }
             Text("Click and Drag the timer to set.")
                 .font(.caption)
@@ -63,7 +63,6 @@ struct TimerSettingsView: View {
                         .contentShape(Rectangle())
                         .frame(width: frameSize, height: frameSize)
                     //.onTapGesture() // TODO: On too many taps give a drag hint - https://www.instagram.com/p/CewsSvBrTBa/
-                    
                         .gesture(DragGesture()
                             .onChanged {gesture in
                                 let newTranslation = Int(Float(gesture.translation.width)/6)
@@ -75,7 +74,7 @@ struct TimerSettingsView: View {
                                 } else if timeMinutes < 1 {
                                     timeMinutes = 1
                                 }
-                                setTimerTime(minutes: timeMinutes)
+                                setAnimationTime(minutes: timeMinutes)
                             }
                             .onEnded {_ in
                                 previousTranslation = 0
@@ -105,7 +104,7 @@ struct TimerSettingsView: View {
         }
     }
     
-    private func setTimerTime(minutes: Int) {
+    private func setAnimationTime(minutes: Int) {
         switch flowType {
         case .focus:
             pomodoro.setInput("timeMinutes", value: Float(minutes))
