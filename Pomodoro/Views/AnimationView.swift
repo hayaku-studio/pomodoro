@@ -67,7 +67,7 @@ struct AnimationView: View {
                             } else if modelData.timeSeconds < 0 {
                                 modelData.timeSeconds = 0
                             }
-                            setTimerTime(seconds: modelData.timeSeconds)
+                            setAnimationTime(seconds: modelData.timeSeconds)
                             if (modelData.timeSeconds > 0) {
                                 isTimerGreaterThanZero = true
                             } else {
@@ -110,13 +110,13 @@ struct AnimationView: View {
         case .focus:
             modelData.flowType = FlowType.rest
             modelData.timeSeconds = modelData.restTimeIntervalMinutes*60
+            setAnimationTime(seconds: modelData.timeSeconds)
             isTimerGreaterThanZero = true
-            modelData.coffee.setInput("timeMinutes", value: Float(modelData.timeSeconds))
         default:
             modelData.flowType = FlowType.focus
             modelData.timeSeconds = modelData.focusTimeIntervalMinutes*60
+            setAnimationTime(seconds: modelData.timeSeconds)
             isTimerGreaterThanZero = true
-            modelData.pomodoro.setInput("timeMinutes", value: Float(modelData.timeSeconds))
         }
     }
     
@@ -150,7 +150,7 @@ struct AnimationView: View {
     
     func decrementTime() {
         modelData.timeSeconds -= 1
-        setTimerTime(seconds: modelData.timeSeconds)
+        setAnimationTime(seconds: modelData.timeSeconds)
         if modelData.timeSeconds <= 0 {
             timerFinished()
         }
@@ -180,7 +180,7 @@ struct AnimationView: View {
         return NSEvent.modifierFlags.contains(.option)
     }
     
-    private func setTimerTime(seconds: Int) {
+    private func setAnimationTime(seconds: Int) {
         switch modelData.flowType {
         case .focus:
             modelData.pomodoro.setInput("timeMinutes", value: Float(seconds)/60)
