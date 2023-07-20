@@ -26,7 +26,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @MainActor func applicationDidFinishLaunching(_ notification: Notification) {
         let pomodoroIcon = PomodoroIconView().environmentObject(modelData).environment(\.managedObjectContext, persistenceController.container.viewContext)
         let iconView = NSHostingView(rootView: pomodoroIcon)
-        iconView.frame = NSRect(x: 0, y: 0, width: 44, height: 20)
+        iconView.frame = NSRect(x: 0, y: 0, width: 50, height: 20)
         
         menu = NSMenu()
 //        menu.addItem(NSMenuItem(title: "Play", action: #selector(togglePopover), keyEquivalent: ""))
