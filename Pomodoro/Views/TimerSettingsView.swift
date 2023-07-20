@@ -16,7 +16,11 @@ struct TimerSettingsView: View {
     @State private var pomodoro = RiveViewModel(fileName: "pomodoro_timer", stateMachineName: "State Machine", artboardName: "Timer Artboard")
     @State private var coffee = RiveViewModel(fileName: "pomodoro_timer", stateMachineName: "State Machine", artboardName: "Coffee Cup Artboard")
     @State private var previousTranslation = 0
-    @State private var timeMinutes = 0
+    @State private var timeMinutes = 0 {
+        didSet {
+            setAnimationTime(minutes: timeMinutes)
+        }
+    }
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -38,7 +42,6 @@ struct TimerSettingsView: View {
                 case .longRest:
                     timeMinutes = modelData.longRestTimeIntervalMinutes
                 }
-                setAnimationTime(minutes: timeMinutes)
             }
             Text("Click and Drag the timer to set.")
                 .font(.caption)
@@ -74,7 +77,6 @@ struct TimerSettingsView: View {
                                 } else if timeMinutes < 1 {
                                     timeMinutes = 1
                                 }
-                                setAnimationTime(minutes: timeMinutes)
                             }
                             .onEnded {_ in
                                 previousTranslation = 0
@@ -103,7 +105,6 @@ struct TimerSettingsView: View {
             }
         }.onAppear() {
             timeMinutes = modelData.focusTimeIntervalMinutes
-            setAnimationTime(minutes: timeMinutes)
         }
     }
     
