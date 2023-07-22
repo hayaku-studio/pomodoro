@@ -28,9 +28,11 @@ struct TimerSettingsView: View {
                 .font(.headline)
                 .padding(.leading, 10)
             Picker("", selection: $flowType) {
-                ForEach(FlowType.allCases) { format in
-                    Text(format.id).tag(format)
-                }
+                Text(FlowType.focus.id).tag(FlowType.focus)
+                Text(FlowType.rest.id).tag(FlowType.rest)
+//                ForEach(FlowType.allCases) { format in
+//                    Text(format.id).tag(format)
+//                }
             }
             .pickerStyle(.segmented)
             .onChange(of: flowType) { (value: FlowType) in
