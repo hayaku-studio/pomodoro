@@ -92,7 +92,7 @@ struct AnimationView: View {
                 .tooltip(isTooltipVisible, side: .top, config: tooltipConfig) {
                     Text("Drag the timer left ← to start.")
                 }
-                AnimationButtonView(action: skipToNextFlowType, imageName: "gobackward", isDisabled: false)
+                AnimationButtonView(action: resetTimer, imageName: "gobackward", isDisabled: false)
                 AnimationButtonView(action: skipToNextFlowType, imageName: "forward.end", isDisabled: false)
                 
             }
@@ -100,19 +100,30 @@ struct AnimationView: View {
         }
     }
     
+    func resetTimer() {
+        switch modelData.flowType {
+        case .focus:
+            modelData.timeSeconds = modelData.focusTimeIntervalMinutes*60
+        case .rest:
+            modelData.timeSeconds = modelData.restTimeIntervalMinutes*60
+        case .longRest:
+            modelData.timeSeconds = modelData.longRestTimeIntervalMinutes*60
+        }
+        setAnimationTime(seconds: modelData.timeSeconds)
+        isTimerGreaterThanZero = true
+    }
+    
     func skipToNextFlowType() {
         switch modelData.flowType {
         case .focus:
             modelData.flowType = FlowType.rest
             modelData.timeSeconds = modelData.restTimeIntervalMinutes*60
-            setAnimationTime(seconds: modelData.timeSeconds)
-            isTimerGreaterThanZero = true
         default:
             modelData.flowType = FlowType.focus
             modelData.timeSeconds = modelData.focusTimeIntervalMinutes*60
-            setAnimationTime(seconds: modelData.timeSeconds)
-            isTimerGreaterThanZero = true
         }
+        setAnimationTime(seconds: modelData.timeSeconds)
+        isTimerGreaterThanZero = true
     }
     
     func toggleTimers() {
