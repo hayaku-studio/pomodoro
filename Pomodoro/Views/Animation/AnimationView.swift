@@ -88,20 +88,15 @@ struct AnimationView: View {
             }
             .offset(y: -12)
             HStack {
-                FontIcon.button(.materialIcon(code: isPlaying ? .pause : .play_arrow), action: isTimerGreaterThanZero ? toggleTimers : openTooltip, padding: 4, fontsize: 24)
-                    .foregroundColor(Color("Dark Mode Button Contrast"))
-                    .background(Circle().fill(Color(isTimerGreaterThanZero ? "Pomodoro Primary" : "Pomodoro Disabled")))
-                    .frame(width: 36, height: 36)
-                    .offset(y: -8)
-                    .tooltip(isTooltipVisible, side: .top, config: tooltipConfig) {
-                        Text("Drag the timer left ← to start.")
-                    }
-                FontIcon.button(.materialIcon(code: .skip_next), action: skipToNextFlowType, padding: 4, fontsize: 24)
-                    .foregroundColor(Color("Dark Mode Button Contrast"))
-                    .background(Circle().fill(Color("Pomodoro Primary")))
-                    .frame(width: 36, height: 36)
-                    .offset(y: -8)
+                AnimationButtonView(action: isTimerGreaterThanZero ? toggleTimers : openTooltip, imageName: isPlaying ? "pause" : "play", isDisabled: !isTimerGreaterThanZero)
+                .tooltip(isTooltipVisible, side: .top, config: tooltipConfig) {
+                    Text("Drag the timer left ← to start.")
+                }
+                AnimationButtonView(action: skipToNextFlowType, imageName: "gobackward", isDisabled: false)
+                AnimationButtonView(action: skipToNextFlowType, imageName: "forward.end", isDisabled: false)
+                
             }
+            .offset(y: -16)
         }
     }
     

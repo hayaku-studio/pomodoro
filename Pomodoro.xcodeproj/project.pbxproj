@@ -14,6 +14,7 @@
 		CA2B4C4A2A499CFD005ED3E7 /* CalendarNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2B4C492A499CFD005ED3E7 /* CalendarNavigationView.swift */; };
 		CA2B4C4D2A49B8F2005ED3E7 /* CalendarGraphEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2B4C4C2A49B8F2005ED3E7 /* CalendarGraphEntry.swift */; };
 		CA48135E2A44485C00AA7A1C /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA48135D2A44485C00AA7A1C /* Date.swift */; };
+		CA603AE82A6BDC3400E8765A /* AnimationButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA603AE72A6BDC3400E8765A /* AnimationButtonView.swift */; };
 		CA6789E82A33762A002CB46A /* TimerSnap.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6789E72A33762A002CB46A /* TimerSnap.swift */; };
 		CA6B06A22A2C6E4000F62E56 /* PomodoroIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6B06A12A2C6E4000F62E56 /* PomodoroIconView.swift */; };
 		CA72DA422A372B7C00998051 /* SwiftUITooltip in Frameworks */ = {isa = PBXBuildFile; productRef = CA72DA412A372B7C00998051 /* SwiftUITooltip */; };
@@ -55,6 +56,7 @@
 		CA2B4C492A499CFD005ED3E7 /* CalendarNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarNavigationView.swift; sourceTree = "<group>"; };
 		CA2B4C4C2A49B8F2005ED3E7 /* CalendarGraphEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarGraphEntry.swift; sourceTree = "<group>"; };
 		CA48135D2A44485C00AA7A1C /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		CA603AE72A6BDC3400E8765A /* AnimationButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationButtonView.swift; sourceTree = "<group>"; };
 		CA6789E72A33762A002CB46A /* TimerSnap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerSnap.swift; sourceTree = "<group>"; };
 		CA6B06A12A2C6E4000F62E56 /* PomodoroIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroIconView.swift; sourceTree = "<group>"; };
 		CA72DA452A38819D00998051 /* CustomModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomModal.swift; sourceTree = "<group>"; };
@@ -112,6 +114,15 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		CA603AE62A6BDC1600E8765A /* Animation */ = {
+			isa = PBXGroup;
+			children = (
+				CAF0990C2A222A2E00606A83 /* AnimationView.swift */,
+				CA603AE72A6BDC3400E8765A /* AnimationButtonView.swift */,
+			);
+			path = Animation;
+			sourceTree = "<group>";
+		};
 		CA6789E62A337617002CB46A /* Enums */ = {
 			isa = PBXGroup;
 			children = (
@@ -149,12 +160,12 @@
 		CAA95F2C2A2DD0F200057B26 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				CAF0990C2A222A2E00606A83 /* AnimationView.swift */,
 				CA6B06A12A2C6E4000F62E56 /* PomodoroIconView.swift */,
 				CAA95F312A2DE7DC00057B26 /* PopupView.swift */,
 				CA01D54E2A309BBD001B9DBC /* SettingsView.swift */,
 				CA059C692A5C461200E2CDE6 /* TimerSettingsView.swift */,
 				CA72DA452A38819D00998051 /* CustomModal.swift */,
+				CA603AE62A6BDC1600E8765A /* Animation */,
 				CA951B272A3DF0630041E5FB /* Calendar */,
 				CAD7C4E22A4E2DF4009003C9 /* Fab */,
 			);
@@ -347,6 +358,7 @@
 				CAA861E32A606BE700CF569A /* FlowType.swift in Sources */,
 				CA6789E82A33762A002CB46A /* TimerSnap.swift in Sources */,
 				CA771EFA2A4ADFEE009BF829 /* CalendarNavigationTextView.swift in Sources */,
+				CA603AE82A6BDC3400E8765A /* AnimationButtonView.swift in Sources */,
 				CAA95F322A2DE7DC00057B26 /* PopupView.swift in Sources */,
 				CA059C6A2A5C461200E2CDE6 /* TimerSettingsView.swift in Sources */,
 				CA951B2B2A3DF0CA0041E5FB /* CalendarCapsule.swift in Sources */,
