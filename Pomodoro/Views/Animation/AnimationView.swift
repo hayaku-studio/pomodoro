@@ -138,7 +138,12 @@ struct AnimationView: View {
         isPlaying = true
         workTimeTimer?.invalidate()
         workTimeTimer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true) {_ in
-            incrementTodaysWorkTimeMinutes(context: managedObjectContext)
+            switch modelData.flowType {
+            case .focus:
+                incrementTodaysWorkTimeMinutes(context: managedObjectContext)
+            default:
+                incrementTodaysRestTimeMinutes(context: managedObjectContext)
+            }
         }
         animationTimer?.invalidate()
         animationTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) {_ in

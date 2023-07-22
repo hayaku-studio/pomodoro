@@ -21,6 +21,19 @@ func incrementTodaysWorkTimeMinutes(context: NSManagedObjectContext) {
     PersistenceController.shared.save()
 }
 
+func incrementTodaysRestTimeMinutes(context: NSManagedObjectContext) {
+    let today = Calendar.current.startOfDay(for: Date.now)
+    let entry = getCalendarEntry(context: context, date: today)
+    if let unwrappedEntry = entry {
+        unwrappedEntry.restTimeMinutes = unwrappedEntry.restTimeMinutes + 1
+    } else {
+        let newEntry = CalendarEntry(context: context)
+        newEntry.date = today
+        newEntry.restTimeMinutes = 1
+    }
+    PersistenceController.shared.save()
+}
+
 func getEarliestCalendarEntryDate(context: NSManagedObjectContext) -> Date {
     let fetchRequest = CalendarEntry.fetchRequest()
     fetchRequest.predicate = NSPredicate(format: "date == min(date)")
@@ -65,7 +78,11 @@ func getCalendarEntriesForYear(context: NSManagedObjectContext, date: Date) -> [
             beginDate: firstDayOfMonth,
             endDate: lastDayOfMonth
         )
-        monthEntries.append(CalendarGraphEntry(date: firstDayOfMonth, workTimeMinutes: allDates.map{Int($0.workTimeMinutes)}.reduce(0, +), label: String(firstDayOfMonth.xmonth.prefix(1))))
+        monthEntries.append(CalendarGraphEntry(
+            date: firstDayOfMonth,
+            workTimeMinutes: allDates.map{Int($0.workTimeMinutes)}.reduce(0, +),
+            restTimeMinutes: allDates.map{Int($0.restTimeMinutes)}.reduce(0, +),
+            label: String(firstDayOfMonth.xmonth.prefix(1))))
     }
     return monthEntries
 }
@@ -80,9 +97,9 @@ func getCalendarEntriesBetweenTwoDates(context: NSManagedObjectContext, beginDat
     
     return allDates.map { date in
         if let entry = calendarEntries.first(where: { $0.date == date }) {
-            return CalendarGraphEntry(date: entry.date!, workTimeMinutes: Int(entry.workTimeMinutes))
+            return CalendarGraphEntry(date: entry.date!, workTimeMinutes: Int(entry.workTimeMinutes), restTimeMinutes: Int(entry.restTimeMinutes))
         } else {
-            return CalendarGraphEntry(date: date, workTimeMinutes: 0)
+            return CalendarGraphEntry(date: date, workTimeMinutes: 0, restTimeMinutes: 0)
         }
     }
 }

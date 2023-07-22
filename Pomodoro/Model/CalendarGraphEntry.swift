@@ -10,5 +10,6 @@ import Foundation
 struct CalendarGraphEntry {
     var date: Date
     var workTimeMinutes: Int
+    var restTimeMinutes: Int
     var label: String?
 }
