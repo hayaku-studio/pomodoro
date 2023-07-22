@@ -32,7 +32,7 @@ struct AnimationButtonView: View {
                 .frame(width: 16, height: 16)
                 .padding(.horizontal, 10)
                 .padding(.vertical, 10)
-                .foregroundColor(.white)
+                .foregroundColor(Color("Button Contrast"))
                 .background(Color(bgColor))
                 .cornerRadius(8)
         }
