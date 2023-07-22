@@ -493,7 +493,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"Pomodoro/Preview Content\"";
 				DEVELOPMENT_TEAM = 6962D3D83X;
 				ENABLE_PREVIEWS = YES;
@@ -524,7 +524,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"Pomodoro/Preview Content\"";
 				DEVELOPMENT_TEAM = 6962D3D83X;
 				ENABLE_PREVIEWS = YES;
