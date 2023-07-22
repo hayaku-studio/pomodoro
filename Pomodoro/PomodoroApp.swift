@@ -27,6 +27,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let pomodoroIcon = PomodoroIconView().environmentObject(modelData).environment(\.managedObjectContext, persistenceController.container.viewContext)
         let iconView = NSHostingView(rootView: pomodoroIcon)
         iconView.frame = NSRect(x: 0, y: 0, width: 50, height: 20)
+//        iconView.frame = NSRect(x: 0, y: 0, width: 640, height: 20) // For App Store Screenshots
         
         menu = NSMenu()
 //        menu.addItem(NSMenuItem(title: "Play", action: #selector(togglePopover), keyEquivalent: ""))
