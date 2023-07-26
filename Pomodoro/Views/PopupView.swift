@@ -32,7 +32,9 @@ struct PopupView: View {
                 .offset(x: -40, y: -8)
                 .zIndex(1)
                 AnimationView()
-                modelData.progressIndicator.view().frame(width: 300, height: 8)
+                if modelData.isPopoverShown {
+                    modelData.progressIndicator.view().frame(width: 300, height: 8)
+                }
             }
             if showTimer {
                 TimerSettingsView()
