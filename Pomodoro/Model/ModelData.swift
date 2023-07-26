@@ -9,6 +9,8 @@ import Foundation
 import RiveRuntime
 
 final class ModelData: ObservableObject {
+    var progressPercentageTimer: Timer?
+    
     @Published var isPopoverShown = false {
         willSet {
             if !newValue {
@@ -26,7 +28,16 @@ final class ModelData: ObservableObject {
             if currentCompletedIntervals > requiredCompletedIntervals {
                 currentCompletedIntervals = 0
             }
-            progressIndicator.setInput("progressPercentage", value: Float((currentCompletedIntervals*100)/requiredCompletedIntervals))
+            var oldProgressPercentage = Float(oldValue*100/requiredCompletedIntervals)
+            let newProgressPercentage = Float((currentCompletedIntervals*100)/requiredCompletedIntervals)
+            progressPercentageTimer?.invalidate()
+            progressPercentageTimer = Timer.scheduledTimer(withTimeInterval: 0.02, repeats: true) {_ in
+                oldProgressPercentage += 0.5
+                self.progressIndicator.setInput("progressPercentage", value: oldProgressPercentage)
+                if oldProgressPercentage > newProgressPercentage {
+                    self.progressPercentageTimer?.invalidate()
+                }
+            }
         }
     }
     @Published var requiredCompletedIntervals: Int
