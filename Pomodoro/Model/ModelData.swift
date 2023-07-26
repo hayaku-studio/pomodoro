@@ -19,7 +19,17 @@ final class ModelData: ObservableObject {
     }
     @Published var pomodoro = RiveViewModel(fileName: "pomodoro_timer", stateMachineName: "State Machine", artboardName: "Timer Artboard")
     @Published var coffee = RiveViewModel(fileName: "pomodoro_timer", stateMachineName: "State Machine", artboardName: "Coffee Cup Artboard")
+    @Published var progressIndicator = RiveViewModel(fileName: "progress_indicator", stateMachineName: "State Machine")
     @Published var timeSeconds = 0
+    @Published var currentCompletedIntervals = 0 {
+        didSet {
+            if currentCompletedIntervals > requiredCompletedIntervals {
+                currentCompletedIntervals = 0
+            }
+            progressIndicator.setInput("progressPercentage", value: Float((currentCompletedIntervals*100)/requiredCompletedIntervals))
+        }
+    }
+    @Published var requiredCompletedIntervals: Int
     @Published var focusTimeIntervalMinutes: Int
     @Published var restTimeIntervalMinutes: Int
     @Published var longRestTimeIntervalMinutes: Int
@@ -31,6 +41,13 @@ final class ModelData: ObservableObject {
     
     init() {
         let defaults = UserDefaults.standard
+        
+        let requiredCompletedIntervalsKey = "requiredCompletedIntervals"
+        if defaults.object(forKey: requiredCompletedIntervalsKey) == nil {
+            requiredCompletedIntervals = 8
+        } else {
+            requiredCompletedIntervals = defaults.integer(forKey: requiredCompletedIntervalsKey)
+        }
         
         let focusTimeIntervalMinutesKey = "focusTimeIntervalMinutes"
         if defaults.object(forKey: focusTimeIntervalMinutesKey) == nil {

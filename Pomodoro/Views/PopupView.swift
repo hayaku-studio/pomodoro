@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import SwiftUIFontIcon
+import RiveRuntime
 
 struct PopupView: View {
     @EnvironmentObject private var modelData: ModelData
@@ -32,6 +32,7 @@ struct PopupView: View {
                 .offset(x: -40, y: -8)
                 .zIndex(1)
                 AnimationView()
+                modelData.progressIndicator.view().frame(width: 300, height: 8)
             }
             if showTimer {
                 TimerSettingsView()

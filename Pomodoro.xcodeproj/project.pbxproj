@@ -45,6 +45,7 @@
 		CAF098FD2A1FB21500606A83 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CAF098FC2A1FB21500606A83 /* Preview Assets.xcassets */; };
 		CAF099072A1FBB8900606A83 /* RiveRuntime in Frameworks */ = {isa = PBXBuildFile; productRef = CAF099062A1FBB8900606A83 /* RiveRuntime */; };
 		CAF0990D2A222A2E00606A83 /* AnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF0990C2A222A2E00606A83 /* AnimationView.swift */; };
+		CAF814452A6FD75200A738A7 /* progress_indicator.riv in Resources */ = {isa = PBXBuildFile; fileRef = CAF814442A6FD75200A738A7 /* progress_indicator.riv */; };
 		CAFC9E052A3F14BE003CAB98 /* WeeklyCalendarGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFC9E042A3F14BE003CAB98 /* WeeklyCalendarGraph.swift */; };
 /* End PBXBuildFile section */
 
@@ -85,6 +86,7 @@
 		CAF098FC2A1FB21500606A83 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		CAF098FE2A1FB21500606A83 /* Pomodoro.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Pomodoro.entitlements; sourceTree = "<group>"; };
 		CAF0990C2A222A2E00606A83 /* AnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationView.swift; sourceTree = "<group>"; };
+		CAF814442A6FD75200A738A7 /* progress_indicator.riv */ = {isa = PBXFileReference; lastKnownFileType = file; path = progress_indicator.riv; sourceTree = "<group>"; };
 		CAFC9E042A3F14BE003CAB98 /* WeeklyCalendarGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyCalendarGraph.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -246,6 +248,7 @@
 			isa = PBXGroup;
 			children = (
 				CAE3D5272A2F684700AD88F1 /* pomodoro_timer.riv */,
+				CAF814442A6FD75200A738A7 /* progress_indicator.riv */,
 			);
 			path = RiveAssets;
 			sourceTree = "<group>";
@@ -321,6 +324,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CAE3D52C2A2F6AF900AD88F1 /* Reception Bell.mp3 in Resources */,
+				CAF814452A6FD75200A738A7 /* progress_indicator.riv in Resources */,
 				CAE3D5282A2F684700AD88F1 /* pomodoro_timer.riv in Resources */,
 				CAF098FD2A1FB21500606A83 /* Preview Assets.xcassets in Resources */,
 				CAF098FA2A1FB21500606A83 /* Assets.xcassets in Resources */,

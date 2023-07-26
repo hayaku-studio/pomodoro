@@ -114,6 +114,7 @@ struct AnimationView: View {
     }
     
     func skipToNextFlowType() {
+        modelData.currentCompletedIntervals += 1
         switch modelData.flowType {
         case .focus:
             modelData.flowType = FlowType.rest
