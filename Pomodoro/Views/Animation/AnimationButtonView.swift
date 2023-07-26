@@ -17,10 +17,12 @@ struct AnimationButtonView: View {
     var body: some View {
         var bgColor = ""
         switch modelData.flowType {
-        case FlowType.focus:
+        case .focus:
             bgColor = isDisabled ? "Pomodoro Disabled" : "Pomodoro Primary"
-        default:
+        case .rest:
             bgColor = isDisabled ? "Button Disabled" : "Button Active"
+        case .longRest:
+            bgColor = isDisabled ? "Coffee Highlighted Disabled": "Coffee Highlighted"
         }
         return Button {
             action()
