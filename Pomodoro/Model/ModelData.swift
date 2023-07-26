@@ -49,7 +49,11 @@ final class ModelData: ObservableObject {
     @Published var focusTimeIntervalMinutes: Int
     @Published var restTimeIntervalMinutes: Int
     @Published var longRestTimeIntervalMinutes: Int
-    @Published var flowType = FlowType.focus
+    @Published var flowType = FlowType.focus {
+        didSet {
+            coffee.setInput("isHighlighted", value: flowType == FlowType.longRest)
+        }
+    }
     @Published var pingVolume: Float
     @Published var timerSnap: TimerSnap
     @Published var earliestCalendarEntryDate: Date?

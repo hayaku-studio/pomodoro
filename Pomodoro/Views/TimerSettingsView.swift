@@ -34,6 +34,7 @@ struct TimerSettingsView: View {
             }
             .pickerStyle(.segmented)
             .onChange(of: flowType) { (value: FlowType) in
+                coffee.setInput("isHighlighted", value: value == FlowType.longRest)
                 switch value {
                 case .focus:
                     timeMinutes = modelData.focusTimeIntervalMinutes
