@@ -120,8 +120,13 @@ struct AnimationView: View {
             modelData.flowType = FlowType.rest
             modelData.timeSeconds = modelData.restTimeIntervalMinutes*60
         default:
-            modelData.flowType = FlowType.focus
-            modelData.timeSeconds = modelData.focusTimeIntervalMinutes*60
+            if modelData.currentCompletedIntervals == modelData.requiredCompletedIntervals {
+                modelData.flowType = FlowType.longRest
+                modelData.timeSeconds = modelData.longRestTimeIntervalMinutes*60
+            } else {
+                modelData.flowType = FlowType.focus
+                modelData.timeSeconds = modelData.focusTimeIntervalMinutes*60
+            }
         }
         setAnimationTime(seconds: modelData.timeSeconds)
         isTimerGreaterThanZero = true

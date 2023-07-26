@@ -25,17 +25,22 @@ final class ModelData: ObservableObject {
     @Published var timeSeconds = 0
     @Published var currentCompletedIntervals = 0 {
         didSet {
-            if currentCompletedIntervals > requiredCompletedIntervals {
-                currentCompletedIntervals = 0
-            }
-            var oldProgressPercentage = Float(oldValue*100/requiredCompletedIntervals)
-            let newProgressPercentage = Float((currentCompletedIntervals*100)/requiredCompletedIntervals)
             progressPercentageTimer?.invalidate()
-            progressPercentageTimer = Timer.scheduledTimer(withTimeInterval: 0.02, repeats: true) {_ in
-                oldProgressPercentage += 0.5
-                self.progressIndicator.setInput("progressPercentage", value: oldProgressPercentage)
-                if oldProgressPercentage > newProgressPercentage {
-                    self.progressPercentageTimer?.invalidate()
+            if currentCompletedIntervals == 0 {
+                return
+            } else if currentCompletedIntervals > requiredCompletedIntervals {
+                currentCompletedIntervals = 0
+                self.progressIndicator.setInput("progressPercentage", value: 0.0)
+            } else {
+                var oldProgressPercentage = Float(oldValue*100/requiredCompletedIntervals)
+                let newProgressPercentage = Float((currentCompletedIntervals*100)/requiredCompletedIntervals)
+                progressPercentageTimer?.invalidate()
+                progressPercentageTimer = Timer.scheduledTimer(withTimeInterval: 0.02, repeats: true) {_ in
+                    oldProgressPercentage += 0.5
+                    self.progressIndicator.setInput("progressPercentage", value: oldProgressPercentage)
+                    if oldProgressPercentage > newProgressPercentage {
+                        self.progressPercentageTimer?.invalidate()
+                    }
                 }
             }
         }
