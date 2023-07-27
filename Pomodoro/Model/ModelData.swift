@@ -45,6 +45,9 @@ final class ModelData: ObservableObject {
             }
         }
     }
+    @Published var automaticallyGoFromFocus: Bool
+    @Published var automaticallyGoFromRest: Bool
+    @Published var automaticallyGoFromLongRest: Bool
     @Published var requiredCompletedIntervals: Int
     @Published var focusTimeIntervalMinutes: Int
     @Published var restTimeIntervalMinutes: Int
@@ -67,6 +70,25 @@ final class ModelData: ObservableObject {
             requiredCompletedIntervals = 8
         } else {
             requiredCompletedIntervals = defaults.integer(forKey: requiredCompletedIntervalsKey)
+        }
+        
+        let automaticallyGoFromFocusKey = "automaticallyGoFromFocus"
+        if defaults.object(forKey: automaticallyGoFromFocusKey) == nil {
+            automaticallyGoFromFocus = true
+        } else {
+            automaticallyGoFromFocus = defaults.bool(forKey: automaticallyGoFromFocusKey)
+        }
+        let automaticallyGoFromRestKey = "automaticallyGoFromRest"
+        if defaults.object(forKey: automaticallyGoFromRestKey) == nil {
+            automaticallyGoFromRest = true
+        } else {
+            automaticallyGoFromRest = defaults.bool(forKey: automaticallyGoFromRestKey)
+        }
+        let automaticallyGoFromLongRestKey = "automaticallyGoFromLongRest"
+        if defaults.object(forKey: automaticallyGoFromLongRestKey) == nil {
+            automaticallyGoFromLongRest = true
+        } else {
+            automaticallyGoFromLongRest = defaults.bool(forKey: automaticallyGoFromLongRestKey)
         }
         
         let focusTimeIntervalMinutesKey = "focusTimeIntervalMinutes"

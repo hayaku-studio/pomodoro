@@ -24,9 +24,6 @@ struct TimerSettingsView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Set Timer Interval")
-                .font(.headline)
-                .padding(.leading, 10)
             Picker("", selection: $flowType) {
                 ForEach(FlowType.allCases) { format in
                     Text(format.id).tag(format)
@@ -44,6 +41,9 @@ struct TimerSettingsView: View {
                     timeMinutes = modelData.longRestTimeIntervalMinutes
                 }
             }
+            Text("Set Timer Interval")
+                .font(.headline)
+                .padding(.leading, 10)
             Text("Click and Drag the timer to set.")
                 .font(.caption)
                 .foregroundColor(Color("Settings Heading Text"))
@@ -104,6 +104,24 @@ struct TimerSettingsView: View {
                 .shadow(radius: 30, x: 0, y: 30)
                 Spacer()
             }
+            switch flowType {
+            case .focus:
+                Toggle("Start Break Automatically", isOn: $modelData.automaticallyGoFromFocus)
+                    .onChange(of: modelData.automaticallyGoFromFocus) { (value: Bool) in
+                        UserDefaults.standard.set(value, forKey: "automaticallyGoFromFocus")
+                    }
+            case .rest:
+                Toggle("Start Focus Automatically", isOn: $modelData.automaticallyGoFromRest)
+                    .onChange(of: modelData.automaticallyGoFromRest) { (value: Bool) in
+                        UserDefaults.standard.set(value, forKey: "automaticallyGoFromRest")
+                    }
+            case .longRest:
+                Toggle("Start Focus Automatically", isOn: $modelData.automaticallyGoFromLongRest)
+                    .onChange(of: modelData.automaticallyGoFromLongRest) { (value: Bool) in
+                        UserDefaults.standard.set(value, forKey: "automaticallyGoFromLongRest")
+                    }
+            }
+            // TODO: if long break - have long break after x sessions
         }.onAppear() {
             timeMinutes = modelData.focusTimeIntervalMinutes
         }
