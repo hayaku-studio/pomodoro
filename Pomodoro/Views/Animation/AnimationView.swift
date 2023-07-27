@@ -183,8 +183,20 @@ struct AnimationView: View {
         modelData.timeSeconds = 0
         isTimerGreaterThanZero = false
         pauseTimers()
-        // TODO: Add setting to automatically move to next when finished
-//        skipToNextFlowType()
+        switch modelData.flowType {
+        case .focus:
+            if modelData.automaticallyGoFromFocus {
+                skipToNextFlowType()
+            }
+        case .rest:
+            if modelData.automaticallyGoFromRest {
+                skipToNextFlowType()
+            }
+        case .longRest:
+            if modelData.automaticallyGoFromLongRest {
+                skipToNextFlowType()
+            }
+        }
     }
     
     func openTooltip() {
