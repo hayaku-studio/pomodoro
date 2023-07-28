@@ -10,6 +10,9 @@ import Combine
 import RiveRuntime
 
 struct TimerSettingsView: View {
+    let minRequiredCompletedIntervals = 4
+    let maxRequiredCompletedIntervals = 16
+    
     @EnvironmentObject private var modelData: ModelData
     
     @State private var flowType = FlowType.focus
@@ -121,7 +124,14 @@ struct TimerSettingsView: View {
                         UserDefaults.standard.set(value, forKey: "automaticallyGoFromLongRest")
                     }
             }
-            // TODO: if long break - have long break after x sessions
+            if flowType == .longRest {
+                HStack{
+                    Text("Long Break After Intervals")
+                    NumberButton(action: decrementRequiredCompletedIntervals, imageName: "minus", isDisabled: modelData.requiredCompletedIntervals == minRequiredCompletedIntervals)
+                    Text(String(Int(modelData.requiredCompletedIntervals/2)))
+                    NumberButton(action: incrementRequiredCompletedIntervals, imageName: "plus", isDisabled: modelData.requiredCompletedIntervals == maxRequiredCompletedIntervals)
+                }
+            }
         }.onAppear() {
             timeMinutes = modelData.focusTimeIntervalMinutes
         }
@@ -135,10 +145,44 @@ struct TimerSettingsView: View {
             coffee.setInput("timeMinutes", value: Float(minutes))
         }
     }
+    
+    private func decrementRequiredCompletedIntervals() {
+        modelData.requiredCompletedIntervals -= 2
+        UserDefaults.standard.set(modelData.requiredCompletedIntervals, forKey: "requiredCompletedIntervals")
+    }
+    
+    private func incrementRequiredCompletedIntervals() {
+        modelData.requiredCompletedIntervals += 2
+        UserDefaults.standard.set(modelData.requiredCompletedIntervals, forKey: "requiredCompletedIntervals")
+    }
 }
 
 struct TimerSettingsView_Previews: PreviewProvider {
     static var previews: some View {
         TimerSettingsView()
+    }
+}
+
+struct NumberButton: View {
+    var action: () -> Void
+    var imageName: String
+    var isDisabled: Bool
+    
+    var body: some View {
+        Button {
+            if !isDisabled {            
+                action()
+            }
+        } label: {
+            Image(systemName: imageName)
+                .resizable()
+                .scaledToFit()
+                .frame(width: 12, height: 12)
+                .padding(4)
+                .foregroundColor(Color(isDisabled ? "Button Disabled" : "Dark Mode Contrast"))
+                .background(Color("Number Button"))
+                .cornerRadius(2)
+        }
+        .buttonStyle(.plain)
     }
 }
