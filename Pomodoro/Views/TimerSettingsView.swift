@@ -149,6 +149,12 @@ struct TimerSettingsView: View {
     private func decrementRequiredCompletedIntervals() {
         modelData.requiredCompletedIntervals -= 2
         UserDefaults.standard.set(modelData.requiredCompletedIntervals, forKey: "requiredCompletedIntervals")
+        // TODO: test more and come up with better logic
+        if modelData.requiredCompletedIntervals <= modelData.currentCompletedIntervals {
+            modelData.flowType = .focus
+            modelData.currentCompletedIntervals = 0
+            modelData.progressIndicator.setInput("progressPercentage", value: 0.0)
+        }
     }
     
     private func incrementRequiredCompletedIntervals() {
