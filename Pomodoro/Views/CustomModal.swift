@@ -12,7 +12,7 @@ struct CustomModal: ViewModifier {
     var actionOnDismiss: () -> Void
     
     func body(content: Content) -> some View {
-        
+        // TODO: make what's under the modal, not change
         Rectangle()
             .fill(.black.opacity(0.15))
             .onTapGesture {
@@ -25,8 +25,8 @@ struct CustomModal: ViewModifier {
                 .mask(RoundedRectangle(cornerRadius: 20, style: .continuous))
                 .shadow(radius: 5, x: 0, y: 3)
                 .shadow(radius: 30, x: 0, y: 30)
-                .padding()
         }
+            .padding(16)
             .transition(.move(edge: .top)
                 .combined(with: .opacity))
             .overlay(alignment: .top) {
@@ -36,6 +36,7 @@ struct CustomModal: ViewModifier {
                     .frame(width: 40, height: 40)
                     .frame(maxWidth: .infinity, alignment: .trailing) // TODO: less hacky alignment
             }
+            .padding(.vertical, 16)
             .zIndex(1)
     }
 }
