@@ -25,7 +25,9 @@ struct AnimationButtonView: View {
             bgColor = isDisabled ? "Coffee Highlighted Disabled": "Coffee Highlighted"
         }
         return Button {
-            action()
+            if !isDisabled {            
+                action()
+            }
         } label: {
             // TODO: custom icons, add number inside reset, maybe shadows and animations
             Image(systemName: imageName)
