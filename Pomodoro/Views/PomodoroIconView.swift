@@ -25,6 +25,7 @@ struct PomodoroIconView: View {
                 Text("\(String(format: "%02d", minutes))")
                     .font(minutes == 100 ? .custom("SF Pro", size: 7) : .footnote)
                     .fontWeight(.semibold)
+                    .monospacedDigit()
                     .offset(y: 2)
                     .foregroundColor(Color("Dark Mode Contrast"))
             }
@@ -39,6 +40,7 @@ struct PomodoroIconView: View {
                 Text("\(String(format: "%02d", Int(modelData.timeSeconds%60)))")
                     .font(.footnote)
                     .fontWeight(.semibold)
+                    .monospacedDigit()
                     .offset(y: 2)
                     .foregroundColor(Color("Dark Mode Contrast"))
             }
