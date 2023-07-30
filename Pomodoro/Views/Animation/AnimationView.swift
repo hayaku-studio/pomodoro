@@ -130,6 +130,7 @@ struct AnimationView: View {
         }
         setAnimationTime(seconds: modelData.timeSeconds)
         isTimerGreaterThanZero = true
+        startTimers()
     }
     
     func toggleTimers() {
