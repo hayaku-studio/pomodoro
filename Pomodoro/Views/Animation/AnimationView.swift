@@ -222,6 +222,8 @@ struct AnimationView: View {
     }
     
     private func triggerTimerPing() {
+        // TODO: this animation is weird with the whole animation switching
+        // TODO: I can make it so that only the wanted animation pings, by having finishPingPomodoro & finishPingCoffee, but I'm not sure that's much better
         switch modelData.flowType {
         case .focus:
             modelData.pomodoro.triggerInput("finishPing")
