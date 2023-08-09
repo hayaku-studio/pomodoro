@@ -26,15 +26,15 @@ struct PopupView: View {
                     }
                     .opacity(0)
                     .frame(width: 0, height: 0)
+                    .offset(x: -40, y: -8)
                     FabView(showFabMenu: $showFabMenu, timerAction: openTimer, settingsAction: openSettings, statsAction: openCalendar)
+                    .offset(x: -40, y: -8)
                     Spacer()
+                    IntervalTrackingView()
+                        .offset(x: -8, y: 2)
                 }
-                .offset(x: -40, y: -8)
                 .zIndex(1)
                 AnimationView()
-                if modelData.isPopoverShown {
-                    modelData.progressIndicator.view().frame(width: 300, height: 30)
-                }
             }
             if showTimer {
                 TimerSettingsView()
