@@ -21,7 +21,6 @@ final class ModelData: ObservableObject {
     }
     @Published var pomodoro = RiveViewModel(fileName: "pomodoro_timer", stateMachineName: "State Machine", artboardName: "Timer Artboard")
     @Published var coffee = RiveViewModel(fileName: "pomodoro_timer", stateMachineName: "State Machine", artboardName: "Coffee Cup Artboard")
-    @Published var progressIndicator = RiveViewModel(fileName: "progress_indicator", stateMachineName: "State Machine")
     @Published var timeSeconds = 0
     @Published var currentCompletedIntervals: Int = 0 {
         didSet {
@@ -30,14 +29,12 @@ final class ModelData: ObservableObject {
                 return
             } else if currentCompletedIntervals > requiredCompletedIntervals {
                 currentCompletedIntervals = 0
-                self.progressIndicator.setInput("progressPercentage", value: 0.0)
             } else {
                 var oldProgressPercentage = Float(oldValue*100/requiredCompletedIntervals)
                 let newProgressPercentage = Float((currentCompletedIntervals*100)/requiredCompletedIntervals)
                 progressPercentageTimer?.invalidate()
                 progressPercentageTimer = Timer.scheduledTimer(withTimeInterval: 0.02, repeats: true) {_ in
                     oldProgressPercentage += 0.5
-                    self.progressIndicator.setInput("progressPercentage", value: oldProgressPercentage)
                     if oldProgressPercentage > newProgressPercentage {
                         self.progressPercentageTimer?.invalidate()
                     }

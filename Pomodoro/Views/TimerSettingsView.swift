@@ -153,7 +153,6 @@ struct TimerSettingsView: View {
         if modelData.requiredCompletedIntervals <= modelData.currentCompletedIntervals {
             modelData.flowType = .focus
             modelData.currentCompletedIntervals = 0
-            modelData.progressIndicator.setInput("progressPercentage", value: 0.0)
         }
     }
     
