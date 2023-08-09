@@ -57,7 +57,7 @@ struct ProgressCircle: View {
             Circle()
                 .strokeBorder(Color.black,lineWidth: 1)
         }
-        .frame(width: 20, height: 20)
+        .frame(width: 12, height: 12)
         
 
     }
