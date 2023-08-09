@@ -25,6 +25,7 @@ struct IntervalTrackingView: View {
                 }
             }
         }
+        .help("\(numberOfCompletedIntervals)/\(numberOfCircles) Intervals Completed")
     }
 }
 
