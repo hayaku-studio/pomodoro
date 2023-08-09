@@ -15,7 +15,7 @@ struct IntervalTrackingView: View {
         let numberOfCompletedIntervals = Int(modelData.currentCompletedIntervals/2)
         let isLastCircleHalfCompleted = modelData.currentCompletedIntervals%2 == 1
         HStack {
-            ForEach(0..<numberOfCircles) {i in
+            ForEach(0..<numberOfCircles, id: \.self) {i in
                 if i < numberOfCompletedIntervals {
                     ProgressCircle(intervalProgress: .completed)
                 } else if i == numberOfCompletedIntervals && isLastCircleHalfCompleted {
