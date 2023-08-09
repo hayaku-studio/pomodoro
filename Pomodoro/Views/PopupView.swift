@@ -33,7 +33,7 @@ struct PopupView: View {
                 .zIndex(1)
                 AnimationView()
                 if modelData.isPopoverShown {
-                    modelData.progressIndicator.view().frame(width: 300, height: 8)
+                    modelData.progressIndicator.view().frame(width: 300, height: 30)
                 }
             }
             if showTimer {
