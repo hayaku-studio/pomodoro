@@ -53,7 +53,7 @@ struct ProgressCircle: View {
                 Circle()
                     .trim(from: 0, to: 0.5)
                     .rotationEffect(.degrees(-90), anchor: .center)
-                    .foregroundColor(Color(hex: 0x4D4E51))
+                    .foregroundColor(Color("Button Active"))
             }
             Circle()
                 .strokeBorder(Color.black,lineWidth: 1)
