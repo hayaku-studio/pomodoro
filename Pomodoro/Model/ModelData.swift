@@ -23,7 +23,7 @@ final class ModelData: ObservableObject {
     @Published var coffee = RiveViewModel(fileName: "pomodoro_timer", stateMachineName: "State Machine", artboardName: "Coffee Cup Artboard")
     @Published var progressIndicator = RiveViewModel(fileName: "progress_indicator", stateMachineName: "State Machine")
     @Published var timeSeconds = 0
-    @Published var currentCompletedIntervals = 0 {
+    @Published var currentCompletedIntervals: Int = 0 {
         didSet {
             progressPercentageTimer?.invalidate()
             if currentCompletedIntervals == 0 {
