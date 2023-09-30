@@ -29,21 +29,6 @@ struct PomodoroIconView: View {
                     .offset(y: 2)
                     .foregroundColor(Color("Dark Mode Contrast"))
             }
-            ZStack {
-                switch modelData.flowType {
-                case .focus:
-                    Image("Tomato Icon")
-                default:
-                    Image("Coffee Cup Icon")
-                        .offset(x: 2, y: 2)
-                }
-                Text("\(String(format: "%02d", Int(modelData.timeSeconds%60)))")
-                    .font(.footnote)
-                    .fontWeight(.semibold)
-                    .monospacedDigit()
-                    .offset(y: 2)
-                    .foregroundColor(Color("Dark Mode Contrast"))
-            }
         }
     }
 }
