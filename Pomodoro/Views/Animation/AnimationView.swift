@@ -35,9 +35,9 @@ struct AnimationView: View {
                 if modelData.isPopoverShown {
                     switch modelData.flowType {
                     case .focus:
-                        modelData.pomodoro.view().scaledToFit().frame(width: 200, height: 200)
+                        modelData.pomodoro.view().frame(width: 200, height: 200)
                     default:
-                        modelData.coffee.view().scaledToFit().frame(width: 200, height: 200)
+                        modelData.coffee.view().frame(width: 200, height: 200)
                     }
                 }
                 Circle()
