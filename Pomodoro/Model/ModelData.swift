@@ -118,6 +118,14 @@ final class ModelData: ObservableObject {
         timerSnap = TimerSnap(rawValue: defaults.string(forKey: timerSnapKey) ?? "")  ?? TimerSnap.seconds10
         
         timeSeconds = focusTimeIntervalMinutes * 60
+        // TODO: move into util (repeated in 3 locations)
         pomodoro.setInput("timeMinutes", value: Float(focusTimeIntervalMinutes))
+        if Float(focusTimeIntervalMinutes%5) < 2.5 {
+            pomodoro.setInput("timeHasPlus2.5", value: false)
+            pomodoro.setInput("timePlus2.5AsPercentage", value: Float((focusTimeIntervalMinutes%5)*40))
+        } else {
+            pomodoro.setInput("timeHasPlus2.5", value: true)
+            pomodoro.setInput("timePlus2.5AsPercentage", value: Float((Float(focusTimeIntervalMinutes%5)-2.5)*40))
+        }
     }
 }
