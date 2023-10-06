@@ -140,14 +140,7 @@ struct TimerSettingsView: View {
     private func setAnimationTime(minutes: Int) {
         switch flowType {
         case .focus:
-            pomodoro.setInput("timeMinutes", value: Float(minutes))
-            if Float(minutes%5) < 2.5 {
-                modelData.pomodoro.setInput("timeHasPlus2.5", value: false)
-                modelData.pomodoro.setInput("timePlus2.5AsPercentage", value: Float((minutes%5)*40))
-            } else {
-                modelData.pomodoro.setInput("timeHasPlus2.5", value: true)
-                modelData.pomodoro.setInput("timePlus2.5AsPercentage", value: Float((Float(minutes%5)-2.5)*40))
-            }
+            updateTimeInput(riveViewModel: pomodoro, minutes: minutes)
         default:
             coffee.setInput("timeMinutes", value: Float(minutes))
         }

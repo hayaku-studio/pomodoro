@@ -216,14 +216,7 @@ struct AnimationView: View {
         switch modelData.flowType {
         case .focus:
             let timeMinutes = seconds/60
-            modelData.pomodoro.setInput("timeMinutes", value: Float(timeMinutes))
-            if Float(timeMinutes%5) < 2.5 {
-                modelData.pomodoro.setInput("timeHasPlus2.5", value: false)
-                modelData.pomodoro.setInput("timePlus2.5AsPercentage", value: Float((timeMinutes%5)*40))
-            } else {
-                modelData.pomodoro.setInput("timeHasPlus2.5", value: true)
-                modelData.pomodoro.setInput("timePlus2.5AsPercentage", value: Float((Float(timeMinutes%5)-2.5)*40))
-            }
+            updateTimeInput(riveViewModel: modelData.pomodoro, minutes: timeMinutes)
         default:
             modelData.coffee.setInput("timeMinutes", value: Float(seconds)/60)
         }

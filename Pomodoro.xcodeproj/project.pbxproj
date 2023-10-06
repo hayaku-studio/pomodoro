@@ -32,6 +32,7 @@
 		CAA95F322A2DE7DC00057B26 /* PopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA95F312A2DE7DC00057B26 /* PopupView.swift */; };
 		CAA996482A39D3920096A7F8 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CAA996462A39D3920096A7F8 /* DataModel.xcdatamodeld */; };
 		CAA9964A2A39D44D0096A7F8 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA996492A39D44D0096A7F8 /* PersistenceController.swift */; };
+		CAB830E82ACFFEE200EAD88D /* Rive.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB830E72ACFFEE200EAD88D /* Rive.swift */; };
 		CAD1A1972A48668200503402 /* YearlyCalendarGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD1A1962A48668200503402 /* YearlyCalendarGraph.swift */; };
 		CAD1A1992A48671700503402 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD1A1982A48671700503402 /* Int.swift */; };
 		CAD1E6682A237A4E00C0C4C8 /* SwiftUIFontIcon in Frameworks */ = {isa = PBXBuildFile; productRef = CAD1E6672A237A4E00C0C4C8 /* SwiftUIFontIcon */; };
@@ -75,6 +76,7 @@
 		CAA95F312A2DE7DC00057B26 /* PopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupView.swift; sourceTree = "<group>"; };
 		CAA996472A39D3920096A7F8 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		CAA996492A39D44D0096A7F8 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
+		CAB830E72ACFFEE200EAD88D /* Rive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rive.swift; sourceTree = "<group>"; };
 		CAD1A1962A48668200503402 /* YearlyCalendarGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearlyCalendarGraph.swift; sourceTree = "<group>"; };
 		CAD1A1982A48671700503402 /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
 		CAD7C4E02A4DBF87009003C9 /* FabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FabView.swift; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				CAA7FCDE2A3B24EB00E5E51C /* Calendar.swift */,
+				CAB830E72ACFFEE200EAD88D /* Rive.swift */,
 				CAE3D51C2A2F4BC900AD88F1 /* Sound.swift */,
 			);
 			path = Utils;
@@ -345,6 +348,7 @@
 				CA72DA482A3894C300998051 /* CalendarView.swift in Sources */,
 				CAD1A1992A48671700503402 /* Int.swift in Sources */,
 				CAA7FCE12A3B96ED00E5E51C /* CalendarFormat.swift in Sources */,
+				CAB830E82ACFFEE200EAD88D /* Rive.swift in Sources */,
 				CA01D54F2A309BBD001B9DBC /* SettingsView.swift in Sources */,
 				CAA9964A2A39D44D0096A7F8 /* PersistenceController.swift in Sources */,
 				CAF0990D2A222A2E00606A83 /* AnimationView.swift in Sources */,
