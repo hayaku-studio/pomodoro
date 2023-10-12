@@ -215,7 +215,7 @@ struct AnimationView: View {
     private func setAnimationTime(seconds: Int) {
         switch modelData.flowType {
         case .focus:
-            let timeMinutes = seconds/60
+            let timeMinutes = Float(seconds)/60.0
             updateTimeInput(riveViewModel: modelData.pomodoro, minutes: timeMinutes)
         default:
             modelData.coffee.setInput("timeMinutes", value: Float(seconds)/60)

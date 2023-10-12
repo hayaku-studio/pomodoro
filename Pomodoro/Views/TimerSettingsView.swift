@@ -140,7 +140,7 @@ struct TimerSettingsView: View {
     private func setAnimationTime(minutes: Int) {
         switch flowType {
         case .focus:
-            updateTimeInput(riveViewModel: pomodoro, minutes: minutes)
+            updateTimeInput(riveViewModel: pomodoro, minutes: Float(minutes))
         default:
             coffee.setInput("timeMinutes", value: Float(minutes))
         }

@@ -118,6 +118,6 @@ final class ModelData: ObservableObject {
         timerSnap = TimerSnap(rawValue: defaults.string(forKey: timerSnapKey) ?? "")  ?? TimerSnap.seconds10
         
         timeSeconds = focusTimeIntervalMinutes * 60
-        updateTimeInput(riveViewModel: pomodoro, minutes: focusTimeIntervalMinutes)
+        updateTimeInput(riveViewModel: pomodoro, minutes: Float(focusTimeIntervalMinutes))
     }
 }
