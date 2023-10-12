@@ -17,4 +17,9 @@ func updateTimeInput(riveViewModel: RiveViewModel, minutes: Int) {
         riveViewModel.setInput("timeHasPlus2.5", value: true)
         riveViewModel.setInput("timePlus2.5AsPercentage", value: Float((Float(minutes%5)-2.5)*40))
     }
+    if minutes < 10 {
+        riveViewModel.setInput("timeMinutes0To10", value: Float(minutes*10))
+    } else {
+        riveViewModel.setInput("timeMinutes0To10", value: 100.0)
+    }
 }
