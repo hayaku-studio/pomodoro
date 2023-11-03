@@ -76,8 +76,8 @@ struct TimerSettingsView: View {
                                 let incrementalTranslation = newTranslation - previousTranslation
                                 previousTranslation = newTranslation
                                 timeMinutes -= incrementalTranslation
-                                if timeMinutes > 100 {
-                                    timeMinutes = 100
+                                if timeMinutes > 90 {
+                                    timeMinutes = 90
                                 } else if timeMinutes < 1 {
                                     timeMinutes = 1
                                 }

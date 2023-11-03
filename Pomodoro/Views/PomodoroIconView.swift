@@ -23,7 +23,7 @@ struct PomodoroIconView: View {
                         .offset(x: 2, y: 2)
                 }
                 Text("\(String(format: "%02d", minutes))")
-                    .font(minutes == 100 ? .custom("SF Pro", size: 7) : .footnote)
+                    .font(.footnote)
                     .fontWeight(.semibold)
                     .monospacedDigit()
                     .offset(y: 2)

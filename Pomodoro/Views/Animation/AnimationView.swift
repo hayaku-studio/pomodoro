@@ -62,8 +62,8 @@ struct AnimationView: View {
                             } else {
                                 modelData.timeSeconds += timerSnapValue - amountOfSecondsFromSnap
                             }
-                            if modelData.timeSeconds > 6000 {
-                                modelData.timeSeconds = 6000
+                            if modelData.timeSeconds > 5400 {
+                                modelData.timeSeconds = 5400
                             } else if modelData.timeSeconds < 0 {
                                 modelData.timeSeconds = 0
                             }
