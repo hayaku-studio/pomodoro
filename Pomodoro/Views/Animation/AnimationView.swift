@@ -78,8 +78,11 @@ struct AnimationView: View {
                                 isTimerGreaterThanZero = false
                             }
                         }
-                        .onEnded {gesture in
+                        .onEnded {gesture in    
                             previousTranslation = 0
+                            let nearestMultipleOf60 = (modelData.timeSeconds + 30) / 60 * 60
+                            modelData.timeSeconds = nearestMultipleOf60
+                            setAnimationTime(seconds: modelData.timeSeconds)
                             if modelData.timeSeconds > 0 {
                                 startTimers()
                             }
