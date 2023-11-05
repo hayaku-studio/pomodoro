@@ -6,12 +6,13 @@
 //
 
 import SwiftUI
+import Foundation
 
 struct PomodoroIconView: View {
     @EnvironmentObject private var modelData: ModelData
     
     var body: some View {
-        let minutes = Int(modelData.timeSeconds/60)
+        let minutes = Int(ceilf(Float(modelData.timeSeconds)/60))
         let isFocusFlowType = modelData.flowType == FlowType.focus
         return HStack(alignment: .center, spacing: isFocusFlowType ? 2 : 0) {
             ZStack {
