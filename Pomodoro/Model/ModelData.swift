@@ -19,8 +19,8 @@ final class ModelData: ObservableObject {
             }
         }
     }
-    @Published var pomodoro = RiveViewModel(fileName: "pomodoro_timer", stateMachineName: "State Machine", artboardName: "Timer Artboard")
-    @Published var coffee = RiveViewModel(fileName: "pomodoro_timer", stateMachineName: "State Machine", artboardName: "Coffee Cup Artboard")
+    @Published var pomodoro = RiveViewModel(fileName: "pomodoro_timer", stateMachineName: "State Machine", artboardName: "Pomodoro Timer")
+    @Published var coffee = RiveViewModel(fileName: "pomodoro_timer", stateMachineName: "State Machine", artboardName: "Coffee Cup Timer")
     @Published var timeSeconds = 0
     @Published var currentCompletedIntervals: Int = 0 {
         didSet {

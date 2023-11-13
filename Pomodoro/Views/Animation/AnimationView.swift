@@ -221,7 +221,7 @@ struct AnimationView: View {
             let timeMinutes = Float(seconds)/60.0
             updateTimeInput(riveViewModel: modelData.pomodoro, minutes: timeMinutes)
         default:
-            modelData.coffee.setInput("timeMinutes", value: Float(seconds)/60)
+            updateTimeInput(riveViewModel: modelData.coffee, minutes: Float(seconds)/60)
         }
     }
     

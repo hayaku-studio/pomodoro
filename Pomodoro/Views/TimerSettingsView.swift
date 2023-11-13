@@ -16,8 +16,8 @@ struct TimerSettingsView: View {
     @EnvironmentObject private var modelData: ModelData
     
     @State private var flowType = FlowType.focus
-    @State private var pomodoro = RiveViewModel(fileName: "pomodoro_timer", stateMachineName: "State Machine", artboardName: "Timer Artboard")
-    @State private var coffee = RiveViewModel(fileName: "pomodoro_timer", stateMachineName: "State Machine", artboardName: "Coffee Cup Artboard")
+    @State private var pomodoro = RiveViewModel(fileName: "pomodoro_timer", stateMachineName: "State Machine", artboardName: "Pomodoro Timer")
+    @State private var coffee = RiveViewModel(fileName: "pomodoro_timer", stateMachineName: "State Machine", artboardName: "Coffee Cup Timer")
     @State private var previousTranslation = 0
     @State private var timeMinutes = 0 {
         didSet {
@@ -142,7 +142,7 @@ struct TimerSettingsView: View {
         case .focus:
             updateTimeInput(riveViewModel: pomodoro, minutes: Float(minutes))
         default:
-            coffee.setInput("timeMinutes", value: Float(minutes))
+            updateTimeInput(riveViewModel: coffee, minutes: Float(minutes))
         }
     }
     
