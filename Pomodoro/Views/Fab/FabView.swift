@@ -15,7 +15,6 @@ struct FabView: View {
     @Binding var showFabMenu: Bool
     var timerAction: () -> Void
     var settingsAction: () -> Void
-    var statsAction: () -> Void
     
     @State private var isMainButtonHovered = false
     
@@ -42,10 +41,6 @@ struct FabView: View {
                 FabItem(imageName: "gearshape", buttonText: "Settings").onTapGesture {
                     settingsAction()
                     closeButtons()
-                },
-                FabItem(imageName: "chart.bar", buttonText: "Statistics").onTapGesture {
-                    statsAction()
-                    closeButtons()
                 }
             ],
             isOpen: $showFabMenu
@@ -67,6 +62,6 @@ struct FabView: View {
 
 struct FabView_Previews: PreviewProvider {
     static var previews: some View {
-        FabView(showFabMenu: .constant(false), timerAction: {}, settingsAction: {}, statsAction: {})
+        FabView(showFabMenu: .constant(false), timerAction: {}, settingsAction: {})
     }
 }

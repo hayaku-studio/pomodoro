@@ -27,7 +27,7 @@ struct PopupView: View {
                     .opacity(0)
                     .frame(width: 0, height: 0)
                     .offset(x: -40, y: -8)
-                    FabView(showFabMenu: $showFabMenu, timerAction: openTimer, settingsAction: openSettings, statsAction: openCalendar)
+                    FabView(showFabMenu: $showFabMenu, timerAction: openTimer, settingsAction: openSettings)
                     .offset(x: -40, y: -8)
                     Spacer()
                     IntervalTrackingView()
@@ -39,10 +39,6 @@ struct PopupView: View {
             if showTimer {
                 TimerSettingsView()
                     .customModal(actionOnDismiss: closeTimer)
-            }
-            if showCalendar {
-                CalendarView()
-                    .customModal(actionOnDismiss: closeCalendar)
             }
             if showSettings {
                 SettingsView()
@@ -57,20 +53,6 @@ struct PopupView: View {
                     }
                     .zIndex(-1)
             }
-        }.onAppear() {
-            modelData.earliestCalendarEntryDate = getEarliestCalendarEntryDate(context: managedObjectContext)
-        }
-    }
-    
-    func openCalendar() {
-        withAnimation(.spring()) {
-            showCalendar = true
-        }
-    }
-    
-    func closeCalendar() {
-        withAnimation(.spring()) {
-            showCalendar = false
         }
     }
     

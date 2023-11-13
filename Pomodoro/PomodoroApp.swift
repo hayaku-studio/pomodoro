@@ -21,10 +21,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private var statusItem: NSStatusItem!
     private var menu: NSMenu!
     private let popover = NSPopover()
-    private let persistenceController = PersistenceController.shared
     
     @MainActor func applicationDidFinishLaunching(_ notification: Notification) {
-        let pomodoroIcon = PomodoroIconView().environmentObject(modelData).environment(\.managedObjectContext, persistenceController.container.viewContext)
+        let pomodoroIcon = PomodoroIconView().environmentObject(modelData)
         let iconView = NSHostingView(rootView: pomodoroIcon)
         iconView.frame = NSRect(x: 0, y: 0, width: 36, height: 20)
 //        iconView.frame = NSRect(x: 0, y: 0, width: 640, height: 20) // For App Store Screenshots
@@ -44,7 +43,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
         
         popover.contentSize = NSSize(width: 290, height: 200)
-        popover.contentViewController = NSHostingController(rootView: PopupView().environmentObject(modelData).environment(\.managedObjectContext, persistenceController.container.viewContext))
+        popover.contentViewController = NSHostingController(rootView: PopupView().environmentObject(modelData))
     }
     
     func applicationWillResignActive(_ notification: Notification) {

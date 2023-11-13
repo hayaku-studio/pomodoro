@@ -15,7 +15,6 @@ struct AnimationView: View {
     
     @State private var isPlaying = false
     @State private var animationTimer: Timer?
-    @State private var workTimeTimer: Timer?
     @State private var previousTranslation = 0
     @State private var isTimerGreaterThanZero = true
     
@@ -146,15 +145,6 @@ struct AnimationView: View {
     
     func startTimers() {
         isPlaying = true
-        workTimeTimer?.invalidate()
-        workTimeTimer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true) {_ in
-            switch modelData.flowType {
-            case .focus:
-                incrementTodaysWorkTimeMinutes(context: managedObjectContext)
-            default:
-                incrementTodaysRestTimeMinutes(context: managedObjectContext)
-            }
-        }
         animationTimer?.invalidate()
         animationTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) {_ in
             decrementTime()
@@ -166,7 +156,6 @@ struct AnimationView: View {
         // TODO: pause the animation (for performance reasons), without causing the "later ping" bug
         //  modelData.pomodoro.pause()
         animationTimer?.invalidate()
-        workTimeTimer?.invalidate()
     }
     
     func decrementTime() {
