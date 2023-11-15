@@ -15,13 +15,6 @@ struct SettingsView: View {
             Text("Settings")
                 .font(.largeTitle)
             PingVolumeView()
-            
-            VStack(alignment: .leading, spacing: 4) {
-                Text("TIMER")
-                    .font(.caption)
-                    .foregroundColor(Color("Settings Heading Text"))
-                    .padding(.leading, 8)
-            }
         }
     }
 }
