@@ -55,7 +55,6 @@ final class ModelData: ObservableObject {
         }
     }
     @Published var pingVolume: Float
-    @Published var timerSnap: TimerSnap
     
     init() {
         let defaults = UserDefaults.standard
@@ -111,9 +110,6 @@ final class ModelData: ObservableObject {
         } else {
             pingVolume = defaults.float(forKey: pingVolumeKey)
         }
-        
-        let timerSnapKey = "timerSnap"
-        timerSnap = TimerSnap(rawValue: defaults.string(forKey: timerSnapKey) ?? "")  ?? TimerSnap.seconds10
         
         timeSeconds = focusTimeIntervalMinutes * 60
         updateTimeInput(riveViewModel: pomodoro, minutes: Float(focusTimeIntervalMinutes))

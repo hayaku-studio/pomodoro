@@ -41,7 +41,7 @@ struct AnimationView: View {
                     .gesture(DragGesture()
                         .onChanged {gesture in
                             pauseTimers() // TODO: find a better way to do this (instead of calling pauseTimers hundreds of times)
-                            let timerSnapValue = modelData.timerSnap.numberValue
+                            let timerSnapValue = 1
                             let newTranslation = Int(Float(gesture.translation.width)*5.0/Float(timerSnapValue))*timerSnapValue
                             let incrementalTranslation = newTranslation - previousTranslation
                             previousTranslation = newTranslation
