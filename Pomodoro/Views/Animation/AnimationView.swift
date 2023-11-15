@@ -7,7 +7,6 @@
 
 import SwiftUI
 import SwiftUIFontIcon
-import SwiftUITooltip
 
 struct AnimationView: View {
     @EnvironmentObject private var modelData: ModelData
@@ -18,14 +17,8 @@ struct AnimationView: View {
     @State private var previousTranslation = 0
     @State private var isTimerGreaterThanZero = true
     
-    @State var tooltipHideTimer: Timer?
-    @State var isTooltipVisible = false
-    var tooltipConfig = DefaultTooltipConfig()
-    
     init() {
         let backgroundcolor = Color("Settings Card Background")
-        tooltipConfig.borderColor = backgroundcolor
-        tooltipConfig.backgroundColor = backgroundcolor
     }
     
     var body: some View {
@@ -48,8 +41,7 @@ struct AnimationView: View {
                     .gesture(DragGesture()
                         .onChanged {gesture in
                             pauseTimers() // TODO: find a better way to do this (instead of calling pauseTimers hundreds of times)
-                            isTooltipVisible = false
-                            let timerSnapValue = isOptionKeyPressed() ? 60 : modelData.timerSnap.numberValue
+                            let timerSnapValue = modelData.timerSnap.numberValue
                             let newTranslation = Int(Float(gesture.translation.width)*5.0/Float(timerSnapValue))*timerSnapValue
                             let incrementalTranslation = newTranslation - previousTranslation
                             previousTranslation = newTranslation
@@ -90,10 +82,7 @@ struct AnimationView: View {
             }
             .offset(y: -12)
             HStack {
-                AnimationButtonView(action: isTimerGreaterThanZero ? toggleTimers : openTooltip, imageName: isPlaying ? "pause" : "play", isDisabled: !isTimerGreaterThanZero)
-                .tooltip(isTooltipVisible, side: .top, config: tooltipConfig) {
-                    Text("Drag the timer left ← to start.")
-                }
+                AnimationButtonView(action: toggleTimers, imageName: isPlaying ? "pause" : "play", isDisabled: !isTimerGreaterThanZero)
                 AnimationButtonView(action: resetTimer, imageName: "gobackward", isDisabled: false)
                 AnimationButtonView(action: skipToNextFlowType, imageName: "forward.end", isDisabled: false)
                 
@@ -190,18 +179,6 @@ struct AnimationView: View {
                 skipToNextFlowType()
             }
         }
-    }
-    
-    func openTooltip() {
-        isTooltipVisible = true
-        tooltipHideTimer?.invalidate()
-        tooltipHideTimer = Timer.scheduledTimer(withTimeInterval: 2, repeats: true) {_ in
-            isTooltipVisible = false
-        }
-    }
-    
-    func isOptionKeyPressed() -> Bool {
-        return NSEvent.modifierFlags.contains(.option)
     }
     
     private func setAnimationTime(seconds: Int) {
