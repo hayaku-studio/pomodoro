@@ -12,7 +12,6 @@
 		CA02FA802A7805DA009D3171 /* IntervalProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA02FA7F2A7805DA009D3171 /* IntervalProgress.swift */; };
 		CA059C6A2A5C461200E2CDE6 /* TimerSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA059C692A5C461200E2CDE6 /* TimerSettingsView.swift */; };
 		CA2B4C462A4977BC005ED3E7 /* Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2B4C452A4977BC005ED3E7 /* Animation.swift */; };
-		CA48135E2A44485C00AA7A1C /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA48135D2A44485C00AA7A1C /* Date.swift */; };
 		CA603AE82A6BDC3400E8765A /* AnimationButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA603AE72A6BDC3400E8765A /* AnimationButtonView.swift */; };
 		CA6789E82A33762A002CB46A /* TimerSnap.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6789E72A33762A002CB46A /* TimerSnap.swift */; };
 		CA6B06A22A2C6E4000F62E56 /* PomodoroIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6B06A12A2C6E4000F62E56 /* PomodoroIconView.swift */; };
@@ -22,7 +21,6 @@
 		CAA95F2E2A2DD13D00057B26 /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA95F2D2A2DD13D00057B26 /* ModelData.swift */; };
 		CAA95F322A2DE7DC00057B26 /* PopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA95F312A2DE7DC00057B26 /* PopupView.swift */; };
 		CAB830E82ACFFEE200EAD88D /* Rive.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB830E72ACFFEE200EAD88D /* Rive.swift */; };
-		CAD1A1992A48671700503402 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD1A1982A48671700503402 /* Int.swift */; };
 		CAD1E6682A237A4E00C0C4C8 /* SwiftUIFontIcon in Frameworks */ = {isa = PBXBuildFile; productRef = CAD1E6672A237A4E00C0C4C8 /* SwiftUIFontIcon */; };
 		CAD7C4DF2A4DBF29009003C9 /* FloatingButton in Frameworks */ = {isa = PBXBuildFile; productRef = CAD7C4DE2A4DBF29009003C9 /* FloatingButton */; };
 		CAD7C4E12A4DBF87009003C9 /* FabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD7C4E02A4DBF87009003C9 /* FabView.swift */; };
@@ -44,7 +42,6 @@
 		CA02FA7F2A7805DA009D3171 /* IntervalProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalProgress.swift; sourceTree = "<group>"; };
 		CA059C692A5C461200E2CDE6 /* TimerSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerSettingsView.swift; sourceTree = "<group>"; };
 		CA2B4C452A4977BC005ED3E7 /* Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animation.swift; sourceTree = "<group>"; };
-		CA48135D2A44485C00AA7A1C /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		CA603AE72A6BDC3400E8765A /* AnimationButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationButtonView.swift; sourceTree = "<group>"; };
 		CA6789E72A33762A002CB46A /* TimerSnap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerSnap.swift; sourceTree = "<group>"; };
 		CA6B06A12A2C6E4000F62E56 /* PomodoroIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroIconView.swift; sourceTree = "<group>"; };
@@ -53,7 +50,6 @@
 		CAA95F2D2A2DD13D00057B26 /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
 		CAA95F312A2DE7DC00057B26 /* PopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupView.swift; sourceTree = "<group>"; };
 		CAB830E72ACFFEE200EAD88D /* Rive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rive.swift; sourceTree = "<group>"; };
-		CAD1A1982A48671700503402 /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
 		CAD7C4E02A4DBF87009003C9 /* FabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FabView.swift; sourceTree = "<group>"; };
 		CAD7C4E32A4E2E85009003C9 /* FabItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FabItem.swift; sourceTree = "<group>"; };
 		CAD7C4E52A4E31A3009003C9 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
@@ -88,8 +84,6 @@
 			children = (
 				CA2B4C452A4977BC005ED3E7 /* Animation.swift */,
 				CAD7C4E52A4E31A3009003C9 /* Color.swift */,
-				CA48135D2A44485C00AA7A1C /* Date.swift */,
-				CAD1A1982A48671700503402 /* Int.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -297,13 +291,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				CAD7C4E62A4E31A3009003C9 /* Color.swift in Sources */,
-				CAD1A1992A48671700503402 /* Int.swift in Sources */,
 				CAB830E82ACFFEE200EAD88D /* Rive.swift in Sources */,
 				CA01D54F2A309BBD001B9DBC /* SettingsView.swift in Sources */,
 				CAF0990D2A222A2E00606A83 /* AnimationView.swift in Sources */,
 				CA02FA7E2A77FBA3009D3171 /* IntervalTrackingView.swift in Sources */,
 				CAD7C4E42A4E2E85009003C9 /* FabItem.swift in Sources */,
-				CA48135E2A44485C00AA7A1C /* Date.swift in Sources */,
 				CAE3D51D2A2F4BC900AD88F1 /* Sound.swift in Sources */,
 				CAD7C4E12A4DBF87009003C9 /* FabView.swift in Sources */,
 				CAA95F2E2A2DD13D00057B26 /* ModelData.swift in Sources */,
