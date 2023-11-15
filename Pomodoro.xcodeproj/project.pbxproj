@@ -15,7 +15,6 @@
 		CA603AE82A6BDC3400E8765A /* AnimationButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA603AE72A6BDC3400E8765A /* AnimationButtonView.swift */; };
 		CA6789E82A33762A002CB46A /* TimerSnap.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6789E72A33762A002CB46A /* TimerSnap.swift */; };
 		CA6B06A22A2C6E4000F62E56 /* PomodoroIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6B06A12A2C6E4000F62E56 /* PomodoroIconView.swift */; };
-		CA72DA422A372B7C00998051 /* SwiftUITooltip in Frameworks */ = {isa = PBXBuildFile; productRef = CA72DA412A372B7C00998051 /* SwiftUITooltip */; };
 		CA72DA462A38819D00998051 /* CustomModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA72DA452A38819D00998051 /* CustomModal.swift */; };
 		CAA861E32A606BE700CF569A /* FlowType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA861E22A606BE700CF569A /* FlowType.swift */; };
 		CAA95F2E2A2DD13D00057B26 /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA95F2D2A2DD13D00057B26 /* ModelData.swift */; };
@@ -70,7 +69,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CAD1E6682A237A4E00C0C4C8 /* SwiftUIFontIcon in Frameworks */,
-				CA72DA422A372B7C00998051 /* SwiftUITooltip in Frameworks */,
 				CAD7C4DF2A4DBF29009003C9 /* FloatingButton in Frameworks */,
 				CAF099072A1FBB8900606A83 /* RiveRuntime in Frameworks */,
 			);
@@ -225,7 +223,6 @@
 			packageProductDependencies = (
 				CAF099062A1FBB8900606A83 /* RiveRuntime */,
 				CAD1E6672A237A4E00C0C4C8 /* SwiftUIFontIcon */,
-				CA72DA412A372B7C00998051 /* SwiftUITooltip */,
 				CAD7C4DE2A4DBF29009003C9 /* FloatingButton */,
 			);
 			productName = Pomodoro;
@@ -259,7 +256,6 @@
 			packageReferences = (
 				CAF099052A1FBB8900606A83 /* XCRemoteSwiftPackageReference "rive-ios" */,
 				CAD1E6662A237A4E00C0C4C8 /* XCRemoteSwiftPackageReference "SwiftUIFontIcon" */,
-				CA72DA402A372B7C00998051 /* XCRemoteSwiftPackageReference "SwiftUI-Tooltip" */,
 				CAD7C4DD2A4DBF29009003C9 /* XCRemoteSwiftPackageReference "FloatingButton" */,
 			);
 			productRefGroup = CAF098F32A1FB1F600606A83 /* Products */;
@@ -514,14 +510,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		CA72DA402A372B7C00998051 /* XCRemoteSwiftPackageReference "SwiftUI-Tooltip" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/quassum/SwiftUI-Tooltip.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
 		CAD1E6662A237A4E00C0C4C8 /* XCRemoteSwiftPackageReference "SwiftUIFontIcon" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/huybuidac/SwiftUIFontIcon";
@@ -549,11 +537,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		CA72DA412A372B7C00998051 /* SwiftUITooltip */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = CA72DA402A372B7C00998051 /* XCRemoteSwiftPackageReference "SwiftUI-Tooltip" */;
-			productName = SwiftUITooltip;
-		};
 		CAD1E6672A237A4E00C0C4C8 /* SwiftUIFontIcon */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = CAD1E6662A237A4E00C0C4C8 /* XCRemoteSwiftPackageReference "SwiftUIFontIcon" */;

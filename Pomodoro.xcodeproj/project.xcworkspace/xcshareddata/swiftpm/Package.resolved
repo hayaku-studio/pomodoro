@@ -14,17 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/rive-app/rive-ios",
       "state" : {
-        "revision" : "4ebd7c0ffc508a5e8a180c577fbc86e1b19a2d5f",
-        "version" : "5.3.1"
-      }
-    },
-    {
-      "identity" : "swiftui-tooltip",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/quassum/SwiftUI-Tooltip.git",
-      "state" : {
-        "revision" : "3bef9a21e2bcf1d0f078ddf6731c3c8996f32c3e",
-        "version" : "1.4.0"
+        "revision" : "9823217df6b583793da523a6a80c3f900991b84b",
+        "version" : "5.6.1"
       }
     },
     {
