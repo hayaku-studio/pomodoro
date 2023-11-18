@@ -20,7 +20,7 @@ func updateTimeInput(riveViewModel: RiveViewModel, minutes: Float) {
 func getMagnificationFactor(timeToMagnify: TimeToMagnify, timeMinutes: Float) -> Float {
     let loopedMinutes = timeMinutes.truncatingRemainder(dividingBy: 25)
     let magnificationFactor: Float = 15.0
-    // TODO: the .time0/.time5 logic is the same as .time20 after the ternary operator. Simplify this
+    // TODO: the .time0/.time5 logic is the same as .time20 after the ternary operator. Simplify this. In fact this whole logic is a mess. Figure out a way to make it make more sense
     switch timeToMagnify {
     case .time0, .time5:
         let absoluteDifference = loopedMinutes > 12.5 + timeToMagnify.numberValue ? 25 - abs(timeToMagnify.numberValue - loopedMinutes) : abs(timeToMagnify.numberValue - loopedMinutes)
