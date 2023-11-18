@@ -10,15 +10,21 @@ import RiveRuntime
 
 func updateTimeInput(riveViewModel: RiveViewModel, minutes: Float) {
     riveViewModel.setInput("timeMinutes", value: minutes)
-    let loopedMinutes = minutes.truncatingRemainder(dividingBy: 25)
-    let magnificationFactor: Float = 15.0
-    let absoluteDifference0 = abs(loopedMinutes < 12.5 ? 0 - loopedMinutes : 25 - loopedMinutes)
-    riveViewModel.setInput("0 Magnified", value: (100 - absoluteDifference0 * magnificationFactor))
-    for timeToMagnify: Float in [5, 20] {
-        let absoluteDifference = abs(loopedMinutes < abs(timeToMagnify - 12.5) ? timeToMagnify - loopedMinutes : timeToMagnify - loopedMinutes)
-        riveViewModel.setInput("\(Int(timeToMagnify)) Magnified", value: (100 - absoluteDifference * magnificationFactor))
-    }
-    for timeToMagnify in [10, 15] {
-        riveViewModel.setInput("\(timeToMagnify) Magnified", value: 100 - abs(Float(timeToMagnify) - loopedMinutes) * magnificationFactor)
+    for timeToMagnify in TimeToMagnify.allCases {
+        riveViewModel.setInput(timeToMagnify.id, value: getMagnificationFactor(timeToMagnify: timeToMagnify, timeMinutes: minutes))
     }
 }
+
+func getMagnificationFactor(timeToMagnify: TimeToMagnify, timeMinutes: Float) -> Float {
+    let loopedMinutes = timeMinutes.truncatingRemainder(dividingBy: 25)
+    let magnificationFactor: Float = 10.0
+    switch timeToMagnify {
+    case .time0:
+        let absoluteDifference0 = abs(loopedMinutes < 12.5 ? 0 - loopedMinutes : 25 - loopedMinutes)
+        return 100 - absoluteDifference0 * magnificationFactor
+    case .time10, .time15:
+        return 100 - abs(timeToMagnify.numberValue - loopedMinutes) * magnificationFactor
+    case .time5, .time20:
+        let absoluteDifference = abs(loopedMinutes < abs(timeToMagnify.numberValue - 12.5) ? timeToMagnify.numberValue - loopedMinutes : timeToMagnify.numberValue - loopedMinutes)
+        return 100 - absoluteDifference * magnificationFactor
+    }}
