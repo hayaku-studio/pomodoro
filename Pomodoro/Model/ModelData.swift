@@ -51,7 +51,7 @@ final class ModelData: ObservableObject {
     @Published var longRestTimeIntervalMinutes: Int
     @Published var flowType = FlowType.focus {
         didSet {
-            coffee.setInput("isHighlighted", value: flowType == FlowType.longRest)
+//            coffee.setInput("isHighlighted", value: flowType == FlowType.longRest)
         }
     }
     @Published var pingVolume: Float

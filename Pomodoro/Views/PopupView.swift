@@ -30,8 +30,8 @@ struct PopupView: View {
                     FabView(showFabMenu: $showFabMenu, timerAction: openTimer, settingsAction: openSettings)
                     .offset(x: -40, y: -8)
                     Spacer()
-                    IntervalTrackingView()
-                        .offset(x: -8, y: 2)
+//                    IntervalTrackingView()
+//                        .offset(x: -8, y: 2)
                 }
                 .zIndex(1)
                 AnimationView()

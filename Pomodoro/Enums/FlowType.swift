@@ -10,7 +10,7 @@ import Foundation
 enum FlowType: String, CaseIterable, Identifiable {
     case focus = "Focus"
     case rest = "Break"
-    case longRest = "Long Break"
+//    case longRest = "Long Break"
     
     var id: String { rawValue }
 }

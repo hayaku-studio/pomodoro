@@ -89,8 +89,8 @@ struct AnimationView: View {
             modelData.timeSeconds = modelData.focusTimeIntervalMinutes*60
         case .rest:
             modelData.timeSeconds = modelData.restTimeIntervalMinutes*60
-        case .longRest:
-            modelData.timeSeconds = modelData.longRestTimeIntervalMinutes*60
+//        case .longRest:
+//            modelData.timeSeconds = modelData.longRestTimeIntervalMinutes*60
         }
         setAnimationTime(seconds: modelData.timeSeconds)
         isTimerGreaterThanZero = true
@@ -103,13 +103,13 @@ struct AnimationView: View {
             modelData.flowType = FlowType.rest
             modelData.timeSeconds = modelData.restTimeIntervalMinutes*60
         default:
-            if modelData.currentCompletedIntervals == modelData.requiredCompletedIntervals {
-                modelData.flowType = FlowType.longRest
-                modelData.timeSeconds = modelData.longRestTimeIntervalMinutes*60
-            } else {
+//            if modelData.currentCompletedIntervals == modelData.requiredCompletedIntervals {
+//                modelData.flowType = FlowType.longRest
+//                modelData.timeSeconds = modelData.longRestTimeIntervalMinutes*60
+//            } else {
                 modelData.flowType = FlowType.focus
                 modelData.timeSeconds = modelData.focusTimeIntervalMinutes*60
-            }
+//            }
         }
         setAnimationTime(seconds: modelData.timeSeconds)
         isTimerGreaterThanZero = true
@@ -166,10 +166,10 @@ struct AnimationView: View {
             if modelData.automaticallyGoFromRest {
                 skipToNextFlowType()
             }
-        case .longRest:
-            if modelData.automaticallyGoFromLongRest {
-                skipToNextFlowType()
-            }
+//        case .longRest:
+//            if modelData.automaticallyGoFromLongRest {
+//                skipToNextFlowType()
+//            }
         }
     }
     

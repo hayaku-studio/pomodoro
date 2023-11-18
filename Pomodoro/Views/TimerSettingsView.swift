@@ -34,14 +34,14 @@ struct TimerSettingsView: View {
             }
             .pickerStyle(.segmented)
             .onChange(of: flowType) { (value: FlowType) in
-                coffee.setInput("isHighlighted", value: value == FlowType.longRest)
+//                coffee.setInput("isHighlighted", value: value == FlowType.longRest)
                 switch value {
                 case .focus:
                     timeMinutes = modelData.focusTimeIntervalMinutes
                 case .rest:
                     timeMinutes = modelData.restTimeIntervalMinutes
-                case .longRest:
-                    timeMinutes = modelData.longRestTimeIntervalMinutes
+//                case .longRest:
+//                    timeMinutes = modelData.longRestTimeIntervalMinutes
                 }
             }
             Text("Set Timer Interval")
@@ -92,9 +92,9 @@ struct TimerSettingsView: View {
                                 case .rest:
                                     modelData.restTimeIntervalMinutes = timeMinutes
                                     timeIntervalMinutesKey = "restTimeIntervalMinutes"
-                                case .longRest:
-                                    modelData.longRestTimeIntervalMinutes = timeMinutes
-                                    timeIntervalMinutesKey = "longRestTimeIntervalMinutes"
+//                                case .longRest:
+//                                    modelData.longRestTimeIntervalMinutes = timeMinutes
+//                                    timeIntervalMinutesKey = "longRestTimeIntervalMinutes"
                                 }
                                 UserDefaults.standard.set(timeMinutes, forKey: timeIntervalMinutesKey)
                                 // TODO: reduce possibility of bugs by having key be some global var
@@ -118,20 +118,20 @@ struct TimerSettingsView: View {
                     .onChange(of: modelData.automaticallyGoFromRest) { (value: Bool) in
                         UserDefaults.standard.set(value, forKey: "automaticallyGoFromRest")
                     }
-            case .longRest:
-                Toggle("Start Focus Automatically", isOn: $modelData.automaticallyGoFromLongRest)
-                    .onChange(of: modelData.automaticallyGoFromLongRest) { (value: Bool) in
-                        UserDefaults.standard.set(value, forKey: "automaticallyGoFromLongRest")
-                    }
+//            case .longRest:
+//                Toggle("Start Focus Automatically", isOn: $modelData.automaticallyGoFromLongRest)
+//                    .onChange(of: modelData.automaticallyGoFromLongRest) { (value: Bool) in
+//                        UserDefaults.standard.set(value, forKey: "automaticallyGoFromLongRest")
+//                    }
             }
-            if flowType == .longRest {
-                HStack{
-                    Text("Long Break After Intervals")
-                    NumberButton(action: decrementRequiredCompletedIntervals, imageName: "minus", isDisabled: modelData.requiredCompletedIntervals == minRequiredCompletedIntervals)
-                    Text(String(Int(modelData.requiredCompletedIntervals/2)))
-                    NumberButton(action: incrementRequiredCompletedIntervals, imageName: "plus", isDisabled: modelData.requiredCompletedIntervals == maxRequiredCompletedIntervals)
-                }
-            }
+//            if flowType == .longRest {
+//                HStack{
+//                    Text("Long Break After Intervals")
+//                    NumberButton(action: decrementRequiredCompletedIntervals, imageName: "minus", isDisabled: modelData.requiredCompletedIntervals == minRequiredCompletedIntervals)
+//                    Text(String(Int(modelData.requiredCompletedIntervals/2)))
+//                    NumberButton(action: incrementRequiredCompletedIntervals, imageName: "plus", isDisabled: modelData.requiredCompletedIntervals == maxRequiredCompletedIntervals)
+//                }
+//            }
         }.onAppear() {
             timeMinutes = modelData.focusTimeIntervalMinutes
         }

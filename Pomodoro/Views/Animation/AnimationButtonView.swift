@@ -21,8 +21,8 @@ struct AnimationButtonView: View {
             bgColor = isDisabled ? "Pomodoro Disabled" : "Pomodoro Primary"
         case .rest:
             bgColor = isDisabled ? "Button Disabled" : "Button Active"
-        case .longRest:
-            bgColor = isDisabled ? "Coffee Highlighted Disabled": "Coffee Highlighted"
+//        case .longRest:
+//            bgColor = isDisabled ? "Coffee Highlighted Disabled": "Coffee Highlighted"
         }
         return Button {
             if !isDisabled {            
