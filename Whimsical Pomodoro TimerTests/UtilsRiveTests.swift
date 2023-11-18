@@ -36,4 +36,40 @@ final class UtilsRiveTests: XCTestCase {
             XCTAssertEqual(Int(getMagnificationFactor(timeToMagnify: TimeToMagnify.time0, timeMinutes: Float(input))), expectedOutput)
         }
     }
+    
+    func testTime10() throws {
+        let timeMinutesToExpectedMagnificationFactor: [Int: Int] = [
+            0: 100-10*magnificationFactor,
+            4: 100-6*magnificationFactor,
+            6: 100-4*magnificationFactor,
+            8: 100-2*magnificationFactor,
+            10: 100,
+            11: 100-1*magnificationFactor,
+            13: 100-3*magnificationFactor,
+            15: 100-5*magnificationFactor,
+            35: 100
+        ]
+
+        for (input, expectedOutput) in timeMinutesToExpectedMagnificationFactor {
+            XCTAssertEqual(Int(getMagnificationFactor(timeToMagnify: TimeToMagnify.time10, timeMinutes: Float(input))), expectedOutput)
+        }
+    }
+    
+    func testTime15() throws {
+        let timeMinutesToExpectedMagnificationFactor: [Int: Int] = [
+            5: 100-10*magnificationFactor,
+            9: 100-6*magnificationFactor,
+            11: 100-4*magnificationFactor,
+            13: 100-2*magnificationFactor,
+            15: 100,
+            16: 100-1*magnificationFactor,
+            18: 100-3*magnificationFactor,
+            20: 100-5*magnificationFactor,
+            40: 100
+        ]
+
+        for (input, expectedOutput) in timeMinutesToExpectedMagnificationFactor {
+            XCTAssertEqual(Int(getMagnificationFactor(timeToMagnify: TimeToMagnify.time15, timeMinutes: Float(input))), expectedOutput)
+        }
+    }
 }
