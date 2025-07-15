@@ -6,30 +6,5 @@ export default defineConfig({
   plugins: [react()],
   server: {
     port: 3000,
-    open: true,
-  },
-  build: {
-    outDir: "dist",
-    sourcemap: true,
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          vendor: ["react", "react-dom"],
-          utils: [
-            "./src/utils/sound",
-            "./src/utils/settings",
-            "./src/utils/rive",
-          ],
-        },
-      },
-    },
-  },
-  resolve: {
-    alias: {
-      "@": "/src",
-    },
-  },
-  define: {
-    "process.env": {},
   },
 });

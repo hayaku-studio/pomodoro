@@ -1,220 +1,79 @@
-import React from "react";
-import { usePomodoroState } from "./hooks/usePomodoroState";
-import AnimationView from "./components/AnimationView.tsx";
-import SettingsView from "./components/SettingsView.tsx";
-import Modal from "./components/Modal.tsx";
-import PomodoroIcon from "./components/PomodoroIcon.tsx";
+import React, { useState, useEffect } from "react";
+import { FlowType } from "./types";
 import "./styles/App.css";
 
 function App() {
-  const { state, actions } = usePomodoroState();
+  const [timeSeconds, setTimeSeconds] = useState(25 * 60); // 25 minutes
+  const [flowType, setFlowType] = useState<FlowType>(FlowType.FOCUS);
+  const [isPlaying, setIsPlaying] = useState(false);
 
-  const handleOpenSettings = () => {
-    actions.setShowSettings(true);
+  // Simple timer logic
+  useEffect(() => {
+    let interval: NodeJS.Timeout | null = null;
+
+    if (isPlaying && timeSeconds > 0) {
+      interval = setInterval(() => {
+        setTimeSeconds((prev) => prev - 1);
+      }, 1000);
+    }
+
+    return () => {
+      if (interval) {
+        clearInterval(interval);
+      }
+    };
+  }, [isPlaying, timeSeconds]);
+
+  // Format time display
+  const formatTime = (seconds: number): string => {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    return `${minutes.toString().padStart(2, "0")}:${remainingSeconds.toString().padStart(2, "0")}`;
   };
 
-  const handleCloseSettings = () => {
-    actions.setShowSettings(false);
+  const toggleTimer = () => {
+    setIsPlaying(!isPlaying);
   };
 
-  const handleOpenTimerSettings = () => {
-    actions.setShowTimer(true);
+  const resetTimer = () => {
+    setIsPlaying(false);
+    setTimeSeconds(flowType === FlowType.FOCUS ? 25 * 60 : 5 * 60);
   };
 
-  const handleCloseTimerSettings = () => {
-    actions.setShowTimer(false);
+  const switchMode = () => {
+    const newMode =
+      flowType === FlowType.FOCUS ? FlowType.REST : FlowType.FOCUS;
+    setFlowType(newMode);
+    setIsPlaying(false);
+    setTimeSeconds(newMode === FlowType.FOCUS ? 25 * 60 : 5 * 60);
   };
 
   return (
     <div className="app">
-      {/* Header with icon and controls */}
       <header className="app-header">
-        <div className="header-content">
-          <PomodoroIcon
-            timeSeconds={state.timeSeconds}
-            flowType={state.flowType}
-            className="header-icon"
-          />
-          <h1 className="app-title">Pomodoro Timer</h1>
-          <div className="header-controls">
-            <button
-              className="header-button"
-              onClick={handleOpenTimerSettings}
-              aria-label="Timer settings"
-              type="button"
-            >
-              ⏱️
-            </button>
-            <button
-              className="header-button"
-              onClick={handleOpenSettings}
-              aria-label="Settings"
-              type="button"
-            >
-              ⚙️
-            </button>
-          </div>
-        </div>
+        <h1 className="app-title">Pomodoro Timer</h1>
       </header>
 
-      {/* Main timer view */}
       <main className="app-main">
-        <AnimationView
-          timeSeconds={state.timeSeconds}
-          flowType={state.flowType}
-          isPlaying={state.isPlaying}
-          onToggleTimer={actions.toggleTimer}
-          onResetTimer={actions.resetTimer}
-          onSkipToNext={actions.skipToNext}
-          onAdjustTime={actions.adjustTime}
-          onSnapToNearestMinute={actions.snapToNearestMinute}
-        />
-
-        {/* Progress indicator */}
-        <div className="progress-section">
-          <div className="progress-label">Session Progress</div>
-          <div className="progress-bar">
-            <div
-              className="progress-fill"
-              style={{
-                width: `${Math.min(100, (state.currentCompletedIntervals / state.requiredCompletedIntervals) * 100)}%`,
-              }}
-            />
-          </div>
-          <div className="progress-text">
-            {state.currentCompletedIntervals} /{" "}
-            {state.requiredCompletedIntervals} intervals
-          </div>
-        </div>
-
-        {/* Current session info */}
-        <div className="session-info">
-          <div className="session-card">
-            <div className="session-title">Current Session</div>
-            <div className="session-type">{state.flowType}</div>
-            <div className="session-stats">
-              <div className="stat-item">
-                <span className="stat-label">Completed</span>
-                <span className="stat-value">
-                  {state.currentCompletedIntervals}
-                </span>
-              </div>
-              <div className="stat-item">
-                <span className="stat-label">Remaining</span>
-                <span className="stat-value">
-                  {Math.max(
-                    0,
-                    state.requiredCompletedIntervals -
-                      state.currentCompletedIntervals,
-                  )}
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </main>
-
-      {/* Settings Modal */}
-      <Modal isOpen={state.showSettings} onClose={handleCloseSettings}>
-        <SettingsView state={state} onUpdateSettings={actions.updateSettings} />
-      </Modal>
-
-      {/* Timer Settings Modal */}
-      <Modal isOpen={state.showTimer} onClose={handleCloseTimerSettings}>
-        <div className="timer-settings">
-          <h2 className="modal-title">Timer Settings</h2>
-          <div className="quick-presets">
-            <h3 className="preset-title">Quick Presets</h3>
-            <div className="preset-buttons">
-              <button
-                className="preset-button"
-                onClick={() =>
-                  actions.updateSettings({
-                    focusTimeIntervalMinutes: 25,
-                    restTimeIntervalMinutes: 5,
-                    longRestTimeIntervalMinutes: 15,
-                  })
-                }
-              >
-                Classic (25/5/15)
-              </button>
-              <button
-                className="preset-button"
-                onClick={() =>
-                  actions.updateSettings({
-                    focusTimeIntervalMinutes: 45,
-                    restTimeIntervalMinutes: 15,
-                    longRestTimeIntervalMinutes: 30,
-                  })
-                }
-              >
-                Extended (45/15/30)
-              </button>
-              <button
-                className="preset-button"
-                onClick={() =>
-                  actions.updateSettings({
-                    focusTimeIntervalMinutes: 15,
-                    restTimeIntervalMinutes: 3,
-                    longRestTimeIntervalMinutes: 10,
-                  })
-                }
-              >
-                Short (15/3/10)
-              </button>
-            </div>
+        <div className="timer-container">
+          <div className="timer-display">
+            <div className="time-text">{formatTime(timeSeconds)}</div>
+            <div className="flow-type">{flowType}</div>
           </div>
 
           <div className="timer-controls">
-            <h3 className="controls-title">Manual Adjustment</h3>
-            <div className="time-adjusters">
-              <div className="time-adjuster">
-                <span className="adjuster-label">-5 min</span>
-                <button
-                  className="adjuster-button"
-                  onClick={() => actions.adjustTime(-300)}
-                >
-                  -5m
-                </button>
-              </div>
-              <div className="time-adjuster">
-                <span className="adjuster-label">-1 min</span>
-                <button
-                  className="adjuster-button"
-                  onClick={() => actions.adjustTime(-60)}
-                >
-                  -1m
-                </button>
-              </div>
-              <div className="time-adjuster">
-                <span className="adjuster-label">+1 min</span>
-                <button
-                  className="adjuster-button"
-                  onClick={() => actions.adjustTime(60)}
-                >
-                  +1m
-                </button>
-              </div>
-              <div className="time-adjuster">
-                <span className="adjuster-label">+5 min</span>
-                <button
-                  className="adjuster-button"
-                  onClick={() => actions.adjustTime(300)}
-                >
-                  +5m
-                </button>
-              </div>
-            </div>
+            <button onClick={toggleTimer} className="control-button">
+              {isPlaying ? "⏸️ Pause" : "▶️ Play"}
+            </button>
+            <button onClick={resetTimer} className="control-button">
+              🔄 Reset
+            </button>
+            <button onClick={switchMode} className="control-button">
+              {flowType === FlowType.FOCUS ? "☕ Break" : "🍅 Focus"}
+            </button>
           </div>
         </div>
-      </Modal>
-
-      {/* Footer */}
-      <footer className="app-footer">
-        <p className="footer-text">
-          Drag the timer to adjust time • Click settings to customize
-        </p>
-      </footer>
+      </main>
     </div>
   );
 }
