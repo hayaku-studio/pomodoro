@@ -5,19 +5,24 @@ export class SoundManager {
   private isInitialized = false;
 
   constructor() {
-    this.initializeAudio();
+    // Don't auto-initialize to avoid issues with autoplay policies
+    // Initialize on first user interaction
   }
 
   private async initializeAudio(): Promise<void> {
+    if (this.isInitialized) return;
+
     try {
-      // Create audio context
-      this.audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+      // Create audio context with fallback for webkit
+      const AudioContextClass =
+        window.AudioContext || window.webkitAudioContext;
+      this.audioContext = new AudioContextClass();
 
       // Load the notification sound
       await this.loadNotificationSound();
       this.isInitialized = true;
     } catch (error) {
-      console.error('Failed to initialize audio:', error);
+      console.error("Failed to initialize audio:", error);
     }
   }
 
@@ -32,7 +37,11 @@ export class SoundManager {
       const frequency = 800; // 800Hz bell-like tone
 
       const frameCount = sampleRate * duration;
-      const arrayBuffer = this.audioContext.createBuffer(1, frameCount, sampleRate);
+      const arrayBuffer = this.audioContext.createBuffer(
+        1,
+        frameCount,
+        sampleRate,
+      );
       const channelData = arrayBuffer.getChannelData(0);
 
       // Generate a bell-like sound with decay
@@ -45,27 +54,28 @@ export class SoundManager {
 
       this.audioBuffer = arrayBuffer;
     } catch (error) {
-      console.error('Failed to load notification sound:', error);
+      console.error("Failed to load notification sound:", error);
     }
   }
 
   public async playSound(volume: number = 0.5): Promise<void> {
-    if (!this.isInitialized || !this.audioContext || !this.audioBuffer) {
+    // Initialize audio on first play to comply with autoplay policies
+    if (!this.isInitialized) {
       await this.initializeAudio();
     }
 
     if (!this.audioContext || !this.audioBuffer) {
-      console.warn('Audio system not available');
+      console.warn("Audio system not available");
       return;
     }
 
     try {
-      // Resume audio context if it's suspended (required by some browsers)
-      if (this.audioContext.state === 'suspended') {
+      // Resume audio context if it's suspended (required by browsers for autoplay policy)
+      if (this.audioContext.state === "suspended") {
         await this.audioContext.resume();
       }
 
-      // Create audio source
+      // Create new audio source for each play
       const source = this.audioContext.createBufferSource();
       const gainNode = this.audioContext.createGain();
 
@@ -79,9 +89,8 @@ export class SoundManager {
       // Set buffer and play
       source.buffer = this.audioBuffer;
       source.start();
-
     } catch (error) {
-      console.error('Failed to play sound:', error);
+      console.error("Failed to play sound:", error);
     }
   }
 
@@ -93,7 +102,7 @@ export class SoundManager {
       const arrayBuffer = await response.arrayBuffer();
       this.audioBuffer = await this.audioContext.decodeAudioData(arrayBuffer);
     } catch (error) {
-      console.error('Failed to load custom sound:', error);
+      console.error("Failed to load custom sound:", error);
     }
   }
 }
@@ -105,6 +114,8 @@ export const soundManager = new SoundManager();
 export const playSound = (volume: number = 0.5): void => {
   // Add a small delay like in the original implementation
   setTimeout(() => {
-    soundManager.playSound(volume);
+    soundManager.playSound(volume).catch((error) => {
+      console.warn("Sound playback failed:", error);
+    });
   }, 10);
 };

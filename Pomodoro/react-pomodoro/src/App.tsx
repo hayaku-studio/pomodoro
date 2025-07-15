@@ -1,10 +1,10 @@
-import React from 'react';
-import { usePomodoroState } from './hooks/usePomodoroState';
-import AnimationView from './components/AnimationView';
-import SettingsView from './components/SettingsView';
-import Modal from './components/Modal';
-import PomodoroIcon from './components/PomodoroIcon';
-import './styles/App.css';
+import React from "react";
+import { usePomodoroState } from "./hooks/usePomodoroState";
+import AnimationView from "./components/AnimationView.tsx";
+import SettingsView from "./components/SettingsView.tsx";
+import Modal from "./components/Modal.tsx";
+import PomodoroIcon from "./components/PomodoroIcon.tsx";
+import "./styles/App.css";
 
 function App() {
   const { state, actions } = usePomodoroState();
@@ -72,19 +72,18 @@ function App() {
 
         {/* Progress indicator */}
         <div className="progress-section">
-          <div className="progress-label">
-            Session Progress
-          </div>
+          <div className="progress-label">Session Progress</div>
           <div className="progress-bar">
             <div
               className="progress-fill"
               style={{
-                width: `${Math.min(100, (state.currentCompletedIntervals / state.requiredCompletedIntervals) * 100)}%`
+                width: `${Math.min(100, (state.currentCompletedIntervals / state.requiredCompletedIntervals) * 100)}%`,
               }}
             />
           </div>
           <div className="progress-text">
-            {state.currentCompletedIntervals} / {state.requiredCompletedIntervals} intervals
+            {state.currentCompletedIntervals} /{" "}
+            {state.requiredCompletedIntervals} intervals
           </div>
         </div>
 
@@ -96,12 +95,18 @@ function App() {
             <div className="session-stats">
               <div className="stat-item">
                 <span className="stat-label">Completed</span>
-                <span className="stat-value">{state.currentCompletedIntervals}</span>
+                <span className="stat-value">
+                  {state.currentCompletedIntervals}
+                </span>
               </div>
               <div className="stat-item">
                 <span className="stat-label">Remaining</span>
                 <span className="stat-value">
-                  {Math.max(0, state.requiredCompletedIntervals - state.currentCompletedIntervals)}
+                  {Math.max(
+                    0,
+                    state.requiredCompletedIntervals -
+                      state.currentCompletedIntervals,
+                  )}
                 </span>
               </div>
             </div>
@@ -110,21 +115,12 @@ function App() {
       </main>
 
       {/* Settings Modal */}
-      <Modal
-        isOpen={state.showSettings}
-        onClose={handleCloseSettings}
-      >
-        <SettingsView
-          state={state}
-          onUpdateSettings={actions.updateSettings}
-        />
+      <Modal isOpen={state.showSettings} onClose={handleCloseSettings}>
+        <SettingsView state={state} onUpdateSettings={actions.updateSettings} />
       </Modal>
 
       {/* Timer Settings Modal */}
-      <Modal
-        isOpen={state.showTimer}
-        onClose={handleCloseTimerSettings}
-      >
+      <Modal isOpen={state.showTimer} onClose={handleCloseTimerSettings}>
         <div className="timer-settings">
           <h2 className="modal-title">Timer Settings</h2>
           <div className="quick-presets">
@@ -132,31 +128,37 @@ function App() {
             <div className="preset-buttons">
               <button
                 className="preset-button"
-                onClick={() => actions.updateSettings({
-                  focusTimeIntervalMinutes: 25,
-                  restTimeIntervalMinutes: 5,
-                  longRestTimeIntervalMinutes: 15
-                })}
+                onClick={() =>
+                  actions.updateSettings({
+                    focusTimeIntervalMinutes: 25,
+                    restTimeIntervalMinutes: 5,
+                    longRestTimeIntervalMinutes: 15,
+                  })
+                }
               >
                 Classic (25/5/15)
               </button>
               <button
                 className="preset-button"
-                onClick={() => actions.updateSettings({
-                  focusTimeIntervalMinutes: 45,
-                  restTimeIntervalMinutes: 15,
-                  longRestTimeIntervalMinutes: 30
-                })}
+                onClick={() =>
+                  actions.updateSettings({
+                    focusTimeIntervalMinutes: 45,
+                    restTimeIntervalMinutes: 15,
+                    longRestTimeIntervalMinutes: 30,
+                  })
+                }
               >
                 Extended (45/15/30)
               </button>
               <button
                 className="preset-button"
-                onClick={() => actions.updateSettings({
-                  focusTimeIntervalMinutes: 15,
-                  restTimeIntervalMinutes: 3,
-                  longRestTimeIntervalMinutes: 10
-                })}
+                onClick={() =>
+                  actions.updateSettings({
+                    focusTimeIntervalMinutes: 15,
+                    restTimeIntervalMinutes: 3,
+                    longRestTimeIntervalMinutes: 10,
+                  })
+                }
               >
                 Short (15/3/10)
               </button>

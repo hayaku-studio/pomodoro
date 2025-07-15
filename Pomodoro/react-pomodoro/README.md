@@ -35,7 +35,7 @@ npm install
 
 3. Start the development server:
 ```bash
-npm start
+npm run dev
 ```
 
 4. Open your browser and visit `http://localhost:3000`
@@ -48,7 +48,13 @@ To create a production build:
 npm run build
 ```
 
-The built files will be in the `build` directory, ready for deployment.
+The built files will be in the `dist` directory, ready for deployment.
+
+To preview the production build locally:
+
+```bash
+npm run preview
+```
 
 ## Usage
 
@@ -155,7 +161,7 @@ Custom Web Audio API implementation that:
 - **Lazy Loading**: Components load only when needed
 - **Optimized Animations**: CSS transforms and GPU acceleration
 - **Memory Management**: Proper cleanup of timers and event listeners
-- **Bundle Size**: Optimized build with code splitting
+- **Bundle Size**: Optimized Vite build with code splitting and tree shaking
 
 ## Customization
 
@@ -189,19 +195,21 @@ soundManager.loadCustomSound('/path/to/your/sound.mp3');
 
 The app can be deployed to any static hosting service:
 
-- **Netlify**: `npm run build` then drag the build folder
-- **Vercel**: Connect your GitHub repository
-- **GitHub Pages**: Use the gh-pages package
-- **AWS S3**: Upload build files to an S3 bucket
+- **Netlify**: `npm run build` then drag the dist folder
+- **Vercel**: Connect your GitHub repository (auto-detects Vite)
+- **GitHub Pages**: Use the gh-pages package with dist folder
+- **AWS S3**: Upload dist files to an S3 bucket
 
 ### Environment Variables
 
 Create a `.env` file for configuration:
 
 ```
-REACT_APP_VERSION=1.0.0
-REACT_APP_ANALYTICS_ID=your-id
+VITE_APP_VERSION=1.0.0
+VITE_ANALYTICS_ID=your-id
 ```
+
+Note: Vite uses `VITE_` prefix instead of `REACT_APP_` for environment variables.
 
 ## Contributing
 
