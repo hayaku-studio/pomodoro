@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FlowType } from "./types";
+import AnimationView from "./components/AnimationView";
+import { playSound } from "./utils/sound";
 import "./styles/App.css";
 
 function App() {
@@ -31,6 +33,24 @@ function App() {
     return `${minutes.toString().padStart(2, "0")}:${remainingSeconds.toString().padStart(2, "0")}`;
   };
 
+  // Handle timer completion
+  const handleTimerComplete = () => {
+    playSound(0.5);
+    setIsPlaying(false);
+  };
+
+  // Handle time adjustment from drag
+  const handleAdjustTime = (deltaSeconds: number) => {
+    const newTime = Math.max(0, Math.min(5400, timeSeconds + deltaSeconds)); // Max 90 minutes
+    setTimeSeconds(newTime);
+  };
+
+  // Snap to nearest minute
+  const handleSnapToNearestMinute = () => {
+    const nearestMinute = Math.round(timeSeconds / 60) * 60;
+    setTimeSeconds(nearestMinute);
+  };
+
   const toggleTimer = () => {
     setIsPlaying(!isPlaying);
   };
@@ -55,24 +75,17 @@ function App() {
       </header>
 
       <main className="app-main">
-        <div className="timer-container">
-          <div className="timer-display">
-            <div className="time-text">{formatTime(timeSeconds)}</div>
-            <div className="flow-type">{flowType}</div>
-          </div>
-
-          <div className="timer-controls">
-            <button onClick={toggleTimer} className="control-button">
-              {isPlaying ? "⏸️ Pause" : "▶️ Play"}
-            </button>
-            <button onClick={resetTimer} className="control-button">
-              🔄 Reset
-            </button>
-            <button onClick={switchMode} className="control-button">
-              {flowType === FlowType.FOCUS ? "☕ Break" : "🍅 Focus"}
-            </button>
-          </div>
-        </div>
+        <AnimationView
+          timeSeconds={timeSeconds}
+          flowType={flowType}
+          isPlaying={isPlaying}
+          onToggleTimer={toggleTimer}
+          onResetTimer={resetTimer}
+          onSkipToNext={switchMode}
+          onAdjustTime={handleAdjustTime}
+          onSnapToNearestMinute={handleSnapToNearestMinute}
+          onTimerComplete={handleTimerComplete}
+        />
       </main>
     </div>
   );
