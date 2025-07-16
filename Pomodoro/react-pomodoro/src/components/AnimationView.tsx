@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import { useRive, useStateMachineInput } from "@rive-app/react-canvas";
 import { FlowType } from "../types";
-import { formatTime, updateTimeInput, triggerFinishPing } from "../utils/rive";
+import { formatTime } from "../utils/rive";
 import AnimationButton from "./AnimationButton";
 import "../styles/AnimationView.css";
 
@@ -13,6 +13,7 @@ interface AnimationViewProps {
   onResetTimer: () => void;
   onSkipToNext: () => void;
   onAdjustTime: (deltaSeconds: number) => void;
+  onSetTime: (newTime: number) => void;
   onSnapToNearestMinute: () => void;
   onTimerComplete?: () => void;
 }
@@ -25,29 +26,30 @@ export const AnimationView: React.FC<AnimationViewProps> = ({
   onResetTimer,
   onSkipToNext,
   onAdjustTime,
+  onSetTime,
   onSnapToNearestMinute,
   onTimerComplete,
 }) => {
   const [isDragging, setIsDragging] = useState(false);
-  const [previousTranslation, setPreviousTranslation] = useState(0);
   const [dragStartX, setDragStartX] = useState(0);
+  const [dragStartTime, setDragStartTime] = useState(0);
   const timerDisplayRef = useRef<HTMLDivElement>(null);
   const isTimerGreaterThanZero = timeSeconds > 0;
 
-  // Rive setup for pomodoro animation
+  // Rive setup for pomodoro animation (tomato timer)
   const { rive: pomodoroRive, RiveComponent: PomodoroRiveComponent } = useRive({
     src: "/pomodoro_timer.riv",
     stateMachines: "State Machine",
     artboard: "Pomodoro Timer",
-    autoplay: false,
+    autoplay: true,
   });
 
-  // Rive setup for coffee animation
+  // Rive setup for coffee animation (break timer)
   const { rive: coffeeRive, RiveComponent: CoffeeRiveComponent } = useRive({
     src: "/pomodoro_timer.riv",
     stateMachines: "State Machine",
     artboard: "Coffee Cup Timer",
-    autoplay: false,
+    autoplay: true,
   });
 
   // Get state machine inputs for time control
@@ -78,10 +80,14 @@ export const AnimationView: React.FC<AnimationViewProps> = ({
   useEffect(() => {
     if (timeSeconds === 0 && onTimerComplete) {
       // Trigger the finish ping animation
-      if (flowType === FlowType.FOCUS && pomodoroRive) {
-        triggerFinishPing({ current: pomodoroRive });
-      } else if (flowType === FlowType.REST && coffeeRive) {
-        triggerFinishPing({ current: coffeeRive });
+      try {
+        if (flowType === FlowType.FOCUS && pomodoroRive) {
+          pomodoroRive.triggerInput?.("finishPing");
+        } else if (flowType === FlowType.REST && coffeeRive) {
+          coffeeRive.triggerInput?.("finishPing");
+        }
+      } catch (error) {
+        // Finish ping not available, continue without it
       }
       onTimerComplete();
     }
@@ -92,8 +98,9 @@ export const AnimationView: React.FC<AnimationViewProps> = ({
     if (isPlaying) return; // Don't allow dragging while timer is running
 
     setIsDragging(true);
-    setPreviousTranslation(0);
     setDragStartX(event.clientX);
+    setDragStartTime(timeSeconds);
+    document.body.style.userSelect = "none"; // Prevent text selection
     event.preventDefault();
   };
 
@@ -101,19 +108,20 @@ export const AnimationView: React.FC<AnimationViewProps> = ({
     if (!isDragging) return;
 
     const deltaX = event.clientX - dragStartX;
-    const newTranslation = Math.round(deltaX * 0.5); // Sensitivity factor
-    const incrementalTranslation = newTranslation - previousTranslation;
-    setPreviousTranslation(newTranslation);
+    const sensitivity = 5; // Seconds per pixel
+    const newTime = dragStartTime + deltaX * sensitivity;
 
-    // Adjust time based on drag movement
-    onAdjustTime(-incrementalTranslation);
+    // Set the time directly
+    onSetTime(newTime);
   };
 
   const handleMouseUp = () => {
     if (!isDragging) return;
 
     setIsDragging(false);
-    setPreviousTranslation(0);
+    setDragStartX(0);
+    setDragStartTime(0);
+    document.body.style.userSelect = ""; // Restore text selection
     onSnapToNearestMinute();
   };
 
@@ -122,8 +130,9 @@ export const AnimationView: React.FC<AnimationViewProps> = ({
     if (isPlaying) return;
 
     setIsDragging(true);
-    setPreviousTranslation(0);
     setDragStartX(event.touches[0].clientX);
+    setDragStartTime(timeSeconds);
+    document.body.style.userSelect = "none"; // Prevent text selection
     event.preventDefault();
   };
 
@@ -131,11 +140,11 @@ export const AnimationView: React.FC<AnimationViewProps> = ({
     if (!isDragging || event.touches.length === 0) return;
 
     const deltaX = event.touches[0].clientX - dragStartX;
-    const newTranslation = Math.round(deltaX * 0.5);
-    const incrementalTranslation = newTranslation - previousTranslation;
-    setPreviousTranslation(newTranslation);
+    const sensitivity = 5; // Seconds per pixel
+    const newTime = dragStartTime + deltaX * sensitivity;
 
-    onAdjustTime(-incrementalTranslation);
+    // Set the time directly
+    onSetTime(newTime);
     event.preventDefault();
   };
 
@@ -143,7 +152,9 @@ export const AnimationView: React.FC<AnimationViewProps> = ({
     if (!isDragging) return;
 
     setIsDragging(false);
-    setPreviousTranslation(0);
+    setDragStartX(0);
+    setDragStartTime(0);
+    document.body.style.userSelect = ""; // Restore text selection
     onSnapToNearestMinute();
   };
 
@@ -164,7 +175,7 @@ export const AnimationView: React.FC<AnimationViewProps> = ({
         document.removeEventListener("touchend", handleTouchEnd);
       };
     }
-  }, [isDragging, dragStartX, previousTranslation]);
+  }, [isDragging, dragStartX, dragStartTime]);
 
   const getTimerDisplayClass = () => {
     let className = "timer-display";

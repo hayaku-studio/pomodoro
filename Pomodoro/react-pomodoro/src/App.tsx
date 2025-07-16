@@ -41,14 +41,24 @@ function App() {
 
   // Handle time adjustment from drag
   const handleAdjustTime = (deltaSeconds: number) => {
-    const newTime = Math.max(0, Math.min(5400, timeSeconds + deltaSeconds)); // Max 90 minutes
-    setTimeSeconds(newTime);
+    setTimeSeconds((prevTime) => {
+      const newTime = Math.max(0, Math.min(5400, prevTime + deltaSeconds)); // Max 90 minutes
+      return newTime;
+    });
+  };
+
+  // Handle direct time setting from drag
+  const handleSetTime = (newTime: number) => {
+    const clampedTime = Math.max(0, Math.min(5400, newTime)); // Max 90 minutes
+    setTimeSeconds(clampedTime);
   };
 
   // Snap to nearest minute
   const handleSnapToNearestMinute = () => {
-    const nearestMinute = Math.round(timeSeconds / 60) * 60;
-    setTimeSeconds(nearestMinute);
+    setTimeSeconds((prevTime) => {
+      const nearestMinute = Math.round(prevTime / 60) * 60;
+      return nearestMinute;
+    });
   };
 
   const toggleTimer = () => {
@@ -83,6 +93,7 @@ function App() {
           onResetTimer={resetTimer}
           onSkipToNext={switchMode}
           onAdjustTime={handleAdjustTime}
+          onSetTime={handleSetTime}
           onSnapToNearestMinute={handleSnapToNearestMinute}
           onTimerComplete={handleTimerComplete}
         />
