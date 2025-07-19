@@ -159,3 +159,5 @@ export interface SliderProps {
   onChange: (value: number) => void;
   onChangeComplete?: (value: number) => void;
 }
+
+export type Icon = React.ComponentType<React.ComponentProps<"svg">>;

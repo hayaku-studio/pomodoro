@@ -1,5 +1,12 @@
 import React from "react";
-import { AnimationButtonProps } from "../types";
+import { AnimationButtonProps, Icon } from "../types";
+import {
+  PauseIcon,
+  PlayIcon,
+  BackwardIcon,
+  ForwardIcon,
+  StopIcon,
+} from "@heroicons/react/24/solid";
 
 export const AnimationButton: React.FC<AnimationButtonProps> = ({
   action,
@@ -12,22 +19,24 @@ export const AnimationButton: React.FC<AnimationButtonProps> = ({
     }
   };
 
-  const getIconSymbol = (name: string): string => {
+  const getIconSymbol = (name: string): Icon => {
     switch (name) {
       case "play":
-        return "▶️";
+        return PlayIcon;
       case "pause":
-        return "⏸️";
+        return PauseIcon;
       case "gobackward":
-        return "⏮️";
+        return BackwardIcon;
       case "forward.end":
-        return "⏭️";
+        return ForwardIcon;
       case "stop":
-        return "⏹️";
+        return StopIcon;
       default:
-        return "⏸️";
+        return PauseIcon;
     }
   };
+
+  const IconComponent = getIconSymbol(iconName);
 
   return (
     <button
@@ -44,7 +53,7 @@ export const AnimationButton: React.FC<AnimationButtonProps> = ({
       type="button"
     >
       <span className="text-base leading-none flex items-center justify-center select-none font-system">
-        {getIconSymbol(iconName)}
+        <IconComponent className="h-4 w-4" />
       </span>
     </button>
   );
