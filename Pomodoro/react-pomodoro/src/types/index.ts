@@ -6,11 +6,11 @@ export enum FlowType {
 
 // Time magnification factors for Rive animations
 export enum TimeToMagnify {
-  TIME_0 = "time0",
-  TIME_5 = "time5",
-  TIME_10 = "time10",
-  TIME_15 = "time15",
-  TIME_20 = "time20",
+  TIME_0 = "0 Magnified",
+  TIME_5 = "5 Magnified",
+  TIME_10 = "10 Magnified",
+  TIME_15 = "15 Magnified",
+  TIME_20 = "20 Magnified",
 }
 
 // Main application state interface
