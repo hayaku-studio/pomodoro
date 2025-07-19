@@ -1,4 +1,6 @@
-import { SettingsKeys } from '../types';
+import { SettingsKeys } from "../types";
+
+export { SettingsKeys };
 
 // Default settings that match the Swift implementation
 export const DEFAULT_SETTINGS = {
@@ -27,13 +29,13 @@ export const getSetting = <T extends SettingValue>(key: SettingsKeys): T => {
 
     // Parse the stored value based on the default type
     const defaultValue = DEFAULT_SETTINGS[key];
-    if (typeof defaultValue === 'boolean') {
+    if (typeof defaultValue === "boolean") {
       return JSON.parse(stored) as T;
-    } else if (typeof defaultValue === 'number') {
+    } else if (typeof defaultValue === "number") {
       return parseFloat(stored) as T;
     }
 
-    return stored as T;
+    return stored as unknown as T;
   } catch (error) {
     console.warn(`Failed to get setting ${key}:`, error);
     return DEFAULT_SETTINGS[key] as T;
@@ -45,7 +47,7 @@ export const getSetting = <T extends SettingValue>(key: SettingsKeys): T => {
  */
 export const setSetting = (key: SettingsKeys, value: SettingValue): void => {
   try {
-    if (typeof value === 'boolean') {
+    if (typeof value === "boolean") {
       localStorage.setItem(key, JSON.stringify(value));
     } else {
       localStorage.setItem(key, value.toString());
@@ -60,13 +62,27 @@ export const setSetting = (key: SettingsKeys, value: SettingValue): void => {
  */
 export const getAllSettings = () => {
   return {
-    requiredCompletedIntervals: getSetting<number>(SettingsKeys.REQUIRED_COMPLETED_INTERVALS),
-    automaticallyGoFromFocus: getSetting<boolean>(SettingsKeys.AUTOMATICALLY_GO_FROM_FOCUS),
-    automaticallyGoFromRest: getSetting<boolean>(SettingsKeys.AUTOMATICALLY_GO_FROM_REST),
-    automaticallyGoFromLongRest: getSetting<boolean>(SettingsKeys.AUTOMATICALLY_GO_FROM_LONG_REST),
-    focusTimeIntervalMinutes: getSetting<number>(SettingsKeys.FOCUS_TIME_INTERVAL_MINUTES),
-    restTimeIntervalMinutes: getSetting<number>(SettingsKeys.REST_TIME_INTERVAL_MINUTES),
-    longRestTimeIntervalMinutes: getSetting<number>(SettingsKeys.LONG_REST_TIME_INTERVAL_MINUTES),
+    requiredCompletedIntervals: getSetting<number>(
+      SettingsKeys.REQUIRED_COMPLETED_INTERVALS,
+    ),
+    automaticallyGoFromFocus: getSetting<boolean>(
+      SettingsKeys.AUTOMATICALLY_GO_FROM_FOCUS,
+    ),
+    automaticallyGoFromRest: getSetting<boolean>(
+      SettingsKeys.AUTOMATICALLY_GO_FROM_REST,
+    ),
+    automaticallyGoFromLongRest: getSetting<boolean>(
+      SettingsKeys.AUTOMATICALLY_GO_FROM_LONG_REST,
+    ),
+    focusTimeIntervalMinutes: getSetting<number>(
+      SettingsKeys.FOCUS_TIME_INTERVAL_MINUTES,
+    ),
+    restTimeIntervalMinutes: getSetting<number>(
+      SettingsKeys.REST_TIME_INTERVAL_MINUTES,
+    ),
+    longRestTimeIntervalMinutes: getSetting<number>(
+      SettingsKeys.LONG_REST_TIME_INTERVAL_MINUTES,
+    ),
     pingVolume: getSetting<number>(SettingsKeys.PING_VOLUME),
   };
 };
@@ -76,11 +92,11 @@ export const getAllSettings = () => {
  */
 export const resetAllSettings = (): void => {
   try {
-    Object.keys(DEFAULT_SETTINGS).forEach(key => {
+    Object.keys(DEFAULT_SETTINGS).forEach((key) => {
       localStorage.removeItem(key);
     });
   } catch (error) {
-    console.warn('Failed to reset settings:', error);
+    console.warn("Failed to reset settings:", error);
   }
 };
 
@@ -101,14 +117,17 @@ export const importSettings = (settingsJson: string): boolean => {
     // Validate and set each setting
     Object.entries(settings).forEach(([key, value]) => {
       const settingsKey = key as SettingsKeys;
-      if (settingsKey in DEFAULT_SETTINGS && typeof value === typeof DEFAULT_SETTINGS[settingsKey]) {
+      if (
+        settingsKey in DEFAULT_SETTINGS &&
+        typeof value === typeof DEFAULT_SETTINGS[settingsKey]
+      ) {
         setSetting(settingsKey, value as SettingValue);
       }
     });
 
     return true;
   } catch (error) {
-    console.warn('Failed to import settings:', error);
+    console.warn("Failed to import settings:", error);
     return false;
   }
 };

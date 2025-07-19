@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { FlowType } from "./types";
 import AnimationView from "./components/AnimationView";
 import { playSound } from "./utils/sound";
-import "./styles/App.css";
 
 function App() {
   const [timeSeconds, setTimeSeconds] = useState(25 * 60); // 25 minutes
@@ -26,25 +25,10 @@ function App() {
     };
   }, [isPlaying, timeSeconds]);
 
-  // Format time display
-  const formatTime = (seconds: number): string => {
-    const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = seconds % 60;
-    return `${minutes.toString().padStart(2, "0")}:${remainingSeconds.toString().padStart(2, "0")}`;
-  };
-
   // Handle timer completion
   const handleTimerComplete = () => {
     playSound(0.5);
     setIsPlaying(false);
-  };
-
-  // Handle time adjustment from drag
-  const handleAdjustTime = (deltaSeconds: number) => {
-    setTimeSeconds((prevTime) => {
-      const newTime = Math.max(0, Math.min(5400, prevTime + deltaSeconds)); // Max 90 minutes
-      return newTime;
-    });
   };
 
   // Handle direct time setting from drag
@@ -79,12 +63,16 @@ function App() {
   };
 
   return (
-    <div className="app">
-      <header className="app-header">
-        <h1 className="app-title">Pomodoro Timer</h1>
+    <div className="min-h-screen bg-gradient-to-br from-indigo-500 to-purple-600 flex flex-col font-sans text-gray-800">
+      <header className="bg-white/10 backdrop-blur-sm border-b border-white/20 py-4 sticky top-0 z-50">
+        <div className="max-w-6xl mx-auto px-5 flex items-center justify-center">
+          <h1 className="text-2xl font-light text-white text-center drop-shadow-sm">
+            Pomodoro Timer
+          </h1>
+        </div>
       </header>
 
-      <main className="app-main">
+      <main className="flex-1 flex flex-col items-center justify-center p-10 gap-10">
         <AnimationView
           timeSeconds={timeSeconds}
           flowType={flowType}
@@ -92,7 +80,6 @@ function App() {
           onToggleTimer={toggleTimer}
           onResetTimer={resetTimer}
           onSkipToNext={switchMode}
-          onAdjustTime={handleAdjustTime}
           onSetTime={handleSetTime}
           onSnapToNearestMinute={handleSnapToNearestMinute}
           onTimerComplete={handleTimerComplete}
