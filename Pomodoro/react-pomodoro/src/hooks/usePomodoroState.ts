@@ -1,7 +1,7 @@
-import { useReducer, useEffect, useCallback } from 'react';
-import { PomodoroState, PomodoroAction, ActionType, FlowType } from '../types';
-import { getAllSettings, setSetting, SettingsKeys } from '../utils/settings';
-import { playSound } from '../utils/sound';
+import { useReducer, useEffect, useCallback, useRef } from "react";
+import { PomodoroState, PomodoroAction, ActionType, FlowType } from "../types";
+import { getAllSettings, setSetting, SettingsKeys } from "../utils/settings";
+import { playSound } from "../utils/sound";
 
 // Initial state factory
 const createInitialState = (): PomodoroState => {
@@ -33,7 +33,10 @@ const createInitialState = (): PomodoroState => {
 };
 
 // Reducer function
-const pomodoroReducer = (state: PomodoroState, action: PomodoroAction): PomodoroState => {
+const pomodoroReducer = (
+  state: PomodoroState,
+  action: PomodoroAction,
+): PomodoroState => {
   switch (action.type) {
     case ActionType.SET_TIME_SECONDS:
       return { ...state, timeSeconds: action.payload };
@@ -145,7 +148,15 @@ const pomodoroReducer = (state: PomodoroState, action: PomodoroAction): Pomodoro
 
 // Custom hook
 export const usePomodoroState = () => {
-  const [state, dispatch] = useReducer(pomodoroReducer, null, createInitialState);
+  const [state, dispatch] = useReducer(
+    pomodoroReducer,
+    null,
+    createInitialState,
+  );
+
+  // Use ref to avoid closure issues in callbacks
+  const stateRef = useRef(state);
+  stateRef.current = state;
 
   // Timer effect
   useEffect(() => {
@@ -153,7 +164,10 @@ export const usePomodoroState = () => {
 
     if (state.isPlaying && state.timeSeconds > 0) {
       interval = setInterval(() => {
-        dispatch({ type: ActionType.SET_TIME_SECONDS, payload: state.timeSeconds - 1 });
+        dispatch({
+          type: ActionType.SET_TIME_SECONDS,
+          payload: state.timeSeconds - 1,
+        });
       }, 1000);
     }
 
@@ -183,7 +197,14 @@ export const usePomodoroState = () => {
         }, 1000); // Small delay before auto-advancing
       }
     }
-  }, [state.timeSeconds, state.isPlaying, state.flowType, state.automaticallyGoFromFocus, state.automaticallyGoFromRest, state.pingVolume]);
+  }, [
+    state.timeSeconds,
+    state.isPlaying,
+    state.flowType,
+    state.automaticallyGoFromFocus,
+    state.automaticallyGoFromRest,
+    state.pingVolume,
+  ]);
 
   // Action creators
   const actions = {
@@ -197,7 +218,10 @@ export const usePomodoroState = () => {
 
     toggleTimer: useCallback(() => {
       if (state.timeSeconds > 0) {
-        dispatch({ type: ActionType.SET_IS_PLAYING, payload: !state.isPlaying });
+        dispatch({
+          type: ActionType.SET_IS_PLAYING,
+          payload: !state.isPlaying,
+        });
       }
     }, [state.isPlaying, state.timeSeconds]),
 
@@ -210,35 +234,62 @@ export const usePomodoroState = () => {
     }, []),
 
     setCompletedIntervals: useCallback((intervals: number) => {
-      dispatch({ type: ActionType.SET_COMPLETED_INTERVALS, payload: intervals });
+      dispatch({
+        type: ActionType.SET_COMPLETED_INTERVALS,
+        payload: intervals,
+      });
     }, []),
 
     updateSettings: useCallback((settings: Partial<PomodoroState>) => {
       Object.entries(settings).forEach(([key, value]) => {
         switch (key) {
-          case 'automaticallyGoFromFocus':
-            dispatch({ type: ActionType.SET_AUTOMATICALLY_GO_FROM_FOCUS, payload: value as boolean });
+          case "automaticallyGoFromFocus":
+            dispatch({
+              type: ActionType.SET_AUTOMATICALLY_GO_FROM_FOCUS,
+              payload: value as boolean,
+            });
             break;
-          case 'automaticallyGoFromRest':
-            dispatch({ type: ActionType.SET_AUTOMATICALLY_GO_FROM_REST, payload: value as boolean });
+          case "automaticallyGoFromRest":
+            dispatch({
+              type: ActionType.SET_AUTOMATICALLY_GO_FROM_REST,
+              payload: value as boolean,
+            });
             break;
-          case 'automaticallyGoFromLongRest':
-            dispatch({ type: ActionType.SET_AUTOMATICALLY_GO_FROM_LONG_REST, payload: value as boolean });
+          case "automaticallyGoFromLongRest":
+            dispatch({
+              type: ActionType.SET_AUTOMATICALLY_GO_FROM_LONG_REST,
+              payload: value as boolean,
+            });
             break;
-          case 'requiredCompletedIntervals':
-            dispatch({ type: ActionType.SET_REQUIRED_COMPLETED_INTERVALS, payload: value as number });
+          case "requiredCompletedIntervals":
+            dispatch({
+              type: ActionType.SET_REQUIRED_COMPLETED_INTERVALS,
+              payload: value as number,
+            });
             break;
-          case 'focusTimeIntervalMinutes':
-            dispatch({ type: ActionType.SET_FOCUS_TIME_INTERVAL_MINUTES, payload: value as number });
+          case "focusTimeIntervalMinutes":
+            dispatch({
+              type: ActionType.SET_FOCUS_TIME_INTERVAL_MINUTES,
+              payload: value as number,
+            });
             break;
-          case 'restTimeIntervalMinutes':
-            dispatch({ type: ActionType.SET_REST_TIME_INTERVAL_MINUTES, payload: value as number });
+          case "restTimeIntervalMinutes":
+            dispatch({
+              type: ActionType.SET_REST_TIME_INTERVAL_MINUTES,
+              payload: value as number,
+            });
             break;
-          case 'longRestTimeIntervalMinutes':
-            dispatch({ type: ActionType.SET_LONG_REST_TIME_INTERVAL_MINUTES, payload: value as number });
+          case "longRestTimeIntervalMinutes":
+            dispatch({
+              type: ActionType.SET_LONG_REST_TIME_INTERVAL_MINUTES,
+              payload: value as number,
+            });
             break;
-          case 'pingVolume':
-            dispatch({ type: ActionType.SET_PING_VOLUME, payload: value as number });
+          case "pingVolume":
+            dispatch({
+              type: ActionType.SET_PING_VOLUME,
+              payload: value as number,
+            });
             break;
         }
       });
@@ -256,15 +307,30 @@ export const usePomodoroState = () => {
       dispatch({ type: ActionType.SET_SHOW_TIMER, payload: show });
     }, []),
 
-    adjustTime: useCallback((deltaSeconds: number) => {
-      const newTime = Math.max(0, Math.min(5400, state.timeSeconds + deltaSeconds)); // Max 90 minutes
-      dispatch({ type: ActionType.SET_TIME_SECONDS, payload: newTime });
-    }, [state.timeSeconds]),
+    adjustTime: useCallback(
+      (deltaSeconds: number) => {
+        const newTime = Math.max(
+          0,
+          Math.min(5400, state.timeSeconds + deltaSeconds),
+        ); // Max 90 minutes
+        dispatch({ type: ActionType.SET_TIME_SECONDS, payload: newTime });
+      },
+      [state.timeSeconds],
+    ),
 
     snapToNearestMinute: useCallback(() => {
-      const nearestMinute = Math.round(state.timeSeconds / 60) * 60;
+      const currentTimeSeconds = stateRef.current.timeSeconds;
+      const currentIsPlaying = stateRef.current.isPlaying;
+      const nearestMinute = Math.round(currentTimeSeconds / 60) * 60;
       dispatch({ type: ActionType.SET_TIME_SECONDS, payload: nearestMinute });
-    }, [state.timeSeconds]),
+
+      // Autostart timer if time is greater than 0 and not already playing (matches macOS behavior)
+      if (nearestMinute > 0 && !currentIsPlaying) {
+        setTimeout(() => {
+          dispatch({ type: ActionType.SET_IS_PLAYING, payload: true });
+        }, 10);
+      }
+    }, []),
   };
 
   return {
