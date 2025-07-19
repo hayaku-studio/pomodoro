@@ -1,12 +1,12 @@
 import React from "react";
 import { AnimationButtonProps, Icon } from "../types";
 import {
-  PauseIcon,
-  PlayIcon,
-  BackwardIcon,
-  ForwardIcon,
-  StopIcon,
-} from "@heroicons/react/24/solid";
+  IoPauseOutline,
+  IoPlayOutline,
+  IoPlaySkipForwardOutline,
+  IoRefreshOutline,
+  IoStopOutline,
+} from "react-icons/io5";
 
 export const AnimationButton: React.FC<AnimationButtonProps> = ({
   action,
@@ -22,17 +22,17 @@ export const AnimationButton: React.FC<AnimationButtonProps> = ({
   const getIconSymbol = (name: string): Icon => {
     switch (name) {
       case "play":
-        return PlayIcon;
+        return IoPlayOutline;
       case "pause":
-        return PauseIcon;
+        return IoPauseOutline;
       case "gobackward":
-        return BackwardIcon;
+        return IoRefreshOutline;
       case "forward.end":
-        return ForwardIcon;
+        return IoPlaySkipForwardOutline;
       case "stop":
-        return StopIcon;
+        return IoStopOutline;
       default:
-        return PauseIcon;
+        return IoPauseOutline;
     }
   };
 
