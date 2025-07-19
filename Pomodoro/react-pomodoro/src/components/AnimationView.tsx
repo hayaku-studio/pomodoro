@@ -118,6 +118,19 @@ export const AnimationView: React.FC<AnimationViewProps> = ({
     "20 Magnified",
   );
 
+  // Get trigger inputs for finish ping animation
+  const pomodoroFinishPing = useStateMachineInput(
+    pomodoroRive,
+    "State Machine",
+    "finishPing",
+  );
+
+  const coffeeFinishPing = useStateMachineInput(
+    coffeeRive,
+    "State Machine",
+    "finishPing",
+  );
+
   // Update Rive animations when time changes (includes magnification logic)
   useEffect(() => {
     const timeMinutes = timeSeconds / 60;
@@ -213,19 +226,21 @@ export const AnimationView: React.FC<AnimationViewProps> = ({
   // Trigger finish animation when timer completes
   useEffect(() => {
     if (timeSeconds === 0 && onTimerComplete) {
-      // Trigger the finish ping animation
-      try {
-        if (flowType === FlowType.FOCUS && pomodoroRive) {
-          (pomodoroRive as any).triggerInput?.("finishPing");
-        } else if (flowType === FlowType.REST && coffeeRive) {
-          (coffeeRive as any).triggerInput?.("finishPing");
-        }
-      } catch (error) {
-        // Finish ping not available, continue without it
+      // Trigger the finish ping animation using state machine inputs
+      if (flowType === FlowType.FOCUS && pomodoroFinishPing) {
+        pomodoroFinishPing.fire();
+      } else if (flowType === FlowType.REST && coffeeFinishPing) {
+        coffeeFinishPing.fire();
       }
       onTimerComplete();
     }
-  }, [timeSeconds, flowType, pomodoroRive, coffeeRive, onTimerComplete]);
+  }, [
+    timeSeconds,
+    flowType,
+    pomodoroFinishPing,
+    coffeeFinishPing,
+    onTimerComplete,
+  ]);
 
   // Handle drag gestures for time adjustment
   const handleMouseDown = (event: React.MouseEvent) => {

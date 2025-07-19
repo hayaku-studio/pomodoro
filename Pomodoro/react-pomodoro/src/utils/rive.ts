@@ -65,43 +65,6 @@ export const getTimeToMagnifyValue = (timeToMagnify: TimeToMagnify): number => {
 };
 
 /**
- * Update time inputs for Rive animation
- * This function would be used with the Rive runtime to update animation state
- */
-export const updateTimeInput = (riveRef: any, minutes: number): void => {
-  if (!riveRef?.current) return;
-
-  try {
-    // Set the main time input
-    riveRef.current.setNumberStateAtPath("timeMinutes", minutes);
-
-    // Set magnification factors for each time marker
-    Object.values(TimeToMagnify).forEach((timeToMagnify) => {
-      const magnificationFactor = getMagnificationFactor(
-        timeToMagnify,
-        minutes,
-      );
-      riveRef.current.setNumberStateAtPath(timeToMagnify, magnificationFactor);
-    });
-  } catch (error) {
-    console.warn("Failed to update Rive time input:", error);
-  }
-};
-
-/**
- * Trigger a finish ping animation in Rive
- */
-export const triggerFinishPing = (riveRef: any): void => {
-  if (!riveRef?.current) return;
-
-  try {
-    riveRef.current.triggerInput("finishPing");
-  } catch (error) {
-    console.warn("Failed to trigger finish ping:", error);
-  }
-};
-
-/**
  * Format time in minutes and seconds for display
  */
 export const formatTime = (totalSeconds: number): string => {
