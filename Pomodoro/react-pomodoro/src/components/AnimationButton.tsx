@@ -4,7 +4,7 @@ import {
   IoPauseOutline,
   IoPlayOutline,
   IoPlaySkipForwardOutline,
-  IoRefreshOutline,
+  IoReloadOutline,
   IoStopOutline,
 } from "react-icons/io5";
 
@@ -26,7 +26,7 @@ export const AnimationButton: React.FC<AnimationButtonProps> = ({
       case "pause":
         return IoPauseOutline;
       case "gobackward":
-        return IoRefreshOutline;
+        return IoReloadOutline;
       case "forward.end":
         return IoPlaySkipForwardOutline;
       case "stop":
