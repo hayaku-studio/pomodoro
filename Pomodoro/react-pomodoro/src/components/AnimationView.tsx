@@ -258,7 +258,7 @@ export const AnimationView: React.FC<AnimationViewProps> = ({
 
     const deltaX = event.clientX - dragStartX;
     const sensitivity = 5; // Seconds per pixel
-    const newTime = dragStartTime + deltaX * sensitivity;
+    const newTime = dragStartTime - deltaX * sensitivity;
 
     // Set the time directly
     onSetTime(newTime);
@@ -290,7 +290,7 @@ export const AnimationView: React.FC<AnimationViewProps> = ({
 
     const deltaX = event.touches[0].clientX - dragStartX;
     const sensitivity = 5; // Seconds per pixel
-    const newTime = dragStartTime + deltaX * sensitivity;
+    const newTime = dragStartTime - deltaX * sensitivity;
 
     // Set the time directly
     onSetTime(newTime);
