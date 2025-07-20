@@ -192,7 +192,8 @@ export const RiveTimerAnimation: React.FC<RiveTimerAnimationProps> = ({
   ]);
 
   const getContainerClasses = () => {
-    const baseClasses = "relative w-full h-full flex items-center justify-center";
+    const baseClasses =
+      "relative w-full h-full flex items-center justify-center";
     const draggingClasses = isDragging ? "scale-105" : "";
     return `${baseClasses} ${draggingClasses} ${className}`;
   };
@@ -210,13 +211,6 @@ export const RiveTimerAnimation: React.FC<RiveTimerAnimationProps> = ({
         ) : (
           <CoffeeRiveComponent className="w-full h-full" />
         )}
-      </div>
-
-      {/* Time overlay (optional, can be hidden by passing empty className) */}
-      <div className="absolute inset-0 flex items-center justify-center">
-        <div className="text-center text-white drop-shadow-lg">
-          <div className="text-lg font-semibold">{timeMinutes}m</div>
-        </div>
       </div>
     </div>
   );

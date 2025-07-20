@@ -52,12 +52,10 @@ export const TimerSettingsModal: React.FC<TimerSettingsModalProps> = ({
       x: e.clientX,
       initialTime: timeMinutes,
     };
-    document.addEventListener("mousemove", handleDocumentMouseMove);
-    document.addEventListener("mouseup", handleDocumentMouseUp);
   };
 
-  const handleDocumentMouseMove = (e: MouseEvent) => {
-    if (!isDragging || !dragStartRef.current) return;
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!dragStartRef.current) return;
 
     const deltaX = e.clientX - dragStartRef.current.x;
     const deltaMinutes = Math.floor(deltaX / 6); // Match the macOS implementation (Float(gesture.translation.width)/6)
@@ -67,12 +65,10 @@ export const TimerSettingsModal: React.FC<TimerSettingsModalProps> = ({
     setTimeMinutes(clampedTime);
   };
 
-  const handleDocumentMouseUp = () => {
-    if (isDragging) {
+  const handleMouseUp = () => {
+    if (dragStartRef.current) {
       setIsDragging(false);
       dragStartRef.current = null;
-      document.removeEventListener("mousemove", handleDocumentMouseMove);
-      document.removeEventListener("mouseup", handleDocumentMouseUp);
 
       // Save the time setting like in macOS
       if (selectedFlowType === FlowType.FOCUS) {
@@ -81,14 +77,6 @@ export const TimerSettingsModal: React.FC<TimerSettingsModalProps> = ({
         onUpdateSettings({ restTimeIntervalMinutes: timeMinutes });
       }
     }
-  };
-
-  const handleMouseMove = (_e: React.MouseEvent) => {
-    // This method is kept for React event handling but actual logic moved to document handlers
-  };
-
-  const handleMouseUp = () => {
-    // This method is kept for React event handling but actual logic moved to document handlers
   };
 
   const handleBooleanChange = (key: keyof PomodoroState, value: boolean) => {
@@ -121,9 +109,6 @@ export const TimerSettingsModal: React.FC<TimerSettingsModalProps> = ({
       <div
         className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl max-w-md w-full max-h-[80vh] overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
-        onMouseMove={handleMouseMove}
-        onMouseUp={handleMouseUp}
-        onMouseLeave={handleMouseUp}
       >
         <div className="p-6">
           <div className="flex items-center justify-between mb-6">
@@ -196,6 +181,9 @@ export const TimerSettingsModal: React.FC<TimerSettingsModalProps> = ({
                     : "cursor-grab hover:shadow-xl hover:scale-102"
                 } select-none`}
                 onMouseDown={handleMouseDown}
+                onMouseMove={handleMouseMove}
+                onMouseUp={handleMouseUp}
+                onMouseLeave={handleMouseUp}
                 style={{ userSelect: "none" }}
               >
                 <div className="w-40 h-40 flex items-center justify-center">
@@ -222,13 +210,6 @@ export const TimerSettingsModal: React.FC<TimerSettingsModalProps> = ({
                   <div className="absolute -top-2 -right-2 w-4 h-4 bg-indigo-500 rounded-full animate-ping"></div>
                 )}
               </div>
-            </div>
-
-            {/* Time Display */}
-            <div className="text-center">
-              <span className="text-2xl font-light text-gray-800 dark:text-white">
-                {timeMinutes} {timeMinutes === 1 ? "minute" : "minutes"}
-              </span>
             </div>
 
             {/* Auto-start Toggle */}
