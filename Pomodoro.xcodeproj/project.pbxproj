@@ -22,6 +22,7 @@
 		CAA95F322A2DE7DC00057B26 /* PopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA95F312A2DE7DC00057B26 /* PopupView.swift */; };
 		CAB830E82ACFFEE200EAD88D /* Rive.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB830E72ACFFEE200EAD88D /* Rive.swift */; };
 		CAD1E6682A237A4E00C0C4C8 /* SwiftUIFontIcon in Frameworks */ = {isa = PBXBuildFile; productRef = CAD1E6672A237A4E00C0C4C8 /* SwiftUIFontIcon */; };
+		CAD7C4DF2A4DBF29009003C9 /* FloatingButton in Frameworks */ = {isa = PBXBuildFile; productRef = CAD7C4DE2A4DBF29009003C9 /* FloatingButton */; };
 		CAD7C4E12A4DBF87009003C9 /* FabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD7C4E02A4DBF87009003C9 /* FabView.swift */; };
 		CAD7C4E42A4E2E85009003C9 /* FabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD7C4E32A4E2E85009003C9 /* FabItem.swift */; };
 		CAD7C4E62A4E31A3009003C9 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD7C4E52A4E31A3009003C9 /* Color.swift */; };
@@ -88,6 +89,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CAD1E6682A237A4E00C0C4C8 /* SwiftUIFontIcon in Frameworks */,
+				CAD7C4DF2A4DBF29009003C9 /* FloatingButton in Frameworks */,
 				CAF099072A1FBB8900606A83 /* RiveRuntime in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -269,6 +271,7 @@
 			packageProductDependencies = (
 				CAF099062A1FBB8900606A83 /* RiveRuntime */,
 				CAD1E6672A237A4E00C0C4C8 /* SwiftUIFontIcon */,
+				CAD7C4DE2A4DBF29009003C9 /* FloatingButton */,
 			);
 			productName = Pomodoro;
 			productReference = CAF098F22A1FB1F600606A83 /* Whimsical Pomodoro Timer.app */;
@@ -305,6 +308,7 @@
 			packageReferences = (
 				CAF099052A1FBB8900606A83 /* XCRemoteSwiftPackageReference "rive-ios" */,
 				CAD1E6662A237A4E00C0C4C8 /* XCRemoteSwiftPackageReference "SwiftUIFontIcon" */,
+				CAD7C4DD2A4DBF29009003C9 /* XCRemoteSwiftPackageReference "FloatingButton" */,
 			);
 			productRefGroup = CAF098F32A1FB1F600606A83 /* Products */;
 			projectDirPath = "";
@@ -644,6 +648,14 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		CAD7C4DD2A4DBF29009003C9 /* XCRemoteSwiftPackageReference "FloatingButton" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/exyte/FloatingButton";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		CAF099052A1FBB8900606A83 /* XCRemoteSwiftPackageReference "rive-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/rive-app/rive-ios";
@@ -659,6 +671,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CAD1E6662A237A4E00C0C4C8 /* XCRemoteSwiftPackageReference "SwiftUIFontIcon" */;
 			productName = SwiftUIFontIcon;
+		};
+		CAD7C4DE2A4DBF29009003C9 /* FloatingButton */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CAD7C4DD2A4DBF29009003C9 /* XCRemoteSwiftPackageReference "FloatingButton" */;
+			productName = FloatingButton;
 		};
 		CAF099062A1FBB8900606A83 /* RiveRuntime */ = {
 			isa = XCSwiftPackageProductDependency;

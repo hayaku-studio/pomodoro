@@ -7,6 +7,8 @@
 
 import SwiftUI
 import SwiftUIFontIcon
+import FloatingButton
+
 
 struct FabView: View {
     
@@ -29,26 +31,26 @@ struct FabView: View {
             .onHover { isHovered in
                 isMainButtonHovered = isHovered
             }
-//        FloatingButton(
-//            mainButtonView: button,
-//            buttons: [
-//                FabItem(imageName: "timer", buttonText: "Timer").onTapGesture {
-//                    timerAction()
-//                    closeButtons()
-//                },
-//                FabItem(imageName: "gearshape", buttonText: "Settings").onTapGesture {
-//                    settingsAction()
-//                    closeButtons()
-//                }
-//            ],
-//            isOpen: $showFabMenu
-//        )
-//        .straight()
-//        .direction(.bottom)
-//        .alignment(.left)
-//        .spacing(8)
-//        .initialOpacity(0)
-//        .offset(y: 10)
+        FloatingButton(
+            mainButtonView: button,
+            buttons: [
+                FabItem(imageName: "timer", buttonText: "Timer").onTapGesture {
+                    timerAction()
+                    closeButtons()
+                },
+                FabItem(imageName: "gearshape", buttonText: "Settings").onTapGesture {
+                    settingsAction()
+                    closeButtons()
+                }
+            ],
+            isOpen: $showFabMenu
+        )
+        .straight()
+        .direction(.bottom)
+        .alignment(.left)
+        .spacing(8)
+        .initialOpacity(0)
+        .offset(y: 10)
     }
     
     func closeButtons() {
