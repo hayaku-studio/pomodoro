@@ -139,6 +139,11 @@ body {
     }
 }
 
+/* Utility animations */
+.hover\:scale-102:hover {
+    transform: scale(1.02);
+}
+
 /* Custom slider styles */
 input[type="range"] {
     -webkit-appearance: none;

@@ -39,7 +39,7 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
   return (
     <div
       ref={dropdownRef}
-      className="absolute top-full right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden z-50"
+      className="absolute top-full right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 overflow-hidden z-50 animate-in slide-in-from-top-2 duration-200"
     >
       <div className="py-1">
         <button
@@ -47,10 +47,10 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
             onTimerClick();
             onClose();
           }}
-          className="w-full px-4 py-3 text-left text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-150 flex items-center gap-3"
+          className="w-full px-4 py-3 text-left text-gray-700 dark:text-gray-200 hover:bg-indigo-50 dark:hover:bg-gray-700 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all duration-200 flex items-center gap-3 group"
         >
           <svg
-            className="w-5 h-5"
+            className="w-5 h-5 transition-transform duration-200 group-hover:scale-110"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -69,10 +69,10 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
             onSettingsClick();
             onClose();
           }}
-          className="w-full px-4 py-3 text-left text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-150 flex items-center gap-3"
+          className="w-full px-4 py-3 text-left text-gray-700 dark:text-gray-200 hover:bg-indigo-50 dark:hover:bg-gray-700 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all duration-200 flex items-center gap-3 group"
         >
           <svg
-            className="w-5 h-5"
+            className="w-5 h-5 transition-transform duration-200 group-hover:scale-110"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"

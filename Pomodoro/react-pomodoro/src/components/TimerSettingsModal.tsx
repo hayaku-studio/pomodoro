@@ -1,5 +1,5 @@
-import React from "react";
-import { PomodoroState } from "../types";
+import React, { useState, useRef } from "react";
+import { PomodoroState, FlowType } from "../types";
 
 interface TimerSettingsModalProps {
   isOpen: boolean;
@@ -14,14 +14,102 @@ export const TimerSettingsModal: React.FC<TimerSettingsModalProps> = ({
   state,
   onUpdateSettings,
 }) => {
+  const [selectedFlowType, setSelectedFlowType] = useState<FlowType>(
+    FlowType.FOCUS,
+  );
+  const [timeMinutes, setTimeMinutes] = useState(() => {
+    return selectedFlowType === FlowType.FOCUS
+      ? state.focusTimeIntervalMinutes
+      : state.restTimeIntervalMinutes;
+  });
+  const [isDragging, setIsDragging] = useState(false);
+  const dragStartRef = useRef<{ x: number; initialTime: number } | null>(null);
+
+  // Update time minutes when flow type changes
+  React.useEffect(() => {
+    const newTime =
+      selectedFlowType === FlowType.FOCUS
+        ? state.focusTimeIntervalMinutes
+        : state.restTimeIntervalMinutes;
+    setTimeMinutes(newTime);
+  }, [
+    selectedFlowType,
+    state.focusTimeIntervalMinutes,
+    state.restTimeIntervalMinutes,
+  ]);
+
   if (!isOpen) return null;
 
-  const handleTimeChange = (key: keyof PomodoroState, value: number) => {
-    onUpdateSettings({ [key]: value });
+  const handleFlowTypeChange = (flowType: FlowType) => {
+    setSelectedFlowType(flowType);
+  };
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setIsDragging(true);
+    dragStartRef.current = {
+      x: e.clientX,
+      initialTime: timeMinutes,
+    };
+    document.addEventListener("mousemove", handleDocumentMouseMove);
+    document.addEventListener("mouseup", handleDocumentMouseUp);
+  };
+
+  const handleDocumentMouseMove = (e: MouseEvent) => {
+    if (!isDragging || !dragStartRef.current) return;
+
+    const deltaX = e.clientX - dragStartRef.current.x;
+    const deltaMinutes = Math.floor(deltaX / 6); // Match the macOS implementation (Float(gesture.translation.width)/6)
+    const newTime = dragStartRef.current.initialTime - deltaMinutes; // Negative like in macOS (timeMinutes -= incrementalTranslation)
+
+    const clampedTime = Math.max(1, Math.min(90, newTime));
+    setTimeMinutes(clampedTime);
+  };
+
+  const handleDocumentMouseUp = () => {
+    if (isDragging) {
+      setIsDragging(false);
+      dragStartRef.current = null;
+      document.removeEventListener("mousemove", handleDocumentMouseMove);
+      document.removeEventListener("mouseup", handleDocumentMouseUp);
+
+      // Save the time setting like in macOS
+      if (selectedFlowType === FlowType.FOCUS) {
+        onUpdateSettings({ focusTimeIntervalMinutes: timeMinutes });
+      } else {
+        onUpdateSettings({ restTimeIntervalMinutes: timeMinutes });
+      }
+    }
+  };
+
+  const handleMouseMove = (_e: React.MouseEvent) => {
+    // This method is kept for React event handling but actual logic moved to document handlers
+  };
+
+  const handleMouseUp = () => {
+    // This method is kept for React event handling but actual logic moved to document handlers
   };
 
   const handleBooleanChange = (key: keyof PomodoroState, value: boolean) => {
     onUpdateSettings({ [key]: value });
+  };
+
+  const getAutoStartToggleText = () => {
+    return selectedFlowType === FlowType.FOCUS
+      ? "Start Break Automatically"
+      : "Start Focus Automatically";
+  };
+
+  const getAutoStartToggleValue = () => {
+    return selectedFlowType === FlowType.FOCUS
+      ? state.automaticallyGoFromFocus
+      : state.automaticallyGoFromRest;
+  };
+
+  const getAutoStartToggleKey = (): keyof PomodoroState => {
+    return selectedFlowType === FlowType.FOCUS
+      ? "automaticallyGoFromFocus"
+      : "automaticallyGoFromRest";
   };
 
   return (
@@ -32,6 +120,9 @@ export const TimerSettingsModal: React.FC<TimerSettingsModalProps> = ({
       <div
         className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl max-w-md w-full max-h-[80vh] overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+        onMouseLeave={handleMouseUp}
       >
         <div className="p-6">
           <div className="flex items-center justify-between mb-6">
@@ -42,156 +133,146 @@ export const TimerSettingsModal: React.FC<TimerSettingsModalProps> = ({
               onClick={onClose}
               className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors"
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
               </svg>
             </button>
           </div>
 
           <div className="space-y-6">
-            {/* Focus Time */}
-            <div className="space-y-3">
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                Focus Time (minutes)
-              </label>
-              <div className="flex items-center space-x-3">
-                <input
-                  type="range"
-                  min="1"
-                  max="90"
-                  value={state.focusTimeIntervalMinutes}
-                  onChange={(e) => handleTimeChange('focusTimeIntervalMinutes', parseInt(e.target.value))}
-                  className="flex-1 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
-                />
-                <div className="w-12 text-sm text-gray-600 dark:text-gray-400 text-center">
-                  {state.focusTimeIntervalMinutes}m
-                </div>
+            {/* Flow Type Segmented Control */}
+            <div className="bg-gray-100 dark:bg-gray-700 rounded-lg p-1">
+              <div className="grid grid-cols-2 gap-1">
+                <button
+                  onClick={() => handleFlowTypeChange(FlowType.FOCUS)}
+                  className={`px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
+                    selectedFlowType === FlowType.FOCUS
+                      ? "bg-white dark:bg-gray-600 text-gray-900 dark:text-white shadow-sm"
+                      : "text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
+                  }`}
+                >
+                  Focus
+                </button>
+                <button
+                  onClick={() => handleFlowTypeChange(FlowType.REST)}
+                  className={`px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
+                    selectedFlowType === FlowType.REST
+                      ? "bg-white dark:bg-gray-600 text-gray-900 dark:text-white shadow-sm"
+                      : "text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
+                  }`}
+                >
+                  Break
+                </button>
               </div>
             </div>
 
-            {/* Break Time */}
-            <div className="space-y-3">
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                Break Time (minutes)
-              </label>
-              <div className="flex items-center space-x-3">
-                <input
-                  type="range"
-                  min="1"
-                  max="30"
-                  value={state.restTimeIntervalMinutes}
-                  onChange={(e) => handleTimeChange('restTimeIntervalMinutes', parseInt(e.target.value))}
-                  className="flex-1 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
-                />
-                <div className="w-12 text-sm text-gray-600 dark:text-gray-400 text-center">
-                  {state.restTimeIntervalMinutes}m
-                </div>
-              </div>
-            </div>
-
-            {/* Long Break Time */}
-            <div className="space-y-3">
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                Long Break Time (minutes)
-              </label>
-              <div className="flex items-center space-x-3">
-                <input
-                  type="range"
-                  min="5"
-                  max="60"
-                  value={state.longRestTimeIntervalMinutes}
-                  onChange={(e) => handleTimeChange('longRestTimeIntervalMinutes', parseInt(e.target.value))}
-                  className="flex-1 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
-                />
-                <div className="w-12 text-sm text-gray-600 dark:text-gray-400 text-center">
-                  {state.longRestTimeIntervalMinutes}m
-                </div>
-              </div>
-            </div>
-
-            {/* Sessions until long break */}
-            <div className="space-y-3">
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                Sessions until long break
-              </label>
-              <div className="flex items-center space-x-3">
-                <input
-                  type="range"
-                  min="2"
-                  max="8"
-                  value={state.requiredCompletedIntervals}
-                  onChange={(e) => handleTimeChange('requiredCompletedIntervals', parseInt(e.target.value))}
-                  className="flex-1 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
-                />
-                <div className="w-12 text-sm text-gray-600 dark:text-gray-400 text-center">
-                  {state.requiredCompletedIntervals}
-                </div>
-              </div>
-            </div>
-
-            <hr className="border-gray-200 dark:border-gray-700" />
-
-            {/* Auto-start Settings */}
-            <div className="space-y-4">
+            {/* Timer Instructions */}
+            <div className="space-y-2">
               <h3 className="text-lg font-medium text-gray-800 dark:text-white">
-                Auto-start Settings
+                Set Timer Interval
               </h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                Click and Drag the timer to set.
+              </p>
+            </div>
 
-              <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <label className="text-sm text-gray-700 dark:text-gray-300">
-                    Auto-start break after focus
-                  </label>
-                  <button
-                    onClick={() => handleBooleanChange('automaticallyGoFromFocus', !state.automaticallyGoFromFocus)}
-                    className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-                      state.automaticallyGoFromFocus ? 'bg-indigo-600' : 'bg-gray-200 dark:bg-gray-700'
-                    }`}
+            {/* Draggable Animation */}
+            <div className="flex justify-center">
+              <div
+                className={`relative bg-gray-50 dark:bg-gray-700 rounded-2xl shadow-lg p-4 transition-all duration-200 ${
+                  isDragging
+                    ? "cursor-grabbing scale-105 shadow-2xl bg-gray-100 dark:bg-gray-600"
+                    : "cursor-grab hover:shadow-xl hover:scale-102"
+                } select-none`}
+                onMouseDown={handleMouseDown}
+                style={{ userSelect: "none" }}
+              >
+                <div className="w-40 h-40 flex items-center justify-center">
+                  {/* Animation placeholder - in a real implementation, this would be the Rive animation */}
+                  <div
+                    className={`w-32 h-32 rounded-full bg-gradient-to-br flex items-center justify-center text-white font-bold text-lg shadow-inner transition-all duration-200 ${
+                      selectedFlowType === FlowType.FOCUS
+                        ? "from-red-400 to-orange-500"
+                        : "from-amber-600 to-yellow-500"
+                    } ${isDragging ? "animate-pulse" : ""}`}
                   >
-                    <span
-                      className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                        state.automaticallyGoFromFocus ? 'translate-x-6' : 'translate-x-1'
-                      }`}
-                    />
-                  </button>
+                    {selectedFlowType === FlowType.FOCUS ? (
+                      <div className="text-center">
+                        <div className="text-2xl">🍅</div>
+                        <div className="text-sm font-semibold">
+                          {timeMinutes}m
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="text-center">
+                        <div className="text-2xl">☕</div>
+                        <div className="text-sm font-semibold">
+                          {timeMinutes}m
+                        </div>
+                      </div>
+                    )}
+                  </div>
                 </div>
 
-                <div className="flex items-center justify-between">
-                  <label className="text-sm text-gray-700 dark:text-gray-300">
-                    Auto-start focus after break
-                  </label>
-                  <button
-                    onClick={() => handleBooleanChange('automaticallyGoFromRest', !state.automaticallyGoFromRest)}
-                    className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-                      state.automaticallyGoFromRest ? 'bg-indigo-600' : 'bg-gray-200 dark:bg-gray-700'
-                    }`}
-                  >
-                    <span
-                      className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                        state.automaticallyGoFromRest ? 'translate-x-6' : 'translate-x-1'
-                      }`}
-                    />
-                  </button>
-                </div>
+                {/* Drag hint overlay */}
+                {!isDragging && (
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/10 rounded-2xl opacity-0 hover:opacity-100 transition-opacity duration-200">
+                    <div className="text-white text-xs font-medium bg-black/60 px-3 py-1 rounded-full backdrop-blur-sm">
+                      ← Drag to adjust →
+                    </div>
+                  </div>
+                )}
 
-                <div className="flex items-center justify-between">
-                  <label className="text-sm text-gray-700 dark:text-gray-300">
-                    Auto-start focus after long break
-                  </label>
-                  <button
-                    onClick={() => handleBooleanChange('automaticallyGoFromLongRest', !state.automaticallyGoFromLongRest)}
-                    className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-                      state.automaticallyGoFromLongRest ? 'bg-indigo-600' : 'bg-gray-200 dark:bg-gray-700'
-                    }`}
-                  >
-                    <span
-                      className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                        state.automaticallyGoFromLongRest ? 'translate-x-6' : 'translate-x-1'
-                      }`}
-                    />
-                  </button>
-                </div>
+                {/* Active drag indicator */}
+                {isDragging && (
+                  <div className="absolute -top-2 -right-2 w-4 h-4 bg-indigo-500 rounded-full animate-ping"></div>
+                )}
               </div>
+            </div>
+
+            {/* Time Display */}
+            <div className="text-center">
+              <span className="text-2xl font-light text-gray-800 dark:text-white">
+                {timeMinutes} {timeMinutes === 1 ? "minute" : "minutes"}
+              </span>
+            </div>
+
+            {/* Auto-start Toggle */}
+            <div className="flex items-center justify-between">
+              <label className="text-sm text-gray-700 dark:text-gray-300">
+                {getAutoStartToggleText()}
+              </label>
+              <button
+                onClick={() =>
+                  handleBooleanChange(
+                    getAutoStartToggleKey(),
+                    !getAutoStartToggleValue(),
+                  )
+                }
+                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
+                  getAutoStartToggleValue()
+                    ? "bg-indigo-600"
+                    : "bg-gray-200 dark:bg-gray-700"
+                }`}
+              >
+                <span
+                  className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                    getAutoStartToggleValue()
+                      ? "translate-x-6"
+                      : "translate-x-1"
+                  }`}
+                />
+              </button>
             </div>
           </div>
 
