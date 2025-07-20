@@ -1,4 +1,5 @@
 {
+  "originHash" : "0ea91777947b3c9ac727f644459bd64210fb781070eac22e2349fda25339adac",
   "pins" : [
     {
       "identity" : "floatingbutton",
@@ -28,5 +29,5 @@
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }
