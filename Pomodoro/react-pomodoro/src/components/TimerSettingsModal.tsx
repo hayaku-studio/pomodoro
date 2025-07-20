@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import { PomodoroState, FlowType } from "../types";
+import RiveTimerAnimation from "./RiveTimerAnimation";
 
 interface TimerSettingsModalProps {
   isOpen: boolean;
@@ -198,30 +199,13 @@ export const TimerSettingsModal: React.FC<TimerSettingsModalProps> = ({
                 style={{ userSelect: "none" }}
               >
                 <div className="w-40 h-40 flex items-center justify-center">
-                  {/* Animation placeholder - in a real implementation, this would be the Rive animation */}
-                  <div
-                    className={`w-32 h-32 rounded-full bg-gradient-to-br flex items-center justify-center text-white font-bold text-lg shadow-inner transition-all duration-200 ${
-                      selectedFlowType === FlowType.FOCUS
-                        ? "from-red-400 to-orange-500"
-                        : "from-amber-600 to-yellow-500"
-                    } ${isDragging ? "animate-pulse" : ""}`}
-                  >
-                    {selectedFlowType === FlowType.FOCUS ? (
-                      <div className="text-center">
-                        <div className="text-2xl">🍅</div>
-                        <div className="text-sm font-semibold">
-                          {timeMinutes}m
-                        </div>
-                      </div>
-                    ) : (
-                      <div className="text-center">
-                        <div className="text-2xl">☕</div>
-                        <div className="text-sm font-semibold">
-                          {timeMinutes}m
-                        </div>
-                      </div>
-                    )}
-                  </div>
+                  {/* Rive Animation */}
+                  <RiveTimerAnimation
+                    timeMinutes={timeMinutes}
+                    flowType={selectedFlowType}
+                    isDragging={isDragging}
+                    className="w-full h-full"
+                  />
                 </div>
 
                 {/* Drag hint overlay */}

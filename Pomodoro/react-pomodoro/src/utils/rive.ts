@@ -94,6 +94,63 @@ export const calculateProgressPercentage = (
 };
 
 /**
+ * Update Rive animation time input and magnification factors
+ * This matches the macOS implementation's updateTimeInput function
+ */
+export const updateTimeInput = (
+  riveViewModel: any,
+  minutes: number,
+  magnificationInputs?: {
+    time0?: any;
+    time5?: any;
+    time10?: any;
+    time15?: any;
+    time20?: any;
+  },
+): void => {
+  if (!riveViewModel) return;
+
+  // Set the main time input
+  if (riveViewModel.value !== undefined) {
+    riveViewModel.value = minutes;
+  }
+
+  // Set magnification factors if provided
+  if (magnificationInputs) {
+    if (magnificationInputs.time0) {
+      magnificationInputs.time0.value = getMagnificationFactor(
+        TimeToMagnify.TIME_0,
+        minutes,
+      );
+    }
+    if (magnificationInputs.time5) {
+      magnificationInputs.time5.value = getMagnificationFactor(
+        TimeToMagnify.TIME_5,
+        minutes,
+      );
+    }
+    if (magnificationInputs.time10) {
+      magnificationInputs.time10.value = getMagnificationFactor(
+        TimeToMagnify.TIME_10,
+        minutes,
+      );
+    }
+    if (magnificationInputs.time15) {
+      magnificationInputs.time15.value = getMagnificationFactor(
+        TimeToMagnify.TIME_15,
+        minutes,
+      );
+    }
+    if (magnificationInputs.time20) {
+      magnificationInputs.time20.value = getMagnificationFactor(
+        TimeToMagnify.TIME_20,
+        minutes,
+      );
+    }
+  }
+};
+
+/**
  * Animate progress percentage change with smooth transitions
  */
 export const animateProgressChange = (
