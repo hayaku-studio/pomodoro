@@ -244,8 +244,6 @@ export const AnimationView: React.FC<AnimationViewProps> = ({
 
   // Handle drag gestures for time adjustment
   const handleMouseDown = (event: React.MouseEvent) => {
-    if (isPlaying) return; // Don't allow dragging while timer is running
-
     setIsDragging(true);
     setDragStartX(event.clientX);
     setDragStartTime(timeSeconds);
@@ -276,8 +274,6 @@ export const AnimationView: React.FC<AnimationViewProps> = ({
 
   // Touch support for mobile
   const handleTouchStart = (event: React.TouchEvent) => {
-    if (isPlaying) return;
-
     setIsDragging(true);
     setDragStartX(event.touches[0].clientX);
     setDragStartTime(timeSeconds);
@@ -329,10 +325,9 @@ export const AnimationView: React.FC<AnimationViewProps> = ({
   const getTimerDisplayClasses = () => {
     const baseClasses =
       "absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-44 h-44 rounded-full flex flex-col items-center justify-center transition-all duration-200 z-10 bg-white/10 backdrop-blur-sm border-2 border-white/20";
-    const interactiveClasses =
-      !isPlaying && isTimerGreaterThanZero
-        ? "cursor-grab border-white/30 hover:scale-105 hover:bg-white/15 hover:shadow-lg hover:border-white/40"
-        : "";
+    const interactiveClasses = isTimerGreaterThanZero
+      ? "cursor-grab border-white/30 hover:scale-105 hover:bg-white/15 hover:shadow-lg hover:border-white/40"
+      : "";
     const draggingClasses = isDragging
       ? "cursor-grabbing scale-105 shadow-xl bg-white/10"
       : "";
@@ -375,11 +370,7 @@ export const AnimationView: React.FC<AnimationViewProps> = ({
             onMouseDown={handleMouseDown}
             onTouchStart={handleTouchStart}
             style={{
-              cursor: isDragging
-                ? "grabbing"
-                : !isPlaying && isTimerGreaterThanZero
-                  ? "grab"
-                  : "default",
+              cursor: isDragging ? "grabbing" : "grab",
             }}
           >
             <div className="text-4xl font-light text-white drop-shadow-lg mb-1 leading-none tracking-tight">
@@ -395,8 +386,7 @@ export const AnimationView: React.FC<AnimationViewProps> = ({
             </div>
           </div>
 
-          {/* Drag hint */}
-          {!isDragging && !isPlaying && isTimerGreaterThanZero && (
+          {!isDragging && isTimerGreaterThanZero && (
             <div className="absolute -bottom-12 left-1/2 transform -translate-x-1/2 text-xs text-white/80 text-center opacity-70 transition-opacity duration-300 hover:opacity-100 pointer-events-none whitespace-nowrap bg-black/50 px-3 py-2 rounded-2xl backdrop-blur-sm border border-white/10">
               <span>← Drag to adjust time →</span>
             </div>
