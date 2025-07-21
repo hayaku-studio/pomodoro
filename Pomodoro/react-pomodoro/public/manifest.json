@@ -4,15 +4,15 @@
   "description": "A beautiful Pomodoro timer to boost your productivity",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#667eea",
-  "theme_color": "#667eea",
+  "background_color": "#FF6347",
+  "theme_color": "#FF6347",
   "orientation": "portrait-primary",
   "categories": ["productivity", "utilities", "lifestyle"],
   "lang": "en",
   "dir": "ltr",
   "icons": [
     {
-      "src": "/vite.svg",
+      "src": "/favicon.svg",
       "sizes": "32x32",
       "type": "image/svg+xml",
       "purpose": "any maskable"
@@ -50,11 +50,7 @@
       "form_factor": "wide"
     }
   ],
-  "features": [
-    "timer",
-    "notifications",
-    "offline"
-  ],
+  "features": ["timer", "notifications", "offline"],
   "scope": "/",
   "id": "pomodoro-timer",
   "prefer_related_applications": false,
