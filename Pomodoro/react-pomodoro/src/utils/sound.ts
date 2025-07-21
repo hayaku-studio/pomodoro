@@ -30,8 +30,21 @@ export class SoundManager {
     if (!this.audioContext) return;
 
     try {
-      // For now, we'll generate a simple bell-like tone
-      // In a real implementation, you could load an actual audio file
+      const response = await fetch("/Reception Bell.mp3");
+      const arrayBuffer = await response.arrayBuffer();
+      this.audioBuffer = await this.audioContext.decodeAudioData(arrayBuffer);
+    } catch (error) {
+      console.error("Failed to load Reception Bell sound:", error);
+      // Fallback to generated sound if file loading fails
+      await this.generateFallbackSound();
+    }
+  }
+
+  private async generateFallbackSound(): Promise<void> {
+    if (!this.audioContext) return;
+
+    try {
+      // Generate a simple bell-like tone as fallback
       const sampleRate = this.audioContext.sampleRate;
       const duration = 0.3; // 300ms
       const frequency = 800; // 800Hz bell-like tone
@@ -54,7 +67,7 @@ export class SoundManager {
 
       this.audioBuffer = arrayBuffer;
     } catch (error) {
-      console.error("Failed to load notification sound:", error);
+      console.error("Failed to generate fallback sound:", error);
     }
   }
 
@@ -83,7 +96,8 @@ export class SoundManager {
       source.connect(gainNode);
       gainNode.connect(this.audioContext.destination);
 
-      // Set volume (normalized to 0-1 range, then divided by 5 like in original)
+      // Set volume (normalized to 0-1 range, then divided by 5 like in original macOS app)
+      // This matches the Swift implementation: player?.volume = volume/5
       gainNode.gain.value = Math.max(0, Math.min(1, volume)) / 5;
 
       // Set buffer and play
@@ -112,7 +126,8 @@ export const soundManager = new SoundManager();
 
 // Convenience function that matches the original Swift implementation
 export const playSound = (volume: number = 0.5): void => {
-  // Add a small delay like in the original implementation
+  // Add a small delay like in the original Swift implementation
+  // TODO: understand async better and check if the 10ms delay actually helps the animation smoothness
   setTimeout(() => {
     soundManager.playSound(volume).catch((error) => {
       console.warn("Sound playback failed:", error);
