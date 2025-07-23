@@ -4,6 +4,12 @@ import { FlowType, TimeToMagnify } from "../types";
 import { formatTime, getMagnificationFactor } from "../utils/rive";
 import AnimationButton from "./AnimationButton";
 
+// Safari detection utility
+const isSafari = () => {
+  if (typeof window === "undefined") return false;
+  return /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+};
+
 interface AnimationViewProps {
   timeSeconds: number;
   flowType: FlowType;
@@ -15,6 +21,7 @@ interface AnimationViewProps {
   onSetTime: (newTime: number) => void;
   onSnapToNearestMinute: () => void;
   onTimerComplete?: () => void;
+  hideOverlay?: boolean; // Option to completely hide the timer overlay for testing
 }
 
 export const AnimationView: React.FC<AnimationViewProps> = ({
@@ -28,12 +35,21 @@ export const AnimationView: React.FC<AnimationViewProps> = ({
   onSetTime,
   onSnapToNearestMinute,
   onTimerComplete,
+  hideOverlay = false,
 }) => {
   const [isDragging, setIsDragging] = useState(false);
   const [dragStartX, setDragStartX] = useState(0);
   const [dragStartTime, setDragStartTime] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
   const timerDisplayRef = useRef<HTMLDivElement>(null);
   const isTimerGreaterThanZero = timeSeconds > 0;
+  const safariDetected = isSafari();
+
+  // Debug logging for Safari detection
+  useEffect(() => {
+    console.log("Safari detected:", safariDetected);
+    console.log("User agent:", navigator.userAgent);
+  }, [safariDetected]);
 
   // Rive setup for pomodoro animation (tomato timer)
   const { rive: pomodoroRive, RiveComponent: PomodoroRiveComponent } = useRive({
@@ -324,19 +340,50 @@ export const AnimationView: React.FC<AnimationViewProps> = ({
 
   const getTimerDisplayClasses = () => {
     const baseClasses =
-      "absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-44 h-44 rounded-full flex flex-col items-center justify-center transition-all duration-200 z-10 bg-white/10 backdrop-blur-sm border-2 border-white/20";
+      "absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-44 h-44 rounded-full flex flex-col items-center justify-center transition-all duration-200 z-10";
+
+    // For Safari, only show overlay when actively interacting to avoid visual conflicts
+    // For other browsers, use subtle background
+    const shouldShowOverlay = safariDetected ? isDragging || isHovered : true;
+    const shouldShowBackground =
+      isDragging || isHovered || (!safariDetected && isTimerGreaterThanZero);
+
+    // Debug logging for overlay behavior
+    if (process.env.NODE_ENV === "development") {
+      console.log(
+        "Safari detected:",
+        safariDetected,
+        "shouldShowOverlay:",
+        shouldShowOverlay,
+        "shouldShowBackground:",
+        shouldShowBackground,
+      );
+    }
+
+    if (!shouldShowOverlay && safariDetected) {
+      return `${baseClasses} border-transparent opacity-0 hover:opacity-100`;
+    }
+
+    const backgroundClasses = shouldShowBackground
+      ? safariDetected
+        ? "bg-white/2 backdrop-blur-sm border border-white/5"
+        : "bg-white/5 backdrop-blur-sm border-2 border-white/10"
+      : "border border-transparent";
+
     const interactiveClasses = isTimerGreaterThanZero
-      ? "cursor-grab border-white/30 hover:scale-105 hover:bg-white/15 hover:shadow-lg hover:border-white/40"
+      ? "cursor-grab hover:scale-105 hover:bg-white/8 hover:shadow-lg hover:border-white/25"
       : "";
     const draggingClasses = isDragging
-      ? "cursor-grabbing scale-105 shadow-xl bg-white/10"
+      ? "cursor-grabbing scale-105 shadow-xl bg-white/12 border-white/35"
       : "";
     const urgentClasses =
       timeSeconds <= 30 && timeSeconds > 0 ? "animate-pulse shadow-lg" : "";
     const focusClasses =
-      flowType === FlowType.FOCUS ? "border-red-400/20" : "border-amber-700/20";
+      flowType === FlowType.FOCUS
+        ? "hover:border-red-400/25"
+        : "hover:border-amber-700/25";
 
-    return `${baseClasses} ${interactiveClasses} ${draggingClasses} ${urgentClasses} ${focusClasses}`;
+    return `${baseClasses} ${backgroundClasses} ${interactiveClasses} ${draggingClasses} ${urgentClasses} ${focusClasses}`;
   };
 
   const getAnimationClasses = () => {
@@ -357,34 +404,77 @@ export const AnimationView: React.FC<AnimationViewProps> = ({
           {/* Rive Animation */}
           <div className="absolute top-0 left-0 w-full h-full z-[1] pointer-events-none">
             {flowType === FlowType.FOCUS ? (
-              <PomodoroRiveComponent className="w-full h-full rounded-full" />
+              <PomodoroRiveComponent
+                className="w-full h-full rounded-full"
+                style={{
+                  backgroundColor: "transparent",
+                  ...(safariDetected && {
+                    WebkitTransform: "translateZ(0)",
+                    transform: "translateZ(0)",
+                  }),
+                }}
+              />
             ) : (
-              <CoffeeRiveComponent className="w-full h-full rounded-full" />
+              <CoffeeRiveComponent
+                className="w-full h-full rounded-full"
+                style={{
+                  backgroundColor: "transparent",
+                  ...(safariDetected && {
+                    WebkitTransform: "translateZ(0)",
+                    transform: "translateZ(0)",
+                  }),
+                }}
+              />
             )}
           </div>
 
           {/* Interactive overlay for dragging */}
-          <div
-            ref={timerDisplayRef}
-            className={getTimerDisplayClasses()}
-            onMouseDown={handleMouseDown}
-            onTouchStart={handleTouchStart}
-            style={{
-              cursor: isDragging ? "grabbing" : "grab",
-            }}
-          >
-            <div className="text-4xl font-light text-white drop-shadow-lg mb-1 leading-none tracking-tight">
-              {formatTime(timeSeconds)}
+          {!hideOverlay && (
+            <div
+              ref={timerDisplayRef}
+              className={getTimerDisplayClasses()}
+              onMouseDown={handleMouseDown}
+              onTouchStart={handleTouchStart}
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+              style={{
+                cursor: isDragging ? "grabbing" : "grab",
+                // Safari-specific styles for better compatibility
+                ...(safariDetected && {
+                  WebkitBackdropFilter:
+                    isDragging || isHovered ? "blur(2px)" : "none",
+                  WebkitTransform: "translateZ(0)", // Force hardware acceleration
+                  willChange: "transform, opacity",
+                }),
+              }}
+            >
+              <div
+                className="text-4xl font-light text-white drop-shadow-lg mb-1 leading-none tracking-tight"
+                style={
+                  safariDetected
+                    ? { textShadow: "0 2px 4px rgba(0,0,0,0.8)" }
+                    : {}
+                }
+              >
+                {formatTime(timeSeconds)}
+              </div>
+              <div
+                className="flex items-center gap-1 text-xs font-medium text-white/90 drop-shadow-sm uppercase tracking-wider"
+                style={
+                  safariDetected
+                    ? { textShadow: "0 1px 2px rgba(0,0,0,0.8)" }
+                    : {}
+                }
+              >
+                {flowType === FlowType.FOCUS ? (
+                  <span className="text-sm leading-none">🍅</span>
+                ) : (
+                  <span className="text-sm leading-none">☕</span>
+                )}
+                <span className="text-[11px]">{flowType}</span>
+              </div>
             </div>
-            <div className="flex items-center gap-1 text-xs font-medium text-white/90 drop-shadow-sm uppercase tracking-wider">
-              {flowType === FlowType.FOCUS ? (
-                <span className="text-sm leading-none">🍅</span>
-              ) : (
-                <span className="text-sm leading-none">☕</span>
-              )}
-              <span className="text-[11px]">{flowType}</span>
-            </div>
-          </div>
+          )}
 
           {!isDragging && isTimerGreaterThanZero && (
             <div className="absolute -bottom-12 left-1/2 transform -translate-x-1/2 text-xs text-white/80 text-center opacity-70 transition-opacity duration-300 hover:opacity-100 pointer-events-none whitespace-nowrap bg-black/50 px-3 py-2 rounded-2xl backdrop-blur-sm border border-white/10">
