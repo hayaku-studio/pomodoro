@@ -128,7 +128,7 @@ export const AnimationView: React.FC<AnimationViewProps> = ({
         }}
       >
         {!isDragging && !isPlaying ? (
-          <div className="h-9 flex justify-center text-xs text-white/80 text-center opacity-70 transition-opacity duration-300 hover:opacity-100 pointer-events-none whitespace-nowrap bg-black/50 px-3 py-2 rounded-2xl backdrop-blur-sm border border-white/10">
+          <div className="h-9 flex justify-center text-xs text-white/80 dark:text-gray-300/80 text-center opacity-70 transition-opacity duration-300 hover:opacity-100 pointer-events-none whitespace-nowrap bg-black/50 dark:bg-gray-800/70 px-3 py-2 rounded-2xl backdrop-blur-sm border border-white/10 dark:border-gray-600/20">
             <span>← Drag to adjust time →</span>
           </div>
         ) : (

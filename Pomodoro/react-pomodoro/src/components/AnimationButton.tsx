@@ -44,8 +44,8 @@ export const AnimationButton: React.FC<AnimationButtonProps> = ({
         flex items-center justify-center w-10 h-10 border-none rounded-full
         text-white cursor-pointer
         transition-all duration-200 shadow-md relative overflow-hidden
-        ${!isDisabled ? "hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0 active:shadow-sm focus:outline-none focus:ring-4 focus:ring-red-400/40" : ""}
-        ${isDisabled ? "bg-gradient-to-br from-gray-400 to-gray-500 cursor-not-allowed opacity-60" : ""}
+        ${!isDisabled ? "hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0 active:shadow-sm focus:outline-none focus:ring-4 focus:ring-red-400/40 dark:focus:ring-red-500/40" : ""}
+        ${isDisabled ? "bg-gradient-to-br from-gray-400 to-gray-500 dark:from-gray-600 dark:to-gray-700 cursor-not-allowed opacity-60" : ""}
       `}
       style={
         !isDisabled
