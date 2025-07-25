@@ -231,7 +231,7 @@ export const TimerSettingsModal: React.FC<TimerSettingsModalProps> = ({
                 }
                 className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors hover:cursor-pointer ${
                   getAutoStartToggleValue()
-                    ? "bg-indigo-600"
+                    ? "bg-green-500"
                     : "bg-gray-200 dark:bg-gray-700"
                 }`}
               >
