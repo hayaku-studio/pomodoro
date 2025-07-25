@@ -69,7 +69,7 @@ export const VolumeSettingsModal: React.FC<VolumeSettingsModalProps> = ({
                       type="range"
                       min="0"
                       max="1"
-                      step="0.1"
+                      step="0.01"
                       value={state.pingVolume}
                       onChange={(e) =>
                         handleVolumeChange(parseFloat(e.target.value))
