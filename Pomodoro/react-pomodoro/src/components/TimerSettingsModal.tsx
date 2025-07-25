@@ -178,7 +178,7 @@ export const TimerSettingsModal: React.FC<TimerSettingsModalProps> = ({
                 Set Timer Interval
               </h3>
               <p className="text-sm text-gray-600 dark:text-gray-400">
-                Click and Drag the timer to set.
+                Drag the timer to set.
               </p>
             </div>
 
