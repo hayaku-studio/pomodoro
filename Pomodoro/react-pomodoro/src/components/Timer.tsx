@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useRive, useStateMachineInput } from "@rive-app/react-canvas";
 import { FlowType, TimeToMagnify } from "../types";
 import { getMagnificationFactor } from "../utils/rive";
@@ -16,6 +16,8 @@ export const Timer: React.FC<TimerProps> = ({
   onTimerComplete,
   className = "w-56 h-56 rounded-full",
 }) => {
+  // Track previous time to detect actual timer completion
+  const prevTimeSeconds = useRef<number>(timeSeconds);
   // Rive setup for pomodoro animation (tomato timer)
   const { rive: pomodoroRive, RiveComponent: PomodoroRiveComponent } = useRive({
     src: "/pomodoro_timer.riv",
@@ -206,7 +208,8 @@ export const Timer: React.FC<TimerProps> = ({
 
   // Trigger finish animation when timer completes
   useEffect(() => {
-    if (timeSeconds === 0 && onTimerComplete) {
+    // Only fire animation if timer actually completed (went from > 0 to 0)
+    if (timeSeconds === 0 && prevTimeSeconds.current > 0 && onTimerComplete) {
       // Trigger the finish ping animation using state machine inputs
       if (flowType === FlowType.FOCUS && pomodoroFinishPing) {
         pomodoroFinishPing.fire();
@@ -215,6 +218,9 @@ export const Timer: React.FC<TimerProps> = ({
       }
       onTimerComplete();
     }
+
+    // Update previous time reference
+    prevTimeSeconds.current = timeSeconds;
   }, [
     timeSeconds,
     flowType,
