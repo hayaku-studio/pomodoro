@@ -1,7 +1,11 @@
 import React from "react";
 import { PomodoroState } from "../types";
 import { playSound } from "../utils/sound";
-import { IoCloseOutline, IoVolumeHighOutline } from "react-icons/io5";
+import {
+  IoCloseOutline,
+  IoVolumeHighOutline,
+  IoVolumeOffOutline,
+} from "react-icons/io5";
 
 interface VolumeSettingsModalProps {
   isOpen: boolean;
@@ -58,7 +62,7 @@ export const VolumeSettingsModal: React.FC<VolumeSettingsModalProps> = ({
 
               <div className="space-y-3">
                 <div className="flex items-center space-x-4">
-                  <IoVolumeHighOutline className="w-5 h-5 text-gray-400" />
+                  <IoVolumeOffOutline className="w-5 h-5 text-gray-400" />
 
                   <div className="flex-1">
                     <input
@@ -84,9 +88,7 @@ export const VolumeSettingsModal: React.FC<VolumeSettingsModalProps> = ({
                     />
                   </div>
 
-                  <div className="w-12 text-sm text-gray-600 dark:text-gray-400 text-center">
-                    {Math.round(state.pingVolume * 100)}%
-                  </div>
+                  <IoVolumeHighOutline className="w-5 h-5 text-gray-400" />
                 </div>
               </div>
             </div>
