@@ -34,7 +34,7 @@ function App() {
           <div className="relative">
             <button
               onClick={() => actions.setShowFabMenu(!state.showFabMenu)}
-              className="text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors duration-200 p-2 rounded-lg hover:bg-gray-200/50 dark:hover:bg-gray-700/50"
+              className="text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors duration-200 p-2 rounded-lg hover:bg-gray-200/50 dark:hover:bg-gray-700/50 hover:cursor-pointer"
               aria-label="Menu"
             >
               <svg

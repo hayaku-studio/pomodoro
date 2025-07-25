@@ -138,7 +138,7 @@ export const TimerSettingsModal: React.FC<TimerSettingsModalProps> = ({
             </h2>
             <button
               onClick={onClose}
-              className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors"
+              className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors hover:cursor-pointer"
             >
               <svg
                 className="w-6 h-6"
@@ -165,7 +165,7 @@ export const TimerSettingsModal: React.FC<TimerSettingsModalProps> = ({
                   className={`px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
                     selectedFlowType === FlowType.FOCUS
                       ? "bg-white dark:bg-gray-600 text-gray-900 dark:text-white shadow-sm"
-                      : "text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
+                      : "text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:cursor-pointer"
                   }`}
                 >
                   Focus
@@ -175,7 +175,7 @@ export const TimerSettingsModal: React.FC<TimerSettingsModalProps> = ({
                   className={`px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
                     selectedFlowType === FlowType.REST
                       ? "bg-white dark:bg-gray-600 text-gray-900 dark:text-white shadow-sm"
-                      : "text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
+                      : "text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:cursor-pointer"
                   }`}
                 >
                   Break
@@ -240,7 +240,7 @@ export const TimerSettingsModal: React.FC<TimerSettingsModalProps> = ({
                     !getAutoStartToggleValue(),
                   )
                 }
-                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
+                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors hover:cursor-pointer ${
                   getAutoStartToggleValue()
                     ? "bg-indigo-600"
                     : "bg-gray-200 dark:bg-gray-700"

@@ -47,7 +47,7 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
             onTimerClick();
             onClose();
           }}
-          className="w-full px-4 py-3 text-left text-gray-700 dark:text-gray-200 hover:bg-red-50 dark:hover:bg-gray-700 hover:text-red-600 dark:hover:text-red-400 transition-all duration-200 flex items-center gap-3 group"
+          className="w-full px-4 py-3 text-left text-gray-700 dark:text-gray-200 hover:bg-red-50 dark:hover:bg-gray-700 hover:text-red-600 dark:hover:text-red-400 transition-all duration-200 flex items-center gap-3 group hover:cursor-pointer"
         >
           <svg
             className="w-5 h-5 transition-transform duration-200 group-hover:scale-110"
@@ -69,7 +69,7 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
             onSettingsClick();
             onClose();
           }}
-          className="w-full px-4 py-3 text-left text-gray-700 dark:text-gray-200 hover:bg-red-50 dark:hover:bg-gray-700 hover:text-red-600 dark:hover:text-red-400 transition-all duration-200 flex items-center gap-3 group"
+          className="w-full px-4 py-3 text-left text-gray-700 dark:text-gray-200 hover:bg-red-50 dark:hover:bg-gray-700 hover:text-red-600 dark:hover:text-red-400 transition-all duration-200 flex items-center gap-3 group hover:cursor-pointer"
         >
           <svg
             className="w-5 h-5 transition-transform duration-200 group-hover:scale-110"

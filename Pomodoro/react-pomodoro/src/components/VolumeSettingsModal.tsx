@@ -42,7 +42,7 @@ export const VolumeSettingsModal: React.FC<VolumeSettingsModalProps> = ({
             </h2>
             <button
               onClick={onClose}
-              className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors"
+              className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors hover:cursor-pointer"
             >
               <svg
                 className="w-6 h-6"
