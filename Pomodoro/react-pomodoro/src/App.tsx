@@ -3,6 +3,7 @@ import DropdownMenu from "./components/DropdownMenu";
 import TimerSettingsModal from "./components/TimerSettingsModal";
 import VolumeSettingsModal from "./components/VolumeSettingsModal";
 import { usePomodoroState } from "./hooks/usePomodoroState";
+import { IoMenuOutline } from "react-icons/io5";
 
 function App() {
   const { state, actions } = usePomodoroState();
@@ -37,19 +38,7 @@ function App() {
               className="text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors duration-200 p-2 rounded-lg hover:bg-gray-200/50 dark:hover:bg-gray-700/50 hover:cursor-pointer"
               aria-label="Menu"
             >
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              </svg>
+              <IoMenuOutline className="w-6 h-6" />
             </button>
             <DropdownMenu
               isOpen={state.showFabMenu}
