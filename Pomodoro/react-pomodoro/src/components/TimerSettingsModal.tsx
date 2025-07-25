@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { PomodoroState, FlowType } from "../types";
 import Timer from "./Timer";
 
@@ -24,7 +24,8 @@ export const TimerSettingsModal: React.FC<TimerSettingsModalProps> = ({
       : state.restTimeIntervalMinutes;
   });
   const [isDragging, setIsDragging] = useState(false);
-  const dragStartRef = useRef<{ x: number; initialTime: number } | null>(null);
+  const [dragStartX, setDragStartX] = useState(0);
+  const [dragStartTime, setDragStartTime] = useState(0);
 
   // Update time minutes when flow type changes
   React.useEffect(() => {
@@ -39,6 +40,26 @@ export const TimerSettingsModal: React.FC<TimerSettingsModalProps> = ({
     state.restTimeIntervalMinutes,
   ]);
 
+  // Mouse event listeners
+  useEffect(() => {
+    if (isDragging) {
+      document.addEventListener("mousemove", handleMouseMove);
+      document.addEventListener("mouseup", handleMouseUp);
+
+      return () => {
+        document.removeEventListener("mousemove", handleMouseMove);
+        document.removeEventListener("mouseup", handleMouseUp);
+      };
+    }
+  }, [
+    isDragging,
+    dragStartX,
+    dragStartTime,
+    timeMinutes,
+    selectedFlowType,
+    onUpdateSettings,
+  ]);
+
   if (!isOpen) return null;
 
   const handleFlowTypeChange = (flowType: FlowType) => {
@@ -48,37 +69,37 @@ export const TimerSettingsModal: React.FC<TimerSettingsModalProps> = ({
   const handleMouseDown = (e: React.MouseEvent) => {
     e.preventDefault();
     setIsDragging(true);
-    dragStartRef.current = {
-      x: e.clientX,
-      initialTime: timeMinutes,
-    };
+    setDragStartX(e.clientX);
+    setDragStartTime(timeMinutes);
+    document.body.style.userSelect = "none"; // Prevent text selection
   };
 
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!dragStartRef.current) return;
+  const handleMouseMove = (event: MouseEvent) => {
+    if (!isDragging) return;
 
-    const deltaX = e.clientX - dragStartRef.current.x;
+    const deltaX = event.clientX - dragStartX;
     const deltaMinutes = Math.floor(deltaX / 6); // Match the macOS implementation (Float(gesture.translation.width)/6)
-    const newTime = dragStartRef.current.initialTime - deltaMinutes; // Negative like in macOS (timeMinutes -= incrementalTranslation)
+    const newTime = dragStartTime - deltaMinutes; // Negative like in macOS (timeMinutes -= incrementalTranslation)
 
     const clampedTime = Math.max(1, Math.min(90, newTime));
     setTimeMinutes(clampedTime);
   };
 
   const handleMouseUp = () => {
-    if (dragStartRef.current) {
-      setIsDragging(false);
-      dragStartRef.current = null;
+    if (!isDragging) return;
 
-      // Save the time setting like in macOS
-      if (selectedFlowType === FlowType.FOCUS) {
-        onUpdateSettings({ focusTimeIntervalMinutes: timeMinutes });
-      } else {
-        onUpdateSettings({ restTimeIntervalMinutes: timeMinutes });
-      }
+    setIsDragging(false);
+    setDragStartX(0);
+    setDragStartTime(0);
+    document.body.style.userSelect = ""; // Restore text selection
+
+    // Save the time setting like in macOS
+    if (selectedFlowType === FlowType.FOCUS) {
+      onUpdateSettings({ focusTimeIntervalMinutes: timeMinutes });
+    } else {
+      onUpdateSettings({ restTimeIntervalMinutes: timeMinutes });
     }
   };
-
   const handleBooleanChange = (key: keyof PomodoroState, value: boolean) => {
     onUpdateSettings({ [key]: value });
   };
@@ -181,9 +202,6 @@ export const TimerSettingsModal: React.FC<TimerSettingsModalProps> = ({
                     : "cursor-grab hover:shadow-xl hover:scale-102"
                 } select-none`}
                 onMouseDown={handleMouseDown}
-                onMouseMove={handleMouseMove}
-                onMouseUp={handleMouseUp}
-                onMouseLeave={handleMouseUp}
                 style={{ userSelect: "none" }}
               >
                 <div className="w-40 h-40 flex items-center justify-center">
