@@ -117,7 +117,7 @@ export const AnimationView: React.FC<AnimationViewProps> = ({
   }, [isDragging, dragStartX, dragStartTime]);
 
   return (
-    <div className="relative flex flex-col justify-center items-center p-5 select-none">
+    <div className="relative flex flex-col justify-center items-center gap-2 p-5 select-none">
       <div
         ref={timerDisplayRef}
         className={isPlaying ? "animate-pulse" : ""}
@@ -127,6 +127,13 @@ export const AnimationView: React.FC<AnimationViewProps> = ({
           cursor: isDragging ? "grabbing" : "grab",
         }}
       >
+        {!isDragging && !isPlaying ? (
+          <div className="h-9 flex justify-center text-xs text-white/80 text-center opacity-70 transition-opacity duration-300 hover:opacity-100 pointer-events-none whitespace-nowrap bg-black/50 px-3 py-2 rounded-2xl backdrop-blur-sm border border-white/10">
+            <span>← Drag to adjust time →</span>
+          </div>
+        ) : (
+          <div className="h-9" />
+        )}
         <Timer
           timeSeconds={timeSeconds}
           flowType={flowType}
@@ -134,16 +141,9 @@ export const AnimationView: React.FC<AnimationViewProps> = ({
           className="w-56 h-56 rounded-full"
         />
       </div>
-      {!isDragging && !isPlaying ? (
-        <div className="h-9 flex justify-center text-xs text-white/80 text-center opacity-70 transition-opacity duration-300 hover:opacity-100 pointer-events-none whitespace-nowrap bg-black/50 px-3 py-2 rounded-2xl backdrop-blur-sm border border-white/10">
-          <span>← Drag to adjust time →</span>
-        </div>
-      ) : (
-        <div className="h-9" />
-      )}
 
       {/* Control buttons */}
-      <div className="flex items-center gap-4 mt-6">
+      <div className="flex items-center gap-4">
         <AnimationButton
           action={onToggleTimer}
           iconName={isPlaying ? "pause" : "play"}
