@@ -260,7 +260,18 @@ export const TimerSettingsModal: React.FC<TimerSettingsModalProps> = ({
           <div className="mt-8 flex justify-end">
             <button
               onClick={onClose}
-              className="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors duration-200"
+              className="px-6 py-2 text-white rounded-lg transition-colors duration-200"
+              style={{
+                background: "linear-gradient(135deg, #EC5E4A 0%, #D94A36 100%)",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background =
+                  "linear-gradient(135deg, #D94A36 0%, #C73E2A 100%)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background =
+                  "linear-gradient(135deg, #EC5E4A 0%, #D94A36 100%)";
+              }}
             >
               Done
             </button>

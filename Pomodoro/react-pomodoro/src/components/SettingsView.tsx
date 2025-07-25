@@ -68,8 +68,32 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
                     parseFloat((e.target as HTMLInputElement).value),
                   )
                 }
-                className="flex-1 h-1.5 rounded-sm bg-gray-300 dark:bg-gray-600 outline-none cursor-pointer appearance-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-gradient-to-br [&::-webkit-slider-thumb]:from-indigo-500 [&::-webkit-slider-thumb]:to-purple-600 [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:shadow-md [&::-webkit-slider-thumb]:transition-all [&::-webkit-slider-thumb]:duration-200 [&::-webkit-slider-thumb]:hover:scale-110 [&::-webkit-slider-thumb]:hover:shadow-lg [&::-moz-range-thumb]:w-5 [&::-moz-range-thumb]:h-5 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-gradient-to-br [&::-moz-range-thumb]:from-indigo-500 [&::-moz-range-thumb]:to-purple-600 [&::-moz-range-thumb]:cursor-pointer [&::-moz-range-thumb]:shadow-md [&::-moz-range-thumb]:border-none [&::-moz-range-thumb]:transition-all [&::-moz-range-thumb]:duration-200 [&::-moz-range-thumb]:hover:scale-110 [&::-moz-range-thumb]:hover:shadow-lg [&::-moz-range-track]:h-1.5 [&::-moz-range-track]:rounded-sm [&::-moz-range-track]:bg-gray-300 [&::-moz-range-track]:border-none"
+                className="flex-1 h-1.5 rounded-sm bg-gray-300 dark:bg-gray-600 outline-none cursor-pointer appearance-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:shadow-md [&::-webkit-slider-thumb]:transition-all [&::-webkit-slider-thumb]:duration-200 [&::-webkit-slider-thumb]:hover:scale-110 [&::-webkit-slider-thumb]:hover:shadow-lg [&::-moz-range-thumb]:w-5 [&::-moz-range-thumb]:h-5 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:cursor-pointer [&::-moz-range-thumb]:shadow-md [&::-moz-range-thumb]:border-none [&::-moz-range-thumb]:transition-all [&::-moz-range-thumb]:duration-200 [&::-moz-range-thumb]:hover:scale-110 [&::-moz-range-thumb]:hover:shadow-lg [&::-moz-range-track]:h-1.5 [&::-moz-range-track]:rounded-sm [&::-moz-range-track]:bg-gray-300 [&::-moz-range-track]:border-none"
+                style={{
+                  background: "#e5e7eb",
+                }}
                 aria-label="Notification volume"
+                ref={(el) => {
+                  if (el) {
+                    el.style.setProperty(
+                      "--thumb-bg",
+                      "linear-gradient(135deg, #EC5E4A 0%, #D94A36 100%)",
+                    );
+                    const style = document.createElement("style");
+                    style.textContent = `
+                      input[type="range"]::-webkit-slider-thumb {
+                        background: linear-gradient(135deg, #EC5E4A 0%, #D94A36 100%) !important;
+                      }
+                      input[type="range"]::-moz-range-thumb {
+                        background: linear-gradient(135deg, #EC5E4A 0%, #D94A36 100%) !important;
+                      }
+                    `;
+                    if (!document.head.querySelector("#coral-slider-style")) {
+                      style.id = "coral-slider-style";
+                      document.head.appendChild(style);
+                    }
+                  }
+                }}
               />
               <div className="text-lg text-gray-600 dark:text-gray-400 min-w-6 text-center">
                 🔊
@@ -103,7 +127,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
                     parseInt(e.target.value) || 25,
                   )
                 }
-                className="w-20 p-2 px-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg text-base font-medium text-center bg-white dark:bg-gray-700 text-gray-800 dark:text-white transition-all duration-200 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/20 hover:border-gray-400 dark:hover:border-gray-500"
+                className="w-20 p-2 px-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg text-base font-medium text-center bg-white dark:bg-gray-700 text-gray-800 dark:text-white transition-all duration-200 focus:outline-none focus:border-red-500 focus:ring-4 focus:ring-red-500/20 hover:border-gray-400 dark:hover:border-gray-500"
               />
             </label>
           </div>
@@ -124,7 +148,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
                     parseInt(e.target.value) || 5,
                   )
                 }
-                className="w-20 p-2 px-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg text-base font-medium text-center bg-white dark:bg-gray-700 text-gray-800 dark:text-white transition-all duration-200 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/20 hover:border-gray-400 dark:hover:border-gray-500"
+                className="w-20 p-2 px-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg text-base font-medium text-center bg-white dark:bg-gray-700 text-gray-800 dark:text-white transition-all duration-200 focus:outline-none focus:border-red-500 focus:ring-4 focus:ring-red-500/20 hover:border-gray-400 dark:hover:border-gray-500"
               />
             </label>
           </div>
@@ -145,7 +169,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
                     parseInt(e.target.value) || 15,
                   )
                 }
-                className="w-20 p-2 px-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg text-base font-medium text-center bg-white dark:bg-gray-700 text-gray-800 dark:text-white transition-all duration-200 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/20 hover:border-gray-400 dark:hover:border-gray-500"
+                className="w-20 p-2 px-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg text-base font-medium text-center bg-white dark:bg-gray-700 text-gray-800 dark:text-white transition-all duration-200 focus:outline-none focus:border-red-500 focus:ring-4 focus:ring-red-500/20 hover:border-gray-400 dark:hover:border-gray-500"
               />
             </label>
           </div>
@@ -173,9 +197,17 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
               <span
                 className={`w-5 h-5 border-2 rounded relative transition-all duration-200 flex-shrink-0 ${
                   state.automaticallyGoFromFocus
-                    ? "bg-gradient-to-br from-indigo-500 to-purple-600 border-indigo-500"
+                    ? "border-red-500"
                     : "border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 hover:border-gray-400 dark:hover:border-gray-500"
                 }`}
+                style={
+                  state.automaticallyGoFromFocus
+                    ? {
+                        background:
+                          "linear-gradient(135deg, #EC5E4A 0%, #D94A36 100%)",
+                      }
+                    : undefined
+                }
               >
                 {state.automaticallyGoFromFocus && (
                   <span className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-xs font-bold">
@@ -208,9 +240,17 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
               <span
                 className={`w-5 h-5 border-2 rounded relative transition-all duration-200 flex-shrink-0 ${
                   state.automaticallyGoFromRest
-                    ? "bg-gradient-to-br from-indigo-500 to-purple-600 border-indigo-500"
+                    ? "border-red-500"
                     : "border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 hover:border-gray-400 dark:hover:border-gray-500"
                 }`}
+                style={
+                  state.automaticallyGoFromRest
+                    ? {
+                        background:
+                          "linear-gradient(135deg, #EC5E4A 0%, #D94A36 100%)",
+                      }
+                    : undefined
+                }
               >
                 {state.automaticallyGoFromRest && (
                   <span className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-xs font-bold">
@@ -243,9 +283,17 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
               <span
                 className={`w-5 h-5 border-2 rounded relative transition-all duration-200 flex-shrink-0 ${
                   state.automaticallyGoFromLongRest
-                    ? "bg-gradient-to-br from-indigo-500 to-purple-600 border-indigo-500"
+                    ? "border-red-500"
                     : "border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 hover:border-gray-400 dark:hover:border-gray-500"
                 }`}
+                style={
+                  state.automaticallyGoFromLongRest
+                    ? {
+                        background:
+                          "linear-gradient(135deg, #EC5E4A 0%, #D94A36 100%)",
+                      }
+                    : undefined
+                }
               >
                 {state.automaticallyGoFromLongRest && (
                   <span className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-xs font-bold">

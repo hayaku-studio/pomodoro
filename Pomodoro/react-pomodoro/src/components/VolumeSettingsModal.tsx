@@ -44,8 +44,18 @@ export const VolumeSettingsModal: React.FC<VolumeSettingsModalProps> = ({
               onClick={onClose}
               className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors"
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
               </svg>
             </button>
           </div>
@@ -59,8 +69,18 @@ export const VolumeSettingsModal: React.FC<VolumeSettingsModalProps> = ({
 
               <div className="space-y-3">
                 <div className="flex items-center space-x-4">
-                  <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 14.142M6.343 6.343L4.93 4.93A1 1 0 003.515 6.343l1.414 1.414A8.963 8.963 0 003 12a8.963 8.963 0 001.929 5.243L3.515 18.657A1 1 0 004.93 20.07l1.414-1.414A8.963 8.963 0 0012 21a8.963 8.963 0 005.657-1.929l1.414 1.414a1 1 0 101.414-1.414l-1.414-1.414A8.963 8.963 0 0021 12a8.963 8.963 0 00-1.929-5.243L20.485 5.343A1 1 0 0019.07 3.93l-1.414 1.414z" />
+                  <svg
+                    className="w-5 h-5 text-gray-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 14.142M6.343 6.343L4.93 4.93A1 1 0 003.515 6.343l1.414 1.414A8.963 8.963 0 003 12a8.963 8.963 0 001.929 5.243L3.515 18.657A1 1 0 004.93 20.07l1.414-1.414A8.963 8.963 0 0012 21a8.963 8.963 0 005.657-1.929l1.414 1.414a1 1 0 101.414-1.414l-1.414-1.414A8.963 8.963 0 0021 12a8.963 8.963 0 00-1.929-5.243L20.485 5.343A1 1 0 0019.07 3.93l-1.414 1.414z"
+                    />
                   </svg>
 
                   <div className="flex-1">
@@ -70,9 +90,19 @@ export const VolumeSettingsModal: React.FC<VolumeSettingsModalProps> = ({
                       max="1"
                       step="0.1"
                       value={state.pingVolume}
-                      onChange={(e) => handleVolumeChange(parseFloat(e.target.value))}
-                      onMouseUp={(e) => handleVolumeChangeComplete(parseFloat((e.target as HTMLInputElement).value))}
-                      onTouchEnd={(e) => handleVolumeChangeComplete(parseFloat((e.target as HTMLInputElement).value))}
+                      onChange={(e) =>
+                        handleVolumeChange(parseFloat(e.target.value))
+                      }
+                      onMouseUp={(e) =>
+                        handleVolumeChangeComplete(
+                          parseFloat((e.target as HTMLInputElement).value),
+                        )
+                      }
+                      onTouchEnd={(e) =>
+                        handleVolumeChangeComplete(
+                          parseFloat((e.target as HTMLInputElement).value),
+                        )
+                      }
                       className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700 slider"
                     />
                   </div>
@@ -97,7 +127,18 @@ export const VolumeSettingsModal: React.FC<VolumeSettingsModalProps> = ({
           <div className="mt-8 flex justify-end">
             <button
               onClick={onClose}
-              className="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors duration-200"
+              className="px-6 py-2 text-white rounded-lg transition-colors duration-200"
+              style={{
+                background: "linear-gradient(135deg, #EC5E4A 0%, #D94A36 100%)",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background =
+                  "linear-gradient(135deg, #D94A36 0%, #C73E2A 100%)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background =
+                  "linear-gradient(135deg, #EC5E4A 0%, #D94A36 100%)";
+              }}
             >
               Done
             </button>
