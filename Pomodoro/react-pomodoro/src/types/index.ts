@@ -19,13 +19,11 @@ export interface PomodoroState {
   timeSeconds: number;
   flowType: FlowType;
   isPlaying: boolean;
-  currentCompletedIntervals: number;
 
   // Settings
   automaticallyGoFromFocus: boolean;
   automaticallyGoFromRest: boolean;
   automaticallyGoFromLongRest: boolean;
-  requiredCompletedIntervals: number;
   focusTimeIntervalMinutes: number;
   restTimeIntervalMinutes: number;
   longRestTimeIntervalMinutes: number;
@@ -40,7 +38,6 @@ export interface PomodoroState {
 
 // Settings keys for localStorage
 export enum SettingsKeys {
-  REQUIRED_COMPLETED_INTERVALS = "requiredCompletedIntervals",
   AUTOMATICALLY_GO_FROM_FOCUS = "automaticallyGoFromFocus",
   AUTOMATICALLY_GO_FROM_REST = "automaticallyGoFromRest",
   AUTOMATICALLY_GO_FROM_LONG_REST = "automaticallyGoFromLongRest",
@@ -55,11 +52,9 @@ export enum ActionType {
   SET_TIME_SECONDS = "SET_TIME_SECONDS",
   SET_FLOW_TYPE = "SET_FLOW_TYPE",
   SET_IS_PLAYING = "SET_IS_PLAYING",
-  SET_COMPLETED_INTERVALS = "SET_COMPLETED_INTERVALS",
   SET_AUTOMATICALLY_GO_FROM_FOCUS = "SET_AUTOMATICALLY_GO_FROM_FOCUS",
   SET_AUTOMATICALLY_GO_FROM_REST = "SET_AUTOMATICALLY_GO_FROM_REST",
   SET_AUTOMATICALLY_GO_FROM_LONG_REST = "SET_AUTOMATICALLY_GO_FROM_LONG_REST",
-  SET_REQUIRED_COMPLETED_INTERVALS = "SET_REQUIRED_COMPLETED_INTERVALS",
   SET_FOCUS_TIME_INTERVAL_MINUTES = "SET_FOCUS_TIME_INTERVAL_MINUTES",
   SET_REST_TIME_INTERVAL_MINUTES = "SET_REST_TIME_INTERVAL_MINUTES",
   SET_LONG_REST_TIME_INTERVAL_MINUTES = "SET_LONG_REST_TIME_INTERVAL_MINUTES",
@@ -88,11 +83,6 @@ export interface SetIsPlayingAction {
   payload: boolean;
 }
 
-export interface SetCompletedIntervalsAction {
-  type: ActionType.SET_COMPLETED_INTERVALS;
-  payload: number;
-}
-
 export interface SetBooleanSettingAction {
   type:
     | ActionType.SET_AUTOMATICALLY_GO_FROM_FOCUS
@@ -107,7 +97,6 @@ export interface SetBooleanSettingAction {
 
 export interface SetNumberSettingAction {
   type:
-    | ActionType.SET_REQUIRED_COMPLETED_INTERVALS
     | ActionType.SET_FOCUS_TIME_INTERVAL_MINUTES
     | ActionType.SET_REST_TIME_INTERVAL_MINUTES
     | ActionType.SET_LONG_REST_TIME_INTERVAL_MINUTES
@@ -127,7 +116,6 @@ export type PomodoroAction =
   | SetTimeSecondsAction
   | SetFlowTypeAction
   | SetIsPlayingAction
-  | SetCompletedIntervalsAction
   | SetBooleanSettingAction
   | SetNumberSettingAction
   | ResetTimerAction

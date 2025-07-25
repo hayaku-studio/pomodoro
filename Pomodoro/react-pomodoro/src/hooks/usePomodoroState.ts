@@ -12,13 +12,10 @@ const createInitialState = (): PomodoroState => {
     timeSeconds: settings.focusTimeIntervalMinutes * 60,
     flowType: FlowType.FOCUS,
     isPlaying: false,
-    currentCompletedIntervals: 0,
-
     // Settings from localStorage
     automaticallyGoFromFocus: settings.automaticallyGoFromFocus,
     automaticallyGoFromRest: settings.automaticallyGoFromRest,
     automaticallyGoFromLongRest: settings.automaticallyGoFromLongRest,
-    requiredCompletedIntervals: settings.requiredCompletedIntervals,
     focusTimeIntervalMinutes: settings.focusTimeIntervalMinutes,
     restTimeIntervalMinutes: settings.restTimeIntervalMinutes,
     longRestTimeIntervalMinutes: settings.longRestTimeIntervalMinutes,
@@ -47,9 +44,6 @@ const pomodoroReducer = (
     case ActionType.SET_IS_PLAYING:
       return { ...state, isPlaying: action.payload };
 
-    case ActionType.SET_COMPLETED_INTERVALS:
-      return { ...state, currentCompletedIntervals: action.payload };
-
     case ActionType.SET_AUTOMATICALLY_GO_FROM_FOCUS:
       setSetting(SettingsKeys.AUTOMATICALLY_GO_FROM_FOCUS, action.payload);
       return { ...state, automaticallyGoFromFocus: action.payload };
@@ -61,10 +55,6 @@ const pomodoroReducer = (
     case ActionType.SET_AUTOMATICALLY_GO_FROM_LONG_REST:
       setSetting(SettingsKeys.AUTOMATICALLY_GO_FROM_LONG_REST, action.payload);
       return { ...state, automaticallyGoFromLongRest: action.payload };
-
-    case ActionType.SET_REQUIRED_COMPLETED_INTERVALS:
-      setSetting(SettingsKeys.REQUIRED_COMPLETED_INTERVALS, action.payload);
-      return { ...state, requiredCompletedIntervals: action.payload };
 
     case ActionType.SET_FOCUS_TIME_INTERVAL_MINUTES:
       setSetting(SettingsKeys.FOCUS_TIME_INTERVAL_MINUTES, action.payload);
@@ -111,10 +101,6 @@ const pomodoroReducer = (
     case ActionType.SKIP_TO_NEXT_FLOW_TYPE:
       let newFlowType: FlowType;
       let newTimeSeconds: number;
-      let newCompletedIntervals = state.currentCompletedIntervals;
-
-      // Increment completed intervals
-      newCompletedIntervals += 1;
 
       switch (state.flowType) {
         case FlowType.FOCUS:
@@ -128,16 +114,10 @@ const pomodoroReducer = (
           break;
       }
 
-      // Reset intervals if we've reached the required amount
-      if (newCompletedIntervals > state.requiredCompletedIntervals) {
-        newCompletedIntervals = 0;
-      }
-
       return {
         ...state,
         flowType: newFlowType,
         timeSeconds: newTimeSeconds,
-        currentCompletedIntervals: newCompletedIntervals,
         isPlaying: true, // Auto-start the next timer
       };
 
@@ -233,13 +213,6 @@ export const usePomodoroState = () => {
       dispatch({ type: ActionType.SKIP_TO_NEXT_FLOW_TYPE });
     }, []),
 
-    setCompletedIntervals: useCallback((intervals: number) => {
-      dispatch({
-        type: ActionType.SET_COMPLETED_INTERVALS,
-        payload: intervals,
-      });
-    }, []),
-
     updateSettings: useCallback((settings: Partial<PomodoroState>) => {
       Object.entries(settings).forEach(([key, value]) => {
         switch (key) {
@@ -261,12 +234,7 @@ export const usePomodoroState = () => {
               payload: value as boolean,
             });
             break;
-          case "requiredCompletedIntervals":
-            dispatch({
-              type: ActionType.SET_REQUIRED_COMPLETED_INTERVALS,
-              payload: value as number,
-            });
-            break;
+
           case "focusTimeIntervalMinutes":
             dispatch({
               type: ActionType.SET_FOCUS_TIME_INTERVAL_MINUTES,

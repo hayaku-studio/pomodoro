@@ -4,7 +4,6 @@ export { SettingsKeys };
 
 // Default settings that match the Swift implementation
 export const DEFAULT_SETTINGS = {
-  [SettingsKeys.REQUIRED_COMPLETED_INTERVALS]: 8,
   [SettingsKeys.AUTOMATICALLY_GO_FROM_FOCUS]: true,
   [SettingsKeys.AUTOMATICALLY_GO_FROM_REST]: true,
   [SettingsKeys.AUTOMATICALLY_GO_FROM_LONG_REST]: true,
@@ -62,9 +61,6 @@ export const setSetting = (key: SettingsKeys, value: SettingValue): void => {
  */
 export const getAllSettings = () => {
   return {
-    requiredCompletedIntervals: getSetting<number>(
-      SettingsKeys.REQUIRED_COMPLETED_INTERVALS,
-    ),
     automaticallyGoFromFocus: getSetting<boolean>(
       SettingsKeys.AUTOMATICALLY_GO_FROM_FOCUS,
     ),

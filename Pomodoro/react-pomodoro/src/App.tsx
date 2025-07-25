@@ -1,4 +1,3 @@
-import { FlowType } from "./types";
 import AnimationView from "./components/AnimationView";
 import DropdownMenu from "./components/DropdownMenu";
 import TimerSettingsModal from "./components/TimerSettingsModal";
@@ -74,25 +73,6 @@ function App() {
           onSnapToNearestMinute={handleSnapToNearestMinute}
           onTimerComplete={handleTimerComplete}
         />
-
-        {/* Progress indicator */}
-        <div className="flex items-center gap-2">
-          {Array.from({ length: state.requiredCompletedIntervals }, (_, i) => (
-            <div
-              key={i}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                i < state.currentCompletedIntervals
-                  ? "bg-white shadow-lg"
-                  : "bg-white/30 border border-white/50"
-              }`}
-            />
-          ))}
-        </div>
-
-        {/* Current mode indicator */}
-        <div className="text-white/80 text-sm font-medium uppercase tracking-wider">
-          {state.flowType === FlowType.FOCUS ? "Focus Session" : "Break Time"}
-        </div>
       </main>
 
       {/* Timer Settings Modal */}

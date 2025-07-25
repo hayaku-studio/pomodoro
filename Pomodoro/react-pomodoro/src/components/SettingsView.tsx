@@ -264,66 +264,6 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
         </div>
 
         {/* Interval Settings */}
-        <div className="flex flex-col gap-4">
-          <h3 className="text-xs font-semibold uppercase tracking-wide text-gray-600 dark:text-gray-400 ml-2">
-            INTERVALS
-          </h3>
-
-          <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-5 border border-black/5 dark:border-white/10 transition-all duration-200 hover:bg-gray-100 dark:hover:bg-gray-700 hover:border-black/8 dark:hover:border-white/15">
-            <label className="flex items-center gap-3 cursor-pointer m-0">
-              <span className="text-base font-medium text-gray-800 dark:text-white flex-1">
-                Required Completed Intervals
-              </span>
-              <input
-                type="number"
-                min="1"
-                max="20"
-                value={state.requiredCompletedIntervals}
-                onChange={(e) =>
-                  handleTimeIntervalChange(
-                    "requiredCompletedIntervals",
-                    parseInt(e.target.value) || 8,
-                  )
-                }
-                className="w-20 p-2 px-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg text-base font-medium text-center bg-white dark:bg-gray-700 text-gray-800 dark:text-white transition-all duration-200 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/20 hover:border-gray-400 dark:hover:border-gray-500"
-              />
-            </label>
-            <p className="text-sm text-gray-600 dark:text-gray-400 mt-2 mb-0 leading-6">
-              Number of focus sessions to complete before a long break
-            </p>
-          </div>
-        </div>
-
-        {/* Session Info */}
-        <div className="flex flex-col gap-4">
-          <h3 className="text-xs font-semibold uppercase tracking-wide text-gray-600 dark:text-gray-400 ml-2">
-            SESSION INFO
-          </h3>
-
-          <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-5 border border-black/5 dark:border-white/10 transition-all duration-200 hover:bg-gray-100 dark:hover:bg-gray-700 hover:border-black/8 dark:hover:border-white/15">
-            <div className="flex justify-between items-center py-2 border-b border-black/5 dark:border-white/10 last:border-b-0">
-              <span className="text-sm text-gray-600 dark:text-gray-400">
-                Current Completed Intervals:
-              </span>
-              <span className="text-base font-semibold text-gray-800 dark:text-white">
-                {state.currentCompletedIntervals}
-              </span>
-            </div>
-            <div className="flex justify-between items-center py-2">
-              <span className="text-sm text-gray-600 dark:text-gray-400">
-                Progress:
-              </span>
-              <span className="text-base font-semibold text-gray-800 dark:text-white">
-                {Math.round(
-                  (state.currentCompletedIntervals /
-                    state.requiredCompletedIntervals) *
-                    100,
-                )}
-                %
-              </span>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   );
