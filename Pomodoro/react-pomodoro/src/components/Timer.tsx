@@ -3,14 +3,14 @@ import { useRive, useStateMachineInput } from "@rive-app/react-canvas";
 import { FlowType, TimeToMagnify } from "../types";
 import { getMagnificationFactor } from "../utils/rive";
 
-interface TimerAnimationProps {
+interface TimerProps {
   timeSeconds: number;
   flowType: FlowType;
   onTimerComplete?: () => void;
   className?: string;
 }
 
-export const TimerAnimation: React.FC<TimerAnimationProps> = ({
+export const Timer: React.FC<TimerProps> = ({
   timeSeconds,
   flowType,
   onTimerComplete,
@@ -231,4 +231,4 @@ export const TimerAnimation: React.FC<TimerAnimationProps> = ({
   );
 };
 
-export default TimerAnimation;
+export default Timer;

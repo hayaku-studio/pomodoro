@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import { PomodoroState, FlowType } from "../types";
-import { TimerAnimation } from "./Timer";
+import Timer from "./Timer";
 
 interface TimerSettingsModalProps {
   isOpen: boolean;
@@ -187,8 +187,7 @@ export const TimerSettingsModal: React.FC<TimerSettingsModalProps> = ({
                 style={{ userSelect: "none" }}
               >
                 <div className="w-40 h-40 flex items-center justify-center">
-                  {/* Rive Animation */}
-                  <TimerAnimation
+                  <Timer
                     timeSeconds={timeMinutes * 60}
                     flowType={selectedFlowType}
                     className="w-full h-full"
