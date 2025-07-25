@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import { useRive, useStateMachineInput } from "@rive-app/react-canvas";
 import { FlowType, TimeToMagnify } from "../types";
-import { formatTime, getMagnificationFactor } from "../utils/rive";
+import { getMagnificationFactor } from "../utils/rive";
 import AnimationButton from "./AnimationButton";
 
 interface AnimationViewProps {
@@ -29,7 +29,6 @@ export const AnimationView: React.FC<AnimationViewProps> = ({
   onSetTime,
   onSnapToNearestMinute,
   onTimerComplete,
-  hideOverlay = false,
 }) => {
   const [isDragging, setIsDragging] = useState(false);
   const [dragStartX, setDragStartX] = useState(0);
