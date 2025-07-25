@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import { FlowType } from "../types";
 import AnimationButton from "./AnimationButton";
-import TimerAnimation from "./TimerAnimation";
+import Timer from "./Timer";
 
 interface AnimationViewProps {
   timeSeconds: number;
@@ -127,7 +127,7 @@ export const AnimationView: React.FC<AnimationViewProps> = ({
           cursor: isDragging ? "grabbing" : "grab",
         }}
       >
-        <TimerAnimation
+        <Timer
           timeSeconds={timeSeconds}
           flowType={flowType}
           onTimerComplete={onTimerComplete}
