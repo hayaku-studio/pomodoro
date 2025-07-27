@@ -5,26 +5,30 @@
 //  Created by David Speers on 10/07/2023.
 //
 
-import SwiftUI
 import Combine
 import RiveRuntime
+import SwiftUI
 
 struct TimerSettingsView: View {
     let minRequiredCompletedIntervals = 4
     let maxRequiredCompletedIntervals = 16
-    
+
     @EnvironmentObject private var modelData: ModelData
-    
+
     @State private var flowType = FlowType.focus
-    @State private var pomodoro = RiveViewModel(fileName: "pomodoro_timer", stateMachineName: "State Machine", artboardName: "Pomodoro Timer")
-    @State private var coffee = RiveViewModel(fileName: "pomodoro_timer", stateMachineName: "State Machine", artboardName: "Coffee Cup Timer")
+    @State private var pomodoro = RiveViewModel(
+        fileName: "pomodoro_timer", stateMachineName: "State Machine",
+        artboardName: "Pomodoro Timer")
+    @State private var coffee = RiveViewModel(
+        fileName: "pomodoro_timer", stateMachineName: "State Machine",
+        artboardName: "Coffee Cup Timer")
     @State private var previousTranslation = 0
     @State private var timeMinutes = 0 {
         didSet {
             setAnimationTime(minutes: timeMinutes)
         }
     }
-    
+
     var body: some View {
         VStack(alignment: .leading) {
             Picker("", selection: $flowType) {
@@ -34,14 +38,14 @@ struct TimerSettingsView: View {
             }
             .pickerStyle(.segmented)
             .onChange(of: flowType) { (value: FlowType) in
-//                coffee.setInput("isHighlighted", value: value == FlowType.longRest)
+                //                coffee.setInput("isHighlighted", value: value == FlowType.longRest)
                 switch value {
                 case .focus:
                     timeMinutes = modelData.focusTimeIntervalMinutes
                 case .rest:
                     timeMinutes = modelData.restTimeIntervalMinutes
-//                case .longRest:
-//                    timeMinutes = modelData.longRestTimeIntervalMinutes
+                //                case .longRest:
+                //                    timeMinutes = modelData.longRestTimeIntervalMinutes
                 }
             }
             Text("Set Timer Interval")
@@ -65,40 +69,46 @@ struct TimerSettingsView: View {
                     }
                     // TODO: better solution
                     Rectangle()
-                    //                    .stroke(.green) // uncomment to see hitbox
+                        //                    .stroke(.green) // uncomment to see hitbox
                         .opacity(0)
                         .contentShape(Rectangle())
                         .frame(width: frameSize, height: frameSize)
-                    //.onTapGesture() // TODO: On too many taps give a drag hint - https://www.instagram.com/p/CewsSvBrTBa/
-                        .gesture(DragGesture()
-                            .onChanged {gesture in
-                                let newTranslation = Int(Float(gesture.translation.width)/6)
-                                let incrementalTranslation = newTranslation - previousTranslation
-                                previousTranslation = newTranslation
-                                timeMinutes -= incrementalTranslation
-                                if timeMinutes > 90 {
-                                    timeMinutes = 90
-                                } else if timeMinutes < 1 {
-                                    timeMinutes = 1
+                        //.onTapGesture() // TODO: On too many taps give a drag hint - https://www.instagram.com/p/CewsSvBrTBa/
+                        .modifier(
+                            TimerDragPointerStyleModifier(isDragging: previousTranslation != 0)
+                        )
+                        .gesture(
+                            DragGesture()
+                                .onChanged { gesture in
+                                    let newTranslation = Int(Float(gesture.translation.width) / 6)
+                                    let incrementalTranslation =
+                                        newTranslation - previousTranslation
+                                    previousTranslation = newTranslation
+                                    timeMinutes -= incrementalTranslation
+                                    if timeMinutes > 90 {
+                                        timeMinutes = 90
+                                    } else if timeMinutes < 1 {
+                                        timeMinutes = 1
+                                    }
                                 }
-                            }
-                            .onEnded {_ in
-                                previousTranslation = 0
-                                var timeIntervalMinutesKey = ""
-                                switch flowType {
-                                case .focus:
-                                    modelData.focusTimeIntervalMinutes = timeMinutes
-                                    timeIntervalMinutesKey = "focusTimeIntervalMinutes"
-                                case .rest:
-                                    modelData.restTimeIntervalMinutes = timeMinutes
-                                    timeIntervalMinutesKey = "restTimeIntervalMinutes"
-//                                case .longRest:
-//                                    modelData.longRestTimeIntervalMinutes = timeMinutes
-//                                    timeIntervalMinutesKey = "longRestTimeIntervalMinutes"
+                                .onEnded { _ in
+                                    previousTranslation = 0
+                                    var timeIntervalMinutesKey = ""
+                                    switch flowType {
+                                    case .focus:
+                                        modelData.focusTimeIntervalMinutes = timeMinutes
+                                        timeIntervalMinutesKey = "focusTimeIntervalMinutes"
+                                    case .rest:
+                                        modelData.restTimeIntervalMinutes = timeMinutes
+                                        timeIntervalMinutesKey = "restTimeIntervalMinutes"
+                                    //                                case .longRest:
+                                    //                                    modelData.longRestTimeIntervalMinutes = timeMinutes
+                                    //                                    timeIntervalMinutesKey = "longRestTimeIntervalMinutes"
+                                    }
+                                    UserDefaults.standard.set(
+                                        timeMinutes, forKey: timeIntervalMinutesKey)
+                                    // TODO: reduce possibility of bugs by having key be some global var
                                 }
-                                UserDefaults.standard.set(timeMinutes, forKey: timeIntervalMinutesKey)
-                                // TODO: reduce possibility of bugs by having key be some global var
-                            }
                         )
                 }
                 .background(Color("Modal Content Background"))
@@ -118,25 +128,25 @@ struct TimerSettingsView: View {
                     .onChange(of: modelData.automaticallyGoFromRest) { (value: Bool) in
                         UserDefaults.standard.set(value, forKey: "automaticallyGoFromRest")
                     }
-//            case .longRest:
-//                Toggle("Start Focus Automatically", isOn: $modelData.automaticallyGoFromLongRest)
-//                    .onChange(of: modelData.automaticallyGoFromLongRest) { (value: Bool) in
-//                        UserDefaults.standard.set(value, forKey: "automaticallyGoFromLongRest")
-//                    }
+            //            case .longRest:
+            //                Toggle("Start Focus Automatically", isOn: $modelData.automaticallyGoFromLongRest)
+            //                    .onChange(of: modelData.automaticallyGoFromLongRest) { (value: Bool) in
+            //                        UserDefaults.standard.set(value, forKey: "automaticallyGoFromLongRest")
+            //                    }
             }
-//            if flowType == .longRest {
-//                HStack{
-//                    Text("Long Break After Intervals")
-//                    NumberButton(action: decrementRequiredCompletedIntervals, imageName: "minus", isDisabled: modelData.requiredCompletedIntervals == minRequiredCompletedIntervals)
-//                    Text(String(Int(modelData.requiredCompletedIntervals/2)))
-//                    NumberButton(action: incrementRequiredCompletedIntervals, imageName: "plus", isDisabled: modelData.requiredCompletedIntervals == maxRequiredCompletedIntervals)
-//                }
-//            }
-        }.onAppear() {
+            //            if flowType == .longRest {
+            //                HStack{
+            //                    Text("Long Break After Intervals")
+            //                    NumberButton(action: decrementRequiredCompletedIntervals, imageName: "minus", isDisabled: modelData.requiredCompletedIntervals == minRequiredCompletedIntervals)
+            //                    Text(String(Int(modelData.requiredCompletedIntervals/2)))
+            //                    NumberButton(action: incrementRequiredCompletedIntervals, imageName: "plus", isDisabled: modelData.requiredCompletedIntervals == maxRequiredCompletedIntervals)
+            //                }
+            //            }
+        }.onAppear {
             timeMinutes = modelData.focusTimeIntervalMinutes
         }
     }
-    
+
     private func setAnimationTime(minutes: Int) {
         switch flowType {
         case .focus:
@@ -145,20 +155,22 @@ struct TimerSettingsView: View {
             updateTimeInput(riveViewModel: coffee, minutes: Float(minutes))
         }
     }
-    
+
     private func decrementRequiredCompletedIntervals() {
         modelData.requiredCompletedIntervals -= 2
-        UserDefaults.standard.set(modelData.requiredCompletedIntervals, forKey: "requiredCompletedIntervals")
+        UserDefaults.standard.set(
+            modelData.requiredCompletedIntervals, forKey: "requiredCompletedIntervals")
         // TODO: test more and come up with better logic
         if modelData.requiredCompletedIntervals <= modelData.currentCompletedIntervals {
             modelData.flowType = .focus
             modelData.currentCompletedIntervals = 0
         }
     }
-    
+
     private func incrementRequiredCompletedIntervals() {
         modelData.requiredCompletedIntervals += 2
-        UserDefaults.standard.set(modelData.requiredCompletedIntervals, forKey: "requiredCompletedIntervals")
+        UserDefaults.standard.set(
+            modelData.requiredCompletedIntervals, forKey: "requiredCompletedIntervals")
     }
 }
 
@@ -172,10 +184,10 @@ struct NumberButton: View {
     var action: () -> Void
     var imageName: String
     var isDisabled: Bool
-    
+
     var body: some View {
         Button {
-            if !isDisabled {            
+            if !isDisabled {
                 action()
             }
         } label: {
@@ -189,5 +201,30 @@ struct NumberButton: View {
                 .cornerRadius(2)
         }
         .buttonStyle(.plain)
+        .modifier(NumberButtonPointerStyleModifier(isDisabled: isDisabled))
+    }
+}
+
+struct TimerDragPointerStyleModifier: ViewModifier {
+    let isDragging: Bool
+
+    func body(content: Content) -> some View {
+        if #available(macOS 15.0, *) {
+            content.pointerStyle(isDragging ? .grabActive : .grabIdle)
+        } else {
+            content
+        }
+    }
+}
+
+struct NumberButtonPointerStyleModifier: ViewModifier {
+    let isDisabled: Bool
+
+    func body(content: Content) -> some View {
+        if #available(macOS 15.0, *) {
+            content.pointerStyle(isDisabled ? .default : .link)
+        } else {
+            content
+        }
     }
 }

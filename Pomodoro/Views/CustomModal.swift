@@ -10,7 +10,7 @@ import SwiftUIFontIcon
 
 struct CustomModal: ViewModifier {
     var actionOnDismiss: () -> Void
-    
+
     func body(content: Content) -> some View {
         // TODO: make what's under the modal, not change
         Rectangle()
@@ -18,6 +18,7 @@ struct CustomModal: ViewModifier {
             .onTapGesture {
                 actionOnDismiss()
             }
+            .modifier(DismissPointerStyleModifier())
         Group {
             content
                 .padding(16)
@@ -26,18 +27,41 @@ struct CustomModal: ViewModifier {
                 .shadow(radius: 5, x: 0, y: 3)
                 .shadow(radius: 30, x: 0, y: 30)
         }
-            .padding(16)
-            .transition(.move(edge: .top)
-                .combined(with: .opacity))
-            .overlay(alignment: .top) {
-                FontIcon.button(.materialIcon(code: .close), action: actionOnDismiss)
-                    .foregroundColor(Color("Dark Mode Button Contrast"))
-                    .background(Circle().fill(Color("Button Active")))
-                    .frame(width: 40, height: 40)
-                    .frame(maxWidth: .infinity, alignment: .trailing) // TODO: less hacky alignment
-            }
-            .padding(.vertical, 16)
-            .zIndex(1)
+        .padding(16)
+        .transition(
+            .move(edge: .top)
+                .combined(with: .opacity)
+        )
+        .overlay(alignment: .top) {
+            FontIcon.button(.materialIcon(code: .close), action: actionOnDismiss)
+                .foregroundColor(Color("Dark Mode Button Contrast"))
+                .background(Circle().fill(Color("Button Active")))
+                .frame(width: 40, height: 40)
+                .frame(maxWidth: .infinity, alignment: .trailing)  // TODO: less hacky alignment
+                .modifier(CloseButtonPointerStyleModifier())
+        }
+        .padding(.vertical, 16)
+        .zIndex(1)
+    }
+}
+
+struct DismissPointerStyleModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        if #available(macOS 15.0, *) {
+            content.pointerStyle(.default)
+        } else {
+            content
+        }
+    }
+}
+
+struct CloseButtonPointerStyleModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        if #available(macOS 15.0, *) {
+            content.pointerStyle(.link)
+        } else {
+            content
+        }
     }
 }
 

@@ -5,18 +5,18 @@
 //  Created by David Speers on 05/06/2023.
 //
 
-import SwiftUI
 import RiveRuntime
+import SwiftUI
 
 struct PopupView: View {
     @EnvironmentObject private var modelData: ModelData
     @Environment(\.managedObjectContext) private var managedObjectContext
-    
+
     @State private var showFabMenu = false
     @State private var showCalendar = false
     @State private var showSettings = false
     @State private var showTimer = false
-    
+
     var body: some View {
         ZStack {
             VStack {
@@ -27,11 +27,14 @@ struct PopupView: View {
                     .opacity(0)
                     .frame(width: 0, height: 0)
                     .offset(x: -40, y: -8)
-                    FabView(showFabMenu: $showFabMenu, timerAction: openTimer, settingsAction: openSettings)
+                    FabView(
+                        showFabMenu: $showFabMenu, timerAction: openTimer,
+                        settingsAction: openSettings
+                    )
                     .offset(x: -40, y: -8)
                     Spacer()
-//                    IntervalTrackingView()
-//                        .offset(x: -8, y: 2)
+                    //                    IntervalTrackingView()
+                    //                        .offset(x: -8, y: 2)
                 }
                 .zIndex(1)
                 AnimationView()
@@ -47,21 +50,22 @@ struct PopupView: View {
             if showFabMenu {
                 // TODO: zIndexing seems to be weird. Rectangle is under the  AnimationView (to be expected with current code, but is even the case when I reduce AnimationView's zIndex)
                 Rectangle()
-                    .opacity(0.00001) // TODO: better solution
+                    .opacity(0.00001)  // TODO: better solution
                     .onTapGesture {
                         showFabMenu = false
                     }
+                    .modifier(PopupDismissPointerStyleModifier())
                     .zIndex(-1)
             }
         }
     }
-    
+
     func openSettings() {
         withAnimation(.spring()) {
             showSettings = true
         }
     }
-    
+
     func closeSettings() {
         withAnimation(.spring()) {
             showSettings = false
@@ -73,10 +77,20 @@ struct PopupView: View {
             showTimer = true
         }
     }
-    
+
     func closeTimer() {
         withAnimation(.spring()) {
             showTimer = false
+        }
+    }
+}
+
+struct PopupDismissPointerStyleModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        if #available(macOS 15.0, *) {
+            content.pointerStyle(.default)
+        } else {
+            content
         }
     }
 }

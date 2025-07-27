@@ -10,16 +10,16 @@ import SwiftUI
 struct FabItem: View {
     var imageName: String
     var buttonText: String
-    
+
     @State private var isHovered = false
-    
+
     var fontSize: CGFloat {
         return isHovered ? 15 : 14
     }
     var iconSize: CGFloat {
         return isHovered ? 17 : 16
     }
-    
+
     var body: some View {
         ZStack {
             Rectangle()
@@ -28,10 +28,10 @@ struct FabItem: View {
                 .cornerRadius(8)
                 .shadow(color: .black.opacity(0.05), radius: 5, x: 0, y: 1)
                 // TODO: work on some nice overlay here
-//                .overlay(
-//                    RoundedRectangle(cornerRadius: 8)
-//                        .stroke(Color(hex: 0xF4F4F4), lineWidth: 1)
-//                )
+                //                .overlay(
+                //                    RoundedRectangle(cornerRadius: 8)
+                //                        .stroke(Color(hex: 0xF4F4F4), lineWidth: 1)
+                //                )
                 .scaleEffect(isHovered ? 1.1 : 1)
             HStack {
                 Text(buttonText)
@@ -53,6 +53,7 @@ struct FabItem: View {
         .onHover { isHovered in
             self.isHovered = isHovered
         }
+        .modifier(FabItemHoverPointerStyleModifier(isHovered: isHovered))
     }
 }
 
@@ -72,3 +73,14 @@ struct FabIconTextButton_Previews: PreviewProvider {
     }
 }
 
+struct FabItemHoverPointerStyleModifier: ViewModifier {
+    let isHovered: Bool
+
+    func body(content: Content) -> some View {
+        if #available(macOS 15.0, *) {
+            content.pointerStyle(isHovered ? .link : .default)
+        } else {
+            content
+        }
+    }
+}
