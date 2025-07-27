@@ -16,7 +16,8 @@ struct AnimationView: View {
     @State private var animationTimer: Timer?
     @State private var previousTranslation = 0
     @State private var isTimerGreaterThanZero = true
-    
+    @State private var isDragging = false
+
     init() {
         let backgroundcolor = Color("Settings Card Background")
     }
@@ -38,8 +39,12 @@ struct AnimationView: View {
                     .contentShape(Circle())
                     .frame(width: 160)
                 //.onTapGesture() // TODO: On too many taps give a drag hint - https://www.instagram.com/p/CewsSvBrTBa/
+                    .modifier(PointerStyleModifier(isDragging: isDragging))
                     .gesture(DragGesture()
                         .onChanged {gesture in
+                            if !isDragging {
+                                isDragging = true
+                            }
                             pauseTimers() // TODO: find a better way to do this (instead of calling pauseTimers hundreds of times)
                             let newTranslation = Int(Float(gesture.translation.width)*5.0)
                             let incrementalTranslation = newTranslation - previousTranslation
@@ -61,7 +66,8 @@ struct AnimationView: View {
                                 isTimerGreaterThanZero = false
                             }
                         }
-                        .onEnded {gesture in    
+                        .onEnded {gesture in
+                            isDragging = false
                             previousTranslation = 0
                             let nearestMultipleOf60 = (modelData.timeSeconds + 30) / 60 * 60
                             modelData.timeSeconds = nearestMultipleOf60
@@ -191,6 +197,18 @@ struct AnimationView: View {
             modelData.pomodoro.triggerInput("finishPing")
         default:
             modelData.coffee.triggerInput("finishPing")
+        }
+    }
+}
+
+struct PointerStyleModifier: ViewModifier {
+    let isDragging: Bool
+
+    func body(content: Content) -> some View {
+        if #available(macOS 15.0, *) {
+            content.pointerStyle(isDragging ? .grabActive : .grabIdle)
+        } else {
+            content
         }
     }
 }

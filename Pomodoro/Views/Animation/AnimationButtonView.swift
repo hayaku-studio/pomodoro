@@ -69,8 +69,22 @@ struct AnimationButtonView: View {
                 .animation(.easeInOut(duration: 0.2), value: isHovered)
         }
         .buttonStyle(.plain)
+        .modifier(ButtonPointerStyleModifier(isDisabled: isDisabled))
         .onHover { hovering in
             isHovered = hovering
+        }
+    }
+
+}
+
+struct ButtonPointerStyleModifier: ViewModifier {
+    let isDisabled: Bool
+
+    func body(content: Content) -> some View {
+        if #available(macOS 15.0, *) {
+            content.pointerStyle(isDisabled ? .default : .link)
+        } else {
+            content
         }
     }
 }
