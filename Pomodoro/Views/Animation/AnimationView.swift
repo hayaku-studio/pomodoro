@@ -33,52 +33,66 @@ struct AnimationView: View {
                         modelData.coffee.view().frame(width: 200, height: 200)
                     }
                 }
-                Circle()
-                    //.stroke(.green) // uncomment to see hitbox
-                    .opacity(0.0)
-                    .contentShape(Circle())
-                    .frame(width: 160)
-                    //.onTapGesture() // TODO: On too many taps give a drag hint - https://www.instagram.com/p/CewsSvBrTBa/
-                    .dragPointerStyle(isDragging: isDragging)
-                    .gesture(
-                        DragGesture()
-                            .onChanged { gesture in
-                                if !isDragging {
-                                    isDragging = true
-                                }
-                                pauseTimers()  // TODO: find a better way to do this (instead of calling pauseTimers hundreds of times)
-                                let newTranslation = Int(Float(gesture.translation.width) * 5.0)
-                                let incrementalTranslation = newTranslation - previousTranslation
-                                previousTranslation = newTranslation
-                                modelData.timeSeconds -= incrementalTranslation
-                                if modelData.timeSeconds > 5400 {
-                                    modelData.timeSeconds = 5400
-                                } else if modelData.timeSeconds < 0 {
-                                    modelData.timeSeconds = 0
-                                }
-                                setAnimationTime(seconds: modelData.timeSeconds)
-                                if modelData.timeSeconds > 0 {
-                                    isTimerGreaterThanZero = true
-                                } else {
-                                    if isTimerGreaterThanZero {
-                                        triggerTimerPing()
-                                        playSound(volume: modelData.pingVolume)
-                                    }
-                                    isTimerGreaterThanZero = false
-                                }
-                            }
-                            .onEnded { gesture in
-                                isDragging = false
-                                previousTranslation = 0
-                                let nearestMultipleOf60 = (modelData.timeSeconds + 30) / 60 * 60
-                                modelData.timeSeconds = nearestMultipleOf60
-                                setAnimationTime(seconds: modelData.timeSeconds)
-                                if modelData.timeSeconds > 0 {
-                                    startTimers()
-                                }
-                            }
-                    )
             }
+            .opacity(isPlaying ? 0.7 : 1.0)
+            .animation(
+                isPlaying
+                    ? Animation.easeInOut(duration: 1.0).repeatForever(autoreverses: true)
+                    : .default, value: isPlaying
+            )
+            .onAppear {
+                startPulseAnimation()
+            }
+            .overlay(
+                ZStack {
+                    Circle()
+                        //.stroke(.green) // uncomment to see hitbox
+                        .opacity(0.0)
+                        .contentShape(Circle())
+                        .frame(width: 160)
+                        //.onTapGesture() // TODO: On too many taps give a drag hint - https://www.instagram.com/p/CewsSvBrTBa/
+                        .dragPointerStyle(isDragging: isDragging)
+                        .gesture(
+                            DragGesture()
+                                .onChanged { gesture in
+                                    if !isDragging {
+                                        isDragging = true
+                                    }
+                                    pauseTimers()  // TODO: find a better way to do this (instead of calling pauseTimers hundreds of times)
+                                    let newTranslation = Int(Float(gesture.translation.width) * 5.0)
+                                    let incrementalTranslation =
+                                        newTranslation - previousTranslation
+                                    previousTranslation = newTranslation
+                                    modelData.timeSeconds -= incrementalTranslation
+                                    if modelData.timeSeconds > 5400 {
+                                        modelData.timeSeconds = 5400
+                                    } else if modelData.timeSeconds < 0 {
+                                        modelData.timeSeconds = 0
+                                    }
+                                    setAnimationTime(seconds: modelData.timeSeconds)
+                                    if modelData.timeSeconds > 0 {
+                                        isTimerGreaterThanZero = true
+                                    } else {
+                                        if isTimerGreaterThanZero {
+                                            triggerTimerPing()
+                                            playSound(volume: modelData.pingVolume)
+                                        }
+                                        isTimerGreaterThanZero = false
+                                    }
+                                }
+                                .onEnded { gesture in
+                                    isDragging = false
+                                    previousTranslation = 0
+                                    let nearestMultipleOf60 = (modelData.timeSeconds + 30) / 60 * 60
+                                    modelData.timeSeconds = nearestMultipleOf60
+                                    setAnimationTime(seconds: modelData.timeSeconds)
+                                    if modelData.timeSeconds > 0 {
+                                        startTimers()
+                                    }
+                                }
+                        )
+                }
+            )
             .offset(y: -12)
             HStack {
                 AnimationButtonView(
@@ -202,6 +216,10 @@ struct AnimationView: View {
         default:
             modelData.coffee.triggerInput("finishPing")
         }
+    }
+
+    private func startPulseAnimation() {
+        // Animation is handled by the .animation modifier on the view
     }
 }
 
