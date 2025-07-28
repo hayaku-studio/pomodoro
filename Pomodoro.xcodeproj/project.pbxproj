@@ -55,7 +55,7 @@
 		CA2B4C452A4977BC005ED3E7 /* Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animation.swift; sourceTree = "<group>"; };
 		CA603AE72A6BDC3400E8765A /* AnimationButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationButtonView.swift; sourceTree = "<group>"; };
 		CA6B06A12A2C6E4000F62E56 /* PomodoroIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroIconView.swift; sourceTree = "<group>"; };
-		CA7026922B07A7C7001F94CC /* Whimsical Pomodoro TimerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Whimsical Pomodoro TimerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CA7026922B07A7C7001F94CC /* Pomodoro TimerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Pomodoro TimerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA70269B2B07A84B001F94CC /* UtilsRiveTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilsRiveTests.swift; sourceTree = "<group>"; };
 		CA70269D2B0868AF001F94CC /* TimeToMagnify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeToMagnify.swift; sourceTree = "<group>"; };
 		CA72DA452A38819D00998051 /* CustomModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomModal.swift; sourceTree = "<group>"; };
@@ -70,7 +70,7 @@
 		CAE3D51C2A2F4BC900AD88F1 /* Sound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sound.swift; sourceTree = "<group>"; };
 		CAE3D5272A2F684700AD88F1 /* pomodoro_timer.riv */ = {isa = PBXFileReference; lastKnownFileType = file; path = pomodoro_timer.riv; sourceTree = "<group>"; };
 		CAE3D52B2A2F6AF900AD88F1 /* Reception Bell.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Reception Bell.mp3"; sourceTree = "<group>"; };
-		CAF098F22A1FB1F600606A83 /* Whimsical Pomodoro Timer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Whimsical Pomodoro Timer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CAF098F22A1FB1F600606A83 /* Pomodoro Timer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pomodoro Timer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAF098F52A1FB1F600606A83 /* PomodoroApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroApp.swift; sourceTree = "<group>"; };
 		CAF098F92A1FB21500606A83 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CAF098FC2A1FB21500606A83 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -197,8 +197,8 @@
 		CAF098F32A1FB1F600606A83 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				CAF098F22A1FB1F600606A83 /* Whimsical Pomodoro Timer.app */,
-				CA7026922B07A7C7001F94CC /* Whimsical Pomodoro TimerTests.xctest */,
+				CAF098F22A1FB1F600606A83 /* Pomodoro Timer.app */,
+				CA7026922B07A7C7001F94CC /* Pomodoro TimerTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -240,9 +240,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		CA7026912B07A7C7001F94CC /* Whimsical Pomodoro TimerTests */ = {
+		CA7026912B07A7C7001F94CC /* Pomodoro TimerTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CA7026982B07A7C8001F94CC /* Build configuration list for PBXNativeTarget "Whimsical Pomodoro TimerTests" */;
+			buildConfigurationList = CA7026982B07A7C8001F94CC /* Build configuration list for PBXNativeTarget "Pomodoro TimerTests" */;
 			buildPhases = (
 				CA70268E2B07A7C7001F94CC /* Sources */,
 				CA70268F2B07A7C7001F94CC /* Frameworks */,
@@ -253,14 +253,14 @@
 			dependencies = (
 				CA7026972B07A7C8001F94CC /* PBXTargetDependency */,
 			);
-			name = "Whimsical Pomodoro TimerTests";
+			name = "Pomodoro TimerTests";
 			productName = "Whimsical Pomodoro TimerTests";
-			productReference = CA7026922B07A7C7001F94CC /* Whimsical Pomodoro TimerTests.xctest */;
+			productReference = CA7026922B07A7C7001F94CC /* Pomodoro TimerTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		CAF098F12A1FB1F600606A83 /* Whimsical Pomodoro Timer */ = {
+		CAF098F12A1FB1F600606A83 /* Pomodoro Timer */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CAF099012A1FB21500606A83 /* Build configuration list for PBXNativeTarget "Whimsical Pomodoro Timer" */;
+			buildConfigurationList = CAF099012A1FB21500606A83 /* Build configuration list for PBXNativeTarget "Pomodoro Timer" */;
 			buildPhases = (
 				CAF098EE2A1FB1F600606A83 /* Sources */,
 				CAF098EF2A1FB1F600606A83 /* Frameworks */,
@@ -270,14 +270,14 @@
 			);
 			dependencies = (
 			);
-			name = "Whimsical Pomodoro Timer";
+			name = "Pomodoro Timer";
 			packageProductDependencies = (
 				CAF099062A1FBB8900606A83 /* RiveRuntime */,
 				CAD1E6672A237A4E00C0C4C8 /* SwiftUIFontIcon */,
 				CAD7C4DE2A4DBF29009003C9 /* FloatingButton */,
 			);
 			productName = Pomodoro;
-			productReference = CAF098F22A1FB1F600606A83 /* Whimsical Pomodoro Timer.app */;
+			productReference = CAF098F22A1FB1F600606A83 /* Pomodoro Timer.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -317,8 +317,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				CAF098F12A1FB1F600606A83 /* Whimsical Pomodoro Timer */,
-				CA7026912B07A7C7001F94CC /* Whimsical Pomodoro TimerTests */,
+				CAF098F12A1FB1F600606A83 /* Pomodoro Timer */,
+				CA7026912B07A7C7001F94CC /* Pomodoro TimerTests */,
 			);
 		};
 /* End PBXProject section */
@@ -385,7 +385,7 @@
 /* Begin PBXTargetDependency section */
 		CA7026972B07A7C8001F94CC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = CAF098F12A1FB1F600606A83 /* Whimsical Pomodoro Timer */;
+			target = CAF098F12A1FB1F600606A83 /* Pomodoro Timer */;
 			targetProxy = CA7026962B07A7C8001F94CC /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -570,7 +570,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Pomodoro/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Whimsical Pomodoro Timer";
+				INFOPLIST_KEY_CFBundleDisplayName = "Pomodoro Timer";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -603,7 +603,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Pomodoro/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Whimsical Pomodoro Timer";
+				INFOPLIST_KEY_CFBundleDisplayName = "Pomodoro Timer";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -622,7 +622,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		CA7026982B07A7C8001F94CC /* Build configuration list for PBXNativeTarget "Whimsical Pomodoro TimerTests" */ = {
+		CA7026982B07A7C8001F94CC /* Build configuration list for PBXNativeTarget "Pomodoro TimerTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CA7026992B07A7C8001F94CC /* Debug */,
@@ -640,7 +640,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		CAF099012A1FB21500606A83 /* Build configuration list for PBXNativeTarget "Whimsical Pomodoro Timer" */ = {
+		CAF099012A1FB21500606A83 /* Build configuration list for PBXNativeTarget "Pomodoro Timer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CAF099022A1FB21500606A83 /* Debug */,
