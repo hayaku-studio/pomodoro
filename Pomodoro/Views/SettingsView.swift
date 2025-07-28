@@ -33,7 +33,6 @@ struct PingVolumeView: View {
             Text("Ping Volume")
                 .font(.caption)
                 .foregroundColor(Color("Settings Heading Text"))
-                .padding(.leading, 8)
 
             HStack {
                 Label("Low Volume", systemImage: "speaker.fill")

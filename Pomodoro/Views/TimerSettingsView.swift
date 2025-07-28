@@ -122,12 +122,14 @@ struct TimerSettingsView: View {
                     .onChange(of: modelData.automaticallyGoFromFocus) { (value: Bool) in
                         UserDefaults.standard.set(value, forKey: "automaticallyGoFromFocus")
                     }
+                    .padding(.leading, 8)
                     .linkPointerStyle()
             case .rest:
                 Toggle("Start focus automatically", isOn: $modelData.automaticallyGoFromRest)
                     .onChange(of: modelData.automaticallyGoFromRest) { (value: Bool) in
                         UserDefaults.standard.set(value, forKey: "automaticallyGoFromRest")
                     }
+                    .padding(.leading, 8)
                     .linkPointerStyle()
             //            case .longRest:
             //                Toggle("Start Focus Automatically", isOn: $modelData.automaticallyGoFromLongRest)
