@@ -48,6 +48,7 @@ struct TimerSettingsView: View {
                 //                    timeMinutes = modelData.longRestTimeIntervalMinutes
                 }
             }
+            .linkPointerStyle()
             Text("Set Timer Interval")
                 .font(.headline)
                 .padding(.leading, 10)
@@ -121,11 +122,13 @@ struct TimerSettingsView: View {
                     .onChange(of: modelData.automaticallyGoFromFocus) { (value: Bool) in
                         UserDefaults.standard.set(value, forKey: "automaticallyGoFromFocus")
                     }
+                    .linkPointerStyle()
             case .rest:
                 Toggle("Start Focus Automatically", isOn: $modelData.automaticallyGoFromRest)
                     .onChange(of: modelData.automaticallyGoFromRest) { (value: Bool) in
                         UserDefaults.standard.set(value, forKey: "automaticallyGoFromRest")
                     }
+                    .linkPointerStyle()
             //            case .longRest:
             //                Toggle("Start Focus Automatically", isOn: $modelData.automaticallyGoFromLongRest)
             //                    .onChange(of: modelData.automaticallyGoFromLongRest) { (value: Bool) in
