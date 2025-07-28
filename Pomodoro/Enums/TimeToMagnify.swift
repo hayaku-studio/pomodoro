@@ -1,6 +1,6 @@
 //
 //  TimeToMagnify.swift
-//  Whimsical Pomodoro Timer
+//  Pomodoro Timer
 //
 //  Created by David Speers on 18/11/2023.
 //

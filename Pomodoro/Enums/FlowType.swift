@@ -1,6 +1,6 @@
 //
 //  FlowType.swift
-//  Whimsical Pomodoro Timer
+//  Pomodoro Timer
 //
 //  Created by David Speers on 13/07/2023.
 //

@@ -1,6 +1,6 @@
 //
 //  Rive.swift
-//  Whimsical Pomodoro Timer
+//  Pomodoro Timer
 //
 //  Created by David Speers on 06/10/2023.
 //

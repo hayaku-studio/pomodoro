@@ -1,6 +1,6 @@
 //
 //  TimerSettingsView.swift
-//  Whimsical Pomodoro Timer
+//  Pomodoro Timer
 //
 //  Created by David Speers on 10/07/2023.
 //
