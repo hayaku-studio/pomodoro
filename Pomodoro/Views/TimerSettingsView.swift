@@ -52,7 +52,7 @@ struct TimerSettingsView: View {
             Text("Set Timer Interval")
                 .font(.headline)
                 .padding(.leading, 10)
-            Text("Click and Drag the timer to set.")
+            Text("Drag the timer to set.")
                 .font(.caption)
                 .foregroundColor(Color("Settings Heading Text"))
                 .padding(.leading, 10)
@@ -118,13 +118,13 @@ struct TimerSettingsView: View {
             }
             switch flowType {
             case .focus:
-                Toggle("Start Break Automatically", isOn: $modelData.automaticallyGoFromFocus)
+                Toggle("Start break automatically", isOn: $modelData.automaticallyGoFromFocus)
                     .onChange(of: modelData.automaticallyGoFromFocus) { (value: Bool) in
                         UserDefaults.standard.set(value, forKey: "automaticallyGoFromFocus")
                     }
                     .linkPointerStyle()
             case .rest:
-                Toggle("Start Focus Automatically", isOn: $modelData.automaticallyGoFromRest)
+                Toggle("Start focus automatically", isOn: $modelData.automaticallyGoFromRest)
                     .onChange(of: modelData.automaticallyGoFromRest) { (value: Bool) in
                         UserDefaults.standard.set(value, forKey: "automaticallyGoFromRest")
                     }

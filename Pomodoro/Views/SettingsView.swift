@@ -30,7 +30,7 @@ struct PingVolumeView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text("PING VOLUME")
+            Text("Ping Volume")
                 .font(.caption)
                 .foregroundColor(Color("Settings Heading Text"))
                 .padding(.leading, 8)
