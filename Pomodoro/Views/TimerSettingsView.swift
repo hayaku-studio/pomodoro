@@ -74,9 +74,7 @@ struct TimerSettingsView: View {
                         .contentShape(Rectangle())
                         .frame(width: frameSize, height: frameSize)
                         //.onTapGesture() // TODO: On too many taps give a drag hint - https://www.instagram.com/p/CewsSvBrTBa/
-                        .modifier(
-                            TimerDragPointerStyleModifier(isDragging: previousTranslation != 0)
-                        )
+                        .dragPointerStyle(isDragging: previousTranslation != 0)
                         .gesture(
                             DragGesture()
                                 .onChanged { gesture in
@@ -201,30 +199,6 @@ struct NumberButton: View {
                 .cornerRadius(2)
         }
         .buttonStyle(.plain)
-        .modifier(NumberButtonPointerStyleModifier(isDisabled: isDisabled))
-    }
-}
-
-struct TimerDragPointerStyleModifier: ViewModifier {
-    let isDragging: Bool
-
-    func body(content: Content) -> some View {
-        if #available(macOS 15.0, *) {
-            content.pointerStyle(isDragging ? .grabActive : .grabIdle)
-        } else {
-            content
-        }
-    }
-}
-
-struct NumberButtonPointerStyleModifier: ViewModifier {
-    let isDisabled: Bool
-
-    func body(content: Content) -> some View {
-        if #available(macOS 15.0, *) {
-            content.pointerStyle(isDisabled ? .default : .link)
-        } else {
-            content
-        }
+        .disabledPointerStyle(isDisabled: isDisabled)
     }
 }

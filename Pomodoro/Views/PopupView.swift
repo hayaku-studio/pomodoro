@@ -54,7 +54,7 @@ struct PopupView: View {
                     .onTapGesture {
                         showFabMenu = false
                     }
-                    .modifier(PopupDismissPointerStyleModifier())
+                    .defaultPointerStyle()
                     .zIndex(-1)
             }
         }
@@ -81,16 +81,6 @@ struct PopupView: View {
     func closeTimer() {
         withAnimation(.spring()) {
             showTimer = false
-        }
-    }
-}
-
-struct PopupDismissPointerStyleModifier: ViewModifier {
-    func body(content: Content) -> some View {
-        if #available(macOS 15.0, *) {
-            content.pointerStyle(.default)
-        } else {
-            content
         }
     }
 }

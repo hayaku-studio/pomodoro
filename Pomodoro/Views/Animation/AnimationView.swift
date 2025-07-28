@@ -39,7 +39,7 @@ struct AnimationView: View {
                     .contentShape(Circle())
                     .frame(width: 160)
                     //.onTapGesture() // TODO: On too many taps give a drag hint - https://www.instagram.com/p/CewsSvBrTBa/
-                    .modifier(PointerStyleModifier(isDragging: isDragging))
+                    .dragPointerStyle(isDragging: isDragging)
                     .gesture(
                         DragGesture()
                             .onChanged { gesture in
@@ -201,18 +201,6 @@ struct AnimationView: View {
             modelData.pomodoro.triggerInput("finishPing")
         default:
             modelData.coffee.triggerInput("finishPing")
-        }
-    }
-}
-
-struct PointerStyleModifier: ViewModifier {
-    let isDragging: Bool
-
-    func body(content: Content) -> some View {
-        if #available(macOS 15.0, *) {
-            content.pointerStyle(isDragging ? .grabActive : .grabIdle)
-        } else {
-            content
         }
     }
 }

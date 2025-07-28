@@ -31,7 +31,7 @@ struct FabView: View {
         .onHover { isHovered in
             isMainButtonHovered = isHovered
         }
-        .modifier(HoverButtonPointerStyleModifier(isHovered: isMainButtonHovered))
+        .hoverPointerStyle(isHovered: isMainButtonHovered)
         FloatingButton(
             mainButtonView: button,
             buttons: [
@@ -40,13 +40,13 @@ struct FabView: View {
                         timerAction()
                         closeButtons()
                     }
-                    .modifier(ClickablePointerStyleModifier()),
+                    .linkPointerStyle(),
                 FabItem(imageName: "gearshape", buttonText: "Settings")
                     .onTapGesture {
                         settingsAction()
                         closeButtons()
                     }
-                    .modifier(ClickablePointerStyleModifier()),
+                    .linkPointerStyle(),
             ],
             isOpen: $showFabMenu
         )
@@ -61,28 +61,6 @@ struct FabView: View {
     func closeButtons() {
         withAnimation {
             showFabMenu = false
-        }
-    }
-}
-
-struct HoverButtonPointerStyleModifier: ViewModifier {
-    let isHovered: Bool
-
-    func body(content: Content) -> some View {
-        if #available(macOS 15.0, *) {
-            content.pointerStyle(isHovered ? .link : .default)
-        } else {
-            content
-        }
-    }
-}
-
-struct ClickablePointerStyleModifier: ViewModifier {
-    func body(content: Content) -> some View {
-        if #available(macOS 15.0, *) {
-            content.pointerStyle(.link)
-        } else {
-            content
         }
     }
 }

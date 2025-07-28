@@ -53,7 +53,7 @@ struct FabItem: View {
         .onHover { isHovered in
             self.isHovered = isHovered
         }
-        .modifier(FabItemHoverPointerStyleModifier(isHovered: isHovered))
+        .hoverPointerStyle(isHovered: isHovered)
     }
 }
 
@@ -69,18 +69,6 @@ struct FabIconTextButton_Previews: PreviewProvider {
             FabItem(imageName: "timer", buttonText: "Timer")
             FabItem(imageName: "gearshape", buttonText: "Settings")
             FabItem(imageName: "chart.bar", buttonText: "Stats")
-        }
-    }
-}
-
-struct FabItemHoverPointerStyleModifier: ViewModifier {
-    let isHovered: Bool
-
-    func body(content: Content) -> some View {
-        if #available(macOS 15.0, *) {
-            content.pointerStyle(isHovered ? .link : .default)
-        } else {
-            content
         }
     }
 }

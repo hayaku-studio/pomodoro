@@ -18,7 +18,7 @@ struct CustomModal: ViewModifier {
             .onTapGesture {
                 actionOnDismiss()
             }
-            .modifier(DismissPointerStyleModifier())
+            .defaultPointerStyle()
         Group {
             content
                 .padding(16)
@@ -38,30 +38,10 @@ struct CustomModal: ViewModifier {
                 .background(Circle().fill(Color("Button Active")))
                 .frame(width: 40, height: 40)
                 .frame(maxWidth: .infinity, alignment: .trailing)  // TODO: less hacky alignment
-                .modifier(CloseButtonPointerStyleModifier())
+                .linkPointerStyle()
         }
         .padding(.vertical, 16)
         .zIndex(1)
-    }
-}
-
-struct DismissPointerStyleModifier: ViewModifier {
-    func body(content: Content) -> some View {
-        if #available(macOS 15.0, *) {
-            content.pointerStyle(.default)
-        } else {
-            content
-        }
-    }
-}
-
-struct CloseButtonPointerStyleModifier: ViewModifier {
-    func body(content: Content) -> some View {
-        if #available(macOS 15.0, *) {
-            content.pointerStyle(.link)
-        } else {
-            content
-        }
     }
 }
 
