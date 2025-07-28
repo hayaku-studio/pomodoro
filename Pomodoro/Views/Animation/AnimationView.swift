@@ -34,7 +34,7 @@ struct AnimationView: View {
                     }
                 }
             }
-            .opacity(isPlaying ? 0.7 : 1.0)
+            .opacity(isPlaying ? modelData.flowType == .focus ? 0.7 : 0.6 : 1.0)
             .animation(
                 isPlaying
                     ? Animation.easeInOut(duration: 1.0).repeatForever(autoreverses: true)
