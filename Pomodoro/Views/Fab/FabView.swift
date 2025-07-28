@@ -31,7 +31,7 @@ struct FabView: View {
         .onHover { isHovered in
             isMainButtonHovered = isHovered
         }
-        .hoverPointerStyle(isHovered: isMainButtonHovered)
+        .linkPointerStyle()
         FloatingButton(
             mainButtonView: button,
             buttons: [

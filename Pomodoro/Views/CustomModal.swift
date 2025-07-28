@@ -18,7 +18,7 @@ struct CustomModal: ViewModifier {
             .onTapGesture {
                 actionOnDismiss()
             }
-            .defaultPointerStyle()
+            .linkPointerStyle()
         Group {
             content
                 .padding(16)

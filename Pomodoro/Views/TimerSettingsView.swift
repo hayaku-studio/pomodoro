@@ -199,6 +199,6 @@ struct NumberButton: View {
                 .cornerRadius(2)
         }
         .buttonStyle(.plain)
-        .disabledPointerStyle(isDisabled: isDisabled)
+        .linkPointerStyle(isDisabled: isDisabled)
     }
 }

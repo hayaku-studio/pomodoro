@@ -54,7 +54,7 @@ struct PopupView: View {
                     .onTapGesture {
                         showFabMenu = false
                     }
-                    .defaultPointerStyle()
+                    .linkPointerStyle()
                     .zIndex(-1)
             }
         }

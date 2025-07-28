@@ -53,7 +53,7 @@ struct FabItem: View {
         .onHover { isHovered in
             self.isHovered = isHovered
         }
-        .hoverPointerStyle(isHovered: isHovered)
+        .linkPointerStyle()
     }
 }
 

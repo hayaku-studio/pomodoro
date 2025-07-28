@@ -69,7 +69,7 @@ struct AnimationButtonView: View {
                 .animation(.easeInOut(duration: 0.2), value: isHovered)
         }
         .buttonStyle(.plain)
-        .modifier(ButtonPointerStyleModifier(isDisabled: isDisabled))
+        .linkPointerStyle(isDisabled: isDisabled)
         .onHover { hovering in
             isHovered = hovering
         }
