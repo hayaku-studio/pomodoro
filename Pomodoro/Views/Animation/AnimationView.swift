@@ -28,20 +28,27 @@ struct AnimationView: View {
                 if modelData.isPopoverShown {
                     switch modelData.flowType {
                     case .focus:
-                        modelData.pomodoro.view().frame(width: 200, height: 200)
+                        modelData.pomodoro.view()
+                            .frame(width: 200, height: 200)
+                            .opacity(isPlaying ? 0.7 : 1.0)
+                            .animation(
+                                isPlaying
+                                    ? Animation.easeInOut(duration: 1.0).repeatForever(
+                                        autoreverses: true)
+                                    : .default, value: isPlaying
+                            )
                     default:
-                        modelData.coffee.view().frame(width: 200, height: 200)
+                        modelData.coffee.view()
+                            .frame(width: 200, height: 200)
+                            .opacity(isPlaying ? 0.6 : 1.0)
+                            .animation(
+                                isPlaying
+                                    ? Animation.easeInOut(duration: 1.0).repeatForever(
+                                        autoreverses: true)
+                                    : .default, value: isPlaying
+                            )
                     }
                 }
-            }
-            .opacity(isPlaying ? modelData.flowType == .focus ? 0.7 : 0.6 : 1.0)
-            .animation(
-                isPlaying
-                    ? Animation.easeInOut(duration: 1.0).repeatForever(autoreverses: true)
-                    : .default, value: isPlaying
-            )
-            .onAppear {
-                startPulseAnimation()
             }
             .overlay(
                 ZStack {
@@ -218,9 +225,6 @@ struct AnimationView: View {
         }
     }
 
-    private func startPulseAnimation() {
-        // Animation is handled by the .animation modifier on the view
-    }
 }
 
 struct AnimationView_Previews: PreviewProvider {
