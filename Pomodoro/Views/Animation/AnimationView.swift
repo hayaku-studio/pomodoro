@@ -8,6 +8,29 @@
 import SwiftUI
 import SwiftUIFontIcon
 
+struct AnimatedTimerViewModifier: ViewModifier {
+    let isPlaying: Bool
+    let playingOpacity: Double
+
+    func body(content: Content) -> some View {
+        content
+            .frame(width: 200, height: 200)
+            .opacity(isPlaying ? playingOpacity : 1.0)
+            .animation(
+                isPlaying
+                    ? Animation.easeInOut(duration: 1.0).repeatForever(
+                        autoreverses: true)
+                    : .default, value: isPlaying
+            )
+    }
+}
+
+extension View {
+    func animatedTimerStyle(isPlaying: Bool, playingOpacity: Double) -> some View {
+        modifier(AnimatedTimerViewModifier(isPlaying: isPlaying, playingOpacity: playingOpacity))
+    }
+}
+
 struct AnimationView: View {
     @EnvironmentObject private var modelData: ModelData
     @Environment(\.managedObjectContext) var managedObjectContext
@@ -29,24 +52,10 @@ struct AnimationView: View {
                     switch modelData.flowType {
                     case .focus:
                         modelData.pomodoro.view()
-                            .frame(width: 200, height: 200)
-                            .opacity(isPlaying ? 0.7 : 1.0)
-                            .animation(
-                                isPlaying
-                                    ? Animation.easeInOut(duration: 1.0).repeatForever(
-                                        autoreverses: true)
-                                    : .default, value: isPlaying
-                            )
+                            .animatedTimerStyle(isPlaying: isPlaying, playingOpacity: 0.7)
                     default:
                         modelData.coffee.view()
-                            .frame(width: 200, height: 200)
-                            .opacity(isPlaying ? 0.6 : 1.0)
-                            .animation(
-                                isPlaying
-                                    ? Animation.easeInOut(duration: 1.0).repeatForever(
-                                        autoreverses: true)
-                                    : .default, value: isPlaying
-                            )
+                            .animatedTimerStyle(isPlaying: isPlaying, playingOpacity: 0.6)
                     }
                 }
             }
