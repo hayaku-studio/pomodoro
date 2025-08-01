@@ -12,16 +12,26 @@ struct AnimatedTimerViewModifier: ViewModifier {
     let isPlaying: Bool
     let playingOpacity: Double
 
+    @State private var animationActive = false
+
     func body(content: Content) -> some View {
         content
             .frame(width: 200, height: 200)
-            .opacity(isPlaying ? playingOpacity : 1.0)
+            .opacity(animationActive ? playingOpacity : 1.0)
             .animation(
-                isPlaying
+                animationActive
                     ? Animation.easeInOut(duration: 1.0).repeatForever(
                         autoreverses: true)
-                    : .default, value: isPlaying
+                    : .default, value: animationActive
             )
+            .onAppear {
+                if isPlaying {
+                    animationActive = true
+                }
+            }
+            .onChange(of: isPlaying) { newValue in
+                animationActive = newValue
+            }
     }
 }
 
