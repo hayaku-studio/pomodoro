@@ -4,6 +4,16 @@
 
 A beautiful and functional Pomodoro timer available as both a native macOS menubar app and a modern React web application.
 
+## ⚡ Quick Start
+
+### 🍎 macOS App
+[**Download the latest release**](https://github.com/hayaku-studio/pomodoro/releases) from the GitHub releases page and install directly on your Mac.
+Note: as the app is unverified, you'll have to follow the instructions provided by Apple [here](
+https://support.apple.com/en-hk/guide/mac-help/mh40616/mac).
+
+### 🌐 Web App
+[**Try it now**](https://hayaku.studio/pomodoro)
+
 ## 🍅 Features
 
 - **⏱️ Customizable Timer**: Focus and break sessions with intuitive controls
