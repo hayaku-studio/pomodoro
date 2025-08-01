@@ -1,5 +1,7 @@
 # Pomodoro Timer
 
+![App Demo](app_demo.gif)
+
 A beautiful and functional Pomodoro timer available as both a native macOS menubar app and a modern React web application.
 
 ## 🍅 Features
