@@ -4,7 +4,7 @@ import Logo from "./components/Logo";
 import TimerSettingsModal from "./components/TimerSettingsModal";
 import VolumeSettingsModal from "./components/VolumeSettingsModal";
 import { usePomodoroState } from "./hooks/usePomodoroState";
-import { IoMenuOutline } from "react-icons/io5";
+import { IoMenuOutline, IoLogoGithub } from "react-icons/io5";
 
 function App() {
   const { state, actions } = usePomodoroState();
@@ -34,20 +34,31 @@ function App() {
           <h1 className="text-2xl font-light text-gray-700 dark:text-gray-300 text-center drop-shadow-sm flex-1">
             Pomodoro Timer
           </h1>
-          <div className="relative">
-            <button
-              onClick={() => actions.setShowFabMenu(!state.showFabMenu)}
+          <div className="flex items-center gap-2">
+            <a
+              href="https://github.com/hayaku-studio/pomodoro"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors duration-200 p-2 rounded-lg hover:bg-gray-300/50 dark:hover:bg-gray-700/50 hover:cursor-pointer"
-              aria-label="Menu"
+              aria-label="GitHub Repository"
             >
-              <IoMenuOutline className="w-6 h-6" />
-            </button>
-            <DropdownMenu
-              isOpen={state.showFabMenu}
-              onClose={() => actions.setShowFabMenu(false)}
-              onTimerClick={() => actions.setShowTimer(true)}
-              onSettingsClick={() => actions.setShowSettings(true)}
-            />
+              <IoLogoGithub className="w-6 h-6" />
+            </a>
+            <div className="relative">
+              <button
+                onClick={() => actions.setShowFabMenu(!state.showFabMenu)}
+                className="text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors duration-200 p-2 rounded-lg hover:bg-gray-300/50 dark:hover:bg-gray-700/50 hover:cursor-pointer"
+                aria-label="Menu"
+              >
+                <IoMenuOutline className="w-6 h-6" />
+              </button>
+              <DropdownMenu
+                isOpen={state.showFabMenu}
+                onClose={() => actions.setShowFabMenu(false)}
+                onTimerClick={() => actions.setShowTimer(true)}
+                onSettingsClick={() => actions.setShowSettings(true)}
+              />
+            </div>
           </div>
         </div>
       </header>
