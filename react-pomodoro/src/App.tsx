@@ -1,5 +1,6 @@
 import AnimationView from "./components/AnimationView";
 import DropdownMenu from "./components/DropdownMenu";
+import Logo from "./components/Logo";
 import TimerSettingsModal from "./components/TimerSettingsModal";
 import VolumeSettingsModal from "./components/VolumeSettingsModal";
 import { usePomodoroState } from "./hooks/usePomodoroState";
@@ -29,6 +30,7 @@ function App() {
     <div className="min-h-screen paper-texture dark:bg-gray-900 flex flex-col font-sans text-gray-800 dark:text-gray-200">
       <header className="bg-white/20 dark:bg-gray-800/40 backdrop-blur-sm border-b border-gray-300/30 dark:border-gray-600/30 py-4 sticky top-0 z-50">
         <div className="max-w-6xl mx-auto px-5 flex items-center justify-between">
+          <Logo />
           <h1 className="text-2xl font-light text-gray-700 dark:text-gray-300 text-center drop-shadow-sm flex-1">
             Pomodoro Timer
           </h1>
