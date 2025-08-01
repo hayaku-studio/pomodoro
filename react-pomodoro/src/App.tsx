@@ -39,9 +39,10 @@ function App() {
               href="https://github.com/hayaku-studio/pomodoro"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors duration-200 p-2 rounded-lg hover:bg-gray-300/50 dark:hover:bg-gray-700/50 hover:cursor-pointer"
+              className="flex gap-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors duration-200 p-2 rounded-lg hover:bg-gray-300/50 dark:hover:bg-gray-700/50 hover:cursor-pointer"
               aria-label="GitHub Repository"
             >
+              Download for macOS
               <IoLogoGithub className="w-6 h-6" />
             </a>
             <div className="relative">
