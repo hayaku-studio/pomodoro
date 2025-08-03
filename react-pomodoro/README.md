@@ -24,16 +24,19 @@ A beautiful and functional Pomodoro timer web application converted from the ori
 ### Installation
 
 1. Navigate to the React app directory:
+
 ```bash
 cd Pomodoro/react-pomodoro
 ```
 
 2. Install dependencies:
+
 ```bash
 npm install
 ```
 
 3. Start the development server:
+
 ```bash
 npm run dev
 ```
@@ -79,7 +82,7 @@ Access settings by clicking the gear icon (⚙️) in the header:
 Click the timer icon (⏱️) in the header for quick presets:
 
 - **Classic**: 25 min focus / 5 min break / 15 min long break
-- **Extended**: 45 min focus / 15 min break / 30 min long break  
+- **Extended**: 45 min focus / 15 min break / 30 min long break
 - **Short**: 15 min focus / 3 min break / 10 min long break
 
 Manual adjustments are also available with +/-1 min and +/-5 min buttons.
@@ -183,10 +186,10 @@ The app uses CSS custom properties for easy theming:
 Replace the generated notification sound:
 
 ```typescript
-import { soundManager } from './utils/sound';
+import { soundManager } from "./utils/sound";
 
 // Load custom sound file
-soundManager.loadCustomSound('/path/to/your/sound.mp3');
+soundManager.loadCustomSound("/path/to/your/sound.mp3");
 ```
 
 ## Deployment

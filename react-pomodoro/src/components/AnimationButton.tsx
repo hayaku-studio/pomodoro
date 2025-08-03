@@ -40,13 +40,7 @@ export const AnimationButton: React.FC<AnimationButtonProps> = ({
 
   return (
     <button
-      className={`
-        flex items-center justify-center w-10 h-10 border-none rounded-full
-        text-white cursor-pointer
-        transition-all duration-200 shadow-md relative overflow-hidden
-        ${!isDisabled ? "hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0 active:shadow-sm focus:outline-none focus:ring-4 focus:ring-red-400/40 dark:focus:ring-red-500/40" : ""}
-        ${isDisabled ? "bg-gradient-to-br from-gray-400 to-gray-500 dark:from-gray-600 dark:to-gray-700 cursor-not-allowed opacity-60" : ""}
-      `}
+      className={`relative flex h-10 w-10 cursor-pointer items-center justify-center overflow-hidden rounded-full border-none text-white shadow-md transition-all duration-200 ${!isDisabled ? "hover:-translate-y-0.5 hover:shadow-lg focus:ring-4 focus:ring-red-400/40 focus:outline-none active:translate-y-0 active:shadow-sm dark:focus:ring-red-500/40" : ""} ${isDisabled ? "cursor-not-allowed bg-gradient-to-br from-gray-400 to-gray-500 opacity-60 dark:from-gray-600 dark:to-gray-700" : ""} `}
       style={
         !isDisabled
           ? {
@@ -59,7 +53,7 @@ export const AnimationButton: React.FC<AnimationButtonProps> = ({
       aria-label={`Timer ${iconName} button`}
       type="button"
     >
-      <span className="text-base leading-none flex items-center justify-center select-none font-system">
+      <span className="font-system flex items-center justify-center text-base leading-none select-none">
         <IconComponent className="h-4 w-4" />
       </span>
     </button>

@@ -8,7 +8,7 @@ const Logo = ({ className = "" }: LogoProps) => {
       href="https://hayaku.studio"
       target="_blank"
       rel="noopener noreferrer"
-      className={`hover:opacity-80 transition-opacity duration-200 ${className}`}
+      className={`transition-opacity duration-200 hover:opacity-80 ${className}`}
       aria-label="Hayaku Studio"
     >
       <img

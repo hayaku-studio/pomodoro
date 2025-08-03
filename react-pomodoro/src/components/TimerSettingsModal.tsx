@@ -125,46 +125,46 @@ export const TimerSettingsModal: React.FC<TimerSettingsModalProps> = ({
 
   return (
     <div
-      className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm"
       onClick={onClose}
     >
       <div
-        className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl max-w-md w-full max-h-[80vh] overflow-y-auto"
+        className="max-h-[80vh] w-full max-w-md overflow-y-auto rounded-xl bg-white shadow-2xl dark:bg-gray-800"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="p-6">
-          <div className="flex items-center justify-between mb-6">
+          <div className="mb-6 flex items-center justify-between">
             <h2 className="text-2xl font-light text-gray-800 dark:text-white">
               Timer Settings
             </h2>
             <button
               onClick={onClose}
-              className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors hover:cursor-pointer"
+              className="text-gray-400 transition-colors hover:cursor-pointer hover:text-gray-600 dark:hover:text-gray-200"
             >
-              <IoCloseOutline className="w-6 h-6" />
+              <IoCloseOutline className="h-6 w-6" />
             </button>
           </div>
 
           <div className="space-y-6">
             {/* Flow Type Segmented Control */}
-            <div className="bg-gray-100 dark:bg-gray-700 rounded-lg p-1">
+            <div className="rounded-lg bg-gray-100 p-1 dark:bg-gray-700">
               <div className="grid grid-cols-2 gap-1">
                 <button
                   onClick={() => handleFlowTypeChange(FlowType.FOCUS)}
-                  className={`px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
+                  className={`rounded-md px-4 py-2 text-sm font-medium transition-all duration-200 ${
                     selectedFlowType === FlowType.FOCUS
-                      ? "bg-white dark:bg-gray-600 text-gray-900 dark:text-white shadow-sm"
-                      : "text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:cursor-pointer"
+                      ? "bg-white text-gray-900 shadow-sm dark:bg-gray-600 dark:text-white"
+                      : "text-gray-500 hover:cursor-pointer hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
                   }`}
                 >
                   Focus
                 </button>
                 <button
                   onClick={() => handleFlowTypeChange(FlowType.REST)}
-                  className={`px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
+                  className={`rounded-md px-4 py-2 text-sm font-medium transition-all duration-200 ${
                     selectedFlowType === FlowType.REST
-                      ? "bg-white dark:bg-gray-600 text-gray-900 dark:text-white shadow-sm"
-                      : "text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:cursor-pointer"
+                      ? "bg-white text-gray-900 shadow-sm dark:bg-gray-600 dark:text-white"
+                      : "text-gray-500 hover:cursor-pointer hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
                   }`}
                 >
                   Break
@@ -185,26 +185,26 @@ export const TimerSettingsModal: React.FC<TimerSettingsModalProps> = ({
             {/* Draggable Animation */}
             <div className="flex justify-center">
               <div
-                className={`relative bg-gray-50 dark:bg-gray-700 rounded-2xl shadow-lg p-4 transition-all duration-200 ${
+                className={`relative rounded-2xl bg-gray-50 p-4 shadow-lg transition-all duration-200 dark:bg-gray-700 ${
                   isDragging
-                    ? "cursor-grabbing scale-105 shadow-2xl bg-gray-100 dark:bg-gray-600"
-                    : "cursor-grab hover:shadow-xl hover:scale-102"
+                    ? "scale-105 cursor-grabbing bg-gray-100 shadow-2xl dark:bg-gray-600"
+                    : "cursor-grab hover:scale-102 hover:shadow-xl"
                 } select-none`}
                 onMouseDown={handleMouseDown}
                 style={{ userSelect: "none" }}
               >
-                <div className="w-40 h-40 flex items-center justify-center">
+                <div className="flex h-40 w-40 items-center justify-center">
                   <Timer
                     timeSeconds={timeMinutes * 60}
                     flowType={selectedFlowType}
-                    className="w-full h-full"
+                    className="h-full w-full"
                   />
                 </div>
 
                 {/* Drag hint overlay */}
                 {!isDragging && (
-                  <div className="absolute inset-0 flex items-center justify-center bg-black/10 rounded-2xl opacity-0 hover:opacity-100 transition-opacity duration-200">
-                    <div className="text-white text-xs font-medium bg-black/60 px-3 py-1 rounded-full backdrop-blur-sm">
+                  <div className="absolute inset-0 flex items-center justify-center rounded-2xl bg-black/10 opacity-0 transition-opacity duration-200 hover:opacity-100">
+                    <div className="rounded-full bg-black/60 px-3 py-1 text-xs font-medium text-white backdrop-blur-sm">
                       ← Drag to adjust →
                     </div>
                   </div>
@@ -212,7 +212,7 @@ export const TimerSettingsModal: React.FC<TimerSettingsModalProps> = ({
 
                 {/* Active drag indicator */}
                 {isDragging && (
-                  <div className="absolute -top-2 -right-2 w-4 h-4 bg-indigo-500 rounded-full animate-ping"></div>
+                  <div className="absolute -top-2 -right-2 h-4 w-4 animate-ping rounded-full bg-indigo-500"></div>
                 )}
               </div>
             </div>

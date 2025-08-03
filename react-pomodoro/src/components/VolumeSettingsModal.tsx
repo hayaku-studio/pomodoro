@@ -33,23 +33,23 @@ export const VolumeSettingsModal: React.FC<VolumeSettingsModalProps> = ({
 
   return (
     <div
-      className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm"
       onClick={onClose}
     >
       <div
-        className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl max-w-sm w-full"
+        className="w-full max-w-sm rounded-xl bg-white shadow-2xl dark:bg-gray-800"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="p-6">
-          <div className="flex items-center justify-between mb-6">
+          <div className="mb-6 flex items-center justify-between">
             <h2 className="text-2xl font-light text-gray-800 dark:text-white">
               Settings
             </h2>
             <button
               onClick={onClose}
-              className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors hover:cursor-pointer"
+              className="text-gray-400 transition-colors hover:cursor-pointer hover:text-gray-600 dark:hover:text-gray-200"
             >
-              <IoCloseOutline className="w-6 h-6" />
+              <IoCloseOutline className="h-6 w-6" />
             </button>
           </div>
 
@@ -62,7 +62,7 @@ export const VolumeSettingsModal: React.FC<VolumeSettingsModalProps> = ({
 
               <div className="space-y-3">
                 <div className="flex items-center space-x-4">
-                  <IoVolumeOffOutline className="w-5 h-5 text-gray-400" />
+                  <IoVolumeOffOutline className="h-5 w-5 text-gray-400" />
 
                   <div className="flex-1">
                     <input
@@ -84,11 +84,11 @@ export const VolumeSettingsModal: React.FC<VolumeSettingsModalProps> = ({
                           parseFloat((e.target as HTMLInputElement).value),
                         )
                       }
-                      className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700 slider"
+                      className="slider h-2 w-full cursor-pointer appearance-none rounded-lg bg-gray-200 dark:bg-gray-700"
                     />
                   </div>
 
-                  <IoVolumeHighOutline className="w-5 h-5 text-gray-400" />
+                  <IoVolumeHighOutline className="h-5 w-5 text-gray-400" />
                 </div>
               </div>
             </div>

@@ -40,7 +40,7 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
   return (
     <div
       ref={dropdownRef}
-      className="absolute top-full right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 overflow-hidden z-50 animate-in slide-in-from-top-2 duration-200"
+      className="animate-in slide-in-from-top-2 absolute top-full right-0 z-50 mt-2 w-48 overflow-hidden rounded-lg border border-gray-200 bg-white shadow-xl duration-200 dark:border-gray-700 dark:bg-gray-800"
     >
       <div className="py-1">
         <button
@@ -48,9 +48,9 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
             onTimerClick();
             onClose();
           }}
-          className="w-full px-4 py-3 text-left text-gray-700 dark:text-gray-200 hover:bg-red-50 dark:hover:bg-gray-700 hover:text-red-600 dark:hover:text-red-400 transition-all duration-200 flex items-center gap-3 group hover:cursor-pointer"
+          className="group flex w-full items-center gap-3 px-4 py-3 text-left text-gray-700 transition-all duration-200 hover:cursor-pointer hover:bg-red-50 hover:text-red-600 dark:text-gray-200 dark:hover:bg-gray-700 dark:hover:text-red-400"
         >
-          <IoTimeOutline className="w-5 h-5 transition-transform duration-200 group-hover:scale-110" />
+          <IoTimeOutline className="h-5 w-5 transition-transform duration-200 group-hover:scale-110" />
           Timer
         </button>
         <button
@@ -58,9 +58,9 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
             onSettingsClick();
             onClose();
           }}
-          className="w-full px-4 py-3 text-left text-gray-700 dark:text-gray-200 hover:bg-red-50 dark:hover:bg-gray-700 hover:text-red-600 dark:hover:text-red-400 transition-all duration-200 flex items-center gap-3 group hover:cursor-pointer"
+          className="group flex w-full items-center gap-3 px-4 py-3 text-left text-gray-700 transition-all duration-200 hover:cursor-pointer hover:bg-red-50 hover:text-red-600 dark:text-gray-200 dark:hover:bg-gray-700 dark:hover:text-red-400"
         >
-          <IoSettingsOutline className="w-5 h-5 transition-transform duration-200 group-hover:scale-110" />
+          <IoSettingsOutline className="h-5 w-5 transition-transform duration-200 group-hover:scale-110" />
           Settings
         </button>
       </div>
