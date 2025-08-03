@@ -1,7 +1,8 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef } from "react";
 import { FlowType } from "../types";
 import AnimationButton from "./AnimationButton";
 import Timer from "./Timer";
+import { useDragTimeAdjustment } from "../hooks/useDragTimeAdjustment";
 
 interface AnimationViewProps {
   timeSeconds: number;
@@ -29,92 +30,17 @@ export const AnimationView: React.FC<AnimationViewProps> = ({
   onSnapToNearestMinute,
   onTimerComplete,
 }) => {
-  const [isDragging, setIsDragging] = useState(false);
-  const [dragStartX, setDragStartX] = useState(0);
-  const [dragStartTime, setDragStartTime] = useState(0);
-
   const timerDisplayRef = useRef<HTMLDivElement>(null);
   const isTimerGreaterThanZero = timeSeconds > 0;
 
-  // Handle drag gestures for time adjustment
-  const handleMouseDown = (event: React.MouseEvent) => {
-    setIsDragging(true);
-    setDragStartX(event.clientX);
-    setDragStartTime(timeSeconds);
-    document.body.style.userSelect = "none"; // Prevent text selection
-    event.preventDefault();
-  };
-
-  const handleMouseMove = (event: MouseEvent) => {
-    if (!isDragging) return;
-
-    const deltaX = event.clientX - dragStartX;
-    const sensitivity = 5; // Seconds per pixel
-    const newTime = dragStartTime - deltaX * sensitivity;
-
-    // Set the time directly
-    onSetTime(newTime);
-  };
-
-  const handleMouseUp = () => {
-    if (!isDragging) return;
-
-    setIsDragging(false);
-    setDragStartX(0);
-    setDragStartTime(0);
-    document.body.style.userSelect = ""; // Restore text selection
-    onSnapToNearestMinute();
-  };
-
-  // Touch support for mobile
-  const handleTouchStart = (event: React.TouchEvent) => {
-    setIsDragging(true);
-    setDragStartX(event.touches[0].clientX);
-    setDragStartTime(timeSeconds);
-    document.body.style.userSelect = "none"; // Prevent text selection
-    event.preventDefault();
-  };
-
-  const handleTouchMove = (event: TouchEvent) => {
-    if (!isDragging || event.touches.length === 0) return;
-
-    const deltaX = event.touches[0].clientX - dragStartX;
-    const sensitivity = 5; // Seconds per pixel
-    const newTime = dragStartTime - deltaX * sensitivity;
-
-    // Set the time directly
-    onSetTime(newTime);
-    event.preventDefault();
-  };
-
-  const handleTouchEnd = () => {
-    if (!isDragging) return;
-
-    setIsDragging(false);
-    setDragStartX(0);
-    setDragStartTime(0);
-    document.body.style.userSelect = ""; // Restore text selection
-    onSnapToNearestMinute();
-  };
-
-  // Mouse event listeners
-  useEffect(() => {
-    if (isDragging) {
-      document.addEventListener("mousemove", handleMouseMove);
-      document.addEventListener("mouseup", handleMouseUp);
-      document.addEventListener("touchmove", handleTouchMove, {
-        passive: false,
-      });
-      document.addEventListener("touchend", handleTouchEnd);
-
-      return () => {
-        document.removeEventListener("mousemove", handleMouseMove);
-        document.removeEventListener("mouseup", handleMouseUp);
-        document.removeEventListener("touchmove", handleTouchMove);
-        document.removeEventListener("touchend", handleTouchEnd);
-      };
-    }
-  }, [isDragging, dragStartX, dragStartTime]);
+  // Custom hook for drag time adjustment
+  const { isDragging, handleMouseDown, handleTouchStart } =
+    useDragTimeAdjustment({
+      initialTime: timeSeconds,
+      onTimeChange: onSetTime,
+      onDragEnd: onSnapToNearestMinute,
+      sensitivity: 5, // Seconds per pixel
+    });
 
   return (
     <div className="relative flex flex-col items-center justify-center gap-2 p-5 select-none">

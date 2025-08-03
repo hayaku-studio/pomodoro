@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { PomodoroState, FlowType } from "../types";
 import Timer from "./Timer";
 import { IoCloseOutline } from "react-icons/io5";
+import { useDragTimeAdjustment } from "../hooks/useDragTimeAdjustment";
 
 interface TimerSettingsModalProps {
   isOpen: boolean;
@@ -24,9 +25,27 @@ export const TimerSettingsModal: React.FC<TimerSettingsModalProps> = ({
       ? state.focusTimeIntervalMinutes
       : state.restTimeIntervalMinutes;
   });
-  const [isDragging, setIsDragging] = useState(false);
-  const [dragStartX, setDragStartX] = useState(0);
-  const [dragStartTime, setDragStartTime] = useState(0);
+
+  // Custom hook for drag time adjustment
+  const { isDragging, handleMouseDown, handleTouchStart } =
+    useDragTimeAdjustment({
+      initialTime: timeMinutes,
+      onTimeChange: setTimeMinutes,
+      onDragEnd: (finalTime) => {
+        // Save the time setting like in macOS
+        if (selectedFlowType === FlowType.FOCUS) {
+          onUpdateSettings({ focusTimeIntervalMinutes: finalTime });
+        } else {
+          onUpdateSettings({ restTimeIntervalMinutes: finalTime });
+        }
+      },
+      calculateTimeChange: (deltaX, startTime) => {
+        const deltaMinutes = Math.floor(deltaX / 6); // Match the macOS implementation (Float(gesture.translation.width)/6)
+        return startTime - deltaMinutes; // Negative like in macOS (timeMinutes -= incrementalTranslation)
+      },
+      minTime: 1,
+      maxTime: 90,
+    });
 
   // Update time minutes when flow type changes
   React.useEffect(() => {
@@ -41,108 +60,10 @@ export const TimerSettingsModal: React.FC<TimerSettingsModalProps> = ({
     state.restTimeIntervalMinutes,
   ]);
 
-  // Mouse and touch event listeners
-  useEffect(() => {
-    if (isDragging) {
-      document.addEventListener("mousemove", handleMouseMove);
-      document.addEventListener("mouseup", handleMouseUp);
-      document.addEventListener("touchmove", handleTouchMove, {
-        passive: false,
-      });
-      document.addEventListener("touchend", handleTouchEnd);
-
-      return () => {
-        document.removeEventListener("mousemove", handleMouseMove);
-        document.removeEventListener("mouseup", handleMouseUp);
-        document.removeEventListener("touchmove", handleTouchMove);
-        document.removeEventListener("touchend", handleTouchEnd);
-      };
-    }
-  }, [
-    isDragging,
-    dragStartX,
-    dragStartTime,
-    timeMinutes,
-    selectedFlowType,
-    onUpdateSettings,
-  ]);
-
   if (!isOpen) return null;
 
   const handleFlowTypeChange = (flowType: FlowType) => {
     setSelectedFlowType(flowType);
-  };
-
-  const handleMouseDown = (e: React.MouseEvent) => {
-    e.preventDefault();
-    setIsDragging(true);
-    setDragStartX(e.clientX);
-    setDragStartTime(timeMinutes);
-    document.body.style.userSelect = "none"; // Prevent text selection
-  };
-
-  const handleMouseMove = (event: MouseEvent) => {
-    if (!isDragging) return;
-
-    const deltaX = event.clientX - dragStartX;
-    const deltaMinutes = Math.floor(deltaX / 6); // Match the macOS implementation (Float(gesture.translation.width)/6)
-    const newTime = dragStartTime - deltaMinutes; // Negative like in macOS (timeMinutes -= incrementalTranslation)
-
-    const clampedTime = Math.max(1, Math.min(90, newTime));
-    setTimeMinutes(clampedTime);
-  };
-
-  const handleMouseUp = () => {
-    if (!isDragging) return;
-
-    setIsDragging(false);
-    setDragStartX(0);
-    setDragStartTime(0);
-    document.body.style.userSelect = ""; // Restore text selection
-
-    // Save the time setting like in macOS
-    if (selectedFlowType === FlowType.FOCUS) {
-      onUpdateSettings({ focusTimeIntervalMinutes: timeMinutes });
-    } else {
-      onUpdateSettings({ restTimeIntervalMinutes: timeMinutes });
-    }
-  };
-
-  // Touch support for mobile
-  const handleTouchStart = (event: React.TouchEvent) => {
-    setIsDragging(true);
-    setDragStartX(event.touches[0].clientX);
-    setDragStartTime(timeMinutes);
-    document.body.style.userSelect = "none"; // Prevent text selection
-    event.preventDefault();
-  };
-
-  const handleTouchMove = (event: TouchEvent) => {
-    if (!isDragging || event.touches.length === 0) return;
-
-    const deltaX = event.touches[0].clientX - dragStartX;
-    const deltaMinutes = Math.floor(deltaX / 6); // Match the macOS implementation (Float(gesture.translation.width)/6)
-    const newTime = dragStartTime - deltaMinutes; // Negative like in macOS (timeMinutes -= incrementalTranslation)
-
-    const clampedTime = Math.max(1, Math.min(90, newTime));
-    setTimeMinutes(clampedTime);
-    event.preventDefault();
-  };
-
-  const handleTouchEnd = () => {
-    if (!isDragging) return;
-
-    setIsDragging(false);
-    setDragStartX(0);
-    setDragStartTime(0);
-    document.body.style.userSelect = ""; // Restore text selection
-
-    // Save the time setting like in macOS
-    if (selectedFlowType === FlowType.FOCUS) {
-      onUpdateSettings({ focusTimeIntervalMinutes: timeMinutes });
-    } else {
-      onUpdateSettings({ restTimeIntervalMinutes: timeMinutes });
-    }
   };
 
   const handleBooleanChange = (key: keyof PomodoroState, value: boolean) => {
