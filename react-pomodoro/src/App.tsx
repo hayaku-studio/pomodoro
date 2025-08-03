@@ -42,7 +42,7 @@ function App() {
               className="flex gap-2 rounded-lg p-2 text-gray-600 transition-colors duration-200 hover:cursor-pointer hover:bg-gray-300/50 hover:text-gray-800 dark:text-gray-400 dark:hover:bg-gray-700/50 dark:hover:text-gray-200"
               aria-label="GitHub Repository"
             >
-              Download for macOS
+              <span className="hidden md:block">Download for macOS</span>
               <IoLogoGithub className="h-6 w-6" />
             </a>
             <div className="relative">
