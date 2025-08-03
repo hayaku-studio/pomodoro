@@ -29,7 +29,7 @@ function App() {
   return (
     <div className="paper-texture flex min-h-screen flex-col font-sans text-gray-800 dark:bg-gray-900 dark:text-gray-200">
       <header className="sticky top-0 z-50 border-b border-gray-300/30 bg-white/20 py-4 backdrop-blur-sm dark:border-gray-600/30 dark:bg-gray-800/40">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-5">
+        <div className="mx-auto flex max-w-6xl items-center justify-between gap-2 px-5">
           <Logo />
           <h1 className="flex-1 text-center text-2xl font-light text-gray-700 drop-shadow-sm dark:text-gray-300">
             Pomodoro Timer
